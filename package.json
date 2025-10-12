@@ -1,32 +1,30 @@
 {
-  "name": "create-template-landing-page",
+  "name": "create-template-landingpage",
   "version": "1.0.0",
-  "description": "CLI para gerar a landing page (React + Vite + Tailwind) a partir de um template.",
+  "description": "CLI para criar novos projetos baseados no template-landing-page.",
   "bin": {
-    "create-template-landing-page": "bin/cli.js",
-    "template-landing-page": "bin/cli.js"
+    "create-template-landingpage": "./bin/cli.js"
   },
+  "keywords": [
+    "cli",
+    "landingpage",
+    "vite",
+    "react",
+    "template"
+  ],
+  "author": "Allan Teixeira <allanlteixeira@gmail.com>",
+  "license": "MIT",
   "type": "module",
   "files": [
     "bin",
-    "template",
-    "README.md",
-    "LICENSE"
+    "template"
   ],
-  "keywords": [
-    "create",
-    "scaffold",
-    "template",
-    "vite",
-    "react",
-    "landing-page"
-  ],
-  "license": "MIT",
   "engines": {
     "node": ">=18"
   },
   "dependencies": {
-    "kleur": "^4.1.5",
-    "prompts": "^2.4.2"
+    "chalk": "^5.3.0",
+    "fs-extra": "^11.2.0",
+    "inquirer": "^9.3.6"
   }
 }
