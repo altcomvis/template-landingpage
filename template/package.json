@@ -1,49 +1,62 @@
 {
-  "name": "create-template-landing-page",
+  "name": "template-landingpage",
+  "private": true,
   "version": "1.0.0",
-  "description": "Gerador de landing pages React + Vite + Tailwind com painel admin integrado.",
-  "bin": {
-    "create-template-landing-page": "bin/cli.js"
-  },
+  "description": "Landing Page React + Vite + Tailwind com painel admin integrado.",
   "type": "module",
-  "license": "MIT",
   "author": "Allan Teixeira <allanlteixeira@gmail.com>",
-  "keywords": [
-    "react",
-    "vite",
-    "tailwind",
-    "landing-page",
-    "template",
-    "cli",
-    "npx",
-    "berall",
-    "editora-globo"
-  ],
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/allanteixeira/template-landingpage.git"
-  },
-  "homepage": "https://github.com/allanteixeira/template-landingpage#readme",
-  "bugs": {
-    "url": "https://github.com/allanteixeira/template-landingpage/issues"
-  },
-  "files": [
-    "bin",
-    "template",
-    "README.md",
-    "LICENSE"
-  ],
+  "license": "MIT",
   "scripts": {
-    "dev": "cd template && npm run dev",
-    "build": "cd template && npm run build",
-    "lint": "cd template && npm run lint",
-    "preview": "cd template && npm run preview",
-    "prepare": "chmod +x bin/cli.js"
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "lint": "eslint .",
+    "preview": "vite preview"
   },
   "dependencies": {
-    "chalk": "^5.3.0",
-    "ora": "^8.0.1",
-    "inquirer": "^9.2.20",
-    "fs-extra": "^11.2.0"
+    "@dnd-kit/core": "^6.3.1",
+    "@dnd-kit/modifiers": "^9.0.0",
+    "@dnd-kit/sortable": "^10.0.0",
+    "@hookform/resolvers": "^5.2.2",
+    "@radix-ui/react-dialog": "^1.1.15",
+    "@radix-ui/react-label": "^2.1.7",
+    "@radix-ui/react-popover": "^1.1.15",
+    "@radix-ui/react-radio-group": "^1.3.8",
+    "@radix-ui/react-select": "^2.2.6",
+    "@radix-ui/react-separator": "^1.1.7",
+    "@radix-ui/react-slot": "^1.2.3",
+    "@radix-ui/react-switch": "^1.2.6",
+    "@radix-ui/react-tabs": "^1.1.13",
+    "@radix-ui/react-tooltip": "^1.2.8",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "cmdk": "^1.1.1",
+    "embla-carousel-react": "^8.6.0",
+    "file-saver": "^2.0.5",
+    "gsap": "^3.13.0",
+    "idb-keyval": "^6.2.2",
+    "lucide-react": "^0.544.0",
+    "react": "^19.1.1",
+    "react-colorful": "^5.6.1",
+    "react-dom": "^19.1.1",
+    "react-hook-form": "^7.63.0",
+    "react-icons": "^5.5.0",
+    "react-phone-number-input": "^3.4.12",
+    "react-router-dom": "^7.9.3",
+    "react-scroll": "^1.9.3",
+    "sonner": "^2.0.7",
+    "tailwind-merge": "^3.3.1",
+    "vaul": "^1.1.2",
+    "zod": "^4.1.11"
+  },
+  "devDependencies": {
+    "@tailwindcss/vite": "^4.1.14",
+    "@vitejs/plugin-react": "^5.0.3",
+    "autoprefixer": "^10.4.21",
+    "postcss": "^8.5.6",
+    "tailwindcss": "^4.1.14",
+    "typescript": "~5.8.3",
+    "vite": "^7.1.7",
+    "eslint": "^9.36.0",
+    "typescript-eslint": "^8.44.0"
   }
 }
