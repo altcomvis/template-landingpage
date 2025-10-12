@@ -4,13 +4,17 @@ import fs from 'node:fs'
 import fsp from 'node:fs/promises'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
-import { bold, cyan, gray, green, red } from 'kleur/colors'
+import { bold, cyan, gray, green, red, yellow } from 'kleur/colors'
 import prompts from 'prompts'
 
+/*──────────────────────────────────────────────*/
+/* 🔹 Configuração inicial */
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 const TEMPLATE_DIR = path.join(__dirname, '..', 'template')
 
+/*──────────────────────────────────────────────*/
+/* 🔹 Função para copiar diretórios recursivamente */
 async function copyDir(src, dest) {
   await fsp.mkdir(dest, { recursive: true })
   const entries = await fsp.readdir(src, { withFileTypes: true })
@@ -22,23 +26,37 @@ async function copyDir(src, dest) {
   }
 }
 
+/*──────────────────────────────────────────────*/
+/* 🔹 Executa comando (npm install etc.) */
 function run(cmd, args, cwd) {
   return new Promise((resolve, reject) => {
-    const p = spawn(cmd, args, { stdio: 'inherit', cwd, shell: process.platform === 'win32' })
-    p.on('close', code => (code === 0 ? resolve() : reject(new Error(`${cmd} ${args.join(' ')} falhou`))))
+    const p = spawn(cmd, args, {
+      stdio: 'inherit',
+      cwd,
+      shell: process.platform === 'win32'
+    })
+    p.on('close', code =>
+      code === 0
+        ? resolve()
+        : reject(new Error(`${cmd} ${args.join(' ')} falhou com código ${code}`))
+    )
   })
 }
 
+/*──────────────────────────────────────────────*/
+/* 🔹 Programa principal */
 async function main() {
-  const argName = process.argv[2]
-  let targetDir = argName
+  console.log(cyan('\n🚀 Criador de Landing Pages - Template Globo\n'))
+
+  // 1️⃣ Nome do projeto
+  let targetDir = process.argv[2]
 
   if (!targetDir) {
     const res = await prompts({
       type: 'text',
       name: 'name',
       message: 'Nome do projeto:',
-      initial: 'my-landing'
+      initial: 'lp-meu-projeto'
     })
     if (!res.name) {
       console.log(red('✖ Nome do projeto é obrigatório.'))
@@ -48,25 +66,46 @@ async function main() {
   }
 
   const dest = path.resolve(process.cwd(), targetDir)
-  if (fs.existsSync(dest) && fs.readdirSync(dest).length > 0) {
-    console.log(red(`✖ A pasta ${bold(targetDir)} não está vazia.`))
-    process.exit(1)
+
+  // 2️⃣ Confere se pasta existe
+  if (fs.existsSync(dest)) {
+    const files = await fsp.readdir(dest)
+    if (files.length > 0) {
+      const { overwrite } = await prompts({
+        type: 'toggle',
+        name: 'overwrite',
+        message: `A pasta ${bold(targetDir)} já existe e contém arquivos. Deseja sobrescrever?`,
+        initial: false,
+        active: 'sim',
+        inactive: 'não'
+      })
+      if (!overwrite) {
+        console.log(red('✖ Operação cancelada.'))
+        process.exit(1)
+      }
+      await fsp.rm(dest, { recursive: true, force: true })
+      console.log(gray(`🗑️  Pasta existente removida.`))
+    }
   }
 
-  console.log(gray('> Copiando arquivos...'))
+  // 3️⃣ Copia template
+  console.log(gray('> Copiando arquivos do template...\n'))
   await copyDir(TEMPLATE_DIR, dest)
 
-  // Ajusta package.json do projeto gerado
+  // 4️⃣ Ajusta nome no package.json do projeto
   const pkgPath = path.join(dest, 'package.json')
-  try {
-    const pkg = JSON.parse(await fsp.readFile(pkgPath, 'utf-8'))
-    pkg.name = targetDir
-    await fsp.writeFile(pkgPath, JSON.stringify(pkg, null, 2))
-  } catch {
-    // ignora se não tiver package.json
+  if (fs.existsSync(pkgPath)) {
+    try {
+      const pkg = JSON.parse(await fsp.readFile(pkgPath, 'utf-8'))
+      pkg.name = targetDir
+      await fsp.writeFile(pkgPath, JSON.stringify(pkg, null, 2))
+      console.log(gray('> package.json atualizado.'))
+    } catch {
+      console.log(yellow('⚠️  Não foi possível atualizar o package.json.'))
+    }
   }
 
-  // Pergunta instalar deps
+  // 5️⃣ Pergunta se deseja instalar dependências
   const { install } = await prompts({
     type: 'toggle',
     name: 'install',
@@ -77,17 +116,24 @@ async function main() {
   })
 
   if (install) {
-    console.log(gray('> Instalando dependências...'))
-    await run('npm', ['install'], dest)
+    console.log(gray('\n> Instalando dependências...\n'))
+    try {
+      await run('npm', ['install'], dest)
+    } catch (err) {
+      console.log(red(`❌ Falha ao executar npm install: ${err.message}`))
+    }
   }
 
+  // 6️⃣ Mensagem final
   console.log(`\n${green('✔ Projeto criado com sucesso!\n')}`)
   console.log(cyan(`cd ${targetDir}`))
   if (!install) console.log(cyan('npm install'))
   console.log(cyan('npm run dev'))
-  console.log(gray('\nHappy hacking!'))
+  console.log(gray('\nHappy hacking!\n'))
 }
 
+/*──────────────────────────────────────────────*/
+/* 🔹 Execução */
 main().catch(err => {
   console.error(red(err.stack || err.message))
   process.exit(1)
