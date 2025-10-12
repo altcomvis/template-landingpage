@@ -1,16 +1,16 @@
 {
   "general": {
-    "projectName": "Summit Agricultura Regenerativa",
-    "primaryColor": "#334C95",
-    "secondaryColor": "#3CA1E6",
-    "darkColor": "#1A2756",
-    "lightColor": "#92BC49",
-    "backgroundColor": "#1A2756",
-    "surfaceColor": "#334C95",
-    "textColor": "#EBF1FF",
-    "backgroundMode": "solid",
-    "fontFamily": "Poppins",
+    "projectName": "Summit Futuro Sustentável 2025",
+    "primaryColor": "#3e9dc1",
+    "secondaryColor": "#d8578f",
+    "darkColor": "#372f7e",
+    "lightColor": "#eda747",
+    "backgroundColor": "#372f7e",
+    "surfaceColor": "#ebf1ff",
+    "textColor": "#333333",
+    "fontFamily": "Montserrat",
     "enableParallax": true,
+    "backgroundMode": "solid",
     "menu": [
       {
         "id": "1",
@@ -20,52 +20,78 @@
       },
       {
         "id": "2",
+        "label": "Sobre",
+        "href": "about",
+        "visible": true
+      },
+      {
+        "id": "3",
         "label": "Participantes",
         "href": "participants",
         "visible": true
       },
       {
-        "id": "3",
+        "id": "4",
         "label": "Programação",
         "href": "schedule",
         "visible": true
       },
       {
-        "id": "4",
+        "id": "5",
         "label": "Inscrição",
         "href": "subscribe",
         "visible": true
       },
       {
-        "id": "5",
+        "id": "6",
         "label": "Edições Anteriores",
-        "href": "previous-editions",
+        "href": "previous-events",
+        "visible": true
+      },
+      {
+        "id": "7",
+        "label": "Patrocínios",
+        "href": "sponsors",
         "visible": true
       }
-    ]
+    ],
+    "seo": {
+      "title": "Summit Futuro Sustentável 2025 | Editora Globo",
+      "description": "O maior evento sobre inovação, energia limpa e sustentabilidade do Brasil.",
+      "keywords": "sustentabilidade, energia, inovação, summit, globo",
+      "author": "Editora Globo",
+      "image": "/public/img/project/share.jpg",
+      "url": "https://globo.com/projetos/lp/summit-futuro-sustentavel",
+      "gaId": "G-9XYZ123ABC",
+      "metaPixelId": "123456789012345"
+    }
   },
   "hero": {
-    "logo": "",
-    "subtitle": "",
-    "date": "20/10",
-    "time": "9h",
-    "location": "Experience House (Ed. River One)",
-    "address": "Rua Gerivatiba, 207, 19º andar - Butantã – São Paulo/SP",
+    "logo": "logo-do-projeto.webp",
+    "subtitle": "Inovação, tecnologia e propósito para um futuro melhor",
+    "subtitleColor": "#FFFFFF",
+    "date": "15/03",
+    "time": "09h às 18h",
+    "location": "Museu do Amanhã",
+    "address": "Praça Mauá, 1 – Rio de Janeiro, RJ",
     "useBackgroundImage": true,
     "useLightRays": true,
-    "lightRaysColor": "#75db8a"
+    "lightRaysColor": "#00B4D8",
+    "logoSize": ""
   },
   "about": {
-    "subtitle": "",
-    "socialTitle": "Acompanhe nas redes sociais",
+    "subtitle": "Por um planeta mais inteligente e sustentável",
+    "socialTitle": "Assista e participe conosco",
     "paragraphs": [
-      "A agricultura é a base da nossa alimentação e da nossa economia, e a agricultura regenerativa é uma resposta fundamental ao desafio de construirmos um Sistema Alimentar mais resiliente. \nVamos reunir líderes e especialistas para discutir sobre produção sustentável, do campo à cidade, o futuro da cadeia de valor de alimentos, a valorização do produtor agrícola e como impulsionar o Brasil como celeiro mundial em Sistemas Alimentares Regenerativos.\nNão perca!"
+      "O Summit Futuro Sustentável é o principal encontro de líderes e empresas comprometidos com o desenvolvimento sustentável no Brasil.",
+      "Durante dois dias de programação intensa, o evento reúne especialistas, cientistas, empreendedores e representantes do poder público para debater soluções de impacto positivo.",
+      "Inovação, responsabilidade ambiental e transformação social são os pilares desta edição."
     ],
     "showTransmission": true,
     "socialBlocks": [
       {
         "id": "block-1",
-        "label": "GLOBO RURAL",
+        "label": "Transmissão Oficial",
         "icons": [
           {
             "id": "yt",
@@ -73,89 +99,110 @@
             "url": "https://youtube.com/oglobo"
           },
           {
-            "id": "tw",
-            "icon": "twitter",
-            "url": "https://twitter.com/oglobo"
-          },
-          {
-            "id": "02fe81e9-c16a-4a07-af42-6ecd1ad36832",
+            "id": "lk",
             "icon": "linkedin",
-            "url": "https://twitter.com/oglobo"
-          }
-        ]
-      },
-      {
-        "id": "582e28f6-e384-4767-a157-ed0110549219",
-        "label": "VALOR",
-        "icons": [
-          {
-            "id": "9218f257-3374-493b-b903-774d6512d029",
-            "icon": "facebook",
-            "url": "https://youtube.com/oglobo"
-          },
-          {
-            "id": "e83d1132-0afa-4b69-89d2-8e200d143be6",
-            "icon": "instagram",
-            "url": "https://twitter.com/oglobo"
+            "url": "https://linkedin.com/company/oglobo"
           }
         ]
       }
     ]
   },
   "participants": {
-    "title": "Participantes",
+    "title": "Participantes Confirmados",
     "visible": true,
     "groups": [
       {
-        "id": "6c490007-fd01-402d-84f7-34b29c869ca5",
+        "id": "grp1",
         "label": "Palestrantes",
         "participants": [
           {
-            "id": "e76a5cb3-4f8a-418d-b664-0bfd4471270a",
-            "name": "João da Silva",
-            "position": "Diretor da Pedtrobras",
+            "id": "p1",
+            "name": "Ana Ribeiro",
+            "position": "CEO, GreenTech Brasil",
             "photo": "participante.webp"
           },
           {
-            "id": "cfad6382-6fc8-4db5-9484-a8213eb0f473",
-            "name": "Maria Clara Almeira",
-            "position": "CEO Coca-Cola",
+            "id": "p2",
+            "name": "Carlos Lima",
+            "position": "Pesquisador, COPPE/UFRJ",
             "photo": "participante.webp"
           },
           {
-            "id": "da07e355-4949-4d3d-83ef-3e42891cd529",
-            "name": "Carlos Pereira Antunes da Silva",
-            "position": "Superintendente da Sucursal Vale e Professor da Universidade Federal RJ",
+            "id": "p3",
+            "name": "Joana Martins",
+            "position": "Fundadora, EcoMov",
             "photo": "participante.webp"
           },
           {
-            "id": "5682d5c4-27aa-4a0c-a5f3-2be4bdc50be3",
-            "name": "Joana Amaral Costa",
-            "position": "Senadora SP",
+            "id": "p4",
+            "name": "Miguel Torres",
+            "position": "Diretor de Sustentabilidade, Neoenergia",
             "photo": "participante.webp"
           },
           {
-            "id": "1b7627e5-1d84-4281-ab0c-125cf14d2275",
-            "name": "Ana Maria Teixeira Lima",
-            "position": "Deputada RJ",
+            "id": "p5",
+            "name": "Fernanda Costa",
+            "position": "Cientista Ambiental",
+            "photo": "participante.webp"
+          },
+          {
+            "id": "p6",
+            "name": "Eduardo Prado",
+            "position": "Head de Inovação, Gerdau",
+            "photo": "participante.webp"
+          },
+          {
+            "id": "p7",
+            "name": "Lívia Fernandes",
+            "position": "Jornalista, GloboNews",
+            "photo": "participante.webp"
+          },
+          {
+            "id": "p8",
+            "name": "Rafael Gonçalves",
+            "position": "Consultor ESG",
+            "photo": "participante.webp"
+          },
+          {
+            "id": "p9",
+            "name": "Patrícia Mendes",
+            "position": "Gestora de Projetos, ONU Brasil",
+            "photo": "participante.webp"
+          },
+          {
+            "id": "p10",
+            "name": "Rodrigo Sampaio",
+            "position": "Professor de Engenharia Ambiental, USP",
             "photo": "participante.webp"
           }
         ]
       },
       {
-        "id": "3b8675f6-ba2b-462a-96ed-0f64c9dcb403",
+        "id": "grp2",
         "label": "Mediadores",
         "participants": [
           {
-            "id": "a95caf1e-dc3c-4bdc-a254-464498fe79d7",
-            "name": "Lauro Jardim",
-            "position": "Editor Chefe O Globo",
+            "id": "m1",
+            "name": "Juliana Lopes",
+            "position": "Editora, Globo Rural",
             "photo": "participante.webp"
           },
           {
-            "id": "93aa78e4-3ab3-4df3-9a75-e3fd74124fc0",
-            "name": "Mirian Leitão",
-            "position": "Jornalista O Globo",
+            "id": "m2",
+            "name": "André Barbosa",
+            "position": "Apresentador, CBN Sustentabilidade",
+            "photo": "participante.webp"
+          },
+          {
+            "id": "m3",
+            "name": "Carla Soares",
+            "position": "Repórter, Valor Econômico",
+            "photo": "participante.webp"
+          },
+          {
+            "id": "m4",
+            "name": "Marcelo Silva",
+            "position": "Consultor Ambiental",
             "photo": "participante.webp"
           }
         ]
@@ -163,119 +210,185 @@
     ]
   },
   "schedule": {
-    "title": "Programação",
+    "title": "Programação Oficial",
     "visible": true,
     "panels": [
       {
-        "id": "1465483d-1f2e-488f-97a8-d471b2c24828",
-        "time": "8h30",
-        "title": "Wellcome Coffee",
-        "type": "simple"
+        "id": "a1",
+        "time": "08:30",
+        "title": "Welcome Coffee & Networking",
+        "type": "simple",
+        "description": "Recepção e boas-vindas aos participantes"
       },
       {
-        "id": "69dd47c8-3af2-466f-838f-c3448dc9a661",
-        "time": "9h",
-        "title": "Abertura",
-        "type": "simple"
+        "id": "a2",
+        "time": "09:30",
+        "title": "Abertura Oficial",
+        "type": "simple",
+        "description": "Apresentação institucional e abertura do evento"
       },
       {
-        "id": "d0cf00dd-dc7c-480b-b5f2-f96d2ea02825",
-        "time": "9h45",
-        "title": "Painel 1",
-        "description": "Desafio de construirmos um Sistema Alimentar mais resiliente. ",
+        "id": "p1",
+        "time": "10:00",
+        "title": "Painel 1 – Cidades Inteligentes e Sustentáveis",
         "type": "panel",
+        "description": "Como tecnologia e urbanismo se unem para um futuro de baixo impacto.",
         "speakers": [
           {
-            "id": "e76a5cb3-4f8a-418d-b664-0bfd4471270a",
-            "name": "João da Silva",
-            "photo": "participante.webp"
+            "id": "p1",
+            "name": "Ana Ribeiro",
+            "position": "CEO, GreenTech Brasil",
+            "photo": "participante1.webp"
           },
           {
-            "id": "cfad6382-6fc8-4db5-9484-a8213eb0f473",
-            "name": "Maria Clara Almeira",
-            "photo": "participante.webp"
+            "id": "p2",
+            "name": "Carlos Lima",
+            "position": "Pesquisador, COPPE/UFRJ",
+            "photo": "participante2.webp"
+          },
+          {
+            "id": "p3",
+            "name": "Joana Martins",
+            "position": "Fundadora, EcoMov",
+            "photo": "participante3.webp"
           }
         ],
         "mediators": [
           {
-            "id": "a95caf1e-dc3c-4bdc-a254-464498fe79d7",
-            "name": "Lauro Jardim",
-            "photo": "participante.webp"
+            "id": "m1",
+            "name": "Juliana Lopes",
+            "position": "Editora, Globo Rural",
+            "photo": "participante11.webp"
           }
         ]
       },
       {
-        "id": "e40848e1-0079-44f0-adc1-a2e658bd0401",
-        "time": "12h",
-        "title": "Painel 2",
-        "description": "O futuro da cadeia de valor de alimentos, a valorização do produtor agrícola e como impulsionar",
+        "id": "p2",
+        "time": "13:00",
+        "title": "Painel 2 – Inovação e Energia Limpa",
         "type": "panel",
+        "description": "Novas fontes, armazenamento e desafios da transição energética.",
         "speakers": [
           {
-            "id": "5682d5c4-27aa-4a0c-a5f3-2be4bdc50be3",
-            "name": "Joana Amaral Costa",
-            "photo": "participante.webp"
+            "id": "p4",
+            "name": "Miguel Torres",
+            "position": "Diretor, Neoenergia",
+            "photo": "participante4.webp"
           },
           {
-            "id": "da07e355-4949-4d3d-83ef-3e42891cd529",
-            "name": "Carlos Pereira Antunes da Silva",
-            "photo": "participante.webp"
+            "id": "p5",
+            "name": "Fernanda Costa",
+            "position": "Cientista Ambiental",
+            "photo": "participante5.webp"
           },
           {
-            "id": "1b7627e5-1d84-4281-ab0c-125cf14d2275",
-            "name": "Ana Maria Teixeira Lima",
-            "photo": "participante.webp"
+            "id": "p6",
+            "name": "Eduardo Prado",
+            "position": "Head de Inovação, Gerdau",
+            "photo": "participante6.webp"
           }
         ],
         "mediators": [
           {
-            "id": "93aa78e4-3ab3-4df3-9a75-e3fd74124fc0",
-            "name": "Mirian Leitão",
-            "photo": "participante.webp"
+            "id": "m2",
+            "name": "André Barbosa",
+            "position": "Apresentador, CBN Sustentabilidade",
+            "photo": "participante12.webp"
           }
         ]
+      },
+      {
+        "id": "p3",
+        "time": "15:30",
+        "title": "Painel 3 – ESG como Estratégia de Negócio",
+        "type": "panel",
+        "description": "Empresas que transformam o mercado com responsabilidade e propósito.",
+        "speakers": [
+          {
+            "id": "p7",
+            "name": "Lívia Fernandes",
+            "position": "Jornalista, GloboNews",
+            "photo": "participante7.webp"
+          },
+          {
+            "id": "p8",
+            "name": "Rafael Gonçalves",
+            "position": "Consultor ESG",
+            "photo": "participante8.webp"
+          },
+          {
+            "id": "p9",
+            "name": "Patrícia Mendes",
+            "position": "Gestora, ONU Brasil",
+            "photo": "participante9.webp"
+          }
+        ],
+        "mediators": [
+          {
+            "id": "m3",
+            "name": "Carla Soares",
+            "position": "Repórter, Valor Econômico",
+            "photo": "participante13.webp"
+          }
+        ]
+      },
+      {
+        "id": "f1",
+        "time": "17:30",
+        "title": "Encerramento & Coffee Final",
+        "type": "simple",
+        "description": "Considerações finais e networking de encerramento"
       }
     ]
   },
   "previousEvents": {
     "title": "Edições Anteriores",
-    "description": "Confira as edicoes anteriores",
+    "description": "Confira os melhores momentos das edições passadas do Summit Futuro Sustentável.",
     "visible": true,
     "events": [
       {
-        "id": "984537b3-81ae-45ff-b2f9-d382c0d16a06",
-        "date": "Junho 2025",
+        "id": "e1",
+        "date": "2024",
         "image": "edicao1.webp",
-        "title": "Teste 1",
-        "description": "Auscultação de pessoas directa ou indirectamente ligadas ao negócio",
-        "ctaLabel": "Assista",
+        "title": "Summit Futuro Sustentável 2024",
+        "description": "O evento reuniu mais de 2 mil participantes para debater os desafios da energia limpa.",
+        "ctaLabel": "Ver Galeria",
         "ctaLink": "#"
       },
       {
-        "id": "a2ae784d-4623-4b3e-839b-67d6c7049f89",
-        "date": "Maio 2025",
+        "id": "e2",
+        "date": "2023",
         "image": "edicao1.webp",
-        "title": "Teste 2",
-        "description": "Auscultação de pessoas directa ou indirectamente ligadas ao negócio",
-        "ctaLabel": "Assista",
+        "title": "Summit Inovação Verde 2023",
+        "description": "Empresas e startups apresentaram soluções em mobilidade e tecnologia circular.",
+        "ctaLabel": "Ver Galeria",
         "ctaLink": "#"
       },
       {
-        "id": "18d4dd6f-c3d9-4c5f-bc0a-b16a06f705ad",
-        "date": "Abril 2025",
+        "id": "e3",
+        "date": "2022",
         "image": "edicao1.webp",
-        "title": "Teste 3",
-        "description": "Auscultação de pessoas directa ou indirectamente ligadas ao negócio",
-        "ctaLabel": "Assista",
+        "title": "Sustentabilidade em Foco 2022",
+        "description": "Evento marcou o início da parceria com universidades e centros de pesquisa.",
+        "ctaLabel": "Ver Galeria",
         "ctaLink": "#"
       },
       {
-        "id": "95085083-cedb-4ce0-98b2-b4fa1779afe1",
-        "date": "Março 2025",
-        "image": "edicao1.webp",
-        "title": "Teste 4",
-        "description": "Auscultação de pessoas directa ou indirectamente ligadas ao negócio",
-        "ctaLabel": "Assista",
+        "id": "e4",
+        "date": "2021",
+        "image": "evento1.webp",
+        "title": "Inovação Climática 2021",
+        "description": "Primeira edição com transmissão simultânea e formato híbrido.",
+        "ctaLabel": "Ver Galeria",
+        "ctaLink": "#"
+      },
+      {
+        "id": "e5",
+        "date": "2020",
+        "image": "evento1.webp",
+        "title": "Energia para o Amanhã 2020",
+        "description": "Painéis sobre desafios globais da energia renovável.",
+        "ctaLabel": "Ver Galeria",
         "ctaLink": "#"
       }
     ]
@@ -287,7 +400,7 @@
       "items": [
         {
           "id": "de33ee4d-bb5b-4d4a-b5a9-cf72c08ef33f",
-          "name": "pepsico.webp"
+          "name": "marca3.webp"
         }
       ]
     },
@@ -297,24 +410,24 @@
       "items": [
         {
           "id": "b9a562b1-2ba7-4b72-a3aa-d8974ba064f0",
-          "name": "globo-rural.webp"
+          "name": "marca.webp"
         },
         {
           "id": "7a91ddf7-2401-4839-b101-e8ad5758e37a",
-          "name": "editora-globo.webp"
+          "name": "marca2.webp"
         }
       ]
     }
   ],
   "subscribe": {
-    "title": "Inscrição",
+    "title": "Inscreva-se",
+    "description": "Garanta sua vaga no Summit Futuro Sustentável 2025.",
     "visible": true,
-    "description": "Preencha o formulário para participar.",
-    "successTitle": "Inscrição enviada!",
-    "successMessage": "Obrigado pela sua inscrição. Em breve entraremos em contato.",
+    "successTitle": "Inscrição Enviada!",
+    "successMessage": "Obrigado por se inscrever! Em breve entraremos em contato.",
     "formUrl": "",
     "formsConfig": {
-      "FORMS_URL_BASE64": "aHR0cHM6Ly9mb3Jtcy5taWNyb3NvZnQuY29tL2Zvcm1hcGkvYXBpLzBiMDU3MzU0LTBmYzktNDdlNS04Njc0LTg0NDlkZDdlODhiOC9ncm91cHMvY2U3ZmJiMWQtMWE5Ni00MGI0LTk5YmUtODljZjYxNmI2YmY2L2Zvcm1zKCdWSE1GQzhrUDVVZUdkSVJKM1g2SXVCMjdmODZXR3JSQW1iNkp6MkZyYV9aVVFrTlpUekkzVUZGT04xZ3lSMWRUVEVoSVJqSlNWMDlMUVNRbFFDTjBQV2N1JykvcmVzcG9uc2Vz",
+      "FORMS_URL_BASE64": "U2FtcGxlQmFzZTY0RW5jb2RlZFZhbHVl",
       "QUESTION_IDS": {
         "name": "r9dd6878a382646f5824c28921a3b606d",
         "email": "r61251a298dfe46cf92b3d3bdec15ebf5",
@@ -329,47 +442,47 @@
     },
     "fields": [
       {
-        "id": "r9dd6878a382646f5824c28921a3b606d",
+        "id": "f1",
         "label": "name",
         "visible": true
       },
       {
-        "id": "r61251a298dfe46cf92b3d3bdec15ebf5",
+        "id": "f2",
         "label": "email",
         "visible": true
       },
       {
-        "id": "r386e88a11a544391b709260d5e958987",
+        "id": "f3",
         "label": "phone",
         "visible": true
       },
       {
-        "id": "ra401d13ed8b84f5cbd4dca4ffc3890e6",
+        "id": "f4",
         "label": "document",
         "visible": true
       },
       {
-        "id": "r754d4abcd5bc468e80cf3bcd257c4c85",
+        "id": "f5",
         "label": "position",
         "visible": true
       },
       {
-        "id": "r77a287a58cf546799522b6464ed55f92",
+        "id": "f6",
         "label": "company",
         "visible": true
       },
       {
-        "id": "rdc65760d76e640bd9b20ecc7fab55668",
+        "id": "f7",
         "label": "message",
-        "visible": true
+        "visible": false
       },
       {
-        "id": "rbe00f0945a944e37a8ee6d4499bcf6c3",
+        "id": "f8",
         "label": "optin1",
         "visible": true
       },
       {
-        "id": "raa64c101a351475d94f1bf1789d71d6c",
+        "id": "f9",
         "label": "optin2",
         "visible": true
       }

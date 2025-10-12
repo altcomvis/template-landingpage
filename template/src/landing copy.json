@@ -1,0 +1,378 @@
+{
+  "general": {
+    "projectName": "Summit Agricultura Regenerativa",
+    "primaryColor": "#334C95",
+    "secondaryColor": "#3CA1E6",
+    "darkColor": "#1A2756",
+    "lightColor": "#92BC49",
+    "backgroundColor": "#1A2756",
+    "surfaceColor": "#334C95",
+    "textColor": "#EBF1FF",
+    "backgroundMode": "solid",
+    "fontFamily": "Poppins",
+    "enableParallax": true,
+    "menu": [
+      {
+        "id": "1",
+        "label": "Início",
+        "href": "home",
+        "visible": true
+      },
+      {
+        "id": "2",
+        "label": "Participantes",
+        "href": "participants",
+        "visible": true
+      },
+      {
+        "id": "3",
+        "label": "Programação",
+        "href": "schedule",
+        "visible": true
+      },
+      {
+        "id": "4",
+        "label": "Inscrição",
+        "href": "subscribe",
+        "visible": true
+      },
+      {
+        "id": "5",
+        "label": "Edições Anteriores",
+        "href": "previous-editions",
+        "visible": true
+      }
+    ]
+  },
+  "hero": {
+    "logo": "",
+    "subtitle": "",
+    "date": "20/10",
+    "time": "9h",
+    "location": "Experience House (Ed. River One)",
+    "address": "Rua Gerivatiba, 207, 19º andar - Butantã – São Paulo/SP",
+    "useBackgroundImage": true,
+    "useLightRays": true,
+    "lightRaysColor": "#75db8a"
+  },
+  "about": {
+    "subtitle": "",
+    "socialTitle": "Acompanhe nas redes sociais",
+    "paragraphs": [
+      "A agricultura é a base da nossa alimentação e da nossa economia, e a agricultura regenerativa é uma resposta fundamental ao desafio de construirmos um Sistema Alimentar mais resiliente. \nVamos reunir líderes e especialistas para discutir sobre produção sustentável, do campo à cidade, o futuro da cadeia de valor de alimentos, a valorização do produtor agrícola e como impulsionar o Brasil como celeiro mundial em Sistemas Alimentares Regenerativos.\nNão perca!"
+    ],
+    "showTransmission": true,
+    "socialBlocks": [
+      {
+        "id": "block-1",
+        "label": "GLOBO RURAL",
+        "icons": [
+          {
+            "id": "yt",
+            "icon": "youtube",
+            "url": "https://youtube.com/oglobo"
+          },
+          {
+            "id": "tw",
+            "icon": "twitter",
+            "url": "https://twitter.com/oglobo"
+          },
+          {
+            "id": "02fe81e9-c16a-4a07-af42-6ecd1ad36832",
+            "icon": "linkedin",
+            "url": "https://twitter.com/oglobo"
+          }
+        ]
+      },
+      {
+        "id": "582e28f6-e384-4767-a157-ed0110549219",
+        "label": "VALOR",
+        "icons": [
+          {
+            "id": "9218f257-3374-493b-b903-774d6512d029",
+            "icon": "facebook",
+            "url": "https://youtube.com/oglobo"
+          },
+          {
+            "id": "e83d1132-0afa-4b69-89d2-8e200d143be6",
+            "icon": "instagram",
+            "url": "https://twitter.com/oglobo"
+          }
+        ]
+      }
+    ]
+  },
+  "participants": {
+    "title": "Participantes",
+    "visible": true,
+    "groups": [
+      {
+        "id": "6c490007-fd01-402d-84f7-34b29c869ca5",
+        "label": "Palestrantes",
+        "participants": [
+          {
+            "id": "e76a5cb3-4f8a-418d-b664-0bfd4471270a",
+            "name": "João da Silva",
+            "position": "Diretor da Pedtrobras",
+            "photo": "participante.webp"
+          },
+          {
+            "id": "cfad6382-6fc8-4db5-9484-a8213eb0f473",
+            "name": "Maria Clara Almeira",
+            "position": "CEO Coca-Cola",
+            "photo": "participante.webp"
+          },
+          {
+            "id": "da07e355-4949-4d3d-83ef-3e42891cd529",
+            "name": "Carlos Pereira Antunes da Silva",
+            "position": "Superintendente da Sucursal Vale e Professor da Universidade Federal RJ",
+            "photo": "participante.webp"
+          },
+          {
+            "id": "5682d5c4-27aa-4a0c-a5f3-2be4bdc50be3",
+            "name": "Joana Amaral Costa",
+            "position": "Senadora SP",
+            "photo": "participante.webp"
+          },
+          {
+            "id": "1b7627e5-1d84-4281-ab0c-125cf14d2275",
+            "name": "Ana Maria Teixeira Lima",
+            "position": "Deputada RJ",
+            "photo": "participante.webp"
+          }
+        ]
+      },
+      {
+        "id": "3b8675f6-ba2b-462a-96ed-0f64c9dcb403",
+        "label": "Mediadores",
+        "participants": [
+          {
+            "id": "a95caf1e-dc3c-4bdc-a254-464498fe79d7",
+            "name": "Lauro Jardim",
+            "position": "Editor Chefe O Globo",
+            "photo": "participante.webp"
+          },
+          {
+            "id": "93aa78e4-3ab3-4df3-9a75-e3fd74124fc0",
+            "name": "Mirian Leitão",
+            "position": "Jornalista O Globo",
+            "photo": "participante.webp"
+          }
+        ]
+      }
+    ]
+  },
+  "schedule": {
+    "title": "Programação",
+    "visible": true,
+    "panels": [
+      {
+        "id": "1465483d-1f2e-488f-97a8-d471b2c24828",
+        "time": "8h30",
+        "title": "Wellcome Coffee",
+        "type": "simple"
+      },
+      {
+        "id": "69dd47c8-3af2-466f-838f-c3448dc9a661",
+        "time": "9h",
+        "title": "Abertura",
+        "type": "simple"
+      },
+      {
+        "id": "d0cf00dd-dc7c-480b-b5f2-f96d2ea02825",
+        "time": "9h45",
+        "title": "Painel 1",
+        "description": "Desafio de construirmos um Sistema Alimentar mais resiliente. ",
+        "type": "panel",
+        "speakers": [
+          {
+            "id": "e76a5cb3-4f8a-418d-b664-0bfd4471270a",
+            "name": "João da Silva",
+            "photo": "participante.webp"
+          },
+          {
+            "id": "cfad6382-6fc8-4db5-9484-a8213eb0f473",
+            "name": "Maria Clara Almeira",
+            "photo": "participante.webp"
+          }
+        ],
+        "mediators": [
+          {
+            "id": "a95caf1e-dc3c-4bdc-a254-464498fe79d7",
+            "name": "Lauro Jardim",
+            "photo": "participante.webp"
+          }
+        ]
+      },
+      {
+        "id": "e40848e1-0079-44f0-adc1-a2e658bd0401",
+        "time": "12h",
+        "title": "Painel 2",
+        "description": "O futuro da cadeia de valor de alimentos, a valorização do produtor agrícola e como impulsionar",
+        "type": "panel",
+        "speakers": [
+          {
+            "id": "5682d5c4-27aa-4a0c-a5f3-2be4bdc50be3",
+            "name": "Joana Amaral Costa",
+            "photo": "participante.webp"
+          },
+          {
+            "id": "da07e355-4949-4d3d-83ef-3e42891cd529",
+            "name": "Carlos Pereira Antunes da Silva",
+            "photo": "participante.webp"
+          },
+          {
+            "id": "1b7627e5-1d84-4281-ab0c-125cf14d2275",
+            "name": "Ana Maria Teixeira Lima",
+            "photo": "participante.webp"
+          }
+        ],
+        "mediators": [
+          {
+            "id": "93aa78e4-3ab3-4df3-9a75-e3fd74124fc0",
+            "name": "Mirian Leitão",
+            "photo": "participante.webp"
+          }
+        ]
+      }
+    ]
+  },
+  "previousEvents": {
+    "title": "Edições Anteriores",
+    "description": "Confira as edicoes anteriores",
+    "visible": true,
+    "events": [
+      {
+        "id": "984537b3-81ae-45ff-b2f9-d382c0d16a06",
+        "date": "Junho 2025",
+        "image": "edicao1.webp",
+        "title": "Teste 1",
+        "description": "Auscultação de pessoas directa ou indirectamente ligadas ao negócio",
+        "ctaLabel": "Assista",
+        "ctaLink": "#"
+      },
+      {
+        "id": "a2ae784d-4623-4b3e-839b-67d6c7049f89",
+        "date": "Maio 2025",
+        "image": "edicao1.webp",
+        "title": "Teste 2",
+        "description": "Auscultação de pessoas directa ou indirectamente ligadas ao negócio",
+        "ctaLabel": "Assista",
+        "ctaLink": "#"
+      },
+      {
+        "id": "18d4dd6f-c3d9-4c5f-bc0a-b16a06f705ad",
+        "date": "Abril 2025",
+        "image": "edicao1.webp",
+        "title": "Teste 3",
+        "description": "Auscultação de pessoas directa ou indirectamente ligadas ao negócio",
+        "ctaLabel": "Assista",
+        "ctaLink": "#"
+      },
+      {
+        "id": "95085083-cedb-4ce0-98b2-b4fa1779afe1",
+        "date": "Março 2025",
+        "image": "edicao1.webp",
+        "title": "Teste 4",
+        "description": "Auscultação de pessoas directa ou indirectamente ligadas ao negócio",
+        "ctaLabel": "Assista",
+        "ctaLink": "#"
+      }
+    ]
+  },
+  "sponsors": [
+    {
+      "id": "b7d5b7a8-66bf-498e-b541-1c64f8bcfe91",
+      "label": "Oferecimento",
+      "items": [
+        {
+          "id": "de33ee4d-bb5b-4d4a-b5a9-cf72c08ef33f",
+          "name": "pepsico.webp"
+        }
+      ]
+    },
+    {
+      "id": "7f62db7c-c5ca-4dad-8dbe-39f59c9d9142",
+      "label": "Realização",
+      "items": [
+        {
+          "id": "b9a562b1-2ba7-4b72-a3aa-d8974ba064f0",
+          "name": "globo-rural.webp"
+        },
+        {
+          "id": "7a91ddf7-2401-4839-b101-e8ad5758e37a",
+          "name": "editora-globo.webp"
+        }
+      ]
+    }
+  ],
+  "subscribe": {
+    "title": "Inscrição",
+    "visible": true,
+    "description": "Preencha o formulário para participar.",
+    "successTitle": "Inscrição enviada!",
+    "successMessage": "Obrigado pela sua inscrição. Em breve entraremos em contato.",
+    "formUrl": "",
+    "formsConfig": {
+      "FORMS_URL_BASE64": "aHR0cHM6Ly9mb3Jtcy5taWNyb3NvZnQuY29tL2Zvcm1hcGkvYXBpLzBiMDU3MzU0LTBmYzktNDdlNS04Njc0LTg0NDlkZDdlODhiOC9ncm91cHMvY2U3ZmJiMWQtMWE5Ni00MGI0LTk5YmUtODljZjYxNmI2YmY2L2Zvcm1zKCdWSE1GQzhrUDVVZUdkSVJKM1g2SXVCMjdmODZXR3JSQW1iNkp6MkZyYV9aVVFrTlpUekkzVUZGT04xZ3lSMWRUVEVoSVJqSlNWMDlMUVNRbFFDTjBQV2N1JykvcmVzcG9uc2Vz",
+      "QUESTION_IDS": {
+        "name": "r9dd6878a382646f5824c28921a3b606d",
+        "email": "r61251a298dfe46cf92b3d3bdec15ebf5",
+        "phone": "r386e88a11a544391b709260d5e958987",
+        "document": "ra401d13ed8b84f5cbd4dca4ffc3890e6",
+        "position": "r754d4abcd5bc468e80cf3bcd257c4c85",
+        "company": "r77a287a58cf546799522b6464ed55f92",
+        "message": "rdc65760d76e640bd9b20ecc7fab55668",
+        "optin1": "rbe00f0945a944e37a8ee6d4499bcf6c3",
+        "optin2": "raa64c101a351475d94f1bf1789d71d6c"
+      }
+    },
+    "fields": [
+      {
+        "id": "r9dd6878a382646f5824c28921a3b606d",
+        "label": "name",
+        "visible": true
+      },
+      {
+        "id": "r61251a298dfe46cf92b3d3bdec15ebf5",
+        "label": "email",
+        "visible": true
+      },
+      {
+        "id": "r386e88a11a544391b709260d5e958987",
+        "label": "phone",
+        "visible": true
+      },
+      {
+        "id": "ra401d13ed8b84f5cbd4dca4ffc3890e6",
+        "label": "document",
+        "visible": true
+      },
+      {
+        "id": "r754d4abcd5bc468e80cf3bcd257c4c85",
+        "label": "position",
+        "visible": true
+      },
+      {
+        "id": "r77a287a58cf546799522b6464ed55f92",
+        "label": "company",
+        "visible": true
+      },
+      {
+        "id": "rdc65760d76e640bd9b20ecc7fab55668",
+        "label": "message",
+        "visible": true
+      },
+      {
+        "id": "rbe00f0945a944e37a8ee6d4499bcf6c3",
+        "label": "optin1",
+        "visible": true
+      },
+      {
+        "id": "raa64c101a351475d94f1bf1789d71d6c",
+        "label": "optin2",
+        "visible": true
+      }
+    ]
+  }
+}
