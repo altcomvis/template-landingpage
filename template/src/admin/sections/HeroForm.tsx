@@ -157,7 +157,7 @@ export default function HeroForm({ data, setData }: HeroFormProps) {
 						<Input
 							value={localHero.date}
 							onChange={(e) => updateField("date", e.target.value)}
-							placeholder="Ex: 23 a 25 de Outubro"
+							placeholder="Ex: 23/11"
 						/>
 					</div>
 
@@ -166,7 +166,7 @@ export default function HeroForm({ data, setData }: HeroFormProps) {
 						<Input
 							value={localHero.time}
 							onChange={(e) => updateField("time", e.target.value)}
-							placeholder="Ex: das 9h às 18h"
+							placeholder="Ex: 9h às 18h"
 						/>
 					</div>
 

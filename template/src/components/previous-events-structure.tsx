@@ -27,9 +27,10 @@ export function PreviousEventsStructure({
 	description?: string;
 }) {
 	return (
-		<section id="previous-events" className="py-16">
+		<section className="py-16">
 			<div className="container mx-auto px-4 max-w-6xl">
 				<TitleSection name={title} description={description} />
+
 				<Carousel className="relative mt-12">
 					<CarouselContent className="w-10/12 md:w-auto mx-auto">
 						{events.map((event) => (
@@ -37,9 +38,9 @@ export function PreviousEventsStructure({
 								key={event.title + event.date}
 								className="basis-full md:basis-1/2 lg:basis-1/3 px-8 md:px-4"
 							>
-								<div className="bg-[var(--light)] text-[var(--text)] rounded-xl overflow-hidden shadow-lg flex flex-col h-full">
+								<div className="bg-[var(--dark)] text-[var(--light)] rounded-xl overflow-hidden shadow-lg flex flex-col h-full">
 									{/* Data */}
-									<div className="bg-[var(--dark)] text-[var(--text)] text-sm font-bold py-2 text-center">
+									<div className="bg-[var(--dark)] text-[var(--light)] text-sm font-bold py-2 text-center">
 										{event.date}
 									</div>
 
@@ -52,10 +53,10 @@ export function PreviousEventsStructure({
 
 									{/* Conteúdo */}
 									<div className="p-6 flex flex-col flex-1">
-										<h3 className="text-lg font-bold mb-2 text-[var(--dark)]">
+										<h3 className="text-lg font-bold mb-2 text-[var(--light)]">
 											{event.title}
 										</h3>
-										<p className="text-sm text-[var(--dark)] mb-6 flex-1">
+										<p className="text-sm text-white mb-6 flex-1">
 											{event.description}
 										</p>
 

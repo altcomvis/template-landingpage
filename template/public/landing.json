@@ -8,7 +8,8 @@
     "backgroundColor": "#372f7e",
     "surfaceColor": "#ebf1ff",
     "textColor": "#333333",
-    "fontFamily": "Montserrat",
+    "fontBody": "Poppins",
+    "fontTitle": "Anton",
     "enableParallax": true,
     "backgroundMode": "solid",
     "menu": [
@@ -76,32 +77,51 @@
     "address": "Praça Mauá, 1 – Rio de Janeiro, RJ",
     "useBackgroundImage": true,
     "useLightRays": true,
-    "lightRaysColor": "#00B4D8",
+    "lightRaysColor": "#ffffff",
     "logoSize": ""
   },
   "about": {
     "subtitle": "Por um planeta mais inteligente e sustentável",
     "socialTitle": "Assista e participe conosco",
     "paragraphs": [
-      "O Summit Futuro Sustentável é o principal encontro de líderes e empresas comprometidos com o desenvolvimento sustentável no Brasil.",
-      "Durante dois dias de programação intensa, o evento reúne especialistas, cientistas, empreendedores e representantes do poder público para debater soluções de impacto positivo.",
-      "Inovação, responsabilidade ambiental e transformação social são os pilares desta edição."
+      "O Summit Futuro <b>Sustentável</b> é o principal encontro de líderes e empresas <b>comprometidos</b> com o desenvolvimento sustentável no Brasil.<div><br><div>Durante dois dias de programação intensa, o evento reúne especialistas, cientistas, empreendedores e representantes do poder público para debater soluções de impacto positivo.</div><div><br></div><div>Inovação, <i>responsabilidade</i> ambiental e <u>transformação</u> social são os pilares desta edição.</div><div><br></div><div>Novo texto.</div></div>"
     ],
     "showTransmission": true,
     "socialBlocks": [
       {
         "id": "block-1",
-        "label": "Transmissão Oficial",
+        "label": "O GLOBO",
         "icons": [
           {
             "id": "yt",
             "icon": "youtube",
-            "url": "https://youtube.com/oglobo"
+            "url": "https://youtube.com/"
           },
           {
-            "id": "lk",
+            "id": "tw",
+            "icon": "twitter",
+            "url": "https://twitter.com/"
+          },
+          {
+            "id": "02fe81e9-c16a-4a07-af42-6ecd1ad36832",
             "icon": "linkedin",
-            "url": "https://linkedin.com/company/oglobo"
+            "url": "https://linkedin.com/"
+          }
+        ]
+      },
+      {
+        "id": "582e28f6-e384-4767-a157-ed0110549219",
+        "label": "VALOR",
+        "icons": [
+          {
+            "id": "9218f257-3374-493b-b903-774d6512d029",
+            "icon": "facebook",
+            "url": "https://facebook.com/"
+          },
+          {
+            "id": "e83d1132-0afa-4b69-89d2-8e200d143be6",
+            "icon": "instagram",
+            "url": "https://instagram.com/"
           }
         ]
       }
@@ -238,19 +258,19 @@
             "id": "p1",
             "name": "Ana Ribeiro",
             "position": "CEO, GreenTech Brasil",
-            "photo": "participante1.webp"
+            "photo": "participante.webp"
           },
           {
             "id": "p2",
             "name": "Carlos Lima",
             "position": "Pesquisador, COPPE/UFRJ",
-            "photo": "participante2.webp"
+            "photo": "participante.webp"
           },
           {
             "id": "p3",
             "name": "Joana Martins",
             "position": "Fundadora, EcoMov",
-            "photo": "participante3.webp"
+            "photo": "participante.webp"
           }
         ],
         "mediators": [
@@ -258,7 +278,7 @@
             "id": "m1",
             "name": "Juliana Lopes",
             "position": "Editora, Globo Rural",
-            "photo": "participante11.webp"
+            "photo": "participante.webp"
           }
         ]
       },
@@ -273,19 +293,19 @@
             "id": "p4",
             "name": "Miguel Torres",
             "position": "Diretor, Neoenergia",
-            "photo": "participante4.webp"
+            "photo": "participante.webp"
           },
           {
             "id": "p5",
             "name": "Fernanda Costa",
             "position": "Cientista Ambiental",
-            "photo": "participante5.webp"
+            "photo": "participante.webp"
           },
           {
             "id": "p6",
             "name": "Eduardo Prado",
             "position": "Head de Inovação, Gerdau",
-            "photo": "participante6.webp"
+            "photo": "participante.webp"
           }
         ],
         "mediators": [
@@ -293,7 +313,13 @@
             "id": "m2",
             "name": "André Barbosa",
             "position": "Apresentador, CBN Sustentabilidade",
-            "photo": "participante12.webp"
+            "photo": "participante.webp"
+          },
+          {
+            "id": "m3",
+            "name": "Lauro Jardim",
+            "position": "Apresentador, CBN Sustentabilidade",
+            "photo": "participante.webp"
           }
         ]
       },
@@ -308,27 +334,33 @@
             "id": "p7",
             "name": "Lívia Fernandes",
             "position": "Jornalista, GloboNews",
-            "photo": "participante7.webp"
+            "photo": "participante.webp"
           },
           {
             "id": "p8",
             "name": "Rafael Gonçalves",
             "position": "Consultor ESG",
-            "photo": "participante8.webp"
+            "photo": "participante.webp"
           },
           {
             "id": "p9",
             "name": "Patrícia Mendes",
             "position": "Gestora, ONU Brasil",
-            "photo": "participante9.webp"
+            "photo": "participante.webp"
+          },
+          {
+            "id": "p10",
+            "name": "Patrícia Silva",
+            "position": "Gestora, ONU Brasil",
+            "photo": "participante.webp"
           }
         ],
         "mediators": [
           {
-            "id": "m3",
+            "id": "m4",
             "name": "Carla Soares",
             "position": "Repórter, Valor Econômico",
-            "photo": "participante13.webp"
+            "photo": "participante.webp"
           }
         ]
       },
@@ -376,7 +408,7 @@
       {
         "id": "e4",
         "date": "2021",
-        "image": "evento1.webp",
+        "image": "edicao1.webp",
         "title": "Inovação Climática 2021",
         "description": "Primeira edição com transmissão simultânea e formato híbrido.",
         "ctaLabel": "Ver Galeria",
@@ -385,7 +417,7 @@
       {
         "id": "e5",
         "date": "2020",
-        "image": "evento1.webp",
+        "image": "edicao1.webp",
         "title": "Energia para o Amanhã 2020",
         "description": "Painéis sobre desafios globais da energia renovável.",
         "ctaLabel": "Ver Galeria",

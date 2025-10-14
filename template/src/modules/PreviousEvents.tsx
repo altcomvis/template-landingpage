@@ -1,14 +1,34 @@
-import { PreviousEventsStructure } from '@/components/previous-events-structure'
-import landing from '@/landing.json'
+import { PreviousEventsStructure } from "@/components/previous-events-structure";
 
-export function PreviousEvents(props: React.HTMLAttributes<HTMLElement>) {
-  return (
-    <div {...props}>
-      <PreviousEventsStructure
-        events={landing.previousEvents.events}
-        title={landing.previousEvents.title}
-        description={landing.previousEvents.description}
-      />
-    </div>
-  )
+/* ─────────────── Tipagem ─────────────── */
+interface PreviousEvent {
+	id: string;
+	date: string;
+	image: string;
+	title: string;
+	description: string;
+	ctaLabel: string;
+	ctaLink: string;
+}
+
+interface PreviousEventsProps extends React.HTMLAttributes<HTMLElement> {
+	data: {
+		title: string;
+		description?: string;
+		visible?: boolean;
+		events: PreviousEvent[];
+	};
+}
+
+/* ─────────────── Componente ─────────────── */
+export function PreviousEvents({ data, ...props }: PreviousEventsProps) {
+	return (
+		<section {...props} id="previous-events">
+			<PreviousEventsStructure
+				events={data.events}
+				title={data.title}
+				description={data.description}
+			/>
+		</section>
+	);
 }

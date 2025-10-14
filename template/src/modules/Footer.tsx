@@ -1,10 +1,10 @@
 export function Footer() {
 	return (
-		<div className="py-9 flex flex-col justify-center gap-6 text-center text-sm bg-gradient-to-t ">
+		<div className="py-9 flex flex-col text-zinc-400 bg-zinc-900 justify-center gap-6 text-center text-sm md:mt-12 border-t border-zinc-600">
 			<div
-				className=" w-32 md:w32 mx-auto
+				className=" w-32 md:w32 mx-auto bg-zinc-400
      aspect-[217.9/52.3]
-    bg-[var(--surface)] 
+
     [mask:url('/img/project/logo-editora-globo-negocios.svg')]
     [mask-repeat:no-repeat] [mask-position:center] [mask-size:contain]
     [-webkit-mask:url('/img/project/logo-editora-globo-negocios.svg')]
@@ -12,7 +12,7 @@ export function Footer() {
   "
 			></div>
 
-			<p className="px-12 text-[var(--surface)]">
+			<p className="px-12 ">
 				Projeto desenvolvido e realizado pela Editora Globo. © 2025.
 			</p>
 		</div>

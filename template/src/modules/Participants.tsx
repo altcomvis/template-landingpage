@@ -7,57 +7,63 @@ import {
 	CarouselNext,
 	CarouselPrevious,
 } from "@/components/ui/carousel";
-import landing from "@/landing.json";
 
-// 🔹 Tipo mínimo para os participantes
 type Participant = {
 	name: string;
 	position?: string;
 	photo: string;
 };
 
-export function Participants(props: React.HTMLAttributes<HTMLElement>) {
-	// 🔹 Tipando o array vindo do JSON
-	const participantsGroups = (
-		landing as {
-			participants: {
-				title: string;
-				groups: { id: string; label: string; participants: Participant[] }[];
-			};
-		}
-	).participants.groups;
+type ParticipantGroup = {
+	id: string;
+	label: string;
+	participants: Participant[];
+};
 
-	// Flatten all participants from all groups
-	const participants: Participant[] = participantsGroups.flatMap(
-		(group) => group.participants,
-	);
+interface ParticipantsProps extends React.HTMLAttributes<HTMLElement> {
+	data: {
+		title: string;
+		groups: ParticipantGroup[];
+	};
+}
+
+/**
+ * Participants Section — adaptado ao novo padrão
+ * - Recebe os dados via props (`data`)
+ * - Mantém compatibilidade com o layout atual
+ * - Remove dependência direta do `landing.json`
+ */
+export function Participants({ data, ...props }: ParticipantsProps) {
+	const participants = data.groups.flatMap((group) => group.participants);
 
 	return (
-		<section id="speakers">
-			<span {...props}>
-				<TitleSection name="Participantes" />
-			</span>
-			<div
-				className="container w-11/12 px-4 md:px-14 mx-auto py-16 bg-[var(--secondary)] md:rounded-xl"
-				{...props}
-			>
-				<Carousel className="w-full max-w-6xl mx-auto" opts={{ loop: true }}>
-					<CarouselContent className=" rounded-4xl">
-						{participants.map((p: Participant) => (
+		<section id="speakers" className="relative" {...props}>
+			<TitleSection name={data.title || "Participantes"} />
+
+			<div className="container w-11/12 px-4 md:px-14 mx-auto py-16 bg-[var(--secondary)] md:rounded-xl relative overflow-hidden">
+				{/* Gradiente de overlay */}
+				<div className="bg-gradient-to-b from-black/30 to-black/0 absolute inset-0 z-0 md:rounded-xl" />
+
+				<Carousel
+					className="w-full max-w-6xl mx-auto z-10 relative"
+					opts={{ loop: true }}
+				>
+					<CarouselContent>
+						{participants.map((p) => (
 							<CarouselItem
 								key={p.name}
-								className=" md:basis-1/3 lg:basis-1/4 flex justify-center "
+								className="md:basis-1/3 lg:basis-1/4 flex justify-center"
 							>
 								<ParticipantDrawer
 									name={p.name}
 									position={p.position ?? ""}
 									photo={p.photo}
 									trigger={
-										<div className="relative group cursor-pointer ">
+										<div className="relative group cursor-pointer">
 											<img
-												src={`/public/img/participantes/${p.photo}`}
+												src={`/img/participantes/${p.photo}`}
 												alt={p.name}
-												className="w-64 h-64 object-cover shadow border border-[var(--text)] hover:brightness-75 transition "
+												className="w-64 h-64 object-cover shadow border border-[var(--text)] hover:brightness-75 transition"
 											/>
 											<div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent text-white leading-tight text-lg font-semibold pl-5 pr-16 pb-4 pt-16">
 												{p.name}
@@ -69,8 +75,9 @@ export function Participants(props: React.HTMLAttributes<HTMLElement>) {
 						))}
 					</CarouselContent>
 
+					{/* Botões de navegação */}
 					<CarouselPrevious className="absolute left-0 top-1/2 md:px-5 md:-translate-y-1/2 md:-translate-x-12 rounded-r h-full border-none shadow-none bg-zinc-300 hover:bg-black/20 transition" />
-					<CarouselNext className="absolute right-0 top-1/2 md:px-5 md:-translate-y-1/2 md:translate-x-12 rounded-l h-full border-none shadow-none bg-zinc-300 hover:bg-black/20 transition " />
+					<CarouselNext className="absolute right-0 top-1/2 md:px-5 md:-translate-y-1/2 md:translate-x-12 rounded-l h-full border-none shadow-none bg-zinc-300 hover:bg-black/20 transition" />
 				</Carousel>
 			</div>
 		</section>
