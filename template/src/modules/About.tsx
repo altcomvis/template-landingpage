@@ -51,7 +51,7 @@ export function About({ data, ...props }: AboutProps) {
 
 				{/* Texto descritivo com suporte a HTML */}
 				<div
-					className="text-[var(--text)] text-xl font-light pb-16 text-pretty max-w-[60ch] mx-auto"
+					className="text-[var(--text)] text-xl pb-16 text-pretty max-w-[60ch] mx-auto"
 					{...props}
 				>
 					{paragraphs.map((p, i) => (

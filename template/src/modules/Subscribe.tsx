@@ -11,7 +11,6 @@ import {
 	FormControl,
 	FormField,
 	FormItem,
-	FormLabel,
 	FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
@@ -207,7 +206,6 @@ export default function Subscribe({ data, ...props }: SubscribeProps) {
 		setIsUploading(true);
 		try {
 			const cfg = data.formsConfig;
-
 			const answers = Object.entries(values).map(([key, value]) => ({
 				questionId: cfg.QUESTION_IDS[key as keyof typeof cfg.QUESTION_IDS],
 				answer1: value,
@@ -249,7 +247,10 @@ export default function Subscribe({ data, ...props }: SubscribeProps) {
 				<TitleSection name={data.title} description={data.description} />
 
 				<Form key={formKey} {...form}>
-					<form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+					<form
+						onSubmit={form.handleSubmit(onSubmit)}
+						className="grid grid-cols-1 md:grid-cols-2 gap-4"
+					>
 						{/* Campos principais */}
 						{[
 							"name",
@@ -265,44 +266,57 @@ export default function Subscribe({ data, ...props }: SubscribeProps) {
 									key={field}
 									control={form.control}
 									name={field as keyof FormValues}
-									render={({ field: formField }) => (
-										<FormItem>
-											<FormControl>
-												{field === "phone" ? (
-													<PhoneInput
-														{...formField}
-														placeholder="Telefone"
-														international
-														defaultCountry="BR"
-														onChange={(val) =>
-															form.setValue("phone", val || "", {
-																shouldValidate: true,
-															})
-														}
-														className="border px-2 py-[.35rem] rounded-md text-[var(--text)] text-sm w-full"
-													/>
-												) : field === "message" ? (
-													<Textarea
-														{...formField}
-														placeholder="Mensagem"
-														className="min-h-28 text-[var(--text)]"
-													/>
-												) : (
-													<Input
-														{...formField}
-														placeholder={field.toUpperCase()}
-														className="text-[var(--text)]"
-														onChange={
-															field === "document"
-																? handleDocumentChange
-																: formField.onChange
-														}
-													/>
-												)}
-											</FormControl>
-											<FormMessage />
-										</FormItem>
-									)}
+									render={({ field: formField }) => {
+										const placeholders: Record<string, string> = {
+											name: "Nome completo",
+											document: "CPF/CNPJ",
+											email: "E-mail",
+											phone: "Telefone",
+											position: "Cargo",
+											company: "Empresa",
+											message: "Mensagem",
+										};
+										return (
+											<FormItem
+												className={field === "message" ? "col-span-2" : ""}
+											>
+												<FormControl>
+													{field === "phone" ? (
+														<PhoneInput
+															{...formField}
+															placeholder={placeholders[field]}
+															international
+															defaultCountry="BR"
+															onChange={(val) =>
+																form.setValue("phone", val || "", {
+																	shouldValidate: true,
+																})
+															}
+															className="border px-2 py-[.35rem] rounded-md text-[var(--text)] text-sm w-full"
+														/>
+													) : field === "message" ? (
+														<Textarea
+															{...formField}
+															placeholder={placeholders[field]}
+															className="min-h-28 text-[var(--text)]"
+														/>
+													) : (
+														<Input
+															{...formField}
+															placeholder={placeholders[field]}
+															className="text-[var(--text)]"
+															onChange={
+																field === "document"
+																	? handleDocumentChange
+																	: formField.onChange
+															}
+														/>
+													)}
+												</FormControl>
+												<FormMessage />
+											</FormItem>
+										);
+									}}
 								/>
 							) : null,
 						)}
@@ -315,7 +329,7 @@ export default function Subscribe({ data, ...props }: SubscribeProps) {
 									control={form.control}
 									name={opt as keyof FormValues}
 									render={({ field }) => (
-										<FormItem>
+										<FormItem className="col-span-2">
 											<RadioGroup
 												onValueChange={field.onChange}
 												defaultValue={field.value}
@@ -328,7 +342,7 @@ export default function Subscribe({ data, ...props }: SubscribeProps) {
 															value={opt === "optin1" ? "Aceite1" : "Aceite2"}
 														/>
 													</FormControl>
-													<FormLabel className="text-[var(--text)] text-sm leading-tight">
+													<p className="text-[var(--text)] text-sm leading-tight">
 														{opt === "optin1" ? (
 															<>
 																Li e concordo com os{" "}
@@ -347,7 +361,7 @@ export default function Subscribe({ data, ...props }: SubscribeProps) {
 																do Grupo Globo e patrocinadores.
 															</>
 														)}
-													</FormLabel>
+													</p>
 												</FormItem>
 											</RadioGroup>
 											<FormMessage />
@@ -358,17 +372,19 @@ export default function Subscribe({ data, ...props }: SubscribeProps) {
 						)}
 
 						{/* Botão */}
-						<Button
-							type="submit"
-							disabled={isUploading}
-							className="w-full text-lg bg-[var(--background)] hover:bg-zinc-400/25 transition"
-						>
-							{isUploading ? (
-								<Loader2 className="animate-spin mr-2" />
-							) : (
-								"Enviar"
-							)}
-						</Button>
+						<div className="col-span-2">
+							<Button
+								type="submit"
+								disabled={isUploading}
+								className="w-full text-lg bg-[var(--background)] hover:bg-zinc-400/25 transition"
+							>
+								{isUploading ? (
+									<Loader2 className="animate-spin mr-2" />
+								) : (
+									"Enviar"
+								)}
+							</Button>
+						</div>
 					</form>
 				</Form>
 

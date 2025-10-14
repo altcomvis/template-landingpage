@@ -506,7 +506,7 @@
       {
         "id": "f7",
         "label": "message",
-        "visible": false
+        "visible": true
       },
       {
         "id": "f8",
