@@ -32,6 +32,7 @@
     "clsx": "^2.1.1",
     "cmdk": "^1.1.1",
     "embla-carousel-react": "^8.6.0",
+    "favicons": "^7.2.0",
     "file-saver": "^2.0.5",
     "gsap": "^3.13.0",
     "idb-keyval": "^6.2.2",

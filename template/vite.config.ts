@@ -15,7 +15,7 @@ try {
 
 const directoryName = landing?.general?.directoryName || "NOMEPROJETO";
 const baseUrl =
-	"https://s3.glbimg.com/v1/AUTH_87d42e7b2a034c7ba871ec4d2695d73d/oglobo-globo-com/projetos/";
+	"https://s3.glbimg.com/v1/AUTH_87d42e7b2a034c7ba871ec4d2695d73d/projetos/oglobo-globo-com/projetos/";
 
 export default defineConfig(({ mode }) => ({
 	plugins: [react(), tailwindcss()],

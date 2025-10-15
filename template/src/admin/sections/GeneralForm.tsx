@@ -269,6 +269,7 @@ export default function GeneralForm({
 						/>
 					</div>
 				</div>
+
 				{/* 🌐 SEO */}
 				<div className="border-t pt-6 mt-6">
 					<Label className="text-lg font-semibold mb-3 block">
