@@ -4,14 +4,17 @@ import { useLayoutEffect } from "react";
 
 gsap.registerPlugin(ScrollTrigger);
 
-export function useParallaxAnimation(enabled: boolean) {
+export function useParallaxAnimation(enabled?: boolean) {
+	// 🟢 Nunca muda a estrutura do hook, apenas ativa ou não o efeito
 	useLayoutEffect(() => {
-		if (!enabled) return;
+		if (enabled === false) return; // ainda não habilitado
 
-		// Aguarda o ciclo de renderização do React antes de iniciar GSAP
+		// Proteção extra: se não estiver no browser, não roda
+		if (typeof window === "undefined") return;
+
+		// ✅ Espera o próximo frame para garantir que o DOM está pronto
 		requestAnimationFrame(() => {
 			const elements = document.querySelectorAll("[data-parallax]");
-
 			if (!elements.length) return;
 
 			elements.forEach((el, i) => {
@@ -24,7 +27,7 @@ export function useParallaxAnimation(enabled: boolean) {
 						filter: "blur(0px)",
 						ease: "back.out(1.7)",
 						duration: 1.2,
-						delay: i * 0.05, // leve delay entre elementos
+						delay: i * 0.05,
 						scrollTrigger: {
 							trigger: el,
 							start: "top 95%",
@@ -34,12 +37,5 @@ export function useParallaxAnimation(enabled: boolean) {
 				);
 			});
 		});
-
-		// ✅ Cleanup corrigido — sem retorno implícito
-		return () => {
-			ScrollTrigger.getAll().forEach((t) => {
-				t.kill();
-			});
-		};
 	}, [enabled]);
 }

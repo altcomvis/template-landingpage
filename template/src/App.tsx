@@ -15,21 +15,69 @@ import { Schedule } from "./modules/Schedule";
 import { Sponsors } from "./modules/Sponsors";
 import Subscribe from "./modules/Subscribe";
 
+/* ──────────────────────────────── */
+/* 🧩 LANDING PAGE PRINCIPAL */
 function Landing() {
 	const [landing, setLanding] = useState<any>(null);
 
-	// Nunca desestruture direto
+	// ✅ URL do JSON baseada no caminho real
+	const jsonUrl =
+		import.meta.env.MODE === "production"
+			? `${window.location.pathname.replace(/\/$/, "")}/landing.json`
+			: "/landing.json";
 
-	const general = landing?.general || {};
-	const hero = landing?.hero || {};
-	const participants = landing?.participants || {};
-	const schedule = landing?.schedule || {};
-	const subscribe = landing?.subscribe || {};
-	const previousEvents = landing?.previousEvents || {};
+	// ✅ Carrega landing.json ao iniciar
+	useEffect(() => {
+		fetch(jsonUrl)
+			.then((res) => res.json())
+			.then(setLanding)
+			.catch((err) => console.error("Erro ao carregar landing.json:", err));
+	}, [jsonUrl]);
 
-	// ✅ Hooks SEMPRE chamados
-	useParallaxAnimation(!!general.enableParallax);
+	// 👀 Atualiza automaticamente se o JSON mudar (apenas em dev)
+	useEffect(() => {
+		if (import.meta.env.MODE !== "development") return;
+		let lastContent = "";
 
+		const checkForUpdates = async () => {
+			try {
+				const res = await fetch(`${jsonUrl}?t=${Date.now()}`);
+				const text = await res.text();
+				if (lastContent && text !== lastContent) {
+					console.log("🔁 landing.json alterado — recarregando...");
+					window.location.reload();
+				}
+				lastContent = text;
+			} catch {
+				/* ignore */
+			}
+		};
+
+		const interval = setInterval(checkForUpdates, 3000);
+		return () => clearInterval(interval);
+	}, [jsonUrl]);
+
+	// 🕓 Skeleton de carregamento
+	if (!landing) {
+		return (
+			<div className="w-full min-h-screen flex items-center justify-center">
+				<p>Carregando...</p>
+			</div>
+		);
+	}
+
+	/* ──────────────────────────────── */
+	/* 🔹 Desestruturações seguras */
+	const general = landing.general || {};
+	const hero = landing.hero || {};
+	const participants = landing.participants || {};
+	const schedule = landing.schedule || {};
+	const subscribe = landing.subscribe || {};
+	const previousEvents = landing.previousEvents || {};
+
+	/* ──────────────────────────────── */
+	/* 🎨 Hooks visuais */
+	useParallaxAnimation(general.enableParallax ?? false);
 	useThemeColors({
 		primaryColor: general.primaryColor,
 		secondaryColor: general.secondaryColor,
@@ -42,69 +90,27 @@ function Landing() {
 		fontTitle: general.fontTitle,
 	});
 
-	// Carrega JSON
-	useEffect(() => {
-		fetch("/landing.json")
-			.then((res) => res.json())
-			.then(setLanding)
-			.catch((err) => console.error("Erro ao carregar landing.json:", err));
-	}, []);
-	// 👀 Recarrega automaticamente se o JSON for alterado
-	useEffect(() => {
-		let lastContent = "";
-
-		const checkForUpdates = async () => {
-			try {
-				const res = await fetch(`/landing.json?t=${Date.now()}`); // força cache-busting
-				const text = await res.text();
-
-				// se o conteúdo mudou → recarrega a página
-				if (lastContent && text !== lastContent) {
-					console.log("🔁 landing.json alterado — recarregando página...");
-					window.location.reload();
-				}
-
-				lastContent = text;
-			} catch (err) {
-				console.warn("Erro ao verificar atualizações do JSON:", err);
-			}
-		};
-
-		// verifica a cada 3 segundos
-		const interval = setInterval(checkForUpdates, 3000);
-
-		return () => clearInterval(interval);
-	}, []);
-	// Você pode renderizar um "skeleton" SEM sair antes dos hooks
-	if (!landing) {
-		return (
-			<div
-				className="w-full min-h-screen flex items-center justify-center"
-				style={{ fontFamily: "var(--font-family), sans-serif" }}
-			>
-				<p className="text-center">Carregando...</p>
-			</div>
-		);
-	}
-
+	/* ──────────────────────────────── */
+	/* 🖼️ Background dinâmico */
 	const backgroundStyle = hero.useBackgroundImage
 		? {
 				backgroundImage: "url('/public/img/project/header.webp')",
 				backgroundPosition: "top",
-				backgroundAttachment: "fixed",
 				backgroundRepeat: "no-repeat",
 				backgroundSize: "cover",
 			}
 		: { backgroundColor: "var(--background)" };
 
+	/* ──────────────────────────────── */
+	/* 🧠 Render principal */
 	return (
 		<div
+			id="home"
 			className="w-full min-h-screen transition-colors duration-500 md:pt-6"
 			style={{
 				...backgroundStyle,
 				fontFamily: "var(--font-family), sans-serif",
 			}}
-			id="home"
 		>
 			<div
 				className="w-full md:w-10/12 mx-auto md:rounded-2xl shadow-2xl md:px-10 transition-colors duration-500"
@@ -113,26 +119,21 @@ function Landing() {
 				<SeoHead />
 				<MenuTemplate
 					logo="/public/img/project/marca-do-projeto.webp"
-					menuItems={landing.general.menu}
+					menuItems={general.menu}
 				/>
-				{/* remova o ";" que estava depois do componente */}
-				<Hero data-parallax data={landing.hero} general={landing.general} />
+
+				<Hero data-parallax data={hero} general={general} />
 				<About data-parallax data={landing.about} />
+
 				{participants?.visible && (
-					<Participants data-parallax data={landing.participants} />
+					<Participants data-parallax data={participants} />
 				)}
 				{schedule?.visible && (
-					<Schedule
-						data={landing.schedule}
-						participants={landing.participants}
-						data-parallax
-					/>
+					<Schedule data={schedule} participants={participants} data-parallax />
 				)}
-				{subscribe?.visible && (
-					<Subscribe data={landing.subscribe} data-parallax />
-				)}
+				{subscribe?.visible && <Subscribe data={subscribe} data-parallax />}
 				{previousEvents?.visible && (
-					<PreviousEvents data={landing.previousEvents} data-parallax />
+					<PreviousEvents data={previousEvents} data-parallax />
 				)}
 				<Sponsors data={landing.sponsors} data-parallax />
 			</div>
@@ -141,19 +142,63 @@ function Landing() {
 	);
 }
 
+/* ──────────────────────────────── */
+/* 🛠️ Página do Admin */
 function AdminPage() {
 	return <Admin />;
 }
 
+/* ──────────────────────────────── */
+/* 🌍 APP PRINCIPAL */
 export default function App() {
+	const [basePath, setBasePath] = useState<string | null>(null);
+
+	useEffect(() => {
+		const loadBase = async () => {
+			try {
+				// Pega o JSON no mesmo diretório da LP
+				const jsonUrl =
+					import.meta.env.MODE === "production"
+						? `${window.location.pathname.replace(/\/$/, "")}/landing.json`
+						: "/landing.json";
+
+				const res = await fetch(jsonUrl);
+				const data = await res.json();
+
+				const dir = data?.general?.directoryName || "template-landing-page";
+				const base =
+					import.meta.env.MODE === "production" ? `/projetos/${dir}/` : "/";
+
+				console.log("🧭 BasePath confirmado:", base);
+				setBasePath(base);
+			} catch (err) {
+				console.warn("⚠️ Falha ao carregar basePath:", err);
+				setBasePath("/");
+			}
+		};
+
+		loadBase();
+	}, []);
+
+	// 🚧 Enquanto o basePath ainda não está definido, não renderiza o Router
+	if (basePath === null) {
+		return (
+			<div className="w-full min-h-screen flex items-center justify-center">
+				<p>Inicializando aplicação...</p>
+			</div>
+		);
+	}
+
+	// ✅ Só monta o Router quando o basePath já estiver pronto
 	return (
 		<>
-			<Router>
+			<Router basename={basePath}>
 				<Routes>
 					<Route path="/" element={<Landing />} />
 					<Route path="/admin" element={<AdminPage />} />
 				</Routes>
 			</Router>
+
 			<Toaster richColors position="top-center" />
 		</>
 	);
