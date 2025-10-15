@@ -54,12 +54,6 @@
         "label": "Edições Anteriores",
         "href": "previous-events",
         "visible": true
-      },
-      {
-        "id": "7",
-        "label": "Patrocínios",
-        "href": "sponsors",
-        "visible": true
       }
     ],
     "seoImage": "/public/img/project/cover.webp"

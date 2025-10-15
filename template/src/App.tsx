@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
-import { MenuTemplate } from "@/components/menu-template";
+import { MenuTemplate } from "@/modules/Menu";
 import Admin from "./admin/Admin";
 import { SeoHead } from "./components/seo-head";
 import { useParallaxAnimation } from "./hooks/use-parallax-animation";
