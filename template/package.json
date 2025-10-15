@@ -1,7 +1,7 @@
 {
   "name": "template-landingpage",
   "private": true,
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Landing Page React + Vite + Tailwind com painel admin integrado.",
   "type": "module",
   "author": "Allan Teixeira <allanlteixeira@gmail.com>",
