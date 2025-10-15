@@ -7,6 +7,7 @@ import {
 	CarouselNext,
 	CarouselPrevious,
 } from "@/components/ui/carousel";
+import { getBasePath } from "@/utils/getBasePath";
 
 type Event = {
 	date: string;
@@ -46,7 +47,7 @@ export function PreviousEventsStructure({
 
 									{/* Imagem */}
 									<img
-										src={`/public/img/edicoes-passadas/${event.image}`}
+										src={`${getBasePath()}img/edicoes-passadas/${event.image}`}
 										alt={event.title}
 										className="w-full h-48 object-cover"
 									/>

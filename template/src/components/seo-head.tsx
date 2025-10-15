@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { getBasePath } from "@/utils/getBasePath";
 
 type SeoData = {
 	seoTitle?: string;
@@ -37,8 +38,8 @@ export function SeoHead() {
 		const defaultTitle = "Projeto Especial - Editora Globo";
 		const defaultDesc =
 			"Landing Page criada pela Editora Globo. Confira conteúdos, eventos e projetos especiais.";
-		const defaultImage = "/public/img/project/cover.webp";
 
+		const defaultImage = `${getBasePath()}img/project/cover.webp`;
 		// 🎯 Helpers
 		const setMeta = (name: string, content?: string) => {
 			if (!content) return;
@@ -152,5 +153,5 @@ export function SeoHead() {
 		}
 	}, [seo]);
 
-	return null; // Este componente só injeta no <head>
+	return null;
 }

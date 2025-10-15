@@ -1,3 +1,5 @@
+import { getBasePath } from "@/utils/getBasePath";
+
 interface SponsorBlock {
 	id: string;
 	label: string;
@@ -32,7 +34,7 @@ export function Sponsors({ data, ...props }: SponsorsProps) {
 								{block.items.map((item) => (
 									<img
 										key={item.id}
-										src={`/public/img/marcas/${item.name}`}
+										src={`${getBasePath()}img/marcas/${item.name}`}
 										alt={`${block.label} ${item.name}`}
 										className="h-10 w-auto object-contain"
 										loading="lazy"

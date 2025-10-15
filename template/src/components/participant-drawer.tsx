@@ -9,6 +9,7 @@ import {
 	DrawerTitle,
 	DrawerTrigger,
 } from "@/components/ui/drawer";
+import { getBasePath } from "@/utils/getBasePath";
 
 type ParticipantProps = {
 	name: string;
@@ -30,7 +31,7 @@ export function ParticipantDrawer({
 					trigger
 				) : (
 					<img
-						src={`/public/img/participantes/${photo}`}
+						src={`${getBasePath()}img/participantes/${photo}`}
 						alt={name}
 						className="w-16 h-16 rounded-full object-cover cursor-pointer hover:scale-105 transition "
 					/>
@@ -40,7 +41,7 @@ export function ParticipantDrawer({
 			<DrawerContent className="border-zinc-400 bg-zinc-200">
 				<div className="md:flex gap-4 md:w-4/12 mx-auto py-10">
 					<img
-						src={`/public/img/participantes/${photo}`}
+						src={`${getBasePath()}img/participantes/${photo}`}
 						alt={name}
 						className="w-48 mx-auto border border-zinc-300 shadow"
 					/>

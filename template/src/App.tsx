@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import { MenuTemplate } from "@/modules/Menu";
+import { getBasePath } from "@/utils/getBasePath";
 import Admin from "./admin/Admin";
 import { SeoHead } from "./components/seo-head";
 import { Toaster } from "./components/ui/sonner";
@@ -21,12 +22,10 @@ function Landing() {
 	const [landing, setLanding] = useState<any>(null);
 
 	// ✅ URL do JSON baseada no caminho real
-	const jsonUrl =
-		import.meta.env.MODE === "production"
-			? `${window.location.pathname.replace(/\/$/, "")}/landing.json`
-			: "/landing.json";
 
-	// ✅ Carrega landing.json ao iniciar
+	const basePath = getBasePath();
+	const jsonUrl = `${basePath}landing.json`;
+
 	useEffect(() => {
 		fetch(jsonUrl)
 			.then((res) => res.json())
@@ -97,7 +96,7 @@ function Landing() {
 	/* 🖼️ Background dinâmico */
 	const backgroundStyle = hero.useBackgroundImage
 		? {
-				backgroundImage: "url('/public/img/project/header.webp')",
+				backgroundImage: `url('${getBasePath()}img/project/header.webp')`,
 				backgroundPosition: "top",
 				backgroundRepeat: "no-repeat",
 				backgroundSize: "cover",
@@ -121,7 +120,7 @@ function Landing() {
 			>
 				<SeoHead />
 				<MenuTemplate
-					logo="/public/img/project/marca-do-projeto.webp"
+					logo={`${getBasePath()}img/project/marca-do-projeto.webp`}
 					menuItems={general.menu}
 				/>
 
