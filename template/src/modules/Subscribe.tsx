@@ -249,7 +249,7 @@ export default function Subscribe({ data, ...props }: SubscribeProps) {
 				<Form key={formKey} {...form}>
 					<form
 						onSubmit={form.handleSubmit(onSubmit)}
-						className="grid grid-cols-1 md:grid-cols-2 gap-4"
+						className="flex flex-col md:grid md:grid-cols-2 gap-4"
 					>
 						{/* Campos principais */}
 						{[

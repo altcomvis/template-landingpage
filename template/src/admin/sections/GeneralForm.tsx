@@ -25,6 +25,12 @@ interface GeneralData {
 	fontBody?: string; // ⇐ opcional
 	fontTitle?: string; // ⇐ opcional
 	enableParallax?: boolean;
+	seoTitle?: string;
+	seoDescription?: string;
+	seoKeywords?: string;
+	googleAnalyticsId?: string;
+	directoryName?: string;
+	pixelMeta?: string;
 }
 
 interface GeneralFormProps {
@@ -86,6 +92,12 @@ export default function GeneralForm({
 		fontBody: "Poppins",
 		fontTitle: "Poppins",
 		enableParallax: true,
+		seoTitle: "",
+		seoDescription: "",
+		seoKeywords: "",
+		googleAnalyticsId: "",
+		directoryName: "",
+		pixelMeta: "",
 		...(data.general ?? {}),
 	};
 
@@ -255,6 +267,68 @@ export default function GeneralForm({
 							value={general.surfaceColor}
 							onChange={(val) => updateField("surfaceColor", val)}
 						/>
+					</div>
+				</div>
+				{/* 🌐 SEO */}
+				<div className="border-t pt-6 mt-6">
+					<Label className="text-lg font-semibold mb-3 block">
+						SEO e Metadados
+					</Label>
+					<div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+						<div className="flex flex-col gap-2">
+							<Label>Título da página (SEO Title)</Label>
+							<Input
+								value={general.seoTitle || ""}
+								onChange={(e) => updateField("seoTitle", e.target.value)}
+								placeholder="Título exibido nos buscadores"
+							/>
+						</div>
+						<div className="flex flex-col gap-2">
+							<Label>Descrição (SEO Description)</Label>
+							<Input
+								value={general.seoDescription || ""}
+								onChange={(e) => updateField("seoDescription", e.target.value)}
+								placeholder="Resumo da página (até 160 caracteres)"
+							/>
+						</div>
+						<div className="flex flex-col gap-2">
+							<Label>Palavras-chave (Keywords)</Label>
+							<Input
+								value={general.seoKeywords || ""}
+								onChange={(e) => updateField("seoKeywords", e.target.value)}
+								placeholder="palavras, separadas, por, vírgula"
+							/>
+						</div>
+
+						<div className="flex flex-col gap-2">
+							<Label>Google Analytics ID</Label>
+							<Input
+								value={general.googleAnalyticsId || ""}
+								onChange={(e) =>
+									updateField("googleAnalyticsId", e.target.value)
+								}
+								placeholder="G-XXXXXXXXXX"
+							/>
+						</div>
+						<div className="flex flex-col gap-2">
+							<Label>Pixel Meta (Facebook)</Label>
+							<Input
+								value={general.pixelMeta || ""}
+								onChange={(e) => updateField("pixelMeta", e.target.value)}
+								placeholder="Ex: 123456789012345"
+							/>
+						</div>
+						<div className="flex flex-col gap-2">
+							<Label>Nome do Diretório (pasta no SVN)</Label>
+							<Input
+								value={general.directoryName || ""}
+								onChange={(e) => updateField("directoryName", e.target.value)}
+								placeholder="Ex: dialogosrj"
+							/>
+							<p className="text-xs text-zinc-500 mt-1">
+								Usado no Vite base, sitemap e SEO URL.
+							</p>
+						</div>
 					</div>
 				</div>
 			</CardContent>

@@ -13,7 +13,8 @@ export function Footer() {
 			></div>
 
 			<p className="px-12 ">
-				Projeto desenvolvido e realizado pela Editora Globo. © 2025.
+				Projeto desenvolvido e realizado pela Editora Globo. ©{" "}
+				{new Date().getFullYear()}.
 			</p>
 		</div>
 	);

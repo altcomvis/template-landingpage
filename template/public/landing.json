@@ -8,10 +8,16 @@
     "backgroundColor": "#372f7e",
     "surfaceColor": "#ebf1ff",
     "textColor": "#333333",
+    "backgroundMode": "solid",
     "fontBody": "Poppins",
     "fontTitle": "Anton",
     "enableParallax": true,
-    "backgroundMode": "solid",
+    "seoTitle": "Summit Futuro Sustentável 2025",
+    "seoDescription": "O principal evento sobre inovação e sustentabilidade no Brasil, realizado pela Editora Globo.",
+    "seoKeywords": "summit, sustentabilidade, inovação, evento, globo",
+    "googleAnalyticsId": "G-4392085309",
+    "directoryName": "summit-futuro-sustentavel-2025",
+    "pixelMeta": "4392394204320499",
     "menu": [
       {
         "id": "1",
@@ -56,16 +62,7 @@
         "visible": true
       }
     ],
-    "seo": {
-      "title": "Summit Futuro Sustentável 2025 | Editora Globo",
-      "description": "O maior evento sobre inovação, energia limpa e sustentabilidade do Brasil.",
-      "keywords": "sustentabilidade, energia, inovação, summit, globo",
-      "author": "Editora Globo",
-      "image": "/public/img/project/share.jpg",
-      "url": "https://globo.com/projetos/lp/summit-futuro-sustentavel",
-      "gaId": "G-9XYZ123ABC",
-      "metaPixelId": "123456789012345"
-    }
+    "seoImage": "/public/img/project/cover.webp"
   },
   "hero": {
     "logo": "logo-do-projeto.webp",
@@ -84,7 +81,7 @@
     "subtitle": "Por um planeta mais inteligente e sustentável",
     "socialTitle": "Assista e participe conosco",
     "paragraphs": [
-      "O Summit Futuro <b>Sustentável</b> é o principal encontro de líderes e empresas <b>comprometidos</b> com o desenvolvimento sustentável no Brasil.<div><br><div>Durante dois dias de programação intensa, o evento reúne especialistas, cientistas, empreendedores e representantes do poder público para debater soluções de impacto positivo.</div><div><br></div><div>Inovação, <i>responsabilidade</i> ambiental e <u>transformação</u> social são os pilares desta edição.</div><div><br></div><div>Novo texto.</div></div>"
+      "O Summit Futuro <b>Sustentável</b> é o principal encontro de líderes e empresas <b>comprometidos</b> com o desenvolvimento sustentável no Brasil.<div><br><div>Durante dois dias de programação intensa, o evento reúne especialistas, cientistas, empreendedores e representantes do poder público para debater soluções de impacto positivo.</div><div><br></div><div>Inovação, <i>responsabilidade</i> ambiental e <u>transformação</u> social são os pilares desta edição.</div></div>"
     ],
     "showTransmission": true,
     "socialBlocks": [

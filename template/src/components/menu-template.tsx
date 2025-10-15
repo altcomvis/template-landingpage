@@ -40,7 +40,7 @@ export function MenuTemplate({ logo, menuItems }: MenuTemplateProps) {
 	return (
 		<div
 			className={`md:w-full md:flex md:justify-center ${
-				isFixed ? "md:pt-14" : ""
+				isFixed ? "md:pt-14" : "pt-0"
 			}`}
 		>
 			<header
@@ -75,17 +75,21 @@ export function MenuTemplate({ logo, menuItems }: MenuTemplateProps) {
 					</nav>
 
 					{/* Menu Mobile */}
-					<div className="md:hidden pt-4">
+					<div className="md:hidden absolute top-4 left-4">
 						<Sheet open={open} onOpenChange={setOpen}>
 							<SheetTrigger asChild>
-								<Button variant="outline" className="bg-zinc-200" size="icon">
+								<Button
+									variant="outline"
+									className="bg-zinc-200 shadow-lg border"
+									size="icon"
+								>
 									<Menu className="text-zinc-500" />
 								</Button>
 							</SheetTrigger>
 
 							<SheetContent
 								side="top"
-								className="p-6 bg-zinc-700/90 backdrop-blur-md text-white h-screen border-none"
+								className="p-6 bg-zinc-700/90 backdrop-blur-md text-zinc-100 h-screen border-none"
 							>
 								<SheetHeader className="p-0 w-full">
 									<SheetTitle className="p-0 mx-auto pt-16">

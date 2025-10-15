@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import { MenuTemplate } from "@/components/menu-template";
 import Admin from "./admin/Admin";
+import { SeoHead } from "./components/seo-head";
 import { useParallaxAnimation } from "./hooks/use-parallax-animation";
 import { useThemeColors } from "./hooks/use-theme-colors";
 import { About } from "./modules/About";
@@ -17,6 +18,7 @@ function Landing() {
 	const [landing, setLanding] = useState<any>(null);
 
 	// Nunca desestruture direto
+
 	const general = landing?.general || {};
 	const hero = landing?.hero || {};
 	const participants = landing?.participants || {};
@@ -107,6 +109,7 @@ function Landing() {
 				className="w-full md:w-10/12 mx-auto md:rounded-2xl shadow-2xl md:px-10 transition-colors duration-500"
 				style={{ backgroundColor: "var(--surface)", color: "var(--text)" }}
 			>
+				<SeoHead />
 				<MenuTemplate
 					logo="/public/img/project/marca-do-projeto.webp"
 					menuItems={landing.general.menu}

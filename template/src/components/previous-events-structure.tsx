@@ -71,8 +71,8 @@ export function PreviousEventsStructure({
 						))}
 					</CarouselContent>
 
-					<CarouselPrevious className="absolute left-0 top-1/2 md:px-5 md:-translate-y-1/2 md:-translate-x-12 rounded-r h-full border-none shadow-none bg-zinc-300 hover:bg-black/20 transition" />
-					<CarouselNext className="absolute right-0 top-1/2 md:px-5 md:-translate-y-1/2 md:translate-x-12 rounded-l h-full border-none shadow-none bg-zinc-300 hover:bg-black/20 transition" />
+					<CarouselPrevious className="absolute left-0 top-1/2 md:px-5 md:-translate-y-1/2 md:-translate-x-12 border-none shadow-none bg-transparent hover:bg-transparent" />
+					<CarouselNext className="absolute right-0 top-1/2 md:px-5 md:-translate-y-1/2 md:translate-x-12 border-none shadow-none bg-transparent hover:bg-transparent" />
 				</Carousel>
 			</div>
 		</section>

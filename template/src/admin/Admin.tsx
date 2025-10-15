@@ -54,6 +54,14 @@ export interface LandingData {
 		enableParallax?: boolean;
 		backgroundMode: "solid" | "primary" | "secondary" | "dark" | "mylight";
 		menu: { id: string; label: string; href: string; visible: boolean }[];
+		seoTitle?: string;
+		seoDescription?: string;
+		seoKeywords?: string;
+
+		seoUrl?: string;
+		googleAnalyticsId?: string;
+		directoryName?: string;
+		pixelMeta?: string;
 	};
 	hero: {
 		logo: string;
