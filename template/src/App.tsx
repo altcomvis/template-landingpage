@@ -34,7 +34,7 @@ function Landing() {
 			.catch((err) => console.error("Erro ao carregar landing.json:", err));
 	}, [jsonUrl]);
 
-	// 👀 Atualiza automaticamente se o JSON mudar (apenas em dev)
+	// 👀 Hot-reload do JSON em dev
 	useEffect(() => {
 		if (import.meta.env.MODE !== "development") return;
 		let lastContent = "";
@@ -57,27 +57,20 @@ function Landing() {
 		return () => clearInterval(interval);
 	}, [jsonUrl]);
 
-	// 🕓 Skeleton de carregamento
-	if (!landing) {
-		return (
-			<div className="w-full min-h-screen flex items-center justify-center">
-				<p>Carregando...</p>
-			</div>
-		);
-	}
+	/* ──────────────────────────────── */
+	/* 🔹 Desestruturações seguras (sempre definidas) */
+	const general = landing?.general ?? {};
+	const hero = landing?.hero ?? {};
+	const participants = landing?.participants ?? {};
+	const schedule = landing?.schedule ?? {};
+	const subscribe = landing?.subscribe ?? {};
+	const previousEvents = landing?.previousEvents ?? {};
 
 	/* ──────────────────────────────── */
-	/* 🔹 Desestruturações seguras */
-	const general = landing.general || {};
-	const hero = landing.hero || {};
-	const participants = landing.participants || {};
-	const schedule = landing.schedule || {};
-	const subscribe = landing.subscribe || {};
-	const previousEvents = landing.previousEvents || {};
+	/* 🎨 Hooks visuais — SEMPRE chamados */
+	const parallaxEnabled = Boolean(general.enableParallax);
+	useParallaxAnimation(parallaxEnabled);
 
-	/* ──────────────────────────────── */
-	/* 🎨 Hooks visuais */
-	useParallaxAnimation(general.enableParallax ?? false);
 	useThemeColors({
 		primaryColor: general.primaryColor,
 		secondaryColor: general.secondaryColor,
@@ -89,6 +82,16 @@ function Landing() {
 		fontBody: general.fontBody,
 		fontTitle: general.fontTitle,
 	});
+
+	/* ──────────────────────────────── */
+	/* 🕓 Skeleton de carregamento (depois dos hooks) */
+	if (!landing) {
+		return (
+			<div className="w-full min-h-screen flex items-center justify-center">
+				<p>Carregando...</p>
+			</div>
+		);
+	}
 
 	/* ──────────────────────────────── */
 	/* 🖼️ Background dinâmico */

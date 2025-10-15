@@ -1,20 +1,25 @@
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { useLayoutEffect } from "react";
+import { useEffect } from "react";
 
-gsap.registerPlugin(ScrollTrigger);
+// ✅ Registra o plugin apenas no browser
+if (typeof window !== "undefined") {
+	gsap.registerPlugin(ScrollTrigger);
+}
 
-export function useParallaxAnimation(enabled?: boolean) {
-	// 🟢 Nunca muda a estrutura do hook, apenas ativa ou não o efeito
-	useLayoutEffect(() => {
-		if (enabled === false) return; // ainda não habilitado
+/**
+ * Hook seguro e estável para animar elementos com [data-parallax]
+ * Usa apenas useEffect — sem alterar ordem de hooks.
+ */
+export function useParallaxAnimation(enabled: boolean) {
+	useEffect(() => {
+		// Só executa se estiver habilitado e o DOM existir
+		if (!enabled || typeof window === "undefined") return;
 
-		// Proteção extra: se não estiver no browser, não roda
-		if (typeof window === "undefined") return;
-
-		// ✅ Espera o próximo frame para garantir que o DOM está pronto
+		// Espera o próximo frame
 		requestAnimationFrame(() => {
-			const elements = document.querySelectorAll("[data-parallax]");
+			const elements =
+				document.querySelectorAll<HTMLElement>("[data-parallax]");
 			if (!elements.length) return;
 
 			elements.forEach((el, i) => {
@@ -37,5 +42,10 @@ export function useParallaxAnimation(enabled?: boolean) {
 				);
 			});
 		});
+
+		// Cleanup
+		return () => {
+			ScrollTrigger.getAll().forEach((t) => t.kill());
+		};
 	}, [enabled]);
 }
