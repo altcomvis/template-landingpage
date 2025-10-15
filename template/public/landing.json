@@ -1,6 +1,6 @@
 {
   "general": {
-    "projectName": "Summit Futuro Sustentável 2025",
+    "projectName": "Template Landing Page Editora Globo Negócios",
     "primaryColor": "#3e9dc1",
     "secondaryColor": "#d8578f",
     "darkColor": "#372f7e",
@@ -12,11 +12,11 @@
     "fontBody": "Poppins",
     "fontTitle": "Anton",
     "enableParallax": true,
-    "seoTitle": "Summit Futuro Sustentável 2025",
+    "seoTitle": "Template Landing Page Editora Globo Negócios",
     "seoDescription": "O principal evento sobre inovação e sustentabilidade no Brasil, realizado pela Editora Globo.",
     "seoKeywords": "summit, sustentabilidade, inovação, evento, globo",
     "googleAnalyticsId": "G-4392085309",
-    "directoryName": "summit-futuro-sustentavel-2025",
+    "directoryName": "template-landing-page",
     "pixelMeta": "4392394204320499",
     "menu": [
       {
