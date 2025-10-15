@@ -1,6 +1,6 @@
 {
   "name": "@editoraglobonegocios/create-template-landingpage",
-  "version": "1.0.13",
+  "version": "1.0.14",
   "description": "Gerador de landing pages React + Vite + Tailwind com painel admin integrado.",
   "bin": {
     "create-template-landingpage": "bin/cli.js"
