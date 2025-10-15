@@ -1,23 +1,17 @@
-import { useTheme } from "next-themes"
-import { Toaster as Sonner, ToasterProps } from "sonner"
+// src/components/ui/sonner.tsx
 
-const Toaster = ({ ...props }: ToasterProps) => {
-  const { theme = "system" } = useTheme()
+import type { ToasterProps } from "sonner";
+import { Toaster as Sonner } from "sonner";
 
-  return (
-    <Sonner
-      theme={theme as ToasterProps["theme"]}
-      className="toaster group"
-      style={
-        {
-          "--normal-bg": "var(--popover)",
-          "--normal-text": "var(--popover-foreground)",
-          "--normal-border": "var(--border)",
-        } as React.CSSProperties
-      }
-      {...props}
-    />
-  )
+/** Toaster único do app (sem next-themes) */
+export function Toaster(props: ToasterProps) {
+	return (
+		<Sonner
+			richColors
+			closeButton
+			duration={4000}
+			toastOptions={{ classNames: { toast: "rounded-lg" } }}
+			{...props}
+		/>
+	);
 }
-
-export { Toaster }

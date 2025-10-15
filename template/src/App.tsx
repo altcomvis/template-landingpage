@@ -3,6 +3,7 @@ import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import { MenuTemplate } from "@/modules/Menu";
 import Admin from "./admin/Admin";
 import { SeoHead } from "./components/seo-head";
+import { Toaster } from "./components/ui/sonner";
 import { useParallaxAnimation } from "./hooks/use-parallax-animation";
 import { useThemeColors } from "./hooks/use-theme-colors";
 import { About } from "./modules/About";
@@ -146,11 +147,14 @@ function AdminPage() {
 
 export default function App() {
 	return (
-		<Router>
-			<Routes>
-				<Route path="/" element={<Landing />} />
-				<Route path="/admin" element={<AdminPage />} />
-			</Routes>
-		</Router>
+		<>
+			<Router>
+				<Routes>
+					<Route path="/" element={<Landing />} />
+					<Route path="/admin" element={<AdminPage />} />
+				</Routes>
+			</Router>
+			<Toaster richColors position="top-center" />
+		</>
 	);
 }

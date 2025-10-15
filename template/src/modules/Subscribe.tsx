@@ -146,6 +146,10 @@ const baseSchema = z.object({
 
 type FormValues = z.infer<typeof baseSchema>;
 
+/* Helper: torna o campo opcional conforme condição */
+const requiredIf = <T extends z.ZodTypeAny>(cond: boolean, schema: T) =>
+	cond ? schema : schema.optional();
+
 /* ─────────────── Componente principal ─────────────── */
 export default function Subscribe({ data, ...props }: SubscribeProps) {
 	const { toast } = useToast();
@@ -153,25 +157,61 @@ export default function Subscribe({ data, ...props }: SubscribeProps) {
 	const [formKey, setFormKey] = useState(0);
 	const [successOpen, setSuccessOpen] = useState(false);
 
-	// Campos visíveis
 	const visibleLabels = data.fields
 		.filter((f) => f.visible)
 		.map((f) => f.label.toLowerCase());
 
-	// Adapta o schema com base na visibilidade dos campos
-	const formSchema = useMemo(() => {
-		let schema = baseSchema;
-		if (!visibleLabels.includes("message"))
-			schema = schema.omit({ message: true });
-		if (!visibleLabels.includes("optin1"))
-			schema = schema.omit({ optin1: true });
-		if (!visibleLabels.includes("optin2"))
-			schema = schema.omit({ optin2: true });
-		return schema;
-	}, [visibleLabels]);
+	const isVisible = (label: string) =>
+		visibleLabels.includes(label.toLowerCase());
+
+	/* Schema adaptado dinamicamente sem quebrar o tipo */
+	const formSchema = useMemo(
+		() =>
+			z.object({
+				name: z.string().min(2, "Nome inválido"),
+				document: z
+					.string()
+					.min(14, "Documento inválido")
+					.refine((value) => {
+						const only = value.replace(/\D/g, "");
+						return only.length === 11 ? validateCPF(only) : validateCNPJ(only);
+					}, "Documento inválido"),
+				email: z.string().email("Email inválido"),
+				phone: requiredIf(
+					isVisible("phone"),
+					z
+						.string()
+						.min(1, "Telefone obrigatório")
+						.refine((phone) => isValidPhoneNumber(phone), {
+							message: "Telefone inválido",
+						}),
+				),
+				position: requiredIf(
+					isVisible("position"),
+					z.string().min(2, "Cargo inválido"),
+				),
+				company: requiredIf(
+					isVisible("company"),
+					z.string().min(2, "Empresa inválida"),
+				),
+				message: requiredIf(
+					isVisible("message"),
+					z.string().min(5, "Mensagem muito curta"),
+				),
+				optin1: requiredIf(
+					isVisible("optin1"),
+					z.enum(["Aceite1"], { message: "Obrigatório" }),
+				),
+				optin2: requiredIf(
+					isVisible("optin2"),
+					z.enum(["Aceite2"], { message: "Obrigatório" }),
+				),
+			}),
+		[visibleLabels],
+	);
 
 	const form = useForm<FormValues>({
-		resolver: zodResolver(formSchema),
+		resolver: zodResolver(formSchema as unknown as typeof baseSchema),
 		defaultValues: {
 			name: "",
 			document: "",
@@ -261,7 +301,7 @@ export default function Subscribe({ data, ...props }: SubscribeProps) {
 							"company",
 							"message",
 						].map((field) =>
-							visibleLabels.includes(field) ? (
+							isVisible(field) ? (
 								<FormField
 									key={field}
 									control={form.control}
@@ -323,7 +363,7 @@ export default function Subscribe({ data, ...props }: SubscribeProps) {
 
 						{/* Opt-ins */}
 						{["optin1", "optin2"].map((opt) =>
-							visibleLabels.includes(opt) ? (
+							isVisible(opt) ? (
 								<FormField
 									key={opt}
 									control={form.control}
@@ -371,7 +411,6 @@ export default function Subscribe({ data, ...props }: SubscribeProps) {
 							) : null,
 						)}
 
-						{/* Botão */}
 						<div className="col-span-2">
 							<Button
 								type="submit"
