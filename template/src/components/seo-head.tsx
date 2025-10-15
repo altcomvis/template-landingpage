@@ -16,8 +16,14 @@ export function SeoHead() {
 	const [seo, setSeo] = useState<SeoData | null>(null);
 
 	useEffect(() => {
-		fetch("/landing.json")
-			.then((res) => res.json())
+		// ✅ usa o BASE_URL (funciona em dev e produção)
+		const jsonUrl = `${import.meta.env.BASE_URL}landing.json`;
+
+		fetch(jsonUrl)
+			.then((res) => {
+				if (!res.ok) throw new Error(`HTTP ${res.status}`);
+				return res.json();
+			})
 			.then((data) => setSeo(data.general))
 			.catch((err) => console.error("Erro ao carregar SEO:", err));
 	}, []);
@@ -38,9 +44,9 @@ export function SeoHead() {
 		const defaultTitle = "Projeto Especial - Editora Globo";
 		const defaultDesc =
 			"Landing Page criada pela Editora Globo. Confira conteúdos, eventos e projetos especiais.";
-
 		const defaultImage = `${getBasePath()}img/project/cover.webp`;
-		// 🎯 Helpers
+
+		// 🔹 utilitários locais
 		const setMeta = (name: string, content?: string) => {
 			if (!content) return;
 			let tag =
@@ -71,15 +77,15 @@ export function SeoHead() {
 			document.head.appendChild(link);
 		};
 
-		// 🧭 Title & description
+		// 🧭 Título e metadados básicos
 		document.title = seoTitle || defaultTitle;
 		setMeta("description", seoDescription || defaultDesc);
 		setMeta("keywords", seoKeywords || "editora globo, projetos, eventos");
 
 		// 🔗 Canonical
-		if (seoUrl) setLink("canonical", seoUrl);
+		setLink("canonical", seoUrl || window.location.href);
 
-		// 🌐 Open Graph (Facebook / LinkedIn / WhatsApp / Telegram)
+		// 🌐 Open Graph
 		setOG("og:title", seoTitle || defaultTitle);
 		setOG("og:description", seoDescription || defaultDesc);
 		setOG("og:type", "website");
@@ -98,58 +104,53 @@ export function SeoHead() {
 		setMeta("twitter:site", "@EditoraGlobo");
 		setMeta("twitter:creator", "@EditoraGlobo");
 
-		// 📱 WhatsApp / Telegram — usam OG tags automaticamente, mas reforçamos compatibilidade
+		// 📱 WhatsApp / Telegram
 		setMeta("image", seoImage || defaultImage);
 
-		// 📈 Google Analytics (GA4)
+		// 📈 Google Analytics
 		if (googleAnalyticsId) {
-			const existing = document.getElementById("ga-script");
-			if (existing) existing.remove();
-
-			const script = document.createElement("script");
-			script.id = "ga-script";
-			script.async = true;
-			script.src = `https://www.googletagmanager.com/gtag/js?id=${googleAnalyticsId}`;
-			document.head.appendChild(script);
-
-			const inlineScript = document.createElement("script");
-			inlineScript.innerHTML = `
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', '${googleAnalyticsId}');
-      `;
-			document.head.appendChild(inlineScript);
-		}
-
-		// 🔹 Meta Pixel (Facebook Pixel)
-		if (pixelMeta) {
-			const existing = document.getElementById("meta-pixel-script");
-			if (!existing) {
+			if (!document.getElementById("ga-script")) {
 				const script = document.createElement("script");
-				script.id = "meta-pixel-script";
-				script.innerHTML = `
-      !function(f,b,e,v,n,t,s)
-      {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-      n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-      if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-      n.queue=[];t=b.createElement(e);t.async=!0;
-      t.src=v;s=b.getElementsByTagName(e)[0];
-      s.parentNode.insertBefore(t,s)}(window, document,'script',
-      'https://connect.facebook.net/en_US/fbevents.js');
-      fbq('init', '${pixelMeta}');
-      fbq('track', 'PageView');
-    `;
+				script.id = "ga-script";
+				script.async = true;
+				script.src = `https://www.googletagmanager.com/gtag/js?id=${googleAnalyticsId}`;
 				document.head.appendChild(script);
 
-				// 🔹 Pixel fallback no <noscript> para navegadores sem JS
-				const noScript = document.createElement("noscript");
-				noScript.innerHTML = `
-      <img height="1" width="1" style="display:none"
-      src="https://www.facebook.com/tr?id=${pixelMeta}&ev=PageView&noscript=1"/>
-    `;
-				document.body.appendChild(noScript);
+				const inlineScript = document.createElement("script");
+				inlineScript.innerHTML = `
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', '${googleAnalyticsId}');
+        `;
+				document.head.appendChild(inlineScript);
 			}
+		}
+
+		// 🔹 Meta Pixel (Facebook)
+		if (pixelMeta && !document.getElementById("meta-pixel-script")) {
+			const script = document.createElement("script");
+			script.id = "meta-pixel-script";
+			script.innerHTML = `
+        !function(f,b,e,v,n,t,s)
+        {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+        n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+        if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+        n.queue=[];t=b.createElement(e);t.async=!0;
+        t.src=v;s=b.getElementsByTagName(e)[0];
+        s.parentNode.insertBefore(t,s)}(window, document,'script',
+        'https://connect.facebook.net/en_US/fbevents.js');
+        fbq('init', '${pixelMeta}');
+        fbq('track', 'PageView');
+      `;
+			document.head.appendChild(script);
+
+			const noScript = document.createElement("noscript");
+			noScript.innerHTML = `
+        <img height="1" width="1" style="display:none"
+        src="https://www.facebook.com/tr?id=${pixelMeta}&ev=PageView&noscript=1"/>
+      `;
+			document.body.appendChild(noScript);
 		}
 	}, [seo]);
 

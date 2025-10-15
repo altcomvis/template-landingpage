@@ -41,7 +41,6 @@ export interface ParticipantGroup {
 /* 🔹 Tipo unificado */
 export interface LandingData {
 	general: {
-		projectName: string;
 		primaryColor: string;
 		secondaryColor: string;
 		darkColor: string;
@@ -141,7 +140,6 @@ export interface LandingData {
 /* 🔹 Estado inicial */
 const initialData: LandingData = {
 	general: {
-		projectName: "",
 		primaryColor: "#000000",
 		secondaryColor: "#FFFFFF",
 		darkColor: "#222222",

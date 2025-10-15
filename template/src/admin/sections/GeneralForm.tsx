@@ -13,7 +13,6 @@ import { FontSelectorWizard } from "../components/font-selector-wizard";
 /* ──────────────────────────────── */
 /* Tipos */
 interface GeneralData {
-	projectName: string;
 	primaryColor: string;
 	secondaryColor: string;
 	darkColor: string;
@@ -80,7 +79,6 @@ export default function GeneralForm({
 	googleFonts = [],
 }: GeneralFormProps) {
 	const general: GeneralData = {
-		projectName: "",
 		primaryColor: "#0057FF",
 		secondaryColor: "#FFAA00",
 		darkColor: "#111111",
@@ -109,32 +107,22 @@ export default function GeneralForm({
 	return (
 		<Card className="mt-6">
 			<CardContent className="space-y-10 p-6">
-				<div className="flex gap-8 ">
-					{/* 🔹 Nome do projeto */}
-					<div className="w-full">
-						<Label>Nome do Projeto</Label>
-						<Input
-							value={general.projectName}
-							onChange={(e) => updateField("projectName", e.target.value)}
-							placeholder="Ex: Energy & Tech"
+				<div>
+					{/* Switch Parallax */}
+					<div className="flex items-center gap-4 mt-6">
+						<Label>Ativar Parallax</Label>
+						<Switch
+							checked={general.enableParallax ?? false}
+							onCheckedChange={(checked) =>
+								updateField("enableParallax", checked)
+							}
 						/>
 					</div>
-					<div>
-						{/* Switch Parallax */}
-						<div className="flex items-center gap-4 mt-6">
-							<Label>Ativar Parallax</Label>
-							<Switch
-								checked={general.enableParallax ?? false}
-								onCheckedChange={(checked) =>
-									updateField("enableParallax", checked)
-								}
-							/>
-						</div>
-						<p className="text-xs text-zinc-500 mt-2">
-							Ativa animações sutis de fade, blur e movimento ao rolar.
-						</p>
-					</div>
+					<p className="text-xs text-zinc-500 mt-2">
+						Ativa animações sutis de fade, blur e movimento ao rolar.
+					</p>
 				</div>
+
 				{/* 🔤 Tipografia */}
 				<div className="border-t pt-6 mt-6">
 					<Label className="text-lg font-semibold mb-3 block">Tipografia</Label>

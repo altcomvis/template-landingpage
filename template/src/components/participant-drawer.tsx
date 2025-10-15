@@ -9,6 +9,7 @@ import {
 	DrawerTitle,
 	DrawerTrigger,
 } from "@/components/ui/drawer";
+import { useParallaxController } from "@/hooks/use-parallax-animation";
 import { getBasePath } from "@/utils/getBasePath";
 
 type ParticipantProps = {
@@ -24,8 +25,9 @@ export function ParticipantDrawer({
 	photo,
 	trigger,
 }: ParticipantProps) {
+	const { setParallaxEnabled } = useParallaxController();
 	return (
-		<Drawer>
+		<Drawer onOpenChange={(open) => setParallaxEnabled(!open)}>
 			<DrawerTrigger asChild>
 				{trigger ? (
 					trigger

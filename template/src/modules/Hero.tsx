@@ -1,4 +1,5 @@
 import LightRays from "@/components/LightRays";
+import { getBasePath } from "@/utils/getBasePath";
 
 interface HeroProps extends React.HTMLAttributes<HTMLElement> {
 	data: {
@@ -36,10 +37,10 @@ export function Hero({ data, general, ...props }: HeroProps) {
 	const { projectName, primaryColor } = general;
 
 	const hasLogo = true;
-	const logoPath = "/img/project/marca-do-projeto.webp";
+	const logoPath = `${getBasePath()}img/project/marca-do-projeto.webp`;
 
 	const background = useBackgroundImage
-		? "/img/project/header.webp"
+		? `${getBasePath()}img/project/header.webp`
 		: primaryColor;
 
 	return (

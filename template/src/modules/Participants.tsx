@@ -7,6 +7,7 @@ import {
 	CarouselNext,
 	CarouselPrevious,
 } from "@/components/ui/carousel";
+import { getBasePath } from "@/utils/getBasePath";
 
 type Participant = {
 	name: string;
@@ -61,7 +62,7 @@ export function Participants({ data, ...props }: ParticipantsProps) {
 									trigger={
 										<div className="relative group cursor-pointer">
 											<img
-												src={`/img/participantes/${p.photo}`}
+												src={`${getBasePath()}img/participantes/${p.photo}`}
 												alt={p.name}
 												className="w-64 h-64 object-cover shadow border border-[var(--text)] hover:brightness-75 transition"
 											/>
