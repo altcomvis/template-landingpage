@@ -65,7 +65,10 @@ export function About({ data, ...props }: AboutProps) {
 
 				{/* 🎥 Bloco de Transmissão */}
 				{showTransmission && (
-					<div className="w-10/12 md:w-6/12 mx-auto border-t border-b border-zinc-500 py-12">
+					<div
+						className="w-10/12 md:w-6/12 mx-auto border-t border-b border-zinc-500 py-12"
+						{...props}
+					>
 						<h2
 							className="text-2xl font-bold mb-6 text-[var(--light)]"
 							{...props}

@@ -5,10 +5,7 @@ import { getBasePath } from "@/utils/getBasePath";
 import Admin from "./admin/Admin";
 import { SeoHead } from "./components/seo-head";
 import { Toaster } from "./components/ui/sonner";
-import {
-	ParallaxProvider,
-	useParallaxAnimation,
-} from "./hooks/use-parallax-animation";
+import { useParallaxAnimation } from "./hooks/use-parallax-animation";
 import { useThemeColors } from "./hooks/use-theme-colors";
 import { About } from "./modules/About";
 import { Footer } from "./modules/Footer";
@@ -194,7 +191,8 @@ export default function App() {
 
 	// ✅ Só monta o Router quando o basePath já estiver pronto
 	return (
-		<ParallaxProvider>
+	
+			<>
 			<Router basename={basePath}>
 				<Routes>
 					<Route path="/" element={<Landing />} />
@@ -202,7 +200,6 @@ export default function App() {
 				</Routes>
 			</Router>
 
-			<Toaster richColors position="top-center" />
-		</ParallaxProvider>
+			<Toaster richColors position="top-center" /></>
 	);
 }

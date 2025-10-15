@@ -9,7 +9,6 @@ import {
 	DrawerTitle,
 	DrawerTrigger,
 } from "@/components/ui/drawer";
-import { useParallaxController } from "@/hooks/use-parallax-animation";
 import { getBasePath } from "@/utils/getBasePath";
 
 type ParticipantProps = {
@@ -25,9 +24,8 @@ export function ParticipantDrawer({
 	photo,
 	trigger,
 }: ParticipantProps) {
-	const { setParallaxEnabled } = useParallaxController();
 	return (
-		<Drawer onOpenChange={(open) => setParallaxEnabled(!open)}>
+		<Drawer>
 			<DrawerTrigger asChild>
 				{trigger ? (
 					trigger
@@ -40,7 +38,10 @@ export function ParticipantDrawer({
 				)}
 			</DrawerTrigger>
 
-			<DrawerContent className="border-zinc-400 bg-zinc-200">
+			<DrawerContent
+				onOpenAutoFocus={(e) => e.preventDefault()}
+				className="border-zinc-400 bg-zinc-200"
+			>
 				<div className="md:flex gap-4 md:w-4/12 mx-auto py-10">
 					<img
 						src={`${getBasePath()}img/participantes/${photo}`}
