@@ -1,14 +1,14 @@
 import { Button } from "@/components/ui/button";
 import {
-	Drawer,
-	DrawerClose,
-	DrawerContent,
-	DrawerDescription,
-	DrawerFooter,
-	DrawerHeader,
-	DrawerTitle,
-	DrawerTrigger,
-} from "@/components/ui/drawer";
+	Dialog,
+	DialogClose,
+	DialogContent,
+	DialogDescription,
+	DialogFooter,
+	DialogHeader,
+	DialogTitle,
+	DialogTrigger,
+} from "@/components/ui/dialog";
 import { getBasePath } from "@/utils/getBasePath";
 
 type ParticipantProps = {
@@ -18,15 +18,15 @@ type ParticipantProps = {
 	trigger?: React.ReactNode;
 };
 
-export function ParticipantDrawer({
+export function ParticipantDialog({
 	name,
 	position,
 	photo,
 	trigger,
 }: ParticipantProps) {
 	return (
-		<Drawer>
-			<DrawerTrigger asChild>
+		<Dialog>
+			<DialogTrigger asChild>
 				{trigger ? (
 					trigger
 				) : (
@@ -36,34 +36,34 @@ export function ParticipantDrawer({
 						className="w-16 h-16 rounded-full object-cover cursor-pointer hover:scale-105 transition "
 					/>
 				)}
-			</DrawerTrigger>
+			</DialogTrigger>
 
-			<DrawerContent
+			<DialogContent
 				onOpenAutoFocus={(e) => e.preventDefault()}
 				className="border-zinc-400 bg-zinc-200"
 			>
-				<div className="md:flex gap-4 md:w-4/12 mx-auto py-10">
+				<div className="flex flex-col md:flex-row gap-4 mx-auto py-10">
 					<img
 						src={`${getBasePath()}img/participantes/${photo}`}
 						alt={name}
 						className="w-48 mx-auto border border-zinc-300 shadow"
 					/>
 
-					<DrawerHeader>
-						<DrawerTitle className="md:text-left text-2xl text-zinc-500">
+					<DialogHeader>
+						<DialogTitle className="md:text-left text-2xl text-zinc-500">
 							{name}
-						</DrawerTitle>
-						<DrawerDescription className="md:text-left text-base text-zinc-500">
+						</DialogTitle>
+						<DialogDescription className="md:text-left text-base text-zinc-500">
 							{position}
-						</DrawerDescription>
-					</DrawerHeader>
+						</DialogDescription>
+					</DialogHeader>
 				</div>
-				<DrawerFooter className="md:w-4/12 mx-auto">
-					<DrawerClose asChild>
+				<DialogFooter className="md:w-4/12 mx-auto">
+					<DialogClose asChild>
 						<Button>Fechar</Button>
-					</DrawerClose>
-				</DrawerFooter>
-			</DrawerContent>
-		</Drawer>
+					</DialogClose>
+				</DialogFooter>
+			</DialogContent>
+		</Dialog>
 	);
 }

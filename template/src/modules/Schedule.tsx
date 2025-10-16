@@ -1,5 +1,5 @@
 import { Circle } from "lucide-react";
-import { ParticipantDrawer } from "@/components/participant-drawer";
+import { ParticipantDialog } from "@/components/participant-dialog";
 import { TitleSection } from "@/components/title-sections";
 
 /* ─────────────── Tipagens ─────────────── */
@@ -91,7 +91,7 @@ export function Schedule({ data, participants, ...props }: ScheduleProps) {
 															key={full.id}
 															className="text-center w-20 flex flex-col items-center gap-2"
 														>
-															<ParticipantDrawer
+															<ParticipantDialog
 																name={full.name}
 																position={full.position}
 																photo={full.photo}
@@ -114,7 +114,7 @@ export function Schedule({ data, participants, ...props }: ScheduleProps) {
 																	key={full.id}
 																	className="text-center w-20 flex flex-col items-center gap-2"
 																>
-																	<ParticipantDrawer
+																	<ParticipantDialog
 																		name={full.name}
 																		position={full.position}
 																		photo={full.photo}

@@ -1,4 +1,4 @@
-import { ParticipantDrawer } from "@/components/participant-drawer";
+import { ParticipantDialog } from "@/components/participant-dialog";
 import { TitleSection } from "@/components/title-sections";
 import {
 	Carousel,
@@ -38,8 +38,8 @@ export function Participants({ data, ...props }: ParticipantsProps) {
 	const participants = data.groups.flatMap((group) => group.participants);
 
 	return (
-		<section id="speakers" className="relative" {...props}>
-			<TitleSection name={data.title || "Participantes"} />
+		<section id="speakers" className="relative">
+			<TitleSection name={data.title || "Participantes"} {...props} />
 
 			<div className="container w-11/12 px-4 md:px-14 mx-auto py-16 bg-[var(--secondary)] md:rounded-xl relative overflow-hidden">
 				{/* Gradiente de overlay */}
@@ -55,7 +55,7 @@ export function Participants({ data, ...props }: ParticipantsProps) {
 								key={p.name}
 								className="md:basis-1/3 lg:basis-1/4 flex justify-center"
 							>
-								<ParticipantDrawer
+								<ParticipantDialog
 									name={p.name}
 									position={p.position ?? ""}
 									photo={p.photo}
@@ -64,7 +64,7 @@ export function Participants({ data, ...props }: ParticipantsProps) {
 											<img
 												src={`${getBasePath()}img/participantes/${p.photo}`}
 												alt={p.name}
-												className="w-64 h-64 object-cover shadow border border-[var(--text)] hover:brightness-75 transition"
+												className="w-60 md:w-64 h-60 md:h-64 object-cover shadow border border-[var(--text)] hover:brightness-75 transition"
 											/>
 											<div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent text-white leading-tight text-lg font-semibold pl-5 pr-16 pb-4 pt-16">
 												{p.name}
