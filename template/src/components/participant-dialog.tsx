@@ -39,7 +39,7 @@ export function ParticipantDialog({
 			</DialogTrigger>
 
 			<DialogContent
-				onOpenAutoFocus={(e) => e.preventDefault()}
+				onOpenAutoFocus={(e: React.SyntheticEvent) => e.preventDefault()}
 				className="border-zinc-400 bg-zinc-200"
 			>
 				<div className="flex flex-col md:flex-row gap-4 mx-auto py-10">
@@ -60,7 +60,7 @@ export function ParticipantDialog({
 				</div>
 				<DialogFooter className="md:w-4/12 mx-auto">
 					<DialogClose asChild>
-						<Button>Fechar</Button>
+						<Button className="w-full">Fechar</Button>
 					</DialogClose>
 				</DialogFooter>
 			</DialogContent>

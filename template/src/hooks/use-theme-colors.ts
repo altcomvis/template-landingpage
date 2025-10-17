@@ -48,7 +48,14 @@ export function useThemeColors({
 }: ThemeColorsProps) {
 	useEffect(() => {
 		const root = document.documentElement;
-
+		document.documentElement.style.setProperty(
+			"--font-title",
+			fontTitle || "Poppins, sans-serif",
+		);
+		document.documentElement.style.setProperty(
+			"--font-body",
+			fontBody || "Poppins, sans-serif",
+		);
 		const vars: Record<string, string | undefined> = {
 			"--primary": primaryColor,
 			"--primary-rgb": hexToRgb(primaryColor),

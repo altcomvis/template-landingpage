@@ -39,9 +39,12 @@ export function Participants({ data, ...props }: ParticipantsProps) {
 
 	return (
 		<section id="speakers" className="relative">
-			<TitleSection name={data.title || "Participantes"} {...props} />
+			<TitleSection name={data.title || "Participantes"} />
 
-			<div className="container w-11/12 px-4 md:px-14 mx-auto py-16 bg-[var(--secondary)] md:rounded-xl relative overflow-hidden">
+			<div
+				className="container w-11/12 px-4 md:px-14 mx-auto py-16 bg-[var(--secondary)] md:rounded-xl relative overflow-hidden"
+				{...props}
+			>
 				{/* Gradiente de overlay */}
 				<div className="bg-gradient-to-b from-black/30 to-black/0 absolute inset-0 z-0 md:rounded-xl" />
 

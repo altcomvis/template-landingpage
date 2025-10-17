@@ -3,13 +3,12 @@ type TitleProps = {
 	description?: string;
 };
 
-export function TitleSection({ name, description }: TitleProps) {
+export function TitleSection({ name, description, ...props }: TitleProps) {
 	return (
-		<div className="text-center mb-8">
+		<div className="text-center mb-8" {...props}>
 			<h2
-				className="text-3xl font-bold mb-2"
+				className="text-3xl font-bold mb-2 font-title"
 				style={{
-					fontFamily: "var(--font-family-title), sans-serif",
 					color: "var(--light)",
 				}}
 			>
