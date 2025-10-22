@@ -37,10 +37,10 @@ export function Hero({ data, general, ...props }: HeroProps) {
 	const { projectName, primaryColor } = general;
 
 	const hasLogo = true;
-	const logoPath = `${getBasePath()}img/project/marca-do-projeto.webp`;
+	const logoPath = `${getBasePath()}img/hero/marca-do-projeto.webp`;
 
 	const background = useBackgroundImage
-		? `${getBasePath()}img/project/header.webp`
+		? `${getBasePath()}img/hero/header.webp`
 		: primaryColor;
 
 	return (

@@ -94,10 +94,11 @@ function Landing() {
 	/* 🖼️ Background dinâmico */
 	const backgroundStyle = hero.useBackgroundImage
 		? {
-				backgroundImage: `url('${getBasePath()}img/project/header.webp')`,
+				backgroundImage: `url('${getBasePath()}img/hero/header.webp')`,
 				backgroundPosition: "top",
 				backgroundRepeat: "no-repeat",
 				backgroundSize: "cover",
+				backgroundAttachment: "fixed",
 			}
 		: { backgroundColor: "var(--background)" };
 
@@ -118,7 +119,7 @@ function Landing() {
 			>
 				<SeoHead />
 				<MenuTemplate
-					logo="/public/img/project/marca-do-projeto.webp"
+					logo="/public/img/hero/marca-do-projeto.webp"
 					landing={landing}
 				/>
 

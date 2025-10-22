@@ -22,9 +22,9 @@ npm -v
 ## 🛠️ Criar um novo projeto
 
 ```bash
-npx create-berall-landing@latest meu-projeto
-cd meu-projeto
+npx @editoraglobonegocios/create-template-landingpage
 npm install   # só se não rodar automático
+cd meu-projeto
 npm run dev   # inicia o servidor local
 ```
 
@@ -36,7 +36,7 @@ npm run dev   # inicia o servidor local
 
 ## 🎨 Editar Conteúdo
 
-Todo o conteúdo está em **`src/landing.json`**.  
+Todo o conteúdo está em **`public/landing.json`**.  
 No Admin é possível editar e exportar um novo JSON.
 
 ### O que pode ser configurado:
