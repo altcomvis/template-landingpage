@@ -11,31 +11,48 @@ import {
 	SheetTrigger,
 } from "@/components/ui/sheet";
 
-/* ─────────────── Tipos ─────────────── */
-interface MenuItem {
-	id: string;
-	label: string;
-	href: string;
-	visible: boolean;
-}
-
 interface MenuTemplateProps {
 	logo?: string;
-	menuItems: MenuItem[];
+	landing: any; // 👈 recebe o JSON completo
 }
 
-export function MenuTemplate({ logo, menuItems }: MenuTemplateProps) {
+export function MenuTemplate({ logo, landing }: MenuTemplateProps) {
 	const [open, setOpen] = useState(false);
 	const [isFixed, setIsFixed] = useState(false);
 
-	// 🔹 Efeito para fixar o menu ao rolar a página
 	useEffect(() => {
 		const handleScroll = () => setIsFixed(window.scrollY > 10);
 		window.addEventListener("scroll", handleScroll);
 		return () => window.removeEventListener("scroll", handleScroll);
 	}, []);
 
-	const visibleItems = menuItems.filter((item) => item.visible);
+	// 🔹 Gera o menu automaticamente com base nas seções visíveis
+	const menuItems = [
+		{ id: "home", label: "Início", visible: true },
+		{ id: "about", label: "Sobre", visible: landing.about?.visible !== false },
+		{
+			id: "speakers",
+			label: "Participantes",
+			visible: landing.participants?.visible !== false,
+		},
+		{
+			id: "schedule",
+			label: "Programação",
+			visible: landing.schedule?.visible !== false,
+		},
+		{
+			id: "subscribe",
+			label: "Inscrição",
+			visible: landing.subscribe?.visible !== false,
+		},
+		{
+			id: "previous-events",
+			label: "Edições Anteriores",
+			visible: landing.previousEvents?.visible !== false,
+		},
+		// 👇 removido: botão Patrocinadores fixo
+		// { id: "sponsors", label: "Patrocínios", visible: landing.sponsors?.visible !== false },
+	].filter((item) => item.visible);
 
 	return (
 		<div
@@ -57,10 +74,10 @@ export function MenuTemplate({ logo, menuItems }: MenuTemplateProps) {
 				>
 					{/* Menu Desktop */}
 					<nav className="hidden md:flex gap-6 text-base font-medium">
-						{visibleItems.map(({ href, label }) => (
+						{menuItems.map(({ id, label }) => (
 							<ScrollLink
-								key={href}
-								to={href}
+								key={id}
+								to={id}
 								smooth
 								duration={600}
 								offset={-80}
@@ -104,10 +121,10 @@ export function MenuTemplate({ logo, menuItems }: MenuTemplateProps) {
 
 									<SheetDescription className="p-0">
 										<span className="flex flex-col gap-6 font-medium text-2xl mt-8 text-center justify-center items-center py-4">
-											{visibleItems.map(({ href, label }) => (
+											{menuItems.map(({ id, label }) => (
 												<ScrollLink
-													key={href}
-													to={href}
+													key={id}
+													to={id}
 													smooth
 													duration={600}
 													offset={-80}

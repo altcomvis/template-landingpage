@@ -36,24 +36,41 @@ export function FontSelectorWizard({
 		if (step === "body") {
 			setSelectedBody(font);
 			updateField("fontBody", font);
-			setStep("title"); // avança para o segundo passo
+
+			// ✨ Flash visual no preview do body
+			const el = document.getElementById("font-body-preview");
+			if (el) {
+				el.classList.remove("font-flash");
+				void el.offsetWidth; // força reflow para reiniciar animação
+				el.classList.add("font-flash");
+			}
+
+			setStep("title");
 		} else {
 			setSelectedTitle(font);
 			updateField("fontTitle", font);
+
+			// ✨ Flash visual no preview do title
+			const el = document.getElementById("font-title-preview");
+			if (el) {
+				el.classList.remove("font-flash");
+				void el.offsetWidth;
+				el.classList.add("font-flash");
+			}
 		}
 	};
 
 	return (
 		<div className="p-3">
 			<div className="flex items-center justify-between mb-2">
-				<h4 className="font-semibold text-sm text-zinc-700">
+				<h4 className="font-semibold text-lg text-zinc-700">
 					{step === "body"
-						? "Escolha a fonte principal"
-						: "Escolha a fonte dos títulos"}
+						? "Escolha a fonte geral"
+						: "Escolha a fonte dos títulos das seções"}
 				</h4>
 				{step === "title" && (
 					<Button
-						variant="ghost"
+						variant="destructive"
 						onClick={() => setStep("body")}
 						className="text-xs"
 					>

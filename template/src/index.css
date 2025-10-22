@@ -125,3 +125,16 @@
 .font-title {
 	font-family: var(--font-title), sans-serif !important;
 }
+
+@keyframes flashHighlight {
+	0% {
+		background-color: rgba(255, 0, 0, 0.5);
+	}
+	100% {
+		background-color: transparent;
+	}
+}
+
+.font-flash {
+	animation: flashHighlight 0.8s ease-out;
+}

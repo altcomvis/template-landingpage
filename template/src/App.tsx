@@ -118,8 +118,8 @@ function Landing() {
 			>
 				<SeoHead />
 				<MenuTemplate
-					logo={`${getBasePath()}img/project/marca-do-projeto.webp`}
-					menuItems={general.menu}
+					logo="/public/img/project/marca-do-projeto.webp"
+					landing={landing}
 				/>
 
 				<Hero data-parallax data={hero} general={general} />
@@ -191,8 +191,7 @@ export default function App() {
 
 	// ✅ Só monta o Router quando o basePath já estiver pronto
 	return (
-	
-			<>
+		<>
 			<Router basename={basePath}>
 				<Routes>
 					<Route path="/" element={<Landing />} />
@@ -200,6 +199,7 @@ export default function App() {
 				</Routes>
 			</Router>
 
-			<Toaster richColors position="top-center" /></>
+			<Toaster richColors position="top-center" />
+		</>
 	);
 }

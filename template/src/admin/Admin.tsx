@@ -147,8 +147,8 @@ const initialData: LandingData = {
 		backgroundColor: "#EAEAEA",
 		surfaceColor: "#FFFFFF",
 		textColor: "#222222",
-		fontBody: "Poppins",
-		fontTitle: "Poppins",
+		fontBody: "",
+		fontTitle: "",
 		enableParallax: true,
 		backgroundMode: "solid",
 		menu: [

@@ -21,8 +21,8 @@ interface GeneralData {
 	surfaceColor: string;
 	textColor: string;
 	backgroundMode: "solid" | "primary" | "secondary" | "dark" | "mylight";
-	fontBody?: string; // ⇐ opcional
-	fontTitle?: string; // ⇐ opcional
+	fontBody?: string;
+	fontTitle?: string;
 	enableParallax?: boolean;
 	seoTitle?: string;
 	seoDescription?: string;
@@ -39,7 +39,7 @@ interface GeneralFormProps {
 }
 
 /* ──────────────────────────────── */
-/* Campo de cor com # fixo */
+/* Campo de cor com preview */
 function ColorField({
 	label,
 	value,
@@ -59,14 +59,21 @@ function ColorField({
 	return (
 		<div className="flex flex-col gap-2">
 			<Label>{label}</Label>
-			<Input
-				type="text"
-				value={value}
-				onChange={handleChange}
-				placeholder="#000000"
-				maxLength={7}
-				className="w-28 text-center font-mono uppercase"
-			/>
+			<div className="flex items-center gap-2">
+				<Input
+					type="text"
+					value={value}
+					onChange={handleChange}
+					placeholder="#000000"
+					maxLength={7}
+					className="w-28 text-center font-mono uppercase"
+				/>
+				{/* 🔹 Apenas visual */}
+				<div
+					className="w-8 h-8 rounded-md border border-zinc-300"
+					style={{ backgroundColor: value || "#fff" }}
+				/>
+			</div>
 		</div>
 	);
 }
@@ -87,8 +94,8 @@ export default function GeneralForm({
 		surfaceColor: "#FFFFFF",
 		textColor: "#222222",
 		backgroundMode: "solid",
-		fontBody: "Poppins",
-		fontTitle: "Poppins",
+		fontBody: "",
+		fontTitle: "",
 		enableParallax: true,
 		seoTitle: "",
 		seoDescription: "",
@@ -107,8 +114,8 @@ export default function GeneralForm({
 	return (
 		<Card className="mt-6">
 			<CardContent className="space-y-10 p-6">
+				{/* 🔁 Parallax */}
 				<div>
-					{/* Switch Parallax */}
 					<div className="flex items-center gap-4 mt-6">
 						<Label>Ativar Parallax</Label>
 						<Switch
@@ -127,53 +134,60 @@ export default function GeneralForm({
 				<div className="border-t pt-6 mt-6">
 					<Label className="text-lg font-semibold mb-3 block">Tipografia</Label>
 
-					<Popover>
-						<div className="flex justify-between items-center">
-							<Label className="font-semibold">Fontes Google</Label>
-							<PopoverTrigger asChild>
-								<Button type="button" variant="outline" size="sm">
-									+ Selecionar
-								</Button>
-							</PopoverTrigger>
+					<div className="flex items-start justify-stretch gap-6">
+						{/* 👇 Visualização com flash ao selecionar */}
+						<div className="w-full grid grid-cols-1 md:grid-cols-2 gap-6 ">
+							<div>
+								<Label>Fonte geral</Label>
+								<p
+									id="font-body-preview"
+									className="text-sm text-zinc-600 mt-2 border rounded-md px-3 py-2 transition-all"
+									style={{
+										fontFamily: general.fontBody || "inherit",
+										background: "transparent",
+									}}
+								>
+									The quick brown fox jumps over the lazy dog.
+								</p>
+							</div>
+							<div>
+								<Label>Fonte dos títulos das seções</Label>
+								<p
+									id="font-title-preview"
+									className="text-sm text-zinc-700 mt-2 border rounded-md px-3 py-2 font-semibold uppercase transition-all"
+									style={{
+										fontFamily: general.fontTitle || "inherit",
+										background: "transparent",
+									}}
+								>
+									THE QUICK BROWN FOX
+								</p>
+							</div>
 						</div>
-
-						<PopoverContent
-							className="w-[22rem] max-h-[28rem] overflow-y-auto p-0"
-							align="start"
-						>
-							<FontSelectorWizard
-								googleFonts={googleFonts}
-								general={{
-									...general,
-									fontBody: general.fontBody ?? "",
-									fontTitle: general.fontTitle ?? "",
-								}}
-								updateField={updateField}
-							/>
-						</PopoverContent>
-					</Popover>
-
-					{/* Pré-visualização */}
-					<div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-4">
-						<div>
-							<Label>Fonte do corpo</Label>
-							<p
-								className="text-sm text-zinc-500 mt-2 border rounded-md px-3 py-2 bg-zinc-50"
-								style={{ fontFamily: general.fontBody }}
+						<Popover>
+							<div className="flex flex-col gap-2 items-center">
+								<Label className="font-semibold">Fontes Google</Label>
+								<PopoverTrigger asChild>
+									<Button type="button" variant="outline" size="sm">
+										+ Selecionar
+									</Button>
+								</PopoverTrigger>
+							</div>
+							<PopoverContent
+								className=" max-h-[28rem] overflow-y-auto p-0"
+								align="end"
 							>
-								The quick brown fox jumps over the lazy dog.
-							</p>
-						</div>
-
-						<div>
-							<Label>Fonte dos títulos</Label>
-							<p
-								className="text-base text-zinc-700 mt-2 border rounded-md px-3 py-2 bg-zinc-50 font-semibold uppercase"
-								style={{ fontFamily: general.fontTitle }}
-							>
-								THE QUICK BROWN FOX
-							</p>
-						</div>
+								<FontSelectorWizard
+									googleFonts={googleFonts}
+									general={{
+										...general,
+										fontBody: general.fontBody ?? "",
+										fontTitle: general.fontTitle ?? "",
+									}}
+									updateField={updateField}
+								/>
+							</PopoverContent>
+						</Popover>
 					</div>
 				</div>
 
@@ -288,7 +302,6 @@ export default function GeneralForm({
 								placeholder="palavras, separadas, por, vírgula"
 							/>
 						</div>
-
 						<div className="flex flex-col gap-2">
 							<Label>Google Analytics ID</Label>
 							<Input

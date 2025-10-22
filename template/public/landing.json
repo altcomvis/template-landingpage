@@ -17,44 +17,6 @@
     "googleAnalyticsId": "G-4392085309",
     "directoryName": "template-landing-page",
     "pixelMeta": "4392394204320499",
-    "menu": [
-      {
-        "id": "1",
-        "label": "Início",
-        "href": "home",
-        "visible": true
-      },
-      {
-        "id": "2",
-        "label": "Sobre",
-        "href": "about",
-        "visible": true
-      },
-      {
-        "id": "3",
-        "label": "Participantes",
-        "href": "participants",
-        "visible": true
-      },
-      {
-        "id": "4",
-        "label": "Programação",
-        "href": "schedule",
-        "visible": true
-      },
-      {
-        "id": "5",
-        "label": "Inscrição",
-        "href": "subscribe",
-        "visible": true
-      },
-      {
-        "id": "6",
-        "label": "Edições Anteriores",
-        "href": "previous-events",
-        "visible": true
-      }
-    ],
     "seoImage": "/public/img/project/cover.webp"
   },
   "hero": {
@@ -447,9 +409,8 @@
     "visible": true,
     "successTitle": "Inscrição Enviada!",
     "successMessage": "Obrigado por se inscrever! Em breve entraremos em contato.",
-    "formUrl": "",
     "formsConfig": {
-      "FORMS_URL_BASE64": "U2FtcGxlQmFzZTY0RW5jb2RlZFZhbHVl",
+      "FORMS_URL_BASE64": "",
       "QUESTION_IDS": {
         "name": "r9dd6878a382646f5824c28921a3b606d",
         "email": "r61251a298dfe46cf92b3d3bdec15ebf5",
@@ -496,7 +457,7 @@
       {
         "id": "f7",
         "label": "message",
-        "visible": true
+        "visible": false
       },
       {
         "id": "f8",
