@@ -39,7 +39,7 @@ export function ParticipantDialog({
 			</DialogTrigger>
 
 			<DialogContent
-				onOpenAutoFocus={(e: React.SyntheticEvent) => e.preventDefault()}
+				onOpenAutoFocus={(e: Event) => e.preventDefault()}
 				className="border-zinc-400 bg-zinc-200"
 			>
 				<div className="flex flex-col md:flex-row gap-4 mx-auto py-10">
