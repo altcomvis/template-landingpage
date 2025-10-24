@@ -57,10 +57,10 @@ export function useThemeColors({
       fontBody || 'Poppins, sans-serif'
     )
     const vars: Record<string, string | undefined> = {
-      '--primary': primaryColor,
-      '--primary-rgb': hexToRgb(primaryColor),
-      '--secondary': secondaryColor,
-      '--secondary-rgb': hexToRgb(secondaryColor),
+      '--myprimary': primaryColor,
+      '--myprimary-rgb': hexToRgb(primaryColor),
+      '--mysecondary': secondaryColor,
+      '--mysecondary-rgb': hexToRgb(secondaryColor),
       '--dark': darkColor,
       '--dark-rgb': hexToRgb(darkColor),
       '--light': lightColor,
