@@ -328,7 +328,7 @@
   "previousEvents": {
     "title": "Edições Anteriores",
     "description": "Confira os melhores momentos das edições passadas do Summit Futuro Sustentável.",
-    "visible": true,
+    "visible": false,
     "events": [
       {
         "id": "e1",
@@ -410,7 +410,7 @@
     "successTitle": "Inscrição Enviada!",
     "successMessage": "Obrigado por se inscrever! Em breve entraremos em contato.",
     "formsConfig": {
-      "FORMS_URL_BASE64": "",
+      "FORMS_URL_BASE64": "aHR0cHM6Ly9mb3Jtcy5taWNyb3NvZnQuY29tL2Zvcm1hcGkvYXBpLzBiMDU3MzU0LTBmYzktNDdlNS04Njc0LTg0NDlkZDdlODhiOC9ncm91cHMvY2U3ZmJiMWQtMWE5Ni00MGI0LTk5YmUtODljZjYxNmI2YmY2L2Zvcm1zKCdWSE1GQzhrUDVVZUdkSVJKM1g2SXVCMjdmODZXR3JSQW1iNkp6MkZyYV9aVVFrTlpUekkzVUZGT04xZ3lSMWRUVEVoSVJqSlNWMDlMUVNRbFFDTjBQV2N1JykvcmVzcG9uc2Vz",
       "QUESTION_IDS": {
         "name": "r9dd6878a382646f5824c28921a3b606d",
         "email": "r61251a298dfe46cf92b3d3bdec15ebf5",
@@ -419,9 +419,68 @@
         "position": "r754d4abcd5bc468e80cf3bcd257c4c85",
         "company": "r77a287a58cf546799522b6464ed55f92",
         "message": "rdc65760d76e640bd9b20ecc7fab55668",
+        "selectOption": "rcdfdd7330d9e45f792d8e7b9fe4d2663",
         "optin1": "rbe00f0945a944e37a8ee6d4499bcf6c3",
         "optin2": "raa64c101a351475d94f1bf1789d71d6c"
       }
+    },
+    "customSelect": {
+      "label": "Seleção de opções",
+      "description": "Escolha uma das opções abaixo:",
+      "selection": "radio",
+      "visible": false,
+      "options": [
+        {
+          "id": 1,
+          "label": "Item0",
+          "visible": true
+        },
+        {
+          "id": 2,
+          "label": "Item1",
+          "visible": true
+        },
+        {
+          "id": 3,
+          "label": "Item2",
+          "visible": true
+        },
+        {
+          "id": 4,
+          "label": "Item3",
+          "visible": true
+        },
+        {
+          "id": 5,
+          "label": "Item4",
+          "visible": true
+        },
+        {
+          "id": 6,
+          "label": "Item5",
+          "visible": true
+        },
+        {
+          "id": 7,
+          "label": "Item6",
+          "visible": true
+        },
+        {
+          "id": 8,
+          "label": "Item7",
+          "visible": true
+        },
+        {
+          "id": 9,
+          "label": "Item8",
+          "visible": true
+        },
+        {
+          "id": 10,
+          "label": "Item9",
+          "visible": true
+        }
+      ]
     },
     "fields": [
       {

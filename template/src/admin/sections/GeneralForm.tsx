@@ -174,7 +174,7 @@ export default function GeneralForm({
 								</PopoverTrigger>
 							</div>
 							<PopoverContent
-								className=" max-h-[28rem] overflow-y-auto p-0"
+								className=" max-h-112 overflow-y-auto p-0"
 								align="end"
 							>
 								<FontSelectorWizard
