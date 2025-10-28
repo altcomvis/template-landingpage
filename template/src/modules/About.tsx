@@ -89,7 +89,7 @@ export function About({ data, ...props }: AboutProps) {
                           href={icon.url}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="w-10 h-10 flex items-center justify-center text-2xl text(--mysecondary) hover:text-(--light) hover:scale-110 transition-transform"
+                          className="w-10 h-10 flex items-center justify-center text-2xl text-(--text) hover:text-(--light) hover:scale-110 transition-transform"
                         >
                           {Icon && <Icon />}
                         </a>

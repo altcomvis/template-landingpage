@@ -1,6 +1,6 @@
 {
   "general": {
-    "primaryColor": "#3e9dc1",
+    "primaryColor": "#fff",
     "secondaryColor": "#d8578f",
     "darkColor": "#372f7e",
     "lightColor": "#eda747",
@@ -27,8 +27,8 @@
     "time": "09h às 18h",
     "location": "Museu do Amanhã",
     "address": "Praça Mauá, 1 – Rio de Janeiro, RJ",
-    "useBackgroundImage": true,
-    "useLightRays": true,
+    "useBackgroundImage": false,
+    "useLightRays": false,
     "lightRaysColor": "#ffffff",
     "logoSize": ""
   },

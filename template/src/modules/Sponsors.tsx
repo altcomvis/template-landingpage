@@ -19,7 +19,7 @@ export function Sponsors({ data, ...props }: SponsorsProps) {
             <div key={block.id} className="flex flex-col items-center min-w-52">
               {/* Nome da Chancela */}
               <div className="w-full pb-6 flex flex-col items-center">
-                <p className="text-center text-xs font-light mb-6 uppercase tracking-wide bg-(--surface) z-1 px-3">
+                <p className="text-center text-[0.7rem] font-light text-(--text) mb-6 uppercase tracking-wide bg-(--surface) z-1 px-3">
                   {block.label}
                 </p>
                 {/* Linha divisória */}
@@ -33,7 +33,7 @@ export function Sponsors({ data, ...props }: SponsorsProps) {
                     key={item.id}
                     src={`${getBasePath()}img/marcas/${item.name}`}
                     alt={`${block.label} ${item.name}`}
-                    className="h-10 w-auto object-contain"
+                    className="h-14 w-auto object-contain"
                     loading="lazy"
                   />
                 ))}

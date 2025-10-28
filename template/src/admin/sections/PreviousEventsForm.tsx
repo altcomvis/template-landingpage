@@ -161,7 +161,7 @@ export default function PreviousEventsForm({
     title: '',
     description: '',
     events: [],
-    visible: true,
+    visible: false,
   }
 
   const [localPrevious, setLocalPrevious] =
