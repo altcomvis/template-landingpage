@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://globo.com/projetos/lp/sitemap.xml

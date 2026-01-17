@@ -1,8 +1,6 @@
-# 🚀 Landing Page Template – Next.js + Tailwind + ShadCN
+# 🚀 Landing Page Template – React + Vite + Tailwind + ShadCN
 
-Este projeto é um **template base** para criação de Landing Pages, com conteúdo totalmente gerenciado por um **único arquivo JSON (`landing.json`)**.
-
-✨ **Novo:** API integrada para Salesforce Marketing Cloud (SFMC)
+Este projeto é um **template base** para criação de Landing Pages, com conteúdo totalmente gerenciado por um **único arquivo JSON (`landing.json`)** ou pelo **Admin (/admin)** no navegador.
 
 ---
 
@@ -21,12 +19,13 @@ npm -v
 
 ---
 
-## 🛠️ Começar a usar
+## 🛠️ Criar um novo projeto
 
 ```bash
-cd template
-npm install
-npm run dev   # inicia o servidor local em http://localhost:3000
+npx @editoraglobonegocios/create-template-landingpage
+npm install   # só se não rodar automático
+cd meu-projeto
+npm run dev   # inicia o servidor local
 ```
 
 👉 Isso cria a pasta do projeto, instala dependências e abre a landing local em:
