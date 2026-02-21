@@ -133,6 +133,30 @@ export default function Home() {
 
 	// ✅ URL do JSON baseada no caminho real
 	const jsonUrl = `${getBasePath()}landing.json`;
+	useEffect(() => {
+		const handler = (event: MessageEvent) => {
+			const msg = event.data;
+			if (!msg || typeof msg !== "object") return;
+
+			if (msg.type === "UPDATE_DATA" && msg.data) {
+				setLanding(msg.data); // <- aplica em tempo real
+			}
+
+			// handshake (importante pro isPreviewReady do admin)
+			if (msg.type === "RELOAD_PAGE") {
+				window.location.reload();
+			}
+		};
+
+		window.addEventListener("message", handler);
+
+		// avisa o admin que está pronto
+		try {
+			window.parent?.postMessage({ type: "PREVIEW_READY" }, "*");
+		} catch {}
+
+		return () => window.removeEventListener("message", handler);
+	}, []);
 
 	useEffect(() => {
 		fetch(jsonUrl)
