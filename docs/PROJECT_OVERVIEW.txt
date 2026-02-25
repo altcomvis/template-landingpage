@@ -46,7 +46,7 @@ DEPOIS:
 ### Cenário 1: Produção S3
 
 ```
-landing.json
+conteúdo JSON
    ↓ (contains: directoryName = "template-landing-page")
 vite.config.ts
    ↓ (reads directoryName)

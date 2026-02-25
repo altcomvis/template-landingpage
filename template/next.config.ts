@@ -2,16 +2,37 @@ import fs from "fs";
 import type { NextConfig } from "next";
 import path from "path";
 
-// 🔹 Lê o landing.json para pegar o nome do diretório e URL base
-let landing: any = {};
-try {
-	const jsonPath = path.resolve(process.cwd(), "./public/landing.json");
-	landing = JSON.parse(fs.readFileSync(jsonPath, "utf-8"));
-} catch (err) {
-	console.warn("⚠️ Não foi possível ler landing.json:", err);
+// Preferir env para evitar acoplamento ao JSON no build.
+// Ainda suporta ler um JSON local se PROJECT_JSON_PATH estiver definido.
+type ProjectJsonShape = {
+	general?: {
+		directoryName?: string;
+	};
+};
+
+let landing: ProjectJsonShape = {};
+const projectJsonPath = process.env.PROJECT_JSON_PATH
+	? path.resolve(process.cwd(), process.env.PROJECT_JSON_PATH)
+	: null;
+
+if (projectJsonPath) {
+	try {
+		landing = JSON.parse(
+			fs.readFileSync(projectJsonPath, "utf-8"),
+		) as ProjectJsonShape;
+	} catch (err) {
+		console.warn(
+			`⚠️ Não foi possível ler o JSON do projeto em ${projectJsonPath}.`,
+			err,
+		);
+	}
 }
 
-const directoryName = landing?.general?.directoryName || "NOMEPROJETO";
+const directoryName =
+	process.env.NEXT_PUBLIC_DIRECTORY_NAME ||
+	process.env.DIRECTORY_NAME ||
+	landing?.general?.directoryName ||
+	"NOMEPROJETO";
 
 const nextConfig: NextConfig = {
 	// ✅ Base path apenas em produção (caminho relativo, não URL completa)

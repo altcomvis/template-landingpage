@@ -34,7 +34,7 @@ interface ParticipantsProps extends React.HTMLAttributes<HTMLElement> {
  * Participants Section — adaptado ao novo padrão
  * - Recebe os dados via props (`data`)
  * - Mantém compatibilidade com o layout atual
- * - Remove dependência direta do `landing.json`
+ * - Remove dependência direta do JSON de conteúdo
  */
 export function Participants({ data, ...props }: ParticipantsProps) {
 	const participants = data.groups.flatMap((group) => group.participants);

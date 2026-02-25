@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import { MenuTemplate } from "@/modules/Menu";
 import { resolveAssetUrl } from "@/config/s3-urls";
-import { getBasePath } from "@/utils/getBasePath";
+import { MenuTemplate } from "@/modules/Menu";
 
+import { CookiePolicyModal } from "./components/CookiePolicyModal";
 import { SeoHead } from "./components/seo-head";
 import { useParallaxAnimation } from "./hooks/use-parallax-animation";
 import { useThemeColors } from "./hooks/use-theme-colors";
@@ -19,59 +19,72 @@ import { Sponsors } from "./modules/Sponsors";
 export default function App() {
 	// biome-ignore lint/suspicious/noExplicitAny: dynamic JSON data
 	const [landing, setLanding] = useState<any>(null);
-	// ✅ URL do JSON baseada no caminho real
-	const jsonUrl = `${getBasePath()}landing.json`;
-
-	useEffect(() => {
-		fetch(jsonUrl)
-			.then((res) => res.json())
-			.then(setLanding)
-			.catch((err) => console.error("Erro ao carregar landing.json:", err));
-	}, [jsonUrl]);
 
 	// � Escutar mensagens do admin para atualização em tempo real
 	useEffect(() => {
+		let isCancelled = false;
+
 		const handleMessage = (event: MessageEvent) => {
-			// Validar origem (localhost para dev/admin)
-			if (!event.origin.includes("localhost")) {
-				return;
-			}
+			const isDev = Boolean(import.meta.env.DEV);
+			const isSameOrigin = event.origin === window.location.origin;
+			const isFromParent = event.source === window.parent;
+			const isTrustedDevOrigin =
+				isDev &&
+				/^(https?:\/\/)(localhost|127\.0\.0\.1|0\.0\.0\.0)(:\d+)?$/.test(
+					event.origin,
+				);
+			if (!isFromParent && !isSameOrigin && !isTrustedDevOrigin) return;
 
 			const message = event.data;
 
 			// Atualizar dados quando receber UPDATE_DATA do admi	n
 			if (message.type === "UPDATE_DATA" && message.data) {
-				console.log("📨 Dados atualizados recebidos do admin:", message.data);
 				setLanding(message.data);
 			}
 		};
 
 		window.addEventListener("message", handleMessage);
-		return () => window.removeEventListener("message", handleMessage);
-	}, []);
+		try {
+			window.parent?.postMessage({ type: "PREVIEW_READY" }, "*");
+		} catch {
+			// ignore
+		}
 
-	// �👀 Hot-reload do JSON em dev
-	useEffect(() => {
-		if (import.meta.env.MODE !== "development") return;
-		let lastContent = "";
+		const isStandalone = window.self === window.top;
+		const isBlobLike =
+			window.location?.protocol === "blob:" ||
+			String(window.location?.href || "").includes("blob:");
+		const canAutoLoadLocalJson =
+			Boolean(import.meta.env.DEV) && isStandalone && !isBlobLike;
 
-		const checkForUpdates = async () => {
-			try {
-				const res = await fetch(`${jsonUrl}?t=${Date.now()}`);
-				const text = await res.text();
-				if (lastContent && text !== lastContent) {
-					console.log("🔁 landing.json alterado — recarregando...");
-					window.location.reload();
+		if (canAutoLoadLocalJson) {
+			const localJsonUrl = String(
+				import.meta.env.VITE_PROJECT_JSON_URL || "/landing.json",
+			);
+			void (async () => {
+				try {
+					const response = await fetch(localJsonUrl, { cache: "no-store" });
+					if (!response.ok) {
+						throw new Error(
+							`Failed to fetch ${localJsonUrl}: ${response.status}`,
+						);
+					}
+					const data = await response.json();
+					if (!isCancelled) setLanding(data);
+				} catch (error) {
+					console.warn(
+						"[landing] Dev standalone: could not auto-load local project JSON.",
+						error,
+					);
 				}
-				lastContent = text;
-			} catch {
-				/* ignore */
-			}
-		};
+			})();
+		}
 
-		const interval = setInterval(checkForUpdates, 3000);
-		return () => clearInterval(interval);
-	}, [jsonUrl]);
+		return () => {
+			isCancelled = true;
+			window.removeEventListener("message", handleMessage);
+		};
+	}, []);
 
 	/* ──────────────────────────────── */
 	/* 🔹 Desestruturações seguras (sempre definidas) */
@@ -110,9 +123,13 @@ export default function App() {
 	}
 
 	/* ──────────────────────────────── */
+						<CookiePolicyModal text={general?.cookiePolicyText} />
 	/* 🖼️ Background (Hero fixo) */
 	const directoryName = (general as { directoryName?: string })?.directoryName;
-	const heroBackgroundUrl = resolveAssetUrl("img/hero/header.webp", directoryName);
+	const heroBackgroundUrl = resolveAssetUrl(
+		"img/hero/header.webp",
+		directoryName,
+	);
 	const useFixedHeroBackground = hero.useBackgroundImage !== false;
 	const backgroundStyle = useFixedHeroBackground
 		? { backgroundColor: "transparent" }
@@ -126,7 +143,7 @@ export default function App() {
 			<div id="home" className="w-full">
 				<SeoHead />
 				<div
-					className="relative w-full transition-colors duration-500 md:pt-2 z-50"
+					className="relative w-full transition-colors duration-500 z-50"
 					style={{
 						...backgroundStyle,
 						fontFamily: "var(--font-family), sans-serif",

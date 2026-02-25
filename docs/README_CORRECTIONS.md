@@ -9,7 +9,7 @@ Analisar o projeto **template-react** (em `template-landingpage`) e fazer corre�
 | Item | Status | Observações |
 |------|--------|------------|
 | Build com Vite | ✅ OK | Configurado para gerar URLs S3 em produção |
-| Baseado em landing.json | ✅ OK | Lê directoryName dinamicamente |
+| Baseado em conteúdo JSON | ✅ OK | Lê directoryName dinamicamente |
 | getBasePath() função | ✅ OK | Retorna URL relativa em dev, absoluta em prod |
 | Suporte a blob URLs | ⚠️ Parcial | Faltava documentação e detecção explícita |
 | CORS Headers | ❌ Faltava | Adicionado para suportar iframe |
@@ -56,7 +56,7 @@ Adicionada documentação sobre comportamento do Router basename em diferentes c
 
 ### Produção S3
 ```
-landing.json → directoryName: "template-landing-page"
+conteúdo JSON → directoryName: "template-landing-page"
              ↓
 vite config → base: "https://s3.../projetos/template-landing-page/"
              ↓
@@ -67,7 +67,7 @@ Router → basename: "/projetos/template-landing-page/"
 
 ### Iframe Admin-Pages (Blob URLs)
 ```
-template.zip → extracted → landing.json
+template.zip → extracted → conteúdo JSON
                         ↓
 admin-pages → remove directoryName → ""
             ↓
@@ -232,7 +232,7 @@ Se encontrar problemas:
 
 1. Verificar logs no console (DevTools)
 2. Consultar `TESTING_GUIDE.md` seção "Debugging"
-3. Verificar se directoryName está em landing.json
+3. Verificar se directoryName está em conteúdo JSON
 4. Verificar se estrutura de assets é correta
 5. Limpar cache (Cmd+Shift+R / Ctrl+Shift+F5)
 

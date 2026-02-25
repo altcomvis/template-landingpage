@@ -4,12 +4,12 @@
 
 - [ ] Clonar/atualizar repositório template-landingpage
 - [ ] Instalar dependências: `npm install`
-- [ ] Verificar que landing.json existe em `public/landing.json`
-- [ ] Confirmar que `directoryName` está definido em landing.json
+- [ ] Verificar que conteúdo JSON existe em `public/conteúdo JSON`
+- [ ] Confirmar que `directoryName` está definido em conteúdo JSON
 
 ```bash
-# Verificar landing.json
-cat template-react/public/landing.json | grep directoryName
+# Verificar conteúdo JSON
+cat template-react/public/conteúdo JSON | grep directoryName
 # Deve retornar: "directoryName": "template-landing-page"
 ```
 
@@ -136,7 +136,7 @@ fetch('/img/hero/header.webp').then(r => r.blob()).then(console.log)
 ```
 
 - [ ] Verificar que URLs foram convertidas (sem https://s3....)
-- [ ] Confirmar directoryName foi removido (landing.json)
+- [ ] Confirmar directoryName foi removido (conteúdo JSON)
 - [ ] Checar se blob URLs estão mapeados corretamente
 
 ### Se CSS Não Aplica

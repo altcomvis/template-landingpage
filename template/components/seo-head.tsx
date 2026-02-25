@@ -16,16 +16,20 @@ export function SeoHead() {
 	const [seo, setSeo] = useState<SeoData | null>(null);
 
 	useEffect(() => {
-		// ✅ Carrega o JSON da landing page
-		const jsonUrl = `${getBasePath()}landing.json`;
+		const isDev = process.env.NODE_ENV === "development";
+		const handleMessage = (event: MessageEvent) => {
+			const isSameOrigin = event.origin === window.location.origin;
+			const isLocalhostDev = isDev && event.origin.includes("localhost");
+			if (!isSameOrigin && !isLocalhostDev) return;
 
-		fetch(jsonUrl)
-			.then((res) => {
-				if (!res.ok) throw new Error(`HTTP ${res.status}`);
-				return res.json();
-			})
-			.then((data) => setSeo(data.general))
-			.catch((err) => console.error("Erro ao carregar SEO:", err));
+			const message = event.data;
+			if (message?.type === "UPDATE_DATA" && message.data?.general) {
+				setSeo(message.data.general);
+			}
+		};
+
+		window.addEventListener("message", handleMessage);
+		return () => window.removeEventListener("message", handleMessage);
 	}, []);
 
 	useEffect(() => {
@@ -49,7 +53,7 @@ export function SeoHead() {
 		// 🔹 utilitários locais
 		const setMeta = (name: string, content?: string) => {
 			if (!content) return;
-			let tag =
+			const tag =
 				document.querySelector(`meta[name='${name}']`) ||
 				document.createElement("meta");
 			tag.setAttribute("name", name);
@@ -59,7 +63,7 @@ export function SeoHead() {
 
 		const setOG = (property: string, content?: string) => {
 			if (!content) return;
-			let tag =
+			const tag =
 				document.querySelector(`meta[property='${property}']`) ||
 				document.createElement("meta");
 			tag.setAttribute("property", property);
@@ -69,7 +73,7 @@ export function SeoHead() {
 
 		const setLink = (rel: string, href?: string) => {
 			if (!href) return;
-			let link =
+			const link =
 				document.querySelector(`link[rel='${rel}']`) ||
 				document.createElement("link");
 			link.setAttribute("rel", rel);

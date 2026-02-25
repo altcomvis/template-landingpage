@@ -1,12 +1,25 @@
 import fs from "fs";
 import path from "path";
 
-const landingPath = path.resolve("./public/landing.json");
+const projectJsonPath = path.resolve(
+  process.env.PROJECT_JSON_PATH || "./public/landing.json",
+);
 const sitemapPath = path.resolve("./public/sitemap.xml");
 
-const landing = JSON.parse(fs.readFileSync(landingPath, "utf-8"));
-const urlBase = landing.general?.seoUrl || "https://oglobo.globo.com/projetos";
-const directory = landing.general?.directoryName || "";
+let landing = {};
+try {
+  landing = JSON.parse(fs.readFileSync(projectJsonPath, "utf-8"));
+} catch (err) {
+  console.warn(
+    `⚠️ Não foi possível ler o JSON do projeto em ${projectJsonPath}. Gerando sitemap com defaults.`,
+    err,
+  );
+}
+
+const urlBase =
+  process.env.SITEMAP_URL_BASE ||
+  landing.general?.seoUrl ||
+  "https://oglobo.globo.com/projetos";
 
 const pages = [
   { loc: `${urlBase}/`, priority: "1.0" },

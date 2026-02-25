@@ -37,8 +37,14 @@ export function Hero({ data, general, ...props }: HeroProps) {
 	const { projectName } = general;
 
 	const hasLogo = true;
-	const logoPath = resolveAssetUrl("img/hero/marca-do-projeto.webp", general?.directoryName);
-	const backgroundUrl = resolveAssetUrl("img/hero/header.webp", general?.directoryName);
+	const logoPath = resolveAssetUrl(
+		"img/hero/marca-do-projeto.webp",
+		general?.directoryName,
+	);
+	const backgroundUrl = resolveAssetUrl(
+		"img/hero/header.webp",
+		general?.directoryName,
+	);
 	const infoBoxTextClass = "text-gray-900";
 
 	return (
@@ -106,7 +112,7 @@ export function Hero({ data, general, ...props }: HeroProps) {
 					<div className="flex gap-4 justify-center items-stretch flex-wrap">
 						{date && (
 							<div
-								className={`info-box flex items-center gap-2 bg-zinc-400/50 backdrop-blur-md rounded-lg px-4 py-2 ${infoBoxTextClass}`}
+								className={`info-box flex items-center gap-2 bg-zinc-100/80 backdrop-blur-md rounded-lg px-4 py-2 ${infoBoxTextClass}`}
 							>
 								<span className="text-2xl">📅</span>
 								<span className="font-bold text-xl md:text-2xl">{date}</span>
@@ -114,7 +120,7 @@ export function Hero({ data, general, ...props }: HeroProps) {
 						)}
 						{time && (
 							<div
-								className={`info-box flex items-center gap-2 bg-zinc-400/50 backdrop-blur-md rounded-lg px-4 py-2 ${infoBoxTextClass}`}
+								className={`info-box flex items-center gap-2 bg-zinc-100/80 backdrop-blur-md rounded-lg px-4 py-2 ${infoBoxTextClass}`}
 							>
 								<span className="text-2xl">⏰</span>
 								<span className="font-bold text-xl md:text-2xl">{time}</span>
@@ -122,7 +128,7 @@ export function Hero({ data, general, ...props }: HeroProps) {
 						)}
 						{(location || address) && (
 							<div
-								className={`info-box flex items-center gap-2 bg-zinc-400/50 backdrop-blur-md rounded-lg px-4 py-2 text-center md:text-left ${infoBoxTextClass}`}
+								className={`info-box flex items-center gap-2 bg-zinc-100/80 backdrop-blur-md rounded-lg px-4 py-2 text-center md:text-left ${infoBoxTextClass}`}
 							>
 								<div className="flex flex-col">
 									{location && (

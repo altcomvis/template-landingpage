@@ -12,6 +12,7 @@ interface SponsorsProps extends React.HTMLAttributes<HTMLElement> {
 
 export function Sponsors({ data, ...props }: SponsorsProps) {
 	return (
+		// biome-ignore lint/nursery/useUniqueElementIds: <explanation>
 		<section className="py-16" id="sponsors" {...props}>
 			<div className="container mx-auto px-4">
 				<div className="flex flex-wrap justify-center gap-16">

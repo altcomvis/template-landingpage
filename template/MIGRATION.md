@@ -70,7 +70,7 @@ npm start
 ### Formulário Subscribe
 O formulário agora:
 1. **Envia primeiro para `/api/sfmc`** (API local do Next.js)
-2. **Depois para o backend legado** (se configurado no landing.json)
+2. **Depois para o backend legado** (se configurado no conteúdo JSON)
 
 ### Rotas API
 Criada `POST /api/sfmc` que:

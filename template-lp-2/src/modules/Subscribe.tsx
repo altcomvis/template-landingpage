@@ -294,16 +294,14 @@ export default function Subscribe({ data, ...props }: SubscribeProps) {
 	};
 
 	/* Atualiza o form se os campos visíveis mudarem dinamicamente */
+	// biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
 	useEffect(() => {
 		form.reset(form.getValues(), { keepDefaultValues: true });
 	}, [data.fields]);
 
 	return (
-		<Card
-			{...props}
-			className="w-10/12 md:w-full max-w-3xl mx-auto mt-10 bg-(--surface)"
-			id="subscribe"
-		>
+		// biome-ignore lint/nursery/useUniqueElementIds: <explanation>
+		<Card {...props} className="w-full mx-auto bg-(--surface)" id="subscribe">
 			<CardContent className="p-6">
 				<Form key={formKey} {...form}>
 					<form

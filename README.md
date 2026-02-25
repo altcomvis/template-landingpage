@@ -1,6 +1,6 @@
 # 🚀 Landing Page Template – React + Vite + Tailwind + ShadCN
 
-Este projeto é um **template base** para criação de Landing Pages, com conteúdo totalmente gerenciado por um **único arquivo JSON (`landing.json`)** ou pelo **Admin (/admin)** no navegador.
+Este projeto é um **template base** para criação de Landing Pages, com conteúdo gerenciado pelo **Painel Admin (/admin)** e entregue ao preview via **pacote ZIP do template**.
 
 ---
 
@@ -36,8 +36,7 @@ npm run dev   # inicia o servidor local
 
 ## 🎨 Editar Conteúdo
 
-Todo o conteúdo está em **`src/landing.json`**.  
-No Admin é possível editar e exportar um novo JSON.
+Todo o conteúdo é editado no **Admin**. O preview recebe os dados do painel (sem depender de buscar um JSON por URL).
 
 ### O que pode ser configurado:
 - **Configuração**: nome do projeto (usado no `base` de publicação), animação global, parallax.
@@ -47,7 +46,7 @@ No Admin é possível editar e exportar um novo JSON.
 - **Agenda**: programação por horário, painel, palestrantes, mediador.
 - **Patrocinadores**: organizados por chancela (cada bloco numa linha).
 
-👉 Após editar no Admin, clique em **Exportar JSON** e substitua `src/landing.json`.
+👉 Após editar no Admin, use o fluxo de exportação/empacotamento do painel.
 
 ---
 
@@ -93,7 +92,7 @@ npm run build
 - **Criar projeto**: `npx create-berall-landing@latest meu-projeto`
 - **Rodar local**: `npm run dev`
 - **Editar conteúdo**: via `http://localhost:5173/admin`
-- **Exportar JSON**: substituir `src/landing.json`
+- **Exportar JSON**: usar no fluxo do painel
 - **Build**: `npm run build`
 - **Publicar**: copiar `dist/` para o SVN
 
@@ -107,7 +106,6 @@ npm run build
   logo.svg         # logo do projeto
 /src
   components/      # componentes React (Hero, Header, etc.)
-  landing.json     # arquivo único de conteúdo
   App.tsx
   index.css
 ```

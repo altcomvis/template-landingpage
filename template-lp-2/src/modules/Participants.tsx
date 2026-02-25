@@ -49,7 +49,7 @@ function resolveParticipantPhotoSrc(photo: string): string {
  * Participants Section — adaptado ao novo padrão
  * - Recebe os dados via props (`data`)
  * - Mantém compatibilidade com o layout atual
- * - Remove dependência direta do `landing.json`
+ * - Remove dependência direta do JSON de conteúdo
  */
 export function Participants({ data, ...props }: ParticipantsProps) {
 	const participants = data.groups.flatMap((group) => group.participants);
@@ -134,7 +134,7 @@ export function Participants({ data, ...props }: ParticipantsProps) {
 			<TitleSection name={data.title || "Participantes"} />
 
 			<div
-				className="container w-7/12 px-4 md:px-14 mx-auto py-16 md:rounded-xl relative overflow-x-hidden overflow-y-visible"
+				className="container md:w-7/12 px-4 md:px-14 mx-auto py-16 md:rounded-xl relative overflow-x-hidden overflow-y-visible"
 				{...props}
 			>
 				<Carousel
@@ -146,7 +146,7 @@ export function Participants({ data, ...props }: ParticipantsProps) {
 						{participants.map((p) => (
 							<CarouselItem
 								key={p.name}
-								className="basis-full sm:basis-1/2 md:basis-1/3 px-3 pt-0 pb-36 flex justify-center items-start"
+								className="basis-full sm:basis-1/2 md:basis-1/3 md:px-3 pt-0 pb-18 md:pb-36 flex justify-center items-start"
 							>
 								<ParticipantDialog
 									name={p.name}
@@ -160,7 +160,7 @@ export function Participants({ data, ...props }: ParticipantsProps) {
 											<img
 												src={resolveParticipantPhotoSrc(p.photo)}
 												alt={p.name}
-												className="w-60 md:w-64 h-60 md:h-64 rounded-3xl object-cover shadow-2xl hover:brightness-75 transition"
+												className="w-60 md:w-64 h-60 md:h-64 rounded-3xl object-cover md:shadow-2xl hover:brightness-75 transition"
 											/>
 											<div className="absolute bottom-0 left-0 right-0 rounded-b-3xl bg-linear-to-t from-black/80 to-transparent text-white leading-tight text-lg font-semibold pl-5 pr-5 pb-4 pt-16 text-pretty wrap-break-word">
 												{p.name}

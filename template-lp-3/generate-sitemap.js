@@ -1,15 +1,25 @@
 import fs from "fs";
 import path from "path";
 
-// Caminho do arquivo landing.json
-const landingPath = path.resolve("public/landing.json");
+const projectJsonPath = path.resolve(
+  process.env.PROJECT_JSON_PATH || "public/landing.json",
+);
 
-// Lê o JSON
-const landing = JSON.parse(fs.readFileSync(landingPath, "utf8"));
+let landing = {};
+try {
+  landing = JSON.parse(fs.readFileSync(projectJsonPath, "utf8"));
+} catch (err) {
+  console.warn(
+    `⚠️ Não foi possível ler o JSON do projeto em ${projectJsonPath}. Gerando sitemap com defaults.`,
+    err,
+  );
+}
+
 const dir = landing.general?.directoryName || "projeto-sem-nome";
 
 // Base da URL
 const baseURL =
+  process.env.SITEMAP_BASE_URL ||
   "https://oglobo.globo.com/projetos/" + dir.replace(/\/$/, "");
 
 // Data atual no formato ISO (apenas yyyy-mm-dd)

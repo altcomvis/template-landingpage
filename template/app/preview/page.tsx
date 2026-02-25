@@ -69,7 +69,7 @@ export default function PreviewPage() {
 				<div className="text-center">
 					<p className="text-lg mb-2">Aguardando dados...</p>
 					<p className="text-sm text-muted-foreground">
-						O preview está pronto para receber o landing.json
+						O preview está pronto para receber os dados do admin
 					</p>
 				</div>
 			</div>

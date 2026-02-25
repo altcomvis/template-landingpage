@@ -8,7 +8,7 @@ O projeto **template-react** foi analisado e ajustado para funcionar corretament
 
 ### 1. **Estrutura de Build com URLs S3**
 - ✅ O vite.config.ts já está configurado corretamente para gerar URLs absolutas S3 em produção
-- ✅ A base URL é definida dinamicamente via `landing.json`
+- ✅ A base URL é definida dinamicamente via `conteúdo JSON`
 - ⚠️ Os nomes de assets não eram previsíveis (sem hash), dificultando o mapeamento em blob URLs
 
 ### 2. **Compatibilidade com Blob URLs**
@@ -104,7 +104,7 @@ Adicionado comentário explicativo sobre o comportamento do Router basename em d
 
 ### Em Produção (S3)
 ```
-1. Vite lê landing.json → directoryName: "template-landing-page"
+1. Vite lê conteúdo JSON → directoryName: "template-landing-page"
 2. Define base: "https://s3.glbimg.com/.../projetos/template-landing-page/"
 3. Assets são compilados para: https://s3.glbimg.com/.../assets/...
 4. Router usa basename: "/projetos/template-landing-page/"
@@ -112,7 +112,7 @@ Adicionado comentário explicativo sobre o comportamento do Router basename em d
 
 ### No Iframe Admin-Pages (Blob URLs)
 ```
-1. Admin-pages carrega template.zip e extrai landing.json
+1. Admin-pages carrega template.zip e extrai conteúdo JSON
 2. Remove directoryName: "" (ou deixa vazio)
 3. Blob URLs mapeiam: assets/... → blob:http://localhost:3000/...
 4. Router usa basename: "/" (local)
@@ -189,7 +189,7 @@ O `use-landing-package.ts` do admin-pages agora pode:
 
 1. ✅ Detectar URLs S3 absolutas no HTML gerado
 2. ✅ Converter para caminhos relativos antes de criar blob URLs
-3. ✅ Remover `directoryName` do landing.json
+3. ✅ Remover `directoryName` do conteúdo JSON
 4. ✅ Manter funcionalidade completa do template
 
 **Exemplo de conversão:**
@@ -210,7 +210,7 @@ Blob:       blob:http://localhost:3000/abc123 → assets/index.css
 
 ## 📝 Notas Importantes
 
-1. O `directoryName` deve estar presente no landing.json para que as URLs absolutas S3 funcionem
+1. O `directoryName` deve estar presente no conteúdo JSON para que as URLs absolutas S3 funcionem
 2. Em blob URLs, o `directoryName` deve ser vazio ou será ignorado
 3. O basePath do Router é calculado automaticamente baseado no ambiente
 4. Nenhuma mudança quebradora na API existente - totalmente backward compatible

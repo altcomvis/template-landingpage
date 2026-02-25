@@ -9,7 +9,7 @@ Análise completa do projeto **template-react** (em `template-landingpage`) com 
 | Aspecto | Status | Ação |
 |---------|--------|------|
 | Build com Vite | ✅ OK | Mantém produção S3 |
-| Landing.json dinâmico | ✅ OK | Lê directoryName |
+| Conteúdo JSON dinâmico | ✅ OK | Lê directoryName |
 | URL Resolution | ✅ MELHORADO | Agora com detecção de contexto |
 | Blob URL Support | ✅ ADICIONADO | Suporte completo |
 | CORS | ✅ ADICIONADO | Headers configurados |
@@ -74,7 +74,7 @@ Análise completa do projeto **template-react** (em `template-landingpage`) com 
 
 ### Produção S3
 ```
-landing.json (directoryName: "template-landing-page")
+conteúdo JSON (directoryName: "template-landing-page")
        ↓
 vite build (base: "https://s3.../projetos/template-landing-page/")
        ↓
@@ -91,7 +91,7 @@ Admin-pages extrai + processa
        ↓
 Converte URLs S3 → relativas
        ↓
-Remove directoryName do landing.json
+Remove directoryName do conteúdo JSON
        ↓
 Proxy mapeia /assets/ → blob: URLs
        ↓
@@ -217,7 +217,7 @@ Novos padrões são opcionais (não forçados).
 ## 🚨 Considerações Importantes
 
 ### ⚠️ Produção S3
-- directoryName deve estar em landing.json
+- directoryName deve estar em conteúdo JSON
 - URLs devem ser acessíveis publicamente
 - Cache headers devem ser configurados
 - CDN recomendado para performance

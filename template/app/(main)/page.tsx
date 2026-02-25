@@ -130,9 +130,6 @@ interface LandingData {
 
 export default function Home() {
 	const [landing, setLanding] = useState<LandingData | null>(null);
-
-	// ✅ URL do JSON baseada no caminho real
-	const jsonUrl = `${getBasePath()}landing.json`;
 	useEffect(() => {
 		const handler = (event: MessageEvent) => {
 			const msg = event.data;
@@ -157,36 +154,6 @@ export default function Home() {
 
 		return () => window.removeEventListener("message", handler);
 	}, []);
-
-	useEffect(() => {
-		fetch(jsonUrl)
-			.then((res) => res.json())
-			.then(setLanding)
-			.catch((err) => console.error("Erro ao carregar landing.json:", err));
-	}, [jsonUrl]);
-
-	// 👀 Hot-reload do JSON em dev
-	useEffect(() => {
-		if (process.env.NODE_ENV !== "development") return;
-		let lastContent = "";
-
-		const checkForUpdates = async () => {
-			try {
-				const res = await fetch(`${jsonUrl}?t=${Date.now()}`);
-				const text = await res.text();
-				if (lastContent && text !== lastContent) {
-					console.log("🔁 landing.json alterado — recarregando...");
-					window.location.reload();
-				}
-				lastContent = text;
-			} catch {
-				/* ignore */
-			}
-		};
-
-		const interval = setInterval(checkForUpdates, 3000);
-		return () => clearInterval(interval);
-	}, [jsonUrl]);
 
 	/* ──────────────────────────────── */
 	/* 🔹 Desestruturações seguras (sempre definidas) */

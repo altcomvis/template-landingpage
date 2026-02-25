@@ -85,7 +85,7 @@ export function Hero({ data, general, subscribe, ...props }: HeroProps) {
 					<div
 						className={
 							subscribe?.visible
-								? "text-center lg:text-center col-span-3"
+								? "text-center lg:text-center md:col-span-3"
 								: "text-center"
 						}
 					>
@@ -131,7 +131,7 @@ export function Hero({ data, general, subscribe, ...props }: HeroProps) {
 							>
 								{date && (
 									<div
-										className={`info-box flex items-center gap-2 bg-zinc-400/50 backdrop-blur-md rounded-lg px-4 py-2 ${infoBoxTextClass}`}
+										className={`info-box flex items-center gap-2 bg-zinc-100/50 shadow-lg backdrop-blur-md rounded-lg px-4 py-2 ${infoBoxTextClass}`}
 									>
 										<span className="text-2xl">📅</span>
 										<span className="font-bold text-xl md:text-2xl">
@@ -141,7 +141,7 @@ export function Hero({ data, general, subscribe, ...props }: HeroProps) {
 								)}
 								{time && (
 									<div
-										className={`info-box flex items-center gap-2 bg-zinc-400/50 backdrop-blur-md rounded-lg px-4 py-2 ${infoBoxTextClass}`}
+										className={`info-box flex items-center gap-2 bg-zinc-100/50 shadow-lg backdrop-blur-md rounded-lg px-4 py-2 ${infoBoxTextClass}`}
 									>
 										<span className="text-2xl">⏰</span>
 										<span className="font-bold text-xl md:text-2xl">
@@ -151,7 +151,7 @@ export function Hero({ data, general, subscribe, ...props }: HeroProps) {
 								)}
 								{(location || address) && (
 									<div
-										className={`info-box flex items-center gap-2 bg-zinc-400/50 backdrop-blur-md rounded-lg px-4 py-2 text-center md:text-left ${infoBoxTextClass}`}
+										className={`info-box flex items-center gap-2 bg-zinc-100/50 shadow-lg backdrop-blur-md rounded-lg px-4 py-2 text-center md:text-left ${infoBoxTextClass}`}
 									>
 										<div className="flex flex-col">
 											{location && (
@@ -170,7 +170,7 @@ export function Hero({ data, general, subscribe, ...props }: HeroProps) {
 					</div>
 
 					{subscribe?.visible && (
-						<div className="w-full lg:max-w-md lg:justify-self-end col-span-2">
+						<div className="w-full lg:max-w-md lg:justify-self-end md:col-span-2">
 							<Subscribe data={subscribe} data-parallax />
 						</div>
 					)}

@@ -9,8 +9,8 @@
 - [ ] Nenhum warning de CORS ou paths
 
 ### Fase 2: Verificar Configuração S3
-- [ ] `vite.config.ts` lê corretamente `landing.json`
-- [ ] `directoryName` definido em `public/landing.json`
+- [ ] `vite.config.ts` lê corretamente `conteúdo JSON`
+- [ ] `directoryName` definido em `public/conteúdo JSON`
 - [ ] Base URL S3 está em `s3-urls.ts`
 
 ### Fase 3: Testar em Desenvolvimento
@@ -66,7 +66,7 @@ npm run dev
 # "🎉 Pacote carregado com sucesso!"
 # "✅ Proxy de fetch instalado com X URLs mapeadas"
 # "🔧 URLs absolutas S3 convertidas para caminhos relativos"
-# "🔧 Removendo directoryName do landing.json: template-landing-page"
+# "🔧 Removendo directoryName do conteúdo JSON: template-landing-page"
 
 # ❌ NÃO deve ver:
 # "Erro ao carregar template"
@@ -102,12 +102,12 @@ document.querySelector('script')?.src
 // Resultado deve começar com "/assets/" ou ser blob URL
 ```
 
-### Teste 2: Landing.json Modificado
+### Teste 2: Conteúdo JSON Modificado
 **Objetivo**: Confirmar que directoryName foi removido
 
 ```javascript
-// Fetch o landing.json que foi mapeado
-fetch('blob:http://localhost:3000/...')  // blob URL do landing.json
+// Fetch o conteúdo JSON que foi mapeado
+fetch('blob:http://localhost:3000/...')  // blob URL do conteúdo JSON
   .then(r => r.json())
   .then(data => {
     console.log('directoryName:', data.general.directoryName)
@@ -164,7 +164,7 @@ fetch('/assets/index-abc123.css')
 ### Se template não renderiza:
 1. Console → procurar por erros vermelhos
 2. Verificar logs de "Removendo directoryName"
-3. Confirmar que landing.json foi carregado
+3. Confirmar que conteúdo JSON foi carregado
 4. Procurar por erro em JSON parsing
 
 ### Se formulários não funcionam:
@@ -181,10 +181,10 @@ fetch('/assets/index-abc123.css')
 ──────────────────────────────────────
 📦 Template.zip carregado: 2455678 bytes
 🔧 Processando ZIP...
-✅ Landing.json encontrado
-🔧 Removendo directoryName do landing.json: template-landing-page
+✅ Conteúdo JSON encontrado
+🔧 Removendo directoryName do conteúdo JSON: template-landing-page
 ✅ Proxy de fetch instalado com 65 URLs mapeadas
-🔄 Redirecionando fetch: landing.json → blob:http://localhost:3000/xyz
+🔄 Redirecionando fetch: conteúdo JSON → blob:http://localhost:3000/xyz
 🔄 Redirecionando fetch: /assets/index.js → blob:...
 ✅ Proxy de fetch instalado com sucesso
 🎉 Template carregado e renderizado!
@@ -195,7 +195,7 @@ fetch('/assets/index-abc123.css')
 ⚠️ Erro ao carregar template: CORS error
 ❌ JSON.parse: unexpected token
 🧭 BasePath confirmado: /projetos/template-landing-page/ (ERRADO em blob)
-⚠️ Falha ao carregar landing.json
+⚠️ Falha ao carregar conteúdo JSON
 404 not found: /assets/index.js
 ```
 
@@ -228,7 +228,7 @@ Quando tudo estiver funcionando:
 
 1. ✅ Admin-pages carrega template.zip
 2. ✅ HTML tem URLs relativas (convertidas de S3)
-3. ✅ Landing.json tem directoryName = ""
+3. ✅ Conteúdo JSON tem directoryName = ""
 4. ✅ Proxy intercepta fetches e redireciona para blob URLs
 5. ✅ React renderiza corretamente
 6. ✅ Imagens e CSS carregam
