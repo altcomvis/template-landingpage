@@ -170,7 +170,7 @@ export function Hero({ data, general, subscribe, ...props }: HeroProps) {
 					</div>
 
 					{subscribe?.visible && (
-						<div className="w-full lg:max-w-md lg:justify-self-end md:col-span-2">
+						<div className="w-full lg:max-w-md lg:justify-self-end md:col-span-2 pt-8">
 							<Subscribe data={subscribe} data-parallax />
 						</div>
 					)}
