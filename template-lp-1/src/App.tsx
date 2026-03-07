@@ -15,6 +15,14 @@ import { Schedule } from "./modules/Schedule";
 import { Sponsors } from "./modules/Sponsors";
 import Subscribe from "./modules/Subscribe";
 
+function extractFilename(value: unknown): string {
+	const raw = String(value || "").trim();
+	if (!raw) return "";
+	const withoutQuery = raw.split("?")[0]?.split("#")[0] || raw;
+	const normalized = withoutQuery.replace(/\\/g, "/");
+	return (normalized.split("/").pop() || "").trim();
+}
+
 /* ──────────────────────────────── */
 /* 🌍 APP PRINCIPAL - Sem Router */
 export default function App() {
@@ -55,15 +63,20 @@ export default function App() {
 		const isBlobLike =
 			window.location?.protocol === "blob:" ||
 			String(window.location?.href || "").includes("blob:");
-		const canAutoLoadLocalJson = Boolean(import.meta.env.DEV) && isStandalone && !isBlobLike;
+		const canAutoLoadLocalJson =
+			Boolean(import.meta.env.DEV) && isStandalone && !isBlobLike;
 
 		if (canAutoLoadLocalJson) {
-			const localJsonUrl = String(import.meta.env.VITE_PROJECT_JSON_URL || "/landing.json");
+			const localJsonUrl = String(
+				import.meta.env.VITE_PROJECT_JSON_URL || "/landing.json",
+			);
 			void (async () => {
 				try {
 					const response = await fetch(localJsonUrl, { cache: "no-store" });
 					if (!response.ok) {
-						throw new Error(`Failed to fetch ${localJsonUrl}: ${response.status}`);
+						throw new Error(
+							`Failed to fetch ${localJsonUrl}: ${response.status}`,
+						);
 					}
 					const data = await response.json();
 					if (!isCancelled) setLanding(data);
@@ -121,15 +134,20 @@ export default function App() {
 	/* ──────────────────────────────── */
 	/* 🖼️ Background dinâmico */
 	const directoryName = (general as { directoryName?: string })?.directoryName;
-	const backgroundStyle = general.useBackgroundImage
-		? {
-				backgroundImage: `url('${resolveAssetUrl("img/hero/header.webp", directoryName)}')`,
-				backgroundPosition: "top",
-				backgroundRepeat: "no-repeat",
-				backgroundSize: "cover",
-				backgroundAttachment: "fixed",
-			}
-		: { backgroundColor: "var(--mybackground)" };
+	const heroBackgroundFilename = extractFilename(hero?.backgroundUrl);
+	const heroBackgroundSource = heroBackgroundFilename
+		? `img/hero/${heroBackgroundFilename}`
+		: "img/hero/header.webp";
+	const backgroundStyle =
+		hero.useBackgroundImage !== false
+			? {
+					backgroundImage: `url('${resolveAssetUrl(heroBackgroundSource, directoryName)}')`,
+					backgroundPosition: "top",
+					backgroundRepeat: "no-repeat",
+					backgroundSize: "cover",
+					backgroundAttachment: "fixed",
+				}
+			: { backgroundColor: "var(--mybackground)" };
 
 	/* ──────────────────────────────── */
 	/* 🧠 Render principal */
@@ -149,7 +167,7 @@ export default function App() {
 					style={{ backgroundColor: "var(--surface)", color: "var(--text)" }}
 				>
 					<SeoHead />
-						<CookiePolicyModal text={general?.cookiePolicyText} />
+					<CookiePolicyModal text={general?.cookiePolicyText} />
 					<MenuTemplate landing={landing} />
 
 					<Hero data-parallax data={hero} general={general} />

@@ -1,8 +1,18 @@
 import LightRays from "@/components/LightRays";
 import { resolveAssetUrl } from "@/config/s3-urls";
 
+function extractFilename(value?: string): string {
+	const raw = String(value || "").trim();
+	if (!raw) return "";
+	const withoutQuery = raw.split("?")[0]?.split("#")[0] || raw;
+	const normalized = withoutQuery.replace(/\\/g, "/");
+	return (normalized.split("/").pop() || "").trim();
+}
+
 interface HeroProps extends React.HTMLAttributes<HTMLElement> {
 	data: {
+		logo?: string;
+		backgroundUrl?: string;
 		subtitle: string;
 		subtitleColor?: string;
 		date: string;
@@ -37,14 +47,20 @@ export function Hero({ data, general, ...props }: HeroProps) {
 	const { projectName } = general;
 
 	const hasLogo = true;
-	const logoPath = resolveAssetUrl(
-		"img/hero/marca-do-projeto.webp",
-		general?.directoryName,
-	);
+	const logoFilename = extractFilename(data.logo);
+	const logoSource = logoFilename
+		? `img/hero/${logoFilename}`
+		: "img/hero/marca-do-projeto.webp";
+	const logoPath = resolveAssetUrl(logoSource, general?.directoryName);
+	const backgroundFilename = extractFilename(data.backgroundUrl);
+	const heroBackgroundSource = backgroundFilename
+		? `img/hero/${backgroundFilename}`
+		: "img/hero/header.webp";
 	const backgroundUrl = resolveAssetUrl(
-		"img/hero/header.webp",
+		heroBackgroundSource,
 		general?.directoryName,
 	);
+	const useHeroBackground = data.useBackgroundImage !== false;
 	const infoBoxTextClass = "text-gray-900";
 
 	return (
@@ -52,7 +68,10 @@ export function Hero({ data, general, ...props }: HeroProps) {
 			{...props}
 			className="relative flex flex-col items-center justify-center md:rounded-xl shadow-lg bg-center bg-no-repeat bg-cover overflow-hidden py-20 md:py-10"
 			style={{
-				backgroundImage: backgroundUrl ? `url('${backgroundUrl}')` : undefined,
+				backgroundImage:
+					useHeroBackground && backgroundUrl
+						? `url('${backgroundUrl}')`
+						: undefined,
 			}}
 		>
 			{/* 🌤 Light Rays */}

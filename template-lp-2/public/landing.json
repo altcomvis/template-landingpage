@@ -21,7 +21,7 @@
     "cookiePolicyText": "Usamos cookies para melhorar sua experiência, analisar tráfego e personalizar conteúdo. Ao continuar navegando, você concorda com o uso de cookies. Saiba mais na <a href='https://privacidade.globo.com/privacy-policy/' target='_blank' rel='noopener' class='underline'>Política de Privacidade</a>."
   },
   "hero": {
-    "logo": "logo-do-projeto.webp",
+    "logo": "marca-do-projeto.webp",
     "subtitle": "Inovação, tecnologia e propósito para um futuro melhor",
     "subtitleColor": "#999999",
     "date": "15/03",
@@ -32,7 +32,7 @@
     "useLightRays": false,
     "lightRaysColor": "#ffffff",
     "logoSize": "",
-    "backgroundUrl": "hero/header.webp"
+    "backgroundUrl": "header.webp"
   },
   "about": {
     "subtitle": "Por um planeta mais inteligente e sustentável",

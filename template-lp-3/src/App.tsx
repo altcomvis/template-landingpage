@@ -15,6 +15,14 @@ import { Schedule } from "./modules/Schedule";
 import { Sponsors } from "./modules/Sponsors";
 import Subscribe from "./modules/Subscribe";
 
+function extractFilename(value: unknown): string {
+	const raw = String(value || "").trim();
+	if (!raw) return "";
+	const withoutQuery = raw.split("?")[0]?.split("#")[0] || raw;
+	const normalized = withoutQuery.replace(/\\/g, "/");
+	return (normalized.split("/").pop() || "").trim();
+}
+
 /* ──────────────────────────────── */
 /* 🌍 APP PRINCIPAL - Sem Router */
 export default function App() {
@@ -124,11 +132,15 @@ export default function App() {
 	}
 
 	/* ──────────────────────────────── */
-						<CookiePolicyModal text={general?.cookiePolicyText} />
+	<CookiePolicyModal text={general?.cookiePolicyText} />;
 	/* 🖼️ Background (Hero fixo) */
 	const directoryName = (general as { directoryName?: string })?.directoryName;
+	const heroBackgroundFilename = extractFilename(hero?.backgroundUrl);
+	const heroBackgroundSource = heroBackgroundFilename
+		? `img/hero/${heroBackgroundFilename}`
+		: "img/hero/header.webp";
 	const heroBackgroundUrl = resolveAssetUrl(
-		"img/hero/header.webp",
+		heroBackgroundSource,
 		directoryName,
 	);
 	const useFixedHeroBackground = hero.useBackgroundImage !== false;

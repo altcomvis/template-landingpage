@@ -2,8 +2,8 @@
 
 # Variáveis
 PROJECT_NAME="template-lp-3"
-BUILD_DIR="/Users/allanteixeira/Desktop/React-Projetcs/template-landingpage/$PROJECT_NAME"
-ADMIN_PUBLIC="/Users/allanteixeira/Desktop/React-Projetcs/admin-pages/public"
+BUILD_DIR="/Users/allanteixeira/Desktop/Projects/template-landingpage/$PROJECT_NAME"
+ADMIN_PUBLIC="/Users/allanteixeira/Desktop/Projects/admin-pages/public"
 
 echo "📦 Iniciando build e deploy para $PROJECT_NAME..."
 

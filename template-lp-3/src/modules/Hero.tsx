@@ -2,8 +2,18 @@ import { useRef } from "react";
 import LightRays from "@/components/LightRays";
 import { resolveAssetUrl } from "@/config/s3-urls";
 
+function extractFilename(value?: string): string {
+	const raw = String(value || "").trim();
+	if (!raw) return "";
+	const withoutQuery = raw.split("?")[0]?.split("#")[0] || raw;
+	const normalized = withoutQuery.replace(/\\/g, "/");
+	return (normalized.split("/").pop() || "").trim();
+}
+
 interface HeroProps extends React.HTMLAttributes<HTMLElement> {
 	data: {
+		logo?: string;
+		backgroundUrl?: string;
 		subtitle: string;
 		subtitleColor?: string;
 		date: string;
@@ -38,10 +48,11 @@ export function Hero({ data, general, ...props }: HeroProps) {
 	const { projectName } = general;
 
 	const hasLogo = true;
-	const logoPath = resolveAssetUrl(
-		"img/hero/marca-do-projeto.webp",
-		general?.directoryName,
-	);
+	const logoFilename = extractFilename(data.logo);
+	const logoSource = logoFilename
+		? `img/hero/${logoFilename}`
+		: "img/hero/marca-do-projeto.webp";
+	const logoPath = resolveAssetUrl(logoSource, general?.directoryName);
 	const heroRef = useRef<HTMLElement | null>(null);
 	const infoBoxTextClass = "text-gray-900";
 

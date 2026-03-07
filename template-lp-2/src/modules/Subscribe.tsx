@@ -130,6 +130,10 @@ export default function Subscribe({ data, ...props }: SubscribeProps) {
 	const [isUploading, setIsUploading] = useState(false);
 	const [formKey, setFormKey] = useState(0);
 	const [successOpen, setSuccessOpen] = useState(false);
+	const subscribeTitle = data.title?.trim() || "Inscreva-se";
+	const subscribeDescription =
+		data.description?.trim() ||
+		"Garanta sua vaga no evento e receba as novidades por e-mail.";
 
 	const visibleLabels = data.fields
 		.filter((f) => f.visible)
@@ -303,6 +307,15 @@ export default function Subscribe({ data, ...props }: SubscribeProps) {
 		// biome-ignore lint/nursery/useUniqueElementIds: <explanation>
 		<Card {...props} className="w-full mx-auto bg-(--surface)" id="subscribe">
 			<CardContent className="p-6">
+				<header className="mb-6 space-y-2">
+					<h3 className="text-2xl md:text-3xl font-semibold text-(--text)">
+						{subscribeTitle}
+					</h3>
+					<p className="text-sm md:text-base text-(--text)/80">
+						{subscribeDescription}
+					</p>
+				</header>
+
 				<Form key={formKey} {...form}>
 					<form
 						onSubmit={form.handleSubmit(onSubmit)}
