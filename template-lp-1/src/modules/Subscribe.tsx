@@ -298,6 +298,7 @@ export default function Subscribe({ data, ...props }: SubscribeProps) {
 	};
 
 	/* Atualiza o form se os campos visíveis mudarem dinamicamente */
+	// biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
 	useEffect(() => {
 		form.reset(form.getValues(), { keepDefaultValues: true });
 	}, [data.fields]);
