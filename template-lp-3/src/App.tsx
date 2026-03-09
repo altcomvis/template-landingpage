@@ -143,7 +143,7 @@ export default function App() {
 		heroBackgroundSource,
 		directoryName,
 	);
-	const useFixedHeroBackground = hero.useBackgroundImage !== false;
+	const useFixedHeroBackground = general.useBackgroundImage !== false;
 	const backgroundStyle = useFixedHeroBackground
 		? { backgroundColor: "transparent" }
 		: { backgroundColor: "var(--mybackground)" };

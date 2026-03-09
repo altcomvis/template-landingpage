@@ -139,7 +139,7 @@ export default function App() {
 		? `img/hero/${heroBackgroundFilename}`
 		: "img/hero/header.webp";
 	const backgroundStyle =
-		hero.useBackgroundImage !== false
+		general.useBackgroundImage !== false
 			? {
 					backgroundImage: `url('${resolveAssetUrl(heroBackgroundSource, directoryName)}')`,
 					backgroundPosition: "top",
