@@ -89,14 +89,14 @@ export function Hero({ data, general, subscribe, ...props }: HeroProps) {
 				<div
 					className={`grid grid-cols-1 gap-10 items-center ${
 						subscribe?.visible
-							? "lg:grid-cols-5 lg:items-center"
+							? "lg:grid-cols-7 lg:items-center"
 							: "justify-items-center"
 					}`}
 				>
 					<div
 						className={
 							subscribe?.visible
-								? "text-center lg:text-center md:col-span-3"
+								? "text-center lg:text-center md:col-span-4"
 								: "text-center"
 						}
 					>
@@ -181,7 +181,7 @@ export function Hero({ data, general, subscribe, ...props }: HeroProps) {
 					</div>
 
 					{subscribe?.visible && (
-						<div className="w-full lg:max-w-md lg:justify-self-end md:col-span-2 pt-8">
+						<div className="w-full lg:max-w-md lg:justify-self-end md:col-span-3 pt-8">
 							<Subscribe data={subscribe} data-parallax />
 						</div>
 					)}
