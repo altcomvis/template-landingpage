@@ -9,7 +9,21 @@ export default defineConfig(() => ({
 	resolve: {
 		alias: {
 			"@": path.resolve(__dirname, "./src"),
+			"@globo/form-engine": path.resolve(
+				__dirname,
+				"../../admin-pages-form-intergrado/packages/form-engine/src",
+			),
+			"@globo/ui": path.resolve(
+				__dirname,
+				"../../admin-pages-form-intergrado/packages/ui/src",
+			),
 		},
+		dedupe: ["react", "react-dom"],
+	},
+
+	optimizeDeps: {
+		include: ["react", "react-dom"],
+		force: true,
 	},
 
 	// ✅ Temporário: usar base local para evitar resolução via S3

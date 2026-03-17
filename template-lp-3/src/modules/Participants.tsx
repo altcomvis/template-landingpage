@@ -27,7 +27,34 @@ interface ParticipantsProps extends React.HTMLAttributes<HTMLElement> {
 	data: {
 		title: string;
 		groups: ParticipantGroup[];
+		imageRounded?: "0" | "sm" | "md" | "lg" | "xl" | "2xl" | "3xl" | "full";
+		imageBorderWidth?: number;
+		imageBorderColor?: string;
 	};
+}
+
+function getRoundedClass(
+	value?: ParticipantsProps["data"]["imageRounded"],
+): string {
+	switch (value) {
+		case "0":
+			return "rounded-none";
+		case "sm":
+			return "rounded-sm";
+		case "md":
+			return "rounded-md";
+		case "lg":
+			return "rounded-lg";
+		case "2xl":
+			return "rounded-2xl";
+		case "3xl":
+			return "rounded-3xl";
+		case "full":
+			return "rounded-full";
+		case "xl":
+		default:
+			return "rounded-xl";
+	}
 }
 
 /**
@@ -38,6 +65,11 @@ interface ParticipantsProps extends React.HTMLAttributes<HTMLElement> {
  */
 export function Participants({ data, ...props }: ParticipantsProps) {
 	const participants = data.groups.flatMap((group) => group.participants);
+	const roundedClass = getRoundedClass(data.imageRounded);
+	const borderWidth = Number.isFinite(data.imageBorderWidth)
+		? Math.max(0, Number(data.imageBorderWidth))
+		: 1;
+	const borderColor = data.imageBorderColor || "#ffffff";
 
 	const [api, setApi] = useState<CarouselApi | null>(null);
 
@@ -131,7 +163,7 @@ export function Participants({ data, ...props }: ParticipantsProps) {
 						{participants.map((p) => (
 							<CarouselItem
 								key={p.name}
-								className="basis-full sm:basis-1/2 md:basis-1/5 px-2 pt-0 py-6 flex justify-center items-start"
+								className="basis-full sm:basis-1/2 md:basis-1/5 min-w-[16rem] md:min-w-[17rem] px-2 md:px-3 pt-0 py-6 flex justify-center items-start"
 							>
 								<ParticipantDialog
 									name={p.name}
@@ -142,13 +174,22 @@ export function Participants({ data, ...props }: ParticipantsProps) {
 											data-coverflow-el
 											className="relative group cursor-pointer will-change-transform transform-3d transition-transform duration-200 ease-out origin-center"
 										>
+											<div
+											className={`relative w-60 md:w-64 h-60 md:h-64 overflow-hidden ${roundedClass}`}
+											style={{
+												borderWidth: `${borderWidth}px`,
+												borderStyle: "solid",
+												borderColor,
+											}}
+										>
 											<img
 												src={`${getBasePath()}img/participantes/${p.photo}`}
 												alt={p.name}
-												className="w-60 md:w-64 h-60 md:h-64 rounded-xl object-cover  hover:brightness-75 transition"
-											/>
-											<div className="absolute bottom-0 left-0 right-0 rounded-b-xl bg-linear-to-t from-black/80 to-transparent text-white leading-tight text-lg font-semibold pl-5 pr-5 pb-4 pt-16 text-pretty wrap-break-word">
-												{p.name}
+												className="w-full h-full object-cover hover:brightness-75 transition"
+												/>
+												<div className="absolute bottom-0 left-0 right-0 bg-linear-to-t from-black/80 to-transparent text-white leading-tight text-lg font-semibold text-center px-4 pb-4 pt-16 text-pretty wrap-break-word">
+													{p.name}
+												</div>
 											</div>
 										</div>
 									}

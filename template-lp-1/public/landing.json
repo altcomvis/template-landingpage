@@ -406,129 +406,197 @@
     }
   ],
   "subscribe": {
-    "title": "Inscreva-se",
-    "description": "Garanta sua vaga no Summit Futuro Sustentável 2025.",
-    "visible": true,
-    "successTitle": "Inscrição Enviada!",
-    "successMessage": "Obrigado por se inscrever! Em breve entraremos em contato.",
-    "formsConfig": {
-      "FORMS_URL_BASE64": "aHR0cHM6Ly9mb3Jtcy5taWNyb3NvZnQuY29tL2Zvcm1hcGkvYXBpLzBiMDU3MzU0LTBmYzktNDdlNS04Njc0LTg0NDlkZDdlODhiOC9ncm91cHMvY2U3ZmJiMWQtMWE5Ni00MGI0LTk5YmUtODljZjYxNmI2YmY2L2Zvcm1zKCdWSE1GQzhrUDVVZUdkSVJKM1g2SXVCMjdmODZXR3JSQW1iNkp6MkZyYV9aVVFrTlpUekkzVUZGT04xZ3lSMWRUVEVoSVJqSlNWMDlMUVNRbFFDTjBQV2N1JykvcmVzcG9uc2Vz",
-      "QUESTION_IDS": {
-        "name": "r9dd6878a382646f5824c28921a3b606d",
-        "email": "r61251a298dfe46cf92b3d3bdec15ebf5",
-        "phone": "r386e88a11a544391b709260d5e958987",
-        "document": "ra401d13ed8b84f5cbd4dca4ffc3890e6",
-        "position": "r754d4abcd5bc468e80cf3bcd257c4c85",
-        "company": "r77a287a58cf546799522b6464ed55f92",
-        "message": "rdc65760d76e640bd9b20ecc7fab55668",
-        "selectOption": "rcdfdd7330d9e45f792d8e7b9fe4d2663",
-        "optin1": "rbe00f0945a944e37a8ee6d4499bcf6c3",
-        "optin2": "raa64c101a351475d94f1bf1789d71d6c"
+    "styles": {
+      "card": {
+        "background": "bg-white",
+        "border": "none"
+      },
+      "button": {
+        "textSize": "text-base",
+        "rounded": "rounded-sm",
+        "borderColor": "border-gray-600",
+        "border": "show",
+        "background": "bg-black"
+      },
+      "header": {
+        "titleColor": "text-gray-900",
+        "titleSize": "md:text-3xl text-xl",
+        "descriptionColor": "text-gray-600",
+        "descriptionSize": "text-sm"
+      },
+      "validation": {
+        "textColor": "text-red-400",
+        "textSize": "text-xs"
       }
     },
-    "customSelect": {
-      "label": "Seleção de opções",
-      "description": "Escolha uma das opções abaixo:",
-      "selection": "radio",
-      "visible": false,
-      "options": [
-        {
-          "id": 1,
-          "label": "Item0",
-          "visible": true
-        },
-        {
-          "id": 2,
-          "label": "Item1",
-          "visible": true
-        },
-        {
-          "id": 3,
-          "label": "Item2",
-          "visible": true
-        },
-        {
-          "id": 4,
-          "label": "Item3",
-          "visible": true
-        },
-        {
-          "id": 5,
-          "label": "Item4",
-          "visible": true
-        },
-        {
-          "id": 6,
-          "label": "Item5",
-          "visible": true
-        },
-        {
-          "id": 7,
-          "label": "Item6",
-          "visible": true
-        },
-        {
-          "id": 8,
-          "label": "Item7",
-          "visible": true
-        },
-        {
-          "id": 9,
-          "label": "Item8",
-          "visible": true
-        },
-        {
-          "id": 10,
-          "label": "Item9",
-          "visible": true
-        }
+    "title": "Inscreva-se",
+    "description": "Preencha o formulário abaixo para se inscrever no evento.",
+    "successTitle": "Inscrição enviada!",
+    "successMessage": "Obrigado pela sua inscrição. Em breve entraremos em contato.",
+    "visible": true,
+    "sfmcConfig": {
+      "enabled": true,
+      "endpoint": "/api/sfmc",
+      "dataExtensionKey": "",
+      "requireEventCode": false,
+      "eventCode": "",
+      "eventName": "",
+      "eventCodeFieldName": "eventCode",
+      "eventNameFieldName": "eventName",
+      "keyFields": [
+        "email"
       ]
+    },
+    "customSelect": {
+      "label": "",
+      "description": "",
+      "selection": "checkbox",
+      "visible": false,
+      "options": []
     },
     "fields": [
       {
-        "id": "f1",
-        "label": "name",
+        "id": "name",
+        "label": "Nome completo",
         "visible": true
       },
       {
-        "id": "f2",
-        "label": "email",
+        "id": "email",
+        "label": "Email",
         "visible": true
       },
       {
-        "id": "f3",
-        "label": "phone",
+        "id": "phone",
+        "label": "Telefone ou celular",
+        "placeholder": "DDD + Telefone",
         "visible": true
       },
       {
-        "id": "f4",
-        "label": "document",
+        "id": "company",
+        "label": "Nome da Empresa",
+        "placeholder": "Digite o nome da sua empresa",
         "visible": true
       },
       {
-        "id": "f5",
-        "label": "position",
+        "id": "position",
+        "label": "Qual é o seu nível de atuação dentro da organização?",
         "visible": true
       },
       {
-        "id": "f6",
-        "label": "company",
+        "id": "document",
+        "label": "CPF",
         "visible": true
       },
       {
-        "id": "f7",
-        "label": "message",
+        "id": "message",
+        "label": "Mensagem",
         "visible": false
       },
       {
-        "id": "f8",
-        "label": "optin1",
+        "id": "area_atuacao",
+        "label": "Qual é a sua área de atuação dentro da empresa?",
+        "type": "select",
+        "placeholder": "Selecione a área de atuação",
+        "required": true,
+        "visible": true,
+        "options": [
+          { "value": "Atendimento ao Cliente / Suporte", "label": "Atendimento ao Cliente / Suporte" },
+          { "value": "Compras / Suprimentos", "label": "Compras / Suprimentos" },
+          { "value": "Dados, BI e Analytics", "label": "Dados, BI e Analytics" },
+          { "value": "Diretoria e C-Level", "label": "Diretoria e C-Level" },
+          { "value": "Estratégia e Desenvolvimento de Negócios", "label": "Estratégia e Desenvolvimento de Negócios" },
+          { "value": "Finanças e Contabilidade", "label": "Finanças e Contabilidade" },
+          { "value": "Jurídico e Compliance", "label": "Jurídico e Compliance" },
+          { "value": "Marketing, Comunicação e Publicidade", "label": "Marketing, Comunicação e Publicidade" },
+          { "value": "Operações, Logística e Supply Chain", "label": "Operações, Logística e Supply Chain" },
+          { "value": "Pesquisa e Desenvolvimento (P&D)", "label": "Pesquisa e Desenvolvimento (P&D)" },
+          { "value": "Recursos Humanos e Gestão de Pessoas", "label": "Recursos Humanos e Gestão de Pessoas" },
+          { "value": "Sustentabilidade e ESG", "label": "Sustentabilidade e ESG" },
+          { "value": "Tecnologia, TI e Engenharia de Software", "label": "Tecnologia, TI e Engenharia de Software" },
+          { "value": "Vendas e Comercial", "label": "Vendas e Comercial" },
+          { "value": "Outro", "label": "Outro" }
+        ]
+      },
+      {
+        "id": "setor_empresa",
+        "label": "Em qual setor sua empresa atua?",
+        "type": "select",
+        "placeholder": "Selecione um setor",
+        "required": true,
+        "visible": true,
+        "options": [
+          { "value": "Administração Pública / Governo", "label": "Administração Pública / Governo" },
+          { "value": "Agronegócio", "label": "Agronegócio" },
+          { "value": "Alimentos e Bebidas", "label": "Alimentos e Bebidas" },
+          { "value": "Automotivo e Autopeças", "label": "Automotivo e Autopeças" },
+          { "value": "Bancos, Finanças e Seguros", "label": "Bancos, Finanças e Seguros" },
+          { "value": "Comércio e Varejo", "label": "Comércio e Varejo" },
+          { "value": "Construção Civil e Imobiliário", "label": "Construção Civil e Imobiliário" },
+          { "value": "Educação e Treinamento", "label": "Educação e Treinamento" },
+          { "value": "Energia", "label": "Energia" },
+          { "value": "Indústria de Transformação e Manufatura", "label": "Indústria de Transformação e Manufatura" },
+          { "value": "Logística, Transporte e Supply Chain", "label": "Logística, Transporte e Supply Chain" },
+          { "value": "Mídia, Entretenimento e Comunicação", "label": "Mídia, Entretenimento e Comunicação" },
+          { "value": "Publicidade e Marketing", "label": "Publicidade e Marketing" },
+          { "value": "Saúde, Medicina e Farmacêutico", "label": "Saúde, Medicina e Farmacêutico" },
+          { "value": "Serviços Profissionais", "label": "Serviços Profissionais (consultoria, jurídico, contábil, etc.)" },
+          { "value": "Tecnologia da Informação e Software", "label": "Tecnologia da Informação e Software" },
+          { "value": "Telecomunicações e Provedores de Internet", "label": "Telecomunicações e Provedores de Internet" },
+          { "value": "Turismo, Hotelaria e Lazer", "label": "Turismo, Hotelaria e Lazer" },
+          { "value": "Outro", "label": "Outro" }
+        ]
+      },
+      {
+        "id": "porte_empresa",
+        "label": "Qual é o porte da empresa onde você trabalha?",
+        "type": "select",
+        "placeholder": "Selecione o porte",
+        "required": true,
+        "visible": true,
+        "options": [
+          { "value": "Microempresa", "label": "Microempresa (1 a 9 funcionários)" },
+          { "value": "Pequena Empresa", "label": "Pequena Empresa (10 a 49 funcionários)" },
+          { "value": "Média Empresa", "label": "Média Empresa (50 a 199 funcionários)" },
+          { "value": "Médio-Grande Porte", "label": "Empresa de Médio-Grande Porte (200 a 999 funcionários)" },
+          { "value": "Grande Empresa", "label": "Grande Empresa (1.000 a 4.999 funcionários)" },
+          { "value": "Corporação", "label": "Corporação (5.000 ou mais funcionários)" },
+          { "value": "Não sei informar", "label": "Não sei informar" }
+        ]
+      },
+      {
+        "id": "origem",
+        "label": "Como você ficou sabendo do evento?",
+        "type": "select",
+        "placeholder": "Selecione",
+        "required": false,
+        "visible": true,
+        "allowOther": true,
+        "otherOptionValue": "Outro",
+        "otherPlaceholder": "Especifique",
+        "options": [
+          { "value": "Site do Jornal O Globo", "label": "Site do Jornal O Globo" },
+          { "value": "Jornal Extra", "label": "Jornal Extra" },
+          { "value": "Site do Jornal Extra", "label": "Site do Jornal Extra" },
+          { "value": "Sites das Revistas da Editora Globo ou EGCN", "label": "Sites das Revistas da Editora Globo ou EGCN" },
+          { "value": "Redes Sociais", "label": "Redes Sociais" },
+          { "value": "Pesquisa no Google", "label": "Pesquisa no Google" },
+          { "value": "Indicação de amigo ou colega", "label": "Indicação de amigo ou colega" },
+          { "value": "Convite por E-mail", "label": "Convite por E-mail" },
+          { "value": "Convite por WhatsApp", "label": "Convite por WhatsApp" },
+          { "value": "Outro", "label": "Outro" }
+        ]
+      },
+      {
+        "id": "optin1",
+        "label": "Li e concordo com os <a href=\"https://login.globo.com/termosUso/7103\" target=\"_blank\" rel=\"noreferrer\">Termos de Uso</a> e a <a href=\"https://privacidade.globo.com/privacy-policy\" target=\"_blank\" rel=\"noreferrer\">Política de Privacidade</a> da Editora Globo.",
+        "link": "https://privacidade.globo.com/privacy-policy/",
+        "linkText": "Termos de Uso e Política de Privacidade da Editora Globo",
         "visible": true
       },
       {
-        "id": "f9",
-        "label": "optin2",
-        "visible": true
+        "id": "optin2",
+        "label": "Estou ciente e concordo que os meus dados constantes nesta inscrição podem ser utilizados pela Editora Globo, por empresas do Grupo Globo e por patrocinadores do evento para fins de ações de relacionamento, como envio de ofertas de produtos e/ou serviços.",
+        "visible": false
       }
     ]
   }

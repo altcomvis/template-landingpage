@@ -1,6 +1,8 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 @import "tailwindcss/utilities";
+@source "../../../admin-pages-form-intergrado/packages/form-engine/src";
+@source "../../../admin-pages-form-intergrado/packages/ui/src";
 
 @custom-variant dark (&:is(.dark *));
 
