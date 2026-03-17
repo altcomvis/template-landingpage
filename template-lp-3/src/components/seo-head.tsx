@@ -8,6 +8,7 @@ type SeoData = {
 	seoUrl?: string;
 	seoImage?: string;
 	googleAnalyticsId?: string;
+	gtmId?: string;
 	pixelMeta?: string;
 	directoryName?: string;
 };
@@ -42,6 +43,7 @@ export function SeoHead() {
 			seoUrl,
 			seoImage,
 			googleAnalyticsId,
+			gtmId,
 			pixelMeta,
 		} = seo;
 
@@ -110,6 +112,21 @@ export function SeoHead() {
 
 		// 📱 WhatsApp / Telegram
 		setMeta("image", seoImage || defaultImage);
+
+		// 🏷️ Google Tag Manager
+		if (gtmId && !document.getElementById("gtm-script")) {
+			window.dataLayer = (window as Window & { dataLayer?: unknown[] }).dataLayer || [];
+			(window as Window & { dataLayer: unknown[] }).dataLayer.push({
+				"gtm.start": new Date().getTime(),
+				event: "gtm.js",
+			});
+
+			const gtmScript = document.createElement("script");
+			gtmScript.id = "gtm-script";
+			gtmScript.async = true;
+			gtmScript.src = `https://www.googletagmanager.com/gtm.js?id=${gtmId}`;
+			document.head.appendChild(gtmScript);
+		}
 
 		// 📈 Google Analytics
 		if (googleAnalyticsId) {
