@@ -35,6 +35,14 @@ function hexToRgb(hex?: string): string | undefined {
   return `${r} ${g} ${b}`
 }
 
+function buildFontStack(font?: string): string {
+  return font ? `'${font}', sans-serif` : 'Poppins, sans-serif'
+}
+
+function buildGoogleFontsFamily(font: string): string {
+  return font.trim().replace(/\s+/g, '+')
+}
+
 export function useThemeColors({
   primaryColor,
   secondaryColor,
@@ -48,14 +56,14 @@ export function useThemeColors({
 }: ThemeColorsProps) {
   useEffect(() => {
     const root = document.documentElement
-    document.documentElement.style.setProperty(
-      '--font-title',
-      fontTitle || 'Poppins, sans-serif'
-    )
-    document.documentElement.style.setProperty(
-      '--font-body',
-      fontBody || 'Poppins, sans-serif'
-    )
+    const bodyFontStack = buildFontStack(fontBody)
+    const titleFontStack = buildFontStack(fontTitle)
+
+    root.style.setProperty('--font-title', titleFontStack)
+    root.style.setProperty('--font-body', bodyFontStack)
+    root.style.setProperty('--font-family', bodyFontStack)
+    root.style.setProperty('--font-family-title', titleFontStack)
+
     const vars: Record<string, string | undefined> = {
       '--myprimary': primaryColor,
       '--myprimary-rgb': hexToRgb(primaryColor),
@@ -85,12 +93,10 @@ export function useThemeColors({
       const link = document.createElement('link')
       link.id = id
       link.rel = 'stylesheet'
-      link.href = `https://fonts.googleapis.com/css2?family=${encodeURIComponent(
+      link.href = `https://fonts.googleapis.com/css2?family=${buildGoogleFontsFamily(
         fontBody
       )}:wght@400;500;600;700&display=swap`
       document.head.appendChild(link)
-
-      root.style.setProperty('--font-family', `'${fontBody}', sans-serif`)
     }
 
     // ✅ Fonte de títulos (fontTitle)
@@ -101,25 +107,18 @@ export function useThemeColors({
       const link = document.createElement('link')
       link.id = id
       link.rel = 'stylesheet'
-      link.href = `https://fonts.googleapis.com/css2?family=${encodeURIComponent(
+      link.href = `https://fonts.googleapis.com/css2?family=${buildGoogleFontsFamily(
         fontTitle
       )}:wght@600;700;800&display=swap`
       document.head.appendChild(link)
-
-      root.style.setProperty(
-        '--font-family-title',
-        `'${fontTitle}', sans-serif`
-      )
     }
 
     // ✅ Força atualização após leve atraso (garante fontTitle)
     const timeout = setTimeout(() => {
-      if (fontTitle) {
-        root.style.setProperty(
-          '--font-family-title',
-          `'${fontTitle}', sans-serif`
-        )
-      }
+      root.style.setProperty('--font-title', titleFontStack)
+      root.style.setProperty('--font-body', bodyFontStack)
+      root.style.setProperty('--font-family', bodyFontStack)
+      root.style.setProperty('--font-family-title', titleFontStack)
     }, 300)
 
     return () => clearTimeout(timeout)

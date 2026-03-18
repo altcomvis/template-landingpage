@@ -121,11 +121,20 @@
 	}
 	body {
 		@apply bg-background text-foreground;
+		font-family: var(--font-family), var(--font-body), sans-serif;
+	}
+	h1,
+	h2,
+	h3,
+	h4,
+	h5,
+	h6 {
+		font-family: var(--font-family-title), var(--font-title), sans-serif;
 	}
 }
 
 .font-title {
-	font-family: var(--font-title), sans-serif !important;
+	font-family: var(--font-family-title), var(--font-title), sans-serif !important;
 }
 
 @keyframes flashHighlight {

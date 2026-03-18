@@ -13,6 +13,10 @@ type SeoData = {
 	directoryName?: string;
 };
 
+type WindowWithDataLayer = Window & {
+	dataLayer?: unknown[];
+};
+
 export function SeoHead() {
 	const [seo, setSeo] = useState<SeoData | null>(null);
 
@@ -115,8 +119,9 @@ export function SeoHead() {
 
 		// 🏷️ Google Tag Manager
 		if (gtmId && !document.getElementById("gtm-script")) {
-			window.dataLayer = (window as Window & { dataLayer?: unknown[] }).dataLayer || [];
-			(window as Window & { dataLayer: unknown[] }).dataLayer.push({
+			const browserWindow = window as WindowWithDataLayer;
+			browserWindow.dataLayer = browserWindow.dataLayer || [];
+			browserWindow.dataLayer.push({
 				"gtm.start": new Date().getTime(),
 				event: "gtm.js",
 			});
