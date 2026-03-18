@@ -26,16 +26,19 @@ export default defineConfig(() => ({
 		force: true,
 	},
 
-	// ✅ Temporário: usar base local para evitar resolução via S3
-	base: "/",
+	// Usa caminhos relativos para funcionar em subpastas no S3
+	base: "./",
 
 	build: {
 		rollupOptions: {
 			output: {
-				// Nomes previsíveis com hash para facilitar mapeamento de blob URLs
-				assetFileNames: "assets/[name]-[hash][extname]",
+				// Mantem nomes estaveis para os arquivos de entrada no ZIP
+				assetFileNames: (assetInfo) =>
+					assetInfo.name?.endsWith(".css")
+						? "assets/index.css"
+						: "assets/[name]-[hash][extname]",
 				chunkFileNames: "assets/[name]-[hash].js",
-				entryFileNames: "assets/[name]-[hash].js",
+				entryFileNames: "assets/index.js",
 			},
 		},
 	},

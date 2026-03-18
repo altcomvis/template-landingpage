@@ -28,6 +28,12 @@ for BUILD_DIR in "${PROJECTS[@]}"; do
 	npm run build || exit 1
 	echo "✓ Build concluído"
 
+	if [ ! -f "dist/assets/index.js" ] || [ ! -f "dist/assets/index.css" ]; then
+		echo "❌ Build sem nomes estáveis esperados (dist/assets/index.js e dist/assets/index.css) em $PROJECT_NAME"
+		exit 1
+	fi
+	echo "✓ Nomes estáveis de assets validados"
+
 	echo "📦 Zipando dist..."
 	[ -d "dist" ] || { echo "❌ Pasta dist não encontrada em $PROJECT_NAME"; exit 1; }
 	rm -f "$PROJECT_NAME.zip"

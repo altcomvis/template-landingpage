@@ -92,7 +92,7 @@ export function Hero({ data, general, ...props }: HeroProps) {
 					/>
 				</div>
 			)}
-
+			<div className="absolute inset-0 z-0 bg-black/30 pointer-events-none" />
 			{/* 📦 Conteúdo principal */}
 			<div className="relative z-10 text-center max-w-3xl mx-auto px-4">
 				{/* Logo ou nome do projeto */}

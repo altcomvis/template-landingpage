@@ -406,6 +406,11 @@
       ]
     }
   ],
+  "provisionalSubscribe": {
+    "title": "Inscrição",
+    "visible": true,
+    "iframeUrl": "https://mchyb-7yzb-g12z8ttz9nhyzyck1.pub.sfmc-content.com/cki30cywjfh"
+  },
   "subscribe": {
     "styles": {
       "card": {
@@ -434,7 +439,7 @@
     "description": "Preencha o formulário abaixo para se inscrever no evento.",
     "successTitle": "Inscrição enviada!",
     "successMessage": "Obrigado pela sua inscrição. Em breve entraremos em contato.",
-    "visible": true,
+    "visible": false,
     "sfmcConfig": {
       "enabled": true,
       "endpoint": "/api/sfmc",
@@ -501,21 +506,66 @@
         "required": true,
         "visible": true,
         "options": [
-          { "value": "Atendimento ao Cliente / Suporte", "label": "Atendimento ao Cliente / Suporte" },
-          { "value": "Compras / Suprimentos", "label": "Compras / Suprimentos" },
-          { "value": "Dados, BI e Analytics", "label": "Dados, BI e Analytics" },
-          { "value": "Diretoria e C-Level", "label": "Diretoria e C-Level" },
-          { "value": "Estratégia e Desenvolvimento de Negócios", "label": "Estratégia e Desenvolvimento de Negócios" },
-          { "value": "Finanças e Contabilidade", "label": "Finanças e Contabilidade" },
-          { "value": "Jurídico e Compliance", "label": "Jurídico e Compliance" },
-          { "value": "Marketing, Comunicação e Publicidade", "label": "Marketing, Comunicação e Publicidade" },
-          { "value": "Operações, Logística e Supply Chain", "label": "Operações, Logística e Supply Chain" },
-          { "value": "Pesquisa e Desenvolvimento (P&D)", "label": "Pesquisa e Desenvolvimento (P&D)" },
-          { "value": "Recursos Humanos e Gestão de Pessoas", "label": "Recursos Humanos e Gestão de Pessoas" },
-          { "value": "Sustentabilidade e ESG", "label": "Sustentabilidade e ESG" },
-          { "value": "Tecnologia, TI e Engenharia de Software", "label": "Tecnologia, TI e Engenharia de Software" },
-          { "value": "Vendas e Comercial", "label": "Vendas e Comercial" },
-          { "value": "Outro", "label": "Outro" }
+          {
+            "value": "Atendimento ao Cliente / Suporte",
+            "label": "Atendimento ao Cliente / Suporte"
+          },
+          {
+            "value": "Compras / Suprimentos",
+            "label": "Compras / Suprimentos"
+          },
+          {
+            "value": "Dados, BI e Analytics",
+            "label": "Dados, BI e Analytics"
+          },
+          {
+            "value": "Diretoria e C-Level",
+            "label": "Diretoria e C-Level"
+          },
+          {
+            "value": "Estratégia e Desenvolvimento de Negócios",
+            "label": "Estratégia e Desenvolvimento de Negócios"
+          },
+          {
+            "value": "Finanças e Contabilidade",
+            "label": "Finanças e Contabilidade"
+          },
+          {
+            "value": "Jurídico e Compliance",
+            "label": "Jurídico e Compliance"
+          },
+          {
+            "value": "Marketing, Comunicação e Publicidade",
+            "label": "Marketing, Comunicação e Publicidade"
+          },
+          {
+            "value": "Operações, Logística e Supply Chain",
+            "label": "Operações, Logística e Supply Chain"
+          },
+          {
+            "value": "Pesquisa e Desenvolvimento (P&D)",
+            "label": "Pesquisa e Desenvolvimento (P&D)"
+          },
+          {
+            "value": "Recursos Humanos e Gestão de Pessoas",
+            "label": "Recursos Humanos e Gestão de Pessoas"
+          },
+          {
+            "value": "Sustentabilidade e ESG",
+            "label": "Sustentabilidade e ESG"
+          },
+          {
+            "value": "Tecnologia, TI e Engenharia de Software",
+            "label": "Tecnologia, TI e Engenharia de Software"
+          },
+          {
+            "value": "Vendas e Comercial",
+            "label": "Vendas e Comercial"
+          },
+          {
+            "value": "Outro",
+            "label": "Outro"
+          }
         ]
       },
       {
@@ -526,25 +576,82 @@
         "required": true,
         "visible": true,
         "options": [
-          { "value": "Administração Pública / Governo", "label": "Administração Pública / Governo" },
-          { "value": "Agronegócio", "label": "Agronegócio" },
-          { "value": "Alimentos e Bebidas", "label": "Alimentos e Bebidas" },
-          { "value": "Automotivo e Autopeças", "label": "Automotivo e Autopeças" },
-          { "value": "Bancos, Finanças e Seguros", "label": "Bancos, Finanças e Seguros" },
-          { "value": "Comércio e Varejo", "label": "Comércio e Varejo" },
-          { "value": "Construção Civil e Imobiliário", "label": "Construção Civil e Imobiliário" },
-          { "value": "Educação e Treinamento", "label": "Educação e Treinamento" },
-          { "value": "Energia", "label": "Energia" },
-          { "value": "Indústria de Transformação e Manufatura", "label": "Indústria de Transformação e Manufatura" },
-          { "value": "Logística, Transporte e Supply Chain", "label": "Logística, Transporte e Supply Chain" },
-          { "value": "Mídia, Entretenimento e Comunicação", "label": "Mídia, Entretenimento e Comunicação" },
-          { "value": "Publicidade e Marketing", "label": "Publicidade e Marketing" },
-          { "value": "Saúde, Medicina e Farmacêutico", "label": "Saúde, Medicina e Farmacêutico" },
-          { "value": "Serviços Profissionais", "label": "Serviços Profissionais (consultoria, jurídico, contábil, etc.)" },
-          { "value": "Tecnologia da Informação e Software", "label": "Tecnologia da Informação e Software" },
-          { "value": "Telecomunicações e Provedores de Internet", "label": "Telecomunicações e Provedores de Internet" },
-          { "value": "Turismo, Hotelaria e Lazer", "label": "Turismo, Hotelaria e Lazer" },
-          { "value": "Outro", "label": "Outro" }
+          {
+            "value": "Administração Pública / Governo",
+            "label": "Administração Pública / Governo"
+          },
+          {
+            "value": "Agronegócio",
+            "label": "Agronegócio"
+          },
+          {
+            "value": "Alimentos e Bebidas",
+            "label": "Alimentos e Bebidas"
+          },
+          {
+            "value": "Automotivo e Autopeças",
+            "label": "Automotivo e Autopeças"
+          },
+          {
+            "value": "Bancos, Finanças e Seguros",
+            "label": "Bancos, Finanças e Seguros"
+          },
+          {
+            "value": "Comércio e Varejo",
+            "label": "Comércio e Varejo"
+          },
+          {
+            "value": "Construção Civil e Imobiliário",
+            "label": "Construção Civil e Imobiliário"
+          },
+          {
+            "value": "Educação e Treinamento",
+            "label": "Educação e Treinamento"
+          },
+          {
+            "value": "Energia",
+            "label": "Energia"
+          },
+          {
+            "value": "Indústria de Transformação e Manufatura",
+            "label": "Indústria de Transformação e Manufatura"
+          },
+          {
+            "value": "Logística, Transporte e Supply Chain",
+            "label": "Logística, Transporte e Supply Chain"
+          },
+          {
+            "value": "Mídia, Entretenimento e Comunicação",
+            "label": "Mídia, Entretenimento e Comunicação"
+          },
+          {
+            "value": "Publicidade e Marketing",
+            "label": "Publicidade e Marketing"
+          },
+          {
+            "value": "Saúde, Medicina e Farmacêutico",
+            "label": "Saúde, Medicina e Farmacêutico"
+          },
+          {
+            "value": "Serviços Profissionais",
+            "label": "Serviços Profissionais (consultoria, jurídico, contábil, etc.)"
+          },
+          {
+            "value": "Tecnologia da Informação e Software",
+            "label": "Tecnologia da Informação e Software"
+          },
+          {
+            "value": "Telecomunicações e Provedores de Internet",
+            "label": "Telecomunicações e Provedores de Internet"
+          },
+          {
+            "value": "Turismo, Hotelaria e Lazer",
+            "label": "Turismo, Hotelaria e Lazer"
+          },
+          {
+            "value": "Outro",
+            "label": "Outro"
+          }
         ]
       },
       {
@@ -555,13 +662,34 @@
         "required": true,
         "visible": true,
         "options": [
-          { "value": "Microempresa", "label": "Microempresa (1 a 9 funcionários)" },
-          { "value": "Pequena Empresa", "label": "Pequena Empresa (10 a 49 funcionários)" },
-          { "value": "Média Empresa", "label": "Média Empresa (50 a 199 funcionários)" },
-          { "value": "Médio-Grande Porte", "label": "Empresa de Médio-Grande Porte (200 a 999 funcionários)" },
-          { "value": "Grande Empresa", "label": "Grande Empresa (1.000 a 4.999 funcionários)" },
-          { "value": "Corporação", "label": "Corporação (5.000 ou mais funcionários)" },
-          { "value": "Não sei informar", "label": "Não sei informar" }
+          {
+            "value": "Microempresa",
+            "label": "Microempresa (1 a 9 funcionários)"
+          },
+          {
+            "value": "Pequena Empresa",
+            "label": "Pequena Empresa (10 a 49 funcionários)"
+          },
+          {
+            "value": "Média Empresa",
+            "label": "Média Empresa (50 a 199 funcionários)"
+          },
+          {
+            "value": "Médio-Grande Porte",
+            "label": "Empresa de Médio-Grande Porte (200 a 999 funcionários)"
+          },
+          {
+            "value": "Grande Empresa",
+            "label": "Grande Empresa (1.000 a 4.999 funcionários)"
+          },
+          {
+            "value": "Corporação",
+            "label": "Corporação (5.000 ou mais funcionários)"
+          },
+          {
+            "value": "Não sei informar",
+            "label": "Não sei informar"
+          }
         ]
       },
       {
@@ -575,16 +703,46 @@
         "otherOptionValue": "Outro",
         "otherPlaceholder": "Especifique",
         "options": [
-          { "value": "Site do Jornal O Globo", "label": "Site do Jornal O Globo" },
-          { "value": "Jornal Extra", "label": "Jornal Extra" },
-          { "value": "Site do Jornal Extra", "label": "Site do Jornal Extra" },
-          { "value": "Sites das Revistas da Editora Globo ou EGCN", "label": "Sites das Revistas da Editora Globo ou EGCN" },
-          { "value": "Redes Sociais", "label": "Redes Sociais" },
-          { "value": "Pesquisa no Google", "label": "Pesquisa no Google" },
-          { "value": "Indicação de amigo ou colega", "label": "Indicação de amigo ou colega" },
-          { "value": "Convite por E-mail", "label": "Convite por E-mail" },
-          { "value": "Convite por WhatsApp", "label": "Convite por WhatsApp" },
-          { "value": "Outro", "label": "Outro" }
+          {
+            "value": "Site do Jornal O Globo",
+            "label": "Site do Jornal O Globo"
+          },
+          {
+            "value": "Jornal Extra",
+            "label": "Jornal Extra"
+          },
+          {
+            "value": "Site do Jornal Extra",
+            "label": "Site do Jornal Extra"
+          },
+          {
+            "value": "Sites das Revistas da Editora Globo ou EGCN",
+            "label": "Sites das Revistas da Editora Globo ou EGCN"
+          },
+          {
+            "value": "Redes Sociais",
+            "label": "Redes Sociais"
+          },
+          {
+            "value": "Pesquisa no Google",
+            "label": "Pesquisa no Google"
+          },
+          {
+            "value": "Indicação de amigo ou colega",
+            "label": "Indicação de amigo ou colega"
+          },
+          {
+            "value": "Convite por E-mail",
+            "label": "Convite por E-mail"
+          },
+          {
+            "value": "Convite por WhatsApp",
+            "label": "Convite por WhatsApp"
+          },
+          {
+            "value": "Outro",
+            "label": "Outro"
+          }
         ]
       },
       {

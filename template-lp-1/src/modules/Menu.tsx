@@ -41,6 +41,13 @@ export function MenuTemplate({ landing }: MenuTemplateProps) {
 			visible: landing.schedule?.visible !== false,
 		},
 		{
+			id: "provisional-subscribe",
+			label: "Inscrição",
+			visible:
+				landing.provisionalSubscribe?.visible !== false &&
+				Boolean(landing.provisionalSubscribe?.iframeUrl),
+		},
+		{
 			id: "subscribe",
 			label: "Inscrição",
 			visible: landing.subscribe?.visible !== false,

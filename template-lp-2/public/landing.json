@@ -406,9 +406,14 @@
       ]
     }
   ],
+  "provisionalSubscribe": {
+    "title": "Inscrição",
+    "visible": true,
+    "iframeUrl": "https://mchyb-7yzb-g12z8ttz9nhyzyck1.pub.sfmc-content.com/cki30cywjfh"
+  },
   "subscribe": {
     "styles": {
-       "card": {
+      "card": {
         "background": "bg-white",
         "border": "none"
       },
@@ -434,7 +439,7 @@
     "description": "Preencha o formulário abaixo para se inscrever no evento.",
     "successTitle": "Inscrição enviada!",
     "successMessage": "Obrigado pela sua inscrição. Em breve entraremos em contato.",
-    "visible": true,
+    "visible": false,
     "sfmcConfig": {
       "enabled": true,
       "endpoint": "/api/sfmc",

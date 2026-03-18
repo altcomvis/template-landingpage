@@ -44,10 +44,10 @@ export function Schedule({ data, participants, ...props }: ScheduleProps) {
 	};
 
 	return (
-		// biome-ignore lint/nursery/useUniqueElementIds: <explanation>
+		// biome-ignore lint/nursery/useUniqueElementIds: anchor id for menu navigation
 		<section className="py-16" id="schedule" {...props}>
 			<div className="w-full mx-auto px-4 max-w-6xl">
-				<TitleSection name={title || "Programação"} />
+				<TitleSection name={title || "Programação Oficial"} />
 
 				<div className="relative">
 					{/* Linha vertical timeline */}

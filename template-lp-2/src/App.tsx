@@ -11,8 +11,10 @@ import { Footer } from "./modules/Footer";
 import { Hero } from "./modules/Hero";
 import { Participants } from "./modules/Participants";
 import { PreviousEvents } from "./modules/PreviousEvents";
+import { ProvisionalSubscribe } from "./modules/ProvisionalSubscribe";
 import { Schedule } from "./modules/Schedule";
 import { Sponsors } from "./modules/Sponsors";
+import Subscribe from "./modules/Subscribe";
 
 function extractFilename(value: unknown): string {
 	const raw = String(value || "").trim();
@@ -62,12 +64,12 @@ export default function App() {
 		const isBlobLike =
 			window.location?.protocol === "blob:" ||
 			String(window.location?.href || "").includes("blob:");
-		const canAutoLoadLocalJson =
-			Boolean(import.meta.env.DEV) && isStandalone && !isBlobLike;
+		const canAutoLoadLocalJson = isStandalone && !isBlobLike;
 
 		if (canAutoLoadLocalJson) {
 			const localJsonUrl = String(
-				import.meta.env.VITE_PROJECT_JSON_URL || "/landing.json",
+				import.meta.env.VITE_PROJECT_JSON_URL ||
+					`${import.meta.env.BASE_URL}landing.json`,
 			);
 			void (async () => {
 				try {
@@ -81,7 +83,7 @@ export default function App() {
 					if (!isCancelled) setLanding(data);
 				} catch (error) {
 					console.warn(
-						"[landing] Dev standalone: could not auto-load local project JSON.",
+						"[landing] Standalone: could not auto-load local project JSON.",
 						error,
 					);
 				}
@@ -101,6 +103,7 @@ export default function App() {
 	const participants = landing?.participants ?? {};
 	const schedule = landing?.schedule ?? {};
 	const subscribe = landing?.subscribe ?? {};
+	const provisionalSubscribe = landing?.provisionalSubscribe ?? {};
 	const previousEvents = landing?.previousEvents ?? {};
 
 	/* ──────────────────────────────── */
@@ -194,10 +197,14 @@ export default function App() {
 							data-parallax
 						/>
 					)}
+					{provisionalSubscribe?.visible && provisionalSubscribe?.iframeUrl && (
+						<ProvisionalSubscribe data={provisionalSubscribe} data-parallax />
+					)}
+					{subscribe?.visible && <Subscribe data={subscribe} data-parallax />}
 					{previousEvents?.visible && (
 						<PreviousEvents data={previousEvents} data-parallax />
 					)}
-					<Sponsors data={landing.sponsors} data-parallax />
+					<Sponsors data={landing.sponsors} general={general} data-parallax />
 				</div>
 				<div className="relative z-10">
 					<Footer />
