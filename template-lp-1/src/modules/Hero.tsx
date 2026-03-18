@@ -94,7 +94,7 @@ export function Hero({ data, general, ...props }: HeroProps) {
 			)}
 			<div className="absolute inset-0 z-0 bg-black/30 pointer-events-none" />
 			{/* 📦 Conteúdo principal */}
-			<div className="relative z-10 text-center max-w-3xl mx-auto px-4">
+			<div className="relative z-10 text-center w-full mx-auto px-4">
 				{/* Logo ou nome do projeto */}
 				<div className="mb-6">
 					{hasLogo ? (
@@ -119,7 +119,7 @@ export function Hero({ data, general, ...props }: HeroProps) {
 				{/* Subtítulo */}
 				{subtitle && (
 					<p
-						className="text-lg md:text-2xl mb-8 text-shadow-2xl"
+						className="text-lg md:text-2xl md:max-w-xl mx-auto mb-8 text-shadow-2xl"
 						style={{ color: subtitleColor || "#fff" }}
 					>
 						{subtitle}
@@ -133,7 +133,7 @@ export function Hero({ data, general, ...props }: HeroProps) {
 							<div
 								className={`info-box flex items-center gap-2 bg-zinc-100/80 backdrop-blur-md rounded-lg px-4 py-2 ${infoBoxTextClass}`}
 							>
-								<span className="text-2xl">📅</span>
+								<span className="text-2xl">🗓️</span>
 								<span className="font-bold text-xl md:text-2xl">{date}</span>
 							</div>
 						)}
