@@ -17,8 +17,18 @@ type WindowWithDataLayer = Window & {
 	dataLayer?: unknown[];
 };
 
-export function SeoHead() {
-	const [seo, setSeo] = useState<SeoData | null>(null);
+interface SeoHeadProps {
+	seo?: SeoData | null;
+}
+
+export function SeoHead({ seo: externalSeo = null }: SeoHeadProps) {
+	const [seo, setSeo] = useState<SeoData | null>(externalSeo);
+
+	useEffect(() => {
+		if (externalSeo) {
+			setSeo(externalSeo);
+		}
+	}, [externalSeo]);
 
 	useEffect(() => {
 		const isDev = import.meta.env.MODE === "development";
@@ -122,7 +132,7 @@ export function SeoHead() {
 			const browserWindow = window as WindowWithDataLayer;
 			browserWindow.dataLayer = browserWindow.dataLayer || [];
 			browserWindow.dataLayer.push({
-				"gtm.start": new Date().getTime(),
+				"gtm.start": Date.now(),
 				event: "gtm.js",
 			});
 

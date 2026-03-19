@@ -168,7 +168,7 @@ export default function App() {
 					className="w-full md:w-10/12 mx-auto md:rounded-2xl shadow-2xl md:px-10 transition-colors duration-500"
 					style={{ backgroundColor: "var(--surface)", color: "var(--text)" }}
 				>
-					<SeoHead />
+					<SeoHead seo={general} />
 					<CookiePolicyModal text={general?.cookiePolicyText} />
 					<MenuTemplate landing={landing} />
 

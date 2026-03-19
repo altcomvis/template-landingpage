@@ -156,7 +156,7 @@ export default function App() {
 		<>
 			{/* biome-ignore lint/nursery/useUniqueElementIds: required for anchor navigation */}
 			<div id="home" className="w-full">
-				<SeoHead />
+				<SeoHead seo={general} />
 				<div
 					className="relative w-full transition-colors duration-500 z-50"
 					style={{

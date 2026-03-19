@@ -174,7 +174,7 @@ export default function App() {
 					</>
 				)}
 
-				<SeoHead />
+				<SeoHead seo={general} />
 				<div className="relative pb-8 z-50">
 					<div className="absolute inset-x-0 top-3 ">
 						<MenuTemplate landing={landing} />
