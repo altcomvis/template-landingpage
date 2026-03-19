@@ -123,7 +123,7 @@ export function Hero({ data, general, ...props }: HeroProps) {
 									<div
 										className={`info-box flex items-center gap-2 bg-zinc-100/80 backdrop-blur-md rounded-lg px-4 py-2 ${infoBoxTextClass}`}
 									>
-										<span className="text-2xl">📅</span>
+										<span className="text-2xl">🗓️</span>
 										<span className="font-bold text-xl md:text-2xl">
 											{date}
 										</span>
