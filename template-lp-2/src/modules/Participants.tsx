@@ -30,6 +30,7 @@ interface ParticipantsProps extends React.HTMLAttributes<HTMLElement> {
 		imageRounded?: "0" | "sm" | "md" | "lg" | "xl" | "2xl" | "3xl" | "full";
 		imageBorderWidth?: number;
 		imageBorderColor?: string;
+		nameOutsideImage?: boolean;
 	};
 }
 
@@ -81,6 +82,7 @@ function resolveParticipantPhotoSrc(photo: string): string {
 export function Participants({ data, ...props }: ParticipantsProps) {
 	const participants = data.groups.flatMap((group) => group.participants);
 	const roundedClass = getRoundedClass(data.imageRounded);
+	const nameOutsideImage = data.nameOutsideImage ?? false;
 	const borderWidth = Number.isFinite(data.imageBorderWidth)
 		? Math.max(0, Number(data.imageBorderWidth))
 		: 1;
@@ -178,7 +180,7 @@ export function Participants({ data, ...props }: ParticipantsProps) {
 						{participants.map((p) => (
 							<CarouselItem
 								key={p.name}
-								className="basis-full sm:basis-1/2 md:basis-1/3 min-w-[16rem] md:min-w-[17rem] px-2 md:px-3 pt-0 pb-18 md:pb-36 flex justify-center items-start"
+								className="basis-full sm:basis-1/2 md:basis-1/3 min-w-[16rem] md:min-w-68 px-2 md:px-3 pt-0 pb-18 md:pb-36 flex justify-center items-start"
 							>
 								<ParticipantDialog
 									name={p.name}
@@ -190,22 +192,29 @@ export function Participants({ data, ...props }: ParticipantsProps) {
 											className="relative group cursor-pointer will-change-transform transform-3d transition-transform duration-200 ease-out origin-top"
 										>
 											<div
-											className={`relative w-60 md:w-64 h-60 md:h-64 overflow-hidden md:shadow-2xl ${roundedClass}`}
-											style={{
-												borderWidth: `${borderWidth}px`,
-												borderStyle: "solid",
-												borderColor,
-											}}
-										>
-											<img
-												src={resolveParticipantPhotoSrc(p.photo)}
-												alt={p.name}
-												className="w-full h-full object-cover hover:brightness-75 transition"
+												className={`relative w-60 md:w-64 h-60 md:h-64 overflow-hidden md:shadow-2xl ${roundedClass}`}
+												style={{
+													borderWidth: `${borderWidth}px`,
+													borderStyle: "solid",
+													borderColor,
+												}}
+											>
+												<img
+													src={resolveParticipantPhotoSrc(p.photo)}
+													alt={p.name}
+													className="w-full h-full object-cover hover:brightness-75 transition"
 												/>
-												<div className="absolute bottom-0 left-0 right-0 bg-linear-to-t from-black/80 to-transparent text-white leading-tight text-lg font-semibold text-center px-4 pb-4 pt-16 text-pretty wrap-break-word">
+												{!nameOutsideImage && (
+													<div className="absolute bottom-0 left-0 right-0 bg-linear-to-t from-black/80 to-transparent text-white leading-tight text-lg font-semibold text-center px-4 pb-4 pt-16 text-pretty wrap-break-word">
+														{p.name}
+													</div>
+												)}
+											</div>
+											{nameOutsideImage && (
+												<div className="mt-3 text-center text-base font-semibold leading-tight text-pretty wrap-break-word text-foreground max-w-60 md:max-w-64 mx-auto">
 													{p.name}
 												</div>
-											</div>
+											)}
 										</div>
 									}
 								/>

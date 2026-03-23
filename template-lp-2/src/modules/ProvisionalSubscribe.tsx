@@ -3,6 +3,8 @@ interface ProvisionalSubscribeProps extends React.HTMLAttributes<HTMLElement> {
 		title?: string;
 		visible?: boolean;
 		iframeUrl?: string;
+		showClosedMessage?: boolean;
+		closedMessage?: string;
 	};
 }
 
@@ -10,10 +12,17 @@ export function ProvisionalSubscribe({
 	data,
 	...props
 }: ProvisionalSubscribeProps) {
-	const { title, visible, iframeUrl } = data;
+	const { title, visible, iframeUrl, showClosedMessage, closedMessage } = data;
 	const sectionId = "provisional-subscribe";
 
-	if (!visible || !iframeUrl) {
+	if (!visible) {
+		return null;
+	}
+
+	const showClosed = !!showClosedMessage;
+	const showIframe = !showClosed && !!iframeUrl;
+
+	if (!showClosed && !showIframe) {
 		return null;
 	}
 
@@ -29,13 +38,20 @@ export function ProvisionalSubscribe({
 						{title}
 					</h2>
 				)}
-				<iframe
-					src={iframeUrl}
-					width="100%"
-					height={1200}
-					className=" overflow-hidden "
-					title={title || "Inscrição"}
-				/>
+				{showClosed && (
+					<div className="text-center text-lg text-muted-foreground py-8">
+						{closedMessage || "Inscrições encerradas"}
+					</div>
+				)}
+				{showIframe && (
+					<iframe
+						src={iframeUrl}
+						width="100%"
+						height={1200}
+						className=" overflow-hidden "
+						title={title || "Inscrição"}
+					/>
+				)}
 			</div>
 		</section>
 	);
