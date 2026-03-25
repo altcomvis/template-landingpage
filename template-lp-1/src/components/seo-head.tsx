@@ -15,7 +15,99 @@ type SeoData = {
 
 type WindowWithDataLayer = Window & {
 	dataLayer?: unknown[];
+	googletag?: {
+		cmd?: unknown[];
+		pubads?: () => {
+			enableSingleRequest: () => unknown;
+			collapseEmptyDivs: () => unknown;
+			setTargeting: () => unknown;
+			disableInitialLoad: () => unknown;
+			refresh: () => unknown;
+			getSlots: () => unknown[];
+		};
+		defineSlot?: () => {
+			addService: () => unknown;
+			setTargeting: () => unknown;
+		};
+		enableServices?: () => void;
+		display?: () => void;
+	};
 };
+
+function bootstrapGoogletag(browserWindow: WindowWithDataLayer) {
+	const normalize = (value: unknown) => {
+		const googletag =
+			typeof value === "object" && value
+				? (value as Record<string, unknown>)
+				: {};
+
+		if (!Array.isArray(googletag.cmd)) {
+			googletag.cmd = [];
+		}
+
+		if (typeof googletag.pubads !== "function") {
+			googletag.pubads = () => ({
+				enableSingleRequest() {
+					return this;
+				},
+				collapseEmptyDivs() {
+					return this;
+				},
+				setTargeting() {
+					return this;
+				},
+				disableInitialLoad() {
+					return this;
+				},
+				refresh() {
+					return this;
+				},
+				getSlots() {
+					return [];
+				},
+			});
+		}
+
+		if (typeof googletag.defineSlot !== "function") {
+			googletag.defineSlot = () => ({
+				addService() {
+					return this;
+				},
+				setTargeting() {
+					return this;
+				},
+			});
+		}
+
+		if (typeof googletag.enableServices !== "function") {
+			googletag.enableServices = () => {};
+		}
+
+		if (typeof googletag.display !== "function") {
+			googletag.display = () => {};
+		}
+
+		return googletag;
+	};
+
+	let internal = normalize(browserWindow.googletag);
+
+	try {
+		Object.defineProperty(browserWindow, "googletag", {
+			configurable: true,
+			get() {
+				return internal;
+			},
+			set(value: unknown) {
+				internal = normalize(value);
+			},
+		});
+	} catch {
+		// Ignore environments where defineProperty is not allowed.
+	}
+
+	browserWindow.googletag = internal as WindowWithDataLayer["googletag"];
+}
 
 interface SeoHeadProps {
 	seo?: SeoData | null;
@@ -130,6 +222,7 @@ export function SeoHead({ seo: externalSeo = null }: SeoHeadProps) {
 		// 🏷️ Google Tag Manager
 		if (gtmId && !document.getElementById("gtm-script")) {
 			const browserWindow = window as WindowWithDataLayer;
+			bootstrapGoogletag(browserWindow);
 			browserWindow.dataLayer = browserWindow.dataLayer || [];
 			browserWindow.dataLayer.push({
 				"gtm.start": Date.now(),
