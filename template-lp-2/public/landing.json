@@ -409,6 +409,8 @@
   "provisionalSubscribe": {
     "title": "Inscrição",
     "visible": true,
+    "showClosedMessage": false,
+    "closedMessage": "Inscrições encerradas",
     "iframeUrl": "https://mchyb-7yzb-g12z8ttz9nhyzyck1.pub.sfmc-content.com/cki30cywjfh"
   },
   "subscribe": {
