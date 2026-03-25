@@ -50,17 +50,17 @@
           {
             "id": "yt",
             "icon": "youtube",
-            "url": "https://youtube.com/"
+            "url": "jornaloglobo"
           },
           {
             "id": "tw",
             "icon": "twitter",
-            "url": "https://twitter.com/"
+            "url": "jornaloglobo"
           },
           {
             "id": "02fe81e9-c16a-4a07-af42-6ecd1ad36832",
             "icon": "linkedin",
-            "url": "https://linkedin.com/"
+            "url": "oglobo"
           }
         ]
       },
@@ -71,12 +71,12 @@
           {
             "id": "9218f257-3374-493b-b903-774d6512d029",
             "icon": "facebook",
-            "url": "https://facebook.com/"
+            "url": "jornalvalor"
           },
           {
             "id": "e83d1132-0afa-4b69-89d2-8e200d143be6",
             "icon": "instagram",
-            "url": "https://instagram.com/"
+            "url": "jornalvalor"
           }
         ]
       }

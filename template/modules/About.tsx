@@ -20,6 +20,24 @@ const iconMap: Record<string, React.ElementType> = {
 	facebook: FaFacebook,
 };
 
+const hrefBaseMap: Record<string, string> = {
+	instagram: "https://www.instagram.com/",
+	youtube: "https://www.youtube.com/@",
+	facebook: "https://www.facebook.com/",
+	tiktok: "https://www.tiktok.com/@",
+	twitter: "https://x.com/",
+	linkedin: "https://www.linkedin.com/company/",
+};
+
+function buildSocialHref(icon: string, handle: string): string {
+	const h = (handle || "").trim();
+	if (/^https?:\/\//i.test(h)) return h;
+	const base = hrefBaseMap[icon];
+	if (!base || !h) return "#";
+	const withoutAt = h.replace(/^@+/, "");
+	return base + withoutAt;
+}
+
 interface AboutProps extends React.HTMLAttributes<HTMLElement> {
 	data: {
 		subtitle: string;
@@ -88,10 +106,11 @@ export function About({ data, ...props }: AboutProps) {
 									<div className="flex gap-4 justify-center">
 										{block.icons.map((icon) => {
 											const Icon = iconMap[icon.icon];
+											const href = buildSocialHref(icon.icon, icon.url);
 											return (
 												<a
 													key={icon.id}
-													href={icon.url}
+													href={href}
 													target="_blank"
 													rel="noopener noreferrer"
 													className="w-10 h-10 flex items-center justify-center text-2xl text-(--text) hover:text-(--light) hover:scale-110 transition-transform"
