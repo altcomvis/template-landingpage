@@ -204,7 +204,12 @@ export default function App() {
 					{previousEvents?.visible && (
 						<PreviousEvents data={previousEvents} data-parallax />
 					)}
-					<Sponsors data={landing.sponsors} general={general} data-parallax />
+					<Sponsors
+						data={landing.sponsors}
+						showDividerLine={landing.sponsorsShowDividerLine}
+						general={general}
+						data-parallax
+					/>
 				</div>
 				<div className="relative z-10">
 					<Footer />

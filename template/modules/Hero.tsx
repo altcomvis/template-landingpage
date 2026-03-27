@@ -1,4 +1,3 @@
-import Image from "next/image";
 import { useEffect, useState } from "react";
 import LightRays from "@/components/LightRays";
 import { getBasePath } from "@/utils/getBasePath";
@@ -8,8 +7,11 @@ interface HeroProps extends React.HTMLAttributes<HTMLElement> {
 		subtitle: string;
 		subtitleColor?: string;
 		date: string;
+		showDateIcon?: boolean;
 		time: string;
+		showTimeIcon?: boolean;
 		location: string;
+		showLocationIcon?: boolean;
 		address: string;
 
 		useLightRays?: boolean;
@@ -27,14 +29,20 @@ export function Hero({ data, general, ...props }: HeroProps) {
 		subtitle,
 		subtitleColor,
 		date,
+		showDateIcon,
 		time,
+		showTimeIcon,
 		location,
+		showLocationIcon,
 		address,
 
 		useLightRays,
 		lightRaysColor,
 		logoSize,
 	} = data;
+	const renderDateIcon = showDateIcon !== false;
+	const renderTimeIcon = showTimeIcon !== false;
+	const renderLocationIcon = showLocationIcon !== false;
 
 	const { projectName } = general;
 
@@ -159,7 +167,7 @@ export function Hero({ data, general, ...props }: HeroProps) {
 							<div
 								className={`info-box flex items-center gap-2 bg-zinc-400/50 backdrop-blur-md rounded-lg px-4 py-2 ${textContrast}`}
 							>
-								<span className="text-2xl">📅</span>
+								{renderDateIcon && <span className="text-2xl">📅</span>}
 								<span className="font-bold text-xl md:text-2xl">{date}</span>
 							</div>
 						)}
@@ -167,7 +175,7 @@ export function Hero({ data, general, ...props }: HeroProps) {
 							<div
 								className={`info-box flex items-center gap-2 bg-zinc-400/50 backdrop-blur-md rounded-lg px-4 py-2 ${textContrast}`}
 							>
-								<span className="text-2xl">⏰</span>
+								{renderTimeIcon && <span className="text-2xl">⏰</span>}
 								<span className="font-bold text-xl md:text-2xl">{time}</span>
 							</div>
 						)}
@@ -178,7 +186,7 @@ export function Hero({ data, general, ...props }: HeroProps) {
 								<div className="flex flex-col">
 									{location && (
 										<span className="font-bold block text-lg md:text-xl text-pretty">
-											📍 {location}
+											{renderLocationIcon ? `📍 ${location}` : location}
 										</span>
 									)}
 									{address && (

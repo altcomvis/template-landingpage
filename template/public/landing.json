@@ -24,8 +24,11 @@
     "subtitle": "Inovação, tecnologia e propósito para um futuro melhor",
     "subtitleColor": "#FFFFFF",
     "date": "15/03",
+    "showDateIcon": true,
     "time": "09h às 18h",
+    "showTimeIcon": true,
     "location": "Museu do Amanhã",
+    "showLocationIcon": true,
     "address": "Praça Mauá, 1 – Rio de Janeiro, RJ",
     "useBackgroundImage": false,
     "useLightRays": false,
@@ -47,17 +50,17 @@
           {
             "id": "yt",
             "icon": "youtube",
-            "url": "jornaloglobo"
+            "url": "https://www.youtube.com/jornaloglobo"
           },
           {
             "id": "tw",
             "icon": "twitter",
-            "url": "jornaloglobo"
+            "url": "https://x.com/jornaloglobo"
           },
           {
             "id": "02fe81e9-c16a-4a07-af42-6ecd1ad36832",
             "icon": "linkedin",
-            "url": "company/oglobo"
+            "url": "https://www.linkedin.com/company/oglobo"
           }
         ]
       },
@@ -68,12 +71,12 @@
           {
             "id": "9218f257-3374-493b-b903-774d6512d029",
             "icon": "facebook",
-            "url": "jornalvalor"
+            "url": "https://www.facebook.com/jornalvalor"
           },
           {
             "id": "e83d1132-0afa-4b69-89d2-8e200d143be6",
             "icon": "instagram",
-            "url": "jornalvalor"
+            "url": "https://www.instagram.com/jornalvalor"
           }
         ]
       }
@@ -183,6 +186,7 @@
   },
   "schedule": {
     "title": "Programação Oficial",
+    "panelContentAlign": "left",
     "visible": true,
     "panels": [
       {
@@ -377,6 +381,7 @@
       }
     ]
   },
+  "sponsorsShowDividerLine": true,
   "sponsors": [
     {
       "id": "b7d5b7a8-66bf-498e-b541-1c64f8bcfe91",

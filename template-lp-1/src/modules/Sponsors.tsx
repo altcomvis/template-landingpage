@@ -8,6 +8,7 @@ interface SponsorBlock {
 
 interface SponsorsProps extends React.HTMLAttributes<HTMLElement> {
 	data: SponsorBlock[];
+	showDividerLine?: boolean;
 	general?: {
 		directoryName?: string;
 	};
@@ -31,8 +32,14 @@ function resolveSponsorLogoSrc(name: string, directoryName?: string): string {
 	return resolveAssetUrl(`img/marcas/${normalized}`, directoryName);
 }
 
-export function Sponsors({ data, general, ...props }: SponsorsProps) {
+export function Sponsors({
+	data,
+	showDividerLine,
+	general,
+	...props
+}: SponsorsProps) {
 	const directoryName = general?.directoryName;
+	const renderDividerLine = showDividerLine !== false;
 
 	return (
 		// biome-ignore lint/nursery/useUniqueElementIds: required for anchor navigation
@@ -47,7 +54,9 @@ export function Sponsors({ data, general, ...props }: SponsorsProps) {
 									{block.label}
 								</p>
 								{/* Linha divisória */}
-								<div className="w-full border-t border-zinc-400 -mt-8" />
+								{renderDividerLine && (
+									<div className="w-full border-t border-zinc-400 -mt-8" />
+								)}
 							</div>
 
 							{/* Logos */}

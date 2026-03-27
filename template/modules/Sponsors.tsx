@@ -9,9 +9,12 @@ interface SponsorBlock {
 
 interface SponsorsProps extends React.HTMLAttributes<HTMLElement> {
 	data: SponsorBlock[];
+	showDividerLine?: boolean;
 }
 
-export function Sponsors({ data, ...props }: SponsorsProps) {
+export function Sponsors({ data, showDividerLine, ...props }: SponsorsProps) {
+	const renderDividerLine = showDividerLine !== false;
+
 	return (
 		// biome-ignore lint: ID fixo necessário para âncoras de navegação
 		<section className="py-16" id="sponsors" {...props}>
@@ -25,7 +28,9 @@ export function Sponsors({ data, ...props }: SponsorsProps) {
 									{block.label}
 								</p>
 								{/* Linha divisória */}
-								<div className="w-full border-t border-zinc-400 -mt-8" />
+								{renderDividerLine && (
+									<div className="w-full border-t border-zinc-400 -mt-8" />
+								)}
 							</div>
 
 							{/* Logos */}

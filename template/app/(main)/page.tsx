@@ -69,6 +69,7 @@ interface LandingData {
 	};
 	schedule: {
 		title: string;
+		panelContentAlign?: "left" | "center" | "right";
 		visible?: boolean;
 		panels: Array<{
 			id: string;
@@ -121,6 +122,7 @@ interface LandingData {
 			ctaLink: string;
 		}>;
 	};
+	sponsorsShowDividerLine?: boolean;
 	sponsors: Array<{
 		id: string;
 		label: string;
@@ -238,7 +240,11 @@ export default function Home() {
 				{previousEvents?.visible && (
 					<PreviousEvents data={previousEvents} data-parallax />
 				)}
-				<Sponsors data={landing.sponsors} data-parallax />
+				<Sponsors
+					data={landing.sponsors}
+					showDividerLine={landing.sponsorsShowDividerLine}
+					data-parallax
+				/>
 			</div>
 			<Footer />
 		</div>

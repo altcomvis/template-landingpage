@@ -17,8 +17,11 @@ interface HeroProps extends React.HTMLAttributes<HTMLElement> {
 		subtitle: string;
 		subtitleColor?: string;
 		date: string;
+		showDateIcon?: boolean;
 		time: string;
+		showTimeIcon?: boolean;
 		location: string;
+		showLocationIcon?: boolean;
 		address: string;
 		useBackgroundImage?: boolean;
 		useLightRays?: boolean;
@@ -37,8 +40,11 @@ export function Hero({ data, general, ...props }: HeroProps) {
 		subtitle,
 		subtitleColor,
 		date,
+		showDateIcon,
 		time,
+		showTimeIcon,
 		location,
+		showLocationIcon,
 		address,
 		useLightRays,
 		lightRaysColor,
@@ -55,6 +61,9 @@ export function Hero({ data, general, ...props }: HeroProps) {
 	const logoPath = resolveAssetUrl(logoSource, general?.directoryName);
 	const heroRef = useRef<HTMLElement | null>(null);
 	const infoBoxTextClass = "text-gray-900";
+	const renderDateIcon = showDateIcon !== false;
+	const renderTimeIcon = showTimeIcon !== false;
+	const renderLocationIcon = showLocationIcon !== false;
 
 	return (
 		<section
@@ -123,7 +132,7 @@ export function Hero({ data, general, ...props }: HeroProps) {
 									<div
 										className={`info-box flex items-center gap-2 bg-zinc-100/80 backdrop-blur-md rounded-lg px-4 py-2 ${infoBoxTextClass}`}
 									>
-										<span className="text-2xl">🗓️</span>
+										{renderDateIcon && <span className="text-2xl">🗓️</span>}
 										<span className="font-bold text-xl md:text-2xl">
 											{date}
 										</span>
@@ -133,7 +142,7 @@ export function Hero({ data, general, ...props }: HeroProps) {
 									<div
 										className={`info-box flex items-center gap-2 bg-zinc-100/80 backdrop-blur-md rounded-lg px-4 py-2 ${infoBoxTextClass}`}
 									>
-										<span className="text-2xl">⏰</span>
+										{renderTimeIcon && <span className="text-2xl">⏰</span>}
 										<span className="font-bold text-xl md:text-2xl">
 											{time}
 										</span>
@@ -146,7 +155,7 @@ export function Hero({ data, general, ...props }: HeroProps) {
 										<div className="flex flex-col">
 											{location && (
 												<span className="font-bold block text-lg md:text-xl text-pretty">
-													📍 {location}
+													{renderLocationIcon ? `📍 ${location}` : location}
 												</span>
 											)}
 											{address && (
