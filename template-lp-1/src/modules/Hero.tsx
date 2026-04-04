@@ -119,7 +119,7 @@ export function Hero({ data, general, ...props }: HeroProps) {
 							}`}
 						/>
 					) : (
-						<h1 className="text-3xl md:text-5xl font-bold text-white">
+						<h1 className="text-3xl md:text-5xl font-bold text-(--title)">
 							{projectName}
 						</h1>
 					)}

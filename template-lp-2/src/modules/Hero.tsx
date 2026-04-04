@@ -124,7 +124,7 @@ export function Hero({ data, general, subscribe, ...props }: HeroProps) {
 									}`}
 								/>
 							) : (
-								<h1 className="text-3xl md:text-5xl font-bold text-shadow-2xl text-white">
+								<h1 className="text-3xl md:text-5xl font-bold text-shadow-2xl text-(--title)">
 									{projectName}
 								</h1>
 							)}

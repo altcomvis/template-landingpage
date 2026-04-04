@@ -276,7 +276,7 @@ export function EditorialCoverage({ data, ...props }: EditorialCoverageProps) {
 									</div>
 								)}
 								<div className="p-4">
-									<h3 className="font-semibold text-(--text) text-sm mb-2 line-clamp-2">
+									<h3 className="font-semibold text-(--title) text-sm mb-2 line-clamp-2">
 										{article.title}
 									</h3>
 									<p className="text-(--text)/70 text-xs line-clamp-2 mb-3">

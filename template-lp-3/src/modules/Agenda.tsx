@@ -54,7 +54,7 @@ export function Agenda({ data, ...props }: AgendaProps) {
 								<CarouselItem key={month.name} className="basis-60">
 									<div className="border border-(--text)/10 rounded-lg p-6 bg-(--surface) min-h-96">
 										{/* Cabeçalho do mês */}
-										<h3 className="text-lg text-center font-semibold text-(--text) mb-4 pb-3 border-b border-(--text)/10">
+										<h3 className="text-lg text-center font-semibold text-(--title) mb-4 pb-3 border-b border-(--text)/10">
 											{month.name}
 										</h3>
 
@@ -70,7 +70,7 @@ export function Agenda({ data, ...props }: AgendaProps) {
 															<span className="text-sm font-bold text-(--dark)">
 																{event.day}
 															</span>
-															<h4 className="text-sm font-semibold text-(--text) line-clamp-2">
+															<h4 className="text-sm font-semibold text-(--title) line-clamp-2">
 																{event.title || (
 																	<span className="italic opacity-50">
 																		Sem título
@@ -121,7 +121,7 @@ export function Agenda({ data, ...props }: AgendaProps) {
 							key={month.name}
 							className="border border-(--text)/10 rounded-lg p-4 bg-(--surface)"
 						>
-							<h3 className="text-xl font-semibold text-center uppercase text-(--text) mb-3 pb-2 border-b border-(--text)/10">
+							<h3 className="text-xl font-semibold text-center uppercase text-(--title) mb-3 pb-2 border-b border-(--text)/10">
 								{month.name}
 							</h3>
 
@@ -138,7 +138,7 @@ export function Agenda({ data, ...props }: AgendaProps) {
 													<span className="text-sm font-bold text-(--dark)">
 														{event.day}
 													</span>
-													<h4 className="text-sm font-semibold text-(--text) line-clamp-1">
+													<h4 className="text-sm font-semibold text-(--title) line-clamp-1">
 														{event.title || (
 															<span className="italic opacity-50">
 																Sem título

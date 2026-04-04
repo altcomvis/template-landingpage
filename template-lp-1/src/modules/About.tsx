@@ -64,7 +64,7 @@ export function About({ data, ...props }: AboutProps) {
 			<div className="container mx-auto px-4 max-w-4xl text-center">
 				{/* Subtítulo principal */}
 				{subtitle && (
-					<h3 className="text-3xl font-semibold mb-6" {...props}>
+					<h3 className="text-3xl font-semibold mb-6 text-(--title)" {...props}>
 						{subtitle}
 					</h3>
 				)}
@@ -89,7 +89,7 @@ export function About({ data, ...props }: AboutProps) {
 				<Separator className="md:w-96! mx-auto bg-zinc-300" />
 				{showTransmission && (
 					<div className="w-10/12 mx-auto  py-12" {...props}>
-						<h2 className="text-2xl font-bold mb-6 text-(--light)" {...props}>
+						<h2 className="text-2xl font-bold mb-6 text-(--title)" {...props}>
 							{socialTitle}
 						</h2>
 

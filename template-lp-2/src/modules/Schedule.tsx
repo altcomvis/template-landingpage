@@ -117,7 +117,7 @@ export function Schedule({ data, participants, ...props }: ScheduleProps) {
 					<div className=" p-6 border border-(--text) rounded-xl">
 						{eventTitle && (
 							<div className={`mb-4 ${contentTextClass}`}>
-								<h2 className="text-xl md:text-2xl font-bold text-(--text)">
+								<h2 className="text-xl md:text-2xl font-bold text-(--title)">
 									{eventTitle}
 								</h2>
 							</div>
@@ -195,7 +195,7 @@ export function Schedule({ data, participants, ...props }: ScheduleProps) {
 										<div className="bg-(--surface) border shadow-md rounded-xl p-6 relative overflow-hidden">
 											<div className="bg-zinc-400/10 absolute w-full h-full z-0 top-0 left-0 md:rounded-xl" />
 											<h3
-												className={`text-2xl font-semibold mb-2 text-(--text) ${contentTextClass}`}
+												className={`text-2xl font-semibold mb-2 text-(--title) ${contentTextClass}`}
 											>
 												{item.title}
 											</h3>

@@ -81,7 +81,7 @@ export function MenuTemplate({ landing }: MenuTemplateProps) {
 				className={`md:rounded-full md:px-12 z-50 transition-all duration-300 ${
 					isFixed
 						? "fixed md:top-3 md:bg-white/75 md:backdrop-blur-lg md:shadow-lg md:border border-zinc-500"
-						: "relative border-zinc-500"
+						: "relative md:border md:bg-white/20 text-shadow-sm text-shadow-white/20 md:backdrop-blur-xs md:shadow-lg border-zinc-500"
 				}`}
 			>
 				<div
@@ -90,7 +90,7 @@ export function MenuTemplate({ landing }: MenuTemplateProps) {
 					}`}
 				>
 					{/* Menu Desktop */}
-					<nav className="hidden md:flex gap-6 text-base font-medium">
+					<nav className="hidden md:flex gap-6 text-base font-semibold">
 						{menuItems.map(({ id, label }) => (
 							<ScrollLink
 								key={id}
