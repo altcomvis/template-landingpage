@@ -7,6 +7,7 @@
 		"backgroundColor": "#372f7e",
 		"surfaceColor": "#ebf1ff",
 		"textColor": "#333333",
+		"titleColor": "#333333",
 		"backgroundMode": "solid",
 		"fontBody": "Poppins",
 		"fontTitle": "Anton",

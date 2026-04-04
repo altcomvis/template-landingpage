@@ -8,6 +8,7 @@ interface ThemeColorsProps {
 	backgroundColor?: string;
 	surfaceColor?: string;
 	textColor?: string;
+	titleColor?: string;
 	fontBody?: string;
 	fontBodyStyle?: string;
 	fontTitle?: string;
@@ -53,6 +54,7 @@ export function useThemeColors({
 	backgroundColor,
 	surfaceColor,
 	textColor,
+	titleColor,
 	fontBody,
 	fontBodyStyle,
 	fontTitle,
@@ -83,6 +85,8 @@ export function useThemeColors({
 			"--surface-rgb": hexToRgb(surfaceColor),
 			"--text": textColor,
 			"--text-rgb": hexToRgb(textColor),
+			"--title": titleColor || textColor,
+			"--title-rgb": hexToRgb(titleColor || textColor),
 			"--font-body-weight": fontBodyStyle || "400",
 			"--font-title-weight": fontTitleStyle || "700",
 		};
@@ -136,6 +140,7 @@ export function useThemeColors({
 		backgroundColor,
 		surfaceColor,
 		textColor,
+		titleColor,
 		fontBody,
 		fontBodyStyle,
 		fontTitle,

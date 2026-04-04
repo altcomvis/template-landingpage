@@ -1,12 +1,13 @@
 {
 	"general": {
-		"primaryColor": "#fff",
-		"secondaryColor": "#d8578f",
-		"darkColor": "#372f7e",
-		"lightColor": "#eda747",
-		"backgroundColor": "#372f7e",
+		"primaryColor": "#04bf45",
+		"secondaryColor": "#f2cb05",
+		"darkColor": "#005b46",
+		"lightColor": "#ebf2b3",
+		"backgroundColor": "#005b46",
 		"surfaceColor": "#ebf1ff",
 		"textColor": "#333333",
+		"titleColor": "#333333",
 		"backgroundMode": "solid",
 		"fontBody": "Poppins",
 		"fontTitle": "Anton",
