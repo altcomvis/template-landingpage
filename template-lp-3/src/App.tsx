@@ -249,11 +249,19 @@ export default function App() {
 			>
 				{useFixedHeroBackground && heroIsFirst && (
 					<>
-						<div className="fixed w-full h-screen top-0 bg-linear-0 from-green-800/80 via-green-800/0 to-green-800 z-1" />
+						<div
+							className="fixed w-full h-screen top-0 z-1"
+							style={{
+								backgroundImage: `linear-gradient(to bottom, rgb(var(--surface-rgb, 255 255 255) / 0.8), rgb(var(--surface-rgb, 255 255 255) / 0), rgb(var(--surface-rgb, 255 255 255)))`
+							}}
+						/>
 						<div
 							aria-hidden
-							className="fixed inset-0 z-0 bg-top bg-no-repeat bg-cover bg-green-800"
-							style={{ backgroundImage: `url('${heroBackgroundUrl}')` }}
+							className="fixed inset-0 z-0 bg-top bg-no-repeat bg-cover"
+							style={{
+								backgroundImage: `url('${heroBackgroundUrl}')`,
+								backgroundColor: `rgb(var(--surface-rgb, 255 255 255) / 0.3)`
+							}}
 						/>
 					</>
 				)}
