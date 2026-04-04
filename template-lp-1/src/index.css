@@ -120,7 +120,7 @@
 		@apply border-border outline-ring/50;
 	}
 	body {
-		@apply bg-background text-foreground;
+		@apply bg-background text-foreground overflow-x-hidden;
 		font-family: var(--font-family), var(--font-body), sans-serif;
 	}
 	h1,
@@ -134,7 +134,8 @@
 }
 
 .font-title {
-	font-family: var(--font-family-title), var(--font-title), sans-serif !important;
+	font-family:
+		var(--font-family-title), var(--font-title), sans-serif !important;
 }
 
 @keyframes flashHighlight {

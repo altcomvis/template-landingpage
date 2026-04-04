@@ -41,6 +41,16 @@ export function MenuTemplate({ landing }: MenuTemplateProps) {
 			visible: landing.schedule?.visible !== false,
 		},
 		{
+			id: "agenda",
+			label: "Agenda",
+			visible: landing.agenda?.visible !== false,
+		},
+		{
+			id: "editorial-coverage",
+			label: "Cobertura Editorial",
+			visible: landing.editorialCoverage?.visible !== false,
+		},
+		{
 			id: "provisional-subscribe",
 			label: "Inscrição",
 			visible:
@@ -62,7 +72,11 @@ export function MenuTemplate({ landing }: MenuTemplateProps) {
 	].filter((item) => item.visible);
 
 	return (
-		<div className="md:w-full md:flex md:justify-center">
+		<div
+			className={`md:w-full md:flex md:justify-center ${
+				isFixed ? "md:pt-14" : "pt-0"
+			}`}
+		>
 			<header
 				className={`md:rounded-full md:px-12 z-50 transition-all duration-300 ${
 					isFixed
@@ -72,9 +86,7 @@ export function MenuTemplate({ landing }: MenuTemplateProps) {
 			>
 				<div
 					className={`container mx-auto px-4 md:py-3 flex md:justify-center items-center transition-all duration-500 ${
-						isFixed
-							? "md:py-2 text-zinc-700"
-							: "md:py-2 text-(--text) bg-(--surface)/50 md:backdrop-blur-lg rounded-full px-16"
+						isFixed ? "md:py-2 text-zinc-700" : "md:py-2 text-(--text)"
 					}`}
 				>
 					{/* Menu Desktop */}

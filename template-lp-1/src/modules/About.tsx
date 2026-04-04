@@ -71,7 +71,7 @@ export function About({ data, ...props }: AboutProps) {
 
 				{/* Texto descritivo com suporte a HTML */}
 				<div
-					className="text-(--text) text-xl pb-16 text-pretty max-w-[60ch] mx-auto"
+					className="text-(--text) text-xl pb-16 text-pretty md:max-w-[60ch] mx-auto"
 					{...props}
 				>
 					{paragraphs.map((p, i) => (
@@ -86,7 +86,7 @@ export function About({ data, ...props }: AboutProps) {
 				</div>
 
 				{/* 🎥 Bloco de Transmissão */}
-				<Separator className="w-96! mx-auto bg-zinc-300" />
+				<Separator className="md:w-96! mx-auto bg-zinc-300" />
 				{showTransmission && (
 					<div className="w-10/12 mx-auto  py-12" {...props}>
 						<h2 className="text-2xl font-bold mb-6 text-(--light)" {...props}>
@@ -122,7 +122,7 @@ export function About({ data, ...props }: AboutProps) {
 						</div>
 					</div>
 				)}
-				<Separator className="w-96! mx-auto bg-zinc-300" />
+				<Separator className="md:w-96! mx-auto bg-zinc-300" />
 			</div>
 		</section>
 	);

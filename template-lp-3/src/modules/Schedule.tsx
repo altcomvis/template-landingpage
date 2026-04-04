@@ -23,6 +23,14 @@ interface ScheduleItem {
 interface ScheduleProps extends React.HTMLAttributes<HTMLElement> {
 	data: {
 		title: string;
+		eventTitle?: string;
+		eventDescription?: string;
+		date?: string;
+		showDateIcon?: boolean;
+		time?: string;
+		showTimeIcon?: boolean;
+		location?: string;
+		showLocationIcon?: boolean;
 		panelContentAlign?: "left" | "center" | "right";
 		panels: ScheduleItem[];
 	};
@@ -33,8 +41,23 @@ interface ScheduleProps extends React.HTMLAttributes<HTMLElement> {
 
 /* ─────────────── Componente ─────────────── */
 export function Schedule({ data, participants, ...props }: ScheduleProps) {
-	const { title, panels } = data;
+	const {
+		title,
+		eventTitle,
+		eventDescription,
+		date,
+		showDateIcon,
+		time,
+		showTimeIcon,
+		location,
+		showLocationIcon,
+		panels,
+	} = data;
 	const contentAlign = data.panelContentAlign || "left";
+	const renderDateIcon = showDateIcon !== false;
+	const renderTimeIcon = showTimeIcon !== false;
+	const renderLocationIcon = showLocationIcon !== false;
+	const infoBoxTextClass = "text-gray-900";
 	const contentTextClass =
 		contentAlign === "center"
 			? "text-center"
@@ -68,6 +91,12 @@ export function Schedule({ data, participants, ...props }: ScheduleProps) {
 	const contentWrapClass = contentAlign === "center" ? "w-full" : "flex-1";
 	const bulletClass =
 		contentAlign === "center" ? "hidden" : contentAlign === "right" ? "" : "";
+	const metadataContainerClass =
+		contentAlign === "center"
+			? "flex gap-4 justify-center items-stretch flex-wrap"
+			: contentAlign === "right"
+				? "flex gap-4 justify-end items-stretch flex-wrap"
+				: "flex gap-4 justify-start items-stretch flex-wrap";
 	// Função auxiliar para localizar participante
 	const findParticipantById = (id: string): Participant | undefined => {
 		for (const group of participants.groups) {
@@ -81,15 +110,62 @@ export function Schedule({ data, participants, ...props }: ScheduleProps) {
 		// biome-ignore lint/nursery/useUniqueElementIds: anchor id for menu navigation
 		<section className="py-16" id="schedule" {...props}>
 			<div className="w-full mx-auto px-4 max-w-6xl">
-				<TitleSection name={title || "Programação Oficial"} />
+				<TitleSection name={title || "Programação"} />
 
-				<div className="relative">
+				{/* Metadados da Seção */}
+				{(eventTitle || eventDescription || date || time || location) && (
+					<div className=" p-6 border border-(--text) rounded-xl">
+						{eventTitle && (
+							<div className={`mb-4 ${contentTextClass}`}>
+								<h2 className="text-xl md:text-2xl font-bold text-(--text)">
+									{eventTitle}
+								</h2>
+							</div>
+						)}
+						{eventDescription && (
+							<div className={`mb-4 ${contentTextClass}`}>
+								<p className="text-lg text-(--text)/90">{eventDescription}</p>
+							</div>
+						)}
+						<div
+							className={`	${metadataContainerClass} md:divide-x divide-(--text)`}
+						>
+							{date && (
+								<div
+									className={`info-box flex items-center gap-2 px-4 py-2 ${infoBoxTextClass}`}
+								>
+									{renderDateIcon && <span className="text-2xl">🗓️</span>}
+									<span className="font-bold text-xl md:text-2xl">{date}</span>
+								</div>
+							)}
+							{time && (
+								<div
+									className={`info-box flex items-center gap-2 px-4 py-2 ${infoBoxTextClass}`}
+								>
+									{renderTimeIcon && <span className="text-2xl">⏰</span>}
+									<span className="font-bold text-xl md:text-2xl">{time}</span>
+								</div>
+							)}
+							{location && (
+								<div
+									className={`info-box flex items-center gap-2 px-4 py-2 text-center md:text-left ${infoBoxTextClass}`}
+								>
+									<span className="font-bold block text-lg md:text-xl text-pretty">
+										{renderLocationIcon ? `📍 ${location}` : location}
+									</span>
+								</div>
+							)}
+						</div>
+					</div>
+				)}
+
+				<div className="relative ">
 					{/* Linha vertical timeline */}
 					<div
-						className={`absolute top-0 bottom-0 w-px bg-(--text) z-0 ${timelineLineClass}`}
+						className={`absolute -top-6 bottom-0 w-px bg-(--text) z-0 ${timelineLineClass}`}
 					/>
 
-					<div className="space-y-12">
+					<div className="space-y-12 mt-6">
 						{panels.map((item) => (
 							<div key={`${item.id}-${item.title}`} className={rowClass}>
 								{/* ⏰ Horário */}
@@ -190,12 +266,11 @@ export function Schedule({ data, participants, ...props }: ScheduleProps) {
 										<div
 											className={`bg-(--surface) relative  ${contentTextClass}`}
 										>
-											<h3 className="text-2xl font-semibold text-(--text) mb-1 ">
+											<h3 className="text-1xl font-semibold text-(--text)">
 												{item.title}
 											</h3>
-
 											{item.description && (
-												<p className="text-(--text) opacity-80">
+												<p className="text-(--text) opacity-90">
 													{item.description}
 												</p>
 											)}

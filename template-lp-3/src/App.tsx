@@ -7,6 +7,8 @@ import { SeoHead } from "./components/seo-head";
 import { useParallaxAnimation } from "./hooks/use-parallax-animation";
 import { useThemeColors } from "./hooks/use-theme-colors";
 import { About } from "./modules/About";
+import { Agenda } from "./modules/Agenda";
+import { EditorialCoverage } from "./modules/EditorialCoverage";
 import { Footer } from "./modules/Footer";
 import { Hero } from "./modules/Hero";
 import { Participants } from "./modules/Participants";
@@ -102,6 +104,8 @@ export default function App() {
 	const hero = landing?.hero ?? {};
 	const participants = landing?.participants ?? {};
 	const schedule = landing?.schedule ?? {};
+	const agenda = landing?.agenda ?? {};
+	const editorialCoverage = landing?.editorialCoverage ?? {};
 	const subscribe = landing?.subscribe ?? {};
 	const provisionalSubscribe = landing?.provisionalSubscribe ?? {};
 	const previousEvents = landing?.previousEvents ?? {};
@@ -152,6 +156,86 @@ export default function App() {
 
 	/* ──────────────────────────────── */
 	/* 🧠 Render principal */
+	/* ──────────────────────────────── */
+	/* 🧠 Render principal */
+	const DEFAULT_SECTION_ORDER = [
+		"hero",
+		"about",
+		"participants",
+		"schedule",
+		"agenda",
+		"editorialCoverage",
+		"provisionalSubscribe",
+		"subscribe",
+		"previousEvents",
+		"sponsors",
+	];
+
+	const sectionOrder =
+		(landing.sectionOrder as string[]) || DEFAULT_SECTION_ORDER;
+
+	const isSectionVisible = (sectionId: string): boolean => {
+		const visibilityMap: Record<string, boolean> = {
+			hero: true,
+			about: landing.about?.visible !== false,
+			participants: participants?.visible !== false,
+			schedule: schedule?.visible !== false,
+			agenda: agenda?.visible !== false,
+			editorialCoverage: editorialCoverage?.visible !== false,
+			provisionalSubscribe:
+				provisionalSubscribe?.visible !== false &&
+				!!provisionalSubscribe?.iframeUrl,
+			subscribe: subscribe?.visible !== false,
+			previousEvents: previousEvents?.visible !== false,
+			sponsors: true,
+		};
+		return visibilityMap[sectionId] ?? false;
+	};
+
+	const sectionComponents: Record<string, React.ReactNode> = {
+		hero: isSectionVisible("hero") && (
+			<Hero data-parallax data={hero} general={general} />
+		),
+		about: landing.about?.visible !== false && (
+			<About data-parallax data={landing.about} />
+		),
+		participants: isSectionVisible("participants") && (
+			<Participants data-parallax data={participants} />
+		),
+		schedule: isSectionVisible("schedule") && (
+			<Schedule data={schedule} participants={participants} data-parallax />
+		),
+		agenda: isSectionVisible("agenda") && (
+			<Agenda data={agenda} data-parallax />
+		),
+		editorialCoverage: isSectionVisible("editorialCoverage") && (
+			<EditorialCoverage data={editorialCoverage} data-parallax />
+		),
+		provisionalSubscribe: isSectionVisible("provisionalSubscribe") && (
+			<ProvisionalSubscribe data={provisionalSubscribe} data-parallax />
+		),
+		subscribe: isSectionVisible("subscribe") && (
+			<Subscribe data={subscribe} data-parallax />
+		),
+		previousEvents: isSectionVisible("previousEvents") && (
+			<PreviousEvents data={previousEvents} data-parallax />
+		),
+		sponsors: (
+			<Sponsors
+				data={landing.sponsors}
+				showDividerLine={landing.sponsorsShowDividerLine}
+				general={general}
+				data-parallax
+			/>
+		),
+	};
+
+	const renderSection = (sectionId: string) => {
+		return sectionComponents[sectionId] || null;
+	};
+
+	const heroIsFirst = sectionOrder[0] === "hero";
+
 	return (
 		<>
 			{/* biome-ignore lint/nursery/useUniqueElementIds: required for anchor navigation */}
@@ -159,11 +243,11 @@ export default function App() {
 				id="home"
 				className="relative w-full min-h-screen transition-colors duration-500"
 				style={{
-					...backgroundStyle,
+					...(heroIsFirst ? backgroundStyle : {}),
 					fontFamily: "var(--font-family), sans-serif",
 				}}
 			>
-				{useFixedHeroBackground && (
+				{useFixedHeroBackground && heroIsFirst && (
 					<>
 						<div className="fixed w-full h-screen top-0 bg-linear-0 from-green-800/80 via-green-800/0 to-green-800 z-1" />
 						<div
@@ -175,41 +259,40 @@ export default function App() {
 				)}
 
 				<SeoHead seo={general} />
-				<div className="relative pb-8 z-50">
-					<div className="absolute inset-x-0 top-3 ">
-						<MenuTemplate landing={landing} />
+				{heroIsFirst && (
+					<div className="relative pb-8 z-50">
+						<div className="absolute inset-x-0 top-3 ">
+							<MenuTemplate landing={landing} />
+						</div>
+						{renderSection("hero")}
 					</div>
-					<Hero data-parallax data={hero} general={general} />
-				</div>
+				)}
+				{!heroIsFirst && (
+					<div className="relative z-50">
+						<div className="absolute inset-x-0 top-3 ">
+							<MenuTemplate landing={landing} />
+						</div>
+					</div>
+				)}
 				<div
 					className="relative rounded-t-3xl z-10 w-full md:w-10/12 mx-auto md:px-10 transition-colors duration-500"
 					style={{ backgroundColor: "var(--surface)", color: "var(--text)" }}
 				>
-					<About data-parallax data={landing.about} />
-
-					{participants?.visible && (
-						<Participants data-parallax data={participants} />
-					)}
-					{schedule?.visible && (
-						<Schedule
-							data={schedule}
-							participants={participants}
-							data-parallax
-						/>
-					)}
-					{provisionalSubscribe?.visible && provisionalSubscribe?.iframeUrl && (
-						<ProvisionalSubscribe data={provisionalSubscribe} data-parallax />
-					)}
-					{subscribe?.visible && <Subscribe data={subscribe} data-parallax />}
-					{previousEvents?.visible && (
-						<PreviousEvents data={previousEvents} data-parallax />
-					)}
-					<Sponsors
-						data={landing.sponsors}
-						showDividerLine={landing.sponsorsShowDividerLine}
-						general={general}
-						data-parallax
-					/>
+					{sectionOrder.map((sectionId, idx) => {
+						// Skip hero if it was already rendered at the top
+						if (heroIsFirst && sectionId === "hero") return null;
+						return renderSection(sectionId) ? (
+							<div
+								key={`${sectionId}-${
+									// biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
+									idx
+								}`}
+								style={{ display: "contents" }}
+							>
+								{renderSection(sectionId)}
+							</div>
+						) : null;
+					})}
 				</div>
 				<div className="relative z-10">
 					<Footer />

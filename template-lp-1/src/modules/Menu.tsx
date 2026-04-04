@@ -41,6 +41,16 @@ export function MenuTemplate({ landing }: MenuTemplateProps) {
 			visible: landing.schedule?.visible !== false,
 		},
 		{
+			id: "agenda",
+			label: "Agenda",
+			visible: landing.agenda?.visible !== false,
+		},
+		{
+			id: "editorial-coverage",
+			label: "Cobertura Editorial",
+			visible: landing.editorialCoverage?.visible !== false,
+		},
+		{
 			id: "provisional-subscribe",
 			label: "Inscrição",
 			visible:

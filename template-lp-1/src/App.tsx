@@ -7,6 +7,8 @@ import { SeoHead } from "./components/seo-head";
 import { useParallaxAnimation } from "./hooks/use-parallax-animation";
 import { useThemeColors } from "./hooks/use-theme-colors";
 import { About } from "./modules/About";
+import { Agenda } from "./modules/Agenda";
+import { EditorialCoverage } from "./modules/EditorialCoverage";
 import { Footer } from "./modules/Footer";
 import { Hero } from "./modules/Hero";
 import { Participants } from "./modules/Participants";
@@ -102,6 +104,8 @@ export default function App() {
 	const hero = landing?.hero ?? {};
 	const participants = landing?.participants ?? {};
 	const schedule = landing?.schedule ?? {};
+	const agenda = landing?.agenda ?? {};
+	const editorialCoverage = landing?.editorialCoverage ?? {};
 	const subscribe = landing?.subscribe ?? {};
 	const provisionalSubscribe = landing?.provisionalSubscribe ?? {};
 	const previousEvents = landing?.previousEvents ?? {};
@@ -153,6 +157,80 @@ export default function App() {
 
 	/* ──────────────────────────────── */
 	/* 🧠 Render principal */
+	const DEFAULT_SECTION_ORDER = [
+		"hero",
+		"about",
+		"participants",
+		"schedule",
+		"agenda",
+		"editorialCoverage",
+		"provisionalSubscribe",
+		"subscribe",
+		"previousEvents",
+		"sponsors",
+	];
+
+	const sectionOrder =
+		(landing.sectionOrder as string[]) || DEFAULT_SECTION_ORDER;
+
+	const isSectionVisible = (sectionId: string): boolean => {
+		const visibilityMap: Record<string, boolean> = {
+			hero: true,
+			about: landing.about?.visible !== false,
+			participants: participants?.visible !== false,
+			schedule: schedule?.visible !== false,
+			agenda: agenda?.visible !== false,
+			editorialCoverage: editorialCoverage?.visible !== false,
+			provisionalSubscribe:
+				provisionalSubscribe?.visible !== false &&
+				!!provisionalSubscribe?.iframeUrl,
+			subscribe: subscribe?.visible !== false,
+			previousEvents: previousEvents?.visible !== false,
+			sponsors: true,
+		};
+		return visibilityMap[sectionId] ?? false;
+	};
+
+	const sectionComponents: Record<string, React.ReactNode> = {
+		hero: <Hero data-parallax data={hero} general={general} />,
+		about: landing.about?.visible !== false && (
+			<About data-parallax data={landing.about} />
+		),
+		participants: participants?.visible && (
+			<Participants data-parallax data={participants} />
+		),
+		schedule: schedule?.visible && (
+			<Schedule data={schedule} participants={participants} data-parallax />
+		),
+		agenda: agenda?.visible && <Agenda data={agenda} data-parallax />,
+		editorialCoverage: editorialCoverage?.visible && (
+			<EditorialCoverage data={editorialCoverage} data-parallax />
+		),
+		provisionalSubscribe: provisionalSubscribe?.visible &&
+			provisionalSubscribe?.iframeUrl && (
+				<ProvisionalSubscribe data={provisionalSubscribe} data-parallax />
+			),
+		subscribe: subscribe?.visible && (
+			<Subscribe data={subscribe} data-parallax />
+		),
+		previousEvents: previousEvents?.visible && (
+			<PreviousEvents data={previousEvents} data-parallax />
+		),
+		sponsors: (
+			<Sponsors
+				data={landing.sponsors}
+				showDividerLine={landing.sponsorsShowDividerLine}
+				general={general}
+				data-parallax
+			/>
+		),
+	};
+
+	const renderSection = (sectionId: string) => {
+		if (!isSectionVisible(sectionId)) return null;
+		return sectionComponents[sectionId] || null;
+	};
+
 	return (
 		<>
 			{/* biome-ignore lint/nursery/useUniqueElementIds: required for anchor navigation */}
@@ -172,32 +250,19 @@ export default function App() {
 					<CookiePolicyModal text={general?.cookiePolicyText} />
 					<MenuTemplate landing={landing} />
 
-					<Hero data-parallax data={hero} general={general} />
-					<About data-parallax data={landing.about} />
-
-					{participants?.visible && (
-						<Participants data-parallax data={participants} />
+					{sectionOrder.map((sectionId, idx) =>
+						renderSection(sectionId) ? (
+							<div
+								key={`${sectionId}-${
+									// biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
+									idx
+								}`}
+								style={{ display: "contents" }}
+							>
+								{renderSection(sectionId)}
+							</div>
+						) : null,
 					)}
-					{schedule?.visible && (
-						<Schedule
-							data={schedule}
-							participants={participants}
-							data-parallax
-						/>
-					)}
-					{provisionalSubscribe?.visible && provisionalSubscribe?.iframeUrl && (
-						<ProvisionalSubscribe data={provisionalSubscribe} data-parallax />
-					)}
-					{subscribe?.visible && <Subscribe data={subscribe} data-parallax />}
-					{previousEvents?.visible && (
-						<PreviousEvents data={previousEvents} data-parallax />
-					)}
-					<Sponsors
-						data={landing.sponsors}
-						showDividerLine={landing.sponsorsShowDividerLine}
-						general={general}
-						data-parallax
-					/>
 				</div>
 				<Footer />
 			</div>
