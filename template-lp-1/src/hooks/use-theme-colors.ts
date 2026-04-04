@@ -9,7 +9,9 @@ interface ThemeColorsProps {
   surfaceColor?: string
   textColor?: string
   fontBody?: string
+  fontBodyStyle?: string
   fontTitle?: string
+  fontTitleStyle?: string
 }
 
 /* Utilitário: converte HEX (#rrggbb ou #rgb) para string "r g b" */
@@ -52,7 +54,9 @@ export function useThemeColors({
   surfaceColor,
   textColor,
   fontBody,
+  fontBodyStyle,
   fontTitle,
+  fontTitleStyle,
 }: ThemeColorsProps) {
   useEffect(() => {
     const root = document.documentElement
@@ -79,6 +83,8 @@ export function useThemeColors({
       '--surface-rgb': hexToRgb(surfaceColor),
       '--text': textColor,
       '--text-rgb': hexToRgb(textColor),
+      '--font-body-weight': fontBodyStyle || '400',
+      '--font-title-weight': fontTitleStyle || '700',
     }
 
     Object.entries(vars).forEach(([key, value]) => {
@@ -131,6 +137,8 @@ export function useThemeColors({
     surfaceColor,
     textColor,
     fontBody,
+    fontBodyStyle,
     fontTitle,
+    fontTitleStyle,
   ])
 }
