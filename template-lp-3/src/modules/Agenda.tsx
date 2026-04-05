@@ -120,11 +120,11 @@ export function Agenda({ data, ...props }: AgendaProps) {
 				baseClasses += "bg-(--text)/5 opacity-50 cursor-not-allowed";
 			}
 		} else {
-			// Futuro preenchido: opacity-100, Futuro vazio: opacity-60
+			// Futuro preenchido: opacity-100 + bg-white, Futuro vazio: opacity-60
 			if (isEmpty) {
 				baseClasses += `opacity-60 bg-(--text)/5 ${isHorizontal ? "hover:bg-(--text)/10 hover:cursor-pointer" : "hover:bg-(--text)/10 hover:cursor-pointer"}`;
 			} else {
-				baseClasses += `opacity-100 bg-(--text)/5 ${isHorizontal ? "hover:bg-(--text)/10 hover:cursor-pointer" : "hover:bg-(--text)/10 hover:cursor-pointer"}`;
+				baseClasses += `opacity-100 bg-white ${isHorizontal ? "hover:bg-(--text)/5 hover:cursor-pointer" : "hover:bg-(--text)/5 hover:cursor-pointer"}`;
 			}
 		}
 

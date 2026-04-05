@@ -120,11 +120,11 @@ export function Agenda({ data, ...props }: AgendaProps) {
 				baseClasses += "bg-(--text)/5 opacity-50 cursor-not-allowed";
 			}
 		} else {
-			// Futuro preenchido: opacity-100, Futuro vazio: opacity-60
+			// Futuro preenchido: opacity-100 + bg-white, Futuro vazio: opacity-60
 			if (isEmpty) {
 				baseClasses += `opacity-60 bg-(--text)/5 ${isHorizontal ? "hover:bg-(--text)/10 hover:cursor-pointer" : "hover:bg-(--text)/10 hover:cursor-pointer"}`;
 			} else {
-				baseClasses += `opacity-100 bg-(--text)/5 ${isHorizontal ? "hover:bg-(--text)/10 hover:cursor-pointer" : "hover:bg-(--text)/10 hover:cursor-pointer"}`;
+				baseClasses += `opacity-100 bg-white ${isHorizontal ? "hover:bg-(--text)/5 hover:cursor-pointer" : "hover:bg-(--text)/5 hover:cursor-pointer"}`;
 			}
 		}
 
@@ -142,6 +142,7 @@ export function Agenda({ data, ...props }: AgendaProps) {
 					<Carousel
 						className="w-full max-w-6xl mx-auto z-10 relative"
 						ref={carouselRef}
+						opts={{ loop: true }}
 					>
 						<CarouselContent className="gap-4">
 							{sortedMonths.map((month) => {
@@ -155,7 +156,7 @@ export function Agenda({ data, ...props }: AgendaProps) {
 										key={month.monthNumber}
 										data-carousel-item
 										className={`basis-60 transition-all ${
-											isCurrentMonth ? "opacity-100" : "opacity-75"
+											isCurrentMonth ? "opacity-100" : ""
 										}`}
 									>
 										<div
