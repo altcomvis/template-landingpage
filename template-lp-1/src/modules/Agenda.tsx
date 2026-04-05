@@ -44,7 +44,9 @@ export function Agenda({ data, ...props }: AgendaProps) {
 
 	// Detecta o mês atual e scroll para ele
 	useEffect(() => {
-		const currentMonth = (new Date().getMonth() + 1).toString().padStart(2, "0");
+		const currentMonth = (new Date().getMonth() + 1)
+			.toString()
+			.padStart(2, "0");
 		const currentMonthIndex = sortedMonths.findIndex(
 			(m) => m.monthNumber === currentMonth,
 		);
@@ -65,6 +67,25 @@ export function Agenda({ data, ...props }: AgendaProps) {
 			}, 100);
 		}
 	}, [sortedMonths]);
+
+	// Verifica se um evento já passou
+	const isEventPast = (monthNumber: string, eventDay: string): boolean => {
+		const currentMonth = (new Date().getMonth() + 1)
+			.toString()
+			.padStart(2, "0");
+		const currentDay = new Date().getDate();
+
+		const month = parseInt(monthNumber);
+		const currentM = parseInt(currentMonth);
+		const day = parseInt(eventDay);
+
+		// Se o mês é anterior ao atual, evento passou
+		if (month < currentM) return true;
+		// Se o mês é posterior ao atual, evento não passou
+		if (month > currentM) return false;
+		// Se é o mês atual, compara o dia
+		return day < currentDay;
+	};
 
 	return (
 		// biome-ignore lint/nursery/useUniqueElementIds: anchor id for menu navigation
@@ -106,53 +127,55 @@ export function Agenda({ data, ...props }: AgendaProps) {
 												}`}
 											>
 												{month.name}
-												{isCurrentMonth && (
-													<span className="text-sm ml-2 inline-block px-2 py-1 bg-(--title) text-white rounded">
-														Atual
-													</span>
-												)}
 											</h3>
 
 											{/* Events em vertical dentro do mês */}
 											<div className="space-y-3">
 												{month.events.length > 0 ? (
-													month.events.map((event) => (
-														<div
-															key={event.id}
-															className="p-3 bg-(--text)/5 rounded-md hover:bg-(--text)/10 transition-colors"
-														>
-															<div className="flex gap-2 mb-2">
-																<span className="text-sm font-bold text-(--dark)">
-																	{event.day}
-																</span>
-																<h4 className="text-sm font-semibold text-(--title) line-clamp-2">
-																	{event.title || (
-																		<span className="italic opacity-50">
-																			Sem título
-																		</span>
-																	)}
-																</h4>
+													month.events.map((event) => {
+														const isPast = isEventPast(month.monthNumber, event.day);
+														return (
+															<div
+																key={event.id}
+																className={`p-3 rounded-md transition-all ${
+																	isPast
+																		? "bg-(--text)/5 opacity-50 cursor-not-allowed"
+																		: "bg-(--text)/5 hover:bg-(--text)/10 hover:cursor-pointer"
+																}`}
+															>
+																<div className="flex gap-2 mb-2">
+																	<span className="text-sm font-bold text-(--dark)">
+																		{event.day}
+																	</span>
+																	<h4 className="text-sm font-semibold text-(--title) line-clamp-3">
+																		{event.title || (
+																			<span className="italic opacity-50">
+																				Sem título
+																			</span>
+																		)}
+																	</h4>
+																</div>
+
+																{event.time && (
+																	<p className="text-xs text-(--text)/70 mb-1">
+																		⏰ {event.time}
+																	</p>
+																)}
+
+																{event.location && (
+																	<p className="text-xs text-(--text)/70 mb-1">
+																		📍 {event.location}
+																	</p>
+																)}
+
+																{event.description && (
+																	<p className="text-xs text-(--text)/60 line-clamp-2">
+																		{event.description}
+																	</p>
+																)}
 															</div>
-
-															{event.time && (
-																<p className="text-xs text-(--text)/70 mb-1">
-																	⏰ {event.time}
-																</p>
-															)}
-
-															{event.location && (
-																<p className="text-xs text-(--text)/70 mb-1">
-																	📍 {event.location}
-																</p>
-															)}
-
-															{event.description && (
-																<p className="text-xs text-(--text)/60 line-clamp-2">
-																	{event.description}
-																</p>
-															)}
-														</div>
-													))
+														);
+													})
 												) : (
 													<div className="p-4 bg-(--text)/5 rounded-md text-center">
 														<CalendarOff className="size-full opacity-5" />
@@ -195,54 +218,56 @@ export function Agenda({ data, ...props }: AgendaProps) {
 									}`}
 								>
 									{month.name}
-									{isCurrentMonth && (
-										<span className="text-sm ml-2 inline-block px-2 py-1 bg-(--title) text-white rounded">
-											Atual
-										</span>
-									)}
 								</h3>
 
 								{/* Horizontal scroll para eventos */}
 								<div className="overflow-x-auto">
 									<div className="flex gap-3 pb-2 min-w-min">
 										{month.events.length > 0 ? (
-											month.events.map((event) => (
-												<div
-													key={event.id}
-													className="shrink-0 w-64 p-3 bg-(--text)/5 rounded-md"
-												>
-													<div className="flex gap-2 mb-2">
-														<span className="text-sm font-bold text-(--dark)">
-															{event.day}
-														</span>
-														<h4 className="text-sm font-semibold text-(--title) line-clamp-1">
-															{event.title || (
-																<span className="italic opacity-50">
-																	Sem título
-																</span>
-															)}
-														</h4>
+											month.events.map((event) => {
+												const isPast = isEventPast(month.monthNumber, event.day);
+												return (
+													<div
+														key={event.id}
+														className={`shrink-0 w-64 p-3 rounded-md transition-all ${
+															isPast
+																? "bg-(--text)/5 opacity-50 cursor-not-allowed"
+																: "bg-(--text)/5 hover:bg-(--text)/10 hover:cursor-pointer"
+														}`}
+													>
+														<div className="flex gap-2 mb-2">
+															<span className="text-sm font-bold text-(--dark)">
+																{event.day}
+															</span>
+															<h4 className="text-sm font-semibold text-(--title) line-clamp-3">
+																{event.title || (
+																	<span className="italic opacity-50">
+																		Sem título
+																	</span>
+																)}
+															</h4>
+														</div>
+
+														{event.time && (
+															<p className="text-xs text-(--text)/70 mb-1 line-clamp-1">
+																⏰ {event.time}
+															</p>
+														)}
+
+														{event.location && (
+															<p className="text-xs text-(--text)/70 mb-1 line-clamp-1">
+																📍 {event.location}
+															</p>
+														)}
+
+														{event.description && (
+															<p className="text-xs text-(--text)/60 line-clamp-2">
+																{event.description}
+															</p>
+														)}
 													</div>
-
-													{event.time && (
-														<p className="text-xs text-(--text)/70 mb-1 line-clamp-1">
-															⏰ {event.time}
-														</p>
-													)}
-
-													{event.location && (
-														<p className="text-xs text-(--text)/70 mb-1 line-clamp-1">
-															📍 {event.location}
-														</p>
-													)}
-
-													{event.description && (
-														<p className="text-xs text-(--text)/60 line-clamp-2">
-															{event.description}
-														</p>
-													)}
-												</div>
-											))
+												);
+											})
 										) : (
 											<div className="shrink-0 w-64 p-4 bg-(--text)/5 rounded-md text-center opacity-40">
 												<CalendarOff className="size-full opacity-10" />
