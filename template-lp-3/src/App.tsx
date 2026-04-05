@@ -123,8 +123,11 @@ export default function App() {
 		backgroundColor: general.backgroundColor,
 		surfaceColor: general.surfaceColor,
 		textColor: general.textColor,
+		titleColor: general.titleColor,
 		fontBody: general.fontBody,
+		fontBodyStyle: general.fontBodyStyle,
 		fontTitle: general.fontTitle,
+		fontTitleStyle: general.fontTitleStyle,
 	});
 
 	/* ──────────────────────────────── */
@@ -252,7 +255,7 @@ export default function App() {
 						<div
 							className="fixed w-full h-screen top-0 z-1"
 							style={{
-								backgroundImage: `linear-gradient(to bottom, rgb(var(--surface-rgb, 255 255 255) / 0.8), rgb(var(--surface-rgb, 255 255 255) / 0), rgb(var(--surface-rgb, 255 255 255)))`
+								backgroundImage: `linear-gradient(to bottom, rgb(var(--mybackground-rgb, 255 255 255) / 0.8), rgb(var(--mybackground-rgb, 255 255 255) / 0), rgb(var(--mybackground-rgb, 255 255 255)))`,
 							}}
 						/>
 						<div
@@ -260,7 +263,7 @@ export default function App() {
 							className="fixed inset-0 z-0 bg-top bg-no-repeat bg-cover"
 							style={{
 								backgroundImage: `url('${heroBackgroundUrl}')`,
-								backgroundColor: `rgb(var(--surface-rgb, 255 255 255) / 0.3)`
+								backgroundColor: `rgb(var(--mybackground-rgb, 255 255 255) / 0.3)`,
 							}}
 						/>
 					</>

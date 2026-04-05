@@ -10,7 +10,9 @@
 		"titleColor": "#333333",
 		"backgroundMode": "solid",
 		"fontBody": "Poppins",
+		"fontBodyStyle": "400",
 		"fontTitle": "Anton",
+		"fontTitleStyle": "700",
 		"enableParallax": true,
 		"seoTitle": "Template Landing Page Editora Globo Negócios",
 		"seoDescription": "O principal evento sobre inovação e sustentabilidade no Brasil, realizado pela Editora Globo.",
@@ -20,7 +22,7 @@
 		"directoryName": "template-landing-page",
 		"pixelMeta": "4392394204320499",
 		"seoImage": "/public/img/cover.webp",
-		"cookiePolicyText": "Usamos cookies para melhorar sua experiência, analisar tráfego e personalizar conteúdo. Ao continuar navegando, você concorda com o uso de cookies. Saiba mais na <a href='https://privacidade.globo.com/privacy-policy/' target='_blank' rel='noopener' class='underline'>Política de Privacidade</a>."
+		"cookiePolicyText": "Usamos cookies para melhorar sua experiência, analisar tráfego e personalizar conteúdo. Ao continuar navegando, você concorda com o uso de cookies. Saiba mais na <a href='https://privacidade.globo.com/privacy-policy/' target='_blank' rel='noopener' class='underline'>Política de Privacidade</a>"
 	},
 	"hero": {
 		"logo": "marca-do-projeto.webp",

@@ -123,8 +123,11 @@ export default function App() {
 		backgroundColor: general.backgroundColor,
 		surfaceColor: general.surfaceColor,
 		textColor: general.textColor,
+		titleColor: general.titleColor,
 		fontBody: general.fontBody,
+		fontBodyStyle: general.fontBodyStyle,
 		fontTitle: general.fontTitle,
+		fontTitleStyle: general.fontTitleStyle,
 	});
 
 	/* ──────────────────────────────── */
