@@ -15,6 +15,17 @@ interface ThemeColorsProps {
 	fontTitleStyle?: string;
 }
 
+/* Utilitário: extrai weight e style (italic) de um valor como "700italic" */
+function parseVariant(variant?: string): { weight: string; style: string } {
+	if (!variant) return { weight: "400", style: "normal" };
+
+	const isItalic = variant.includes("italic");
+	const weight = variant.replace("italic", "").trim() || "400";
+	const style = isItalic ? "italic" : "normal";
+
+	return { weight, style };
+}
+
 /* Utilitário: converte HEX (#rrggbb ou #rgb) para string "r g b" */
 function hexToRgb(hex?: string): string | undefined {
 	if (!hex) return undefined;
@@ -65,6 +76,10 @@ export function useThemeColors({
 		const bodyFontStack = buildFontStack(fontBody);
 		const titleFontStack = buildFontStack(fontTitle);
 
+		// Parse font weights and styles
+		const bodyVariant = parseVariant(fontBodyStyle);
+		const titleVariant = parseVariant(fontTitleStyle);
+
 		root.style.setProperty("--font-title", titleFontStack);
 		root.style.setProperty("--font-body", bodyFontStack);
 		root.style.setProperty("--font-family", bodyFontStack);
@@ -87,8 +102,10 @@ export function useThemeColors({
 			"--text-rgb": hexToRgb(textColor),
 			"--title": titleColor || textColor,
 			"--title-rgb": hexToRgb(titleColor || textColor),
-			"--font-body-weight": fontBodyStyle || "400",
-			"--font-title-weight": fontTitleStyle || "700",
+			"--font-body-weight": bodyVariant.weight,
+			"--font-body-style": bodyVariant.style,
+			"--font-title-weight": titleVariant.weight,
+			"--font-title-style": titleVariant.style,
 		};
 
 		Object.entries(vars).forEach(([key, value]) => {

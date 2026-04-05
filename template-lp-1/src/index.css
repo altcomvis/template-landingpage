@@ -123,6 +123,7 @@
 		@apply bg-background text-foreground overflow-x-hidden;
 		font-family: var(--font-family), var(--font-body), sans-serif;
 		font-weight: var(--font-body-weight, 400);
+		font-style: var(--font-body-style, normal);
 	}
 	h1,
 	h2,
@@ -132,6 +133,7 @@
 	h6 {
 		font-family: var(--font-family-title), var(--font-title), sans-serif;
 		font-weight: var(--font-title-weight, 700);
+		font-style: var(--font-title-style, normal);
 	}
 }
 
