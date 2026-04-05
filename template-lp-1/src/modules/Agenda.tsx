@@ -120,8 +120,12 @@ export function Agenda({ data, ...props }: AgendaProps) {
 				baseClasses += "bg-(--text)/5 opacity-50 cursor-not-allowed";
 			}
 		} else {
-			// Futuro: sempre ativo com hover effects
-			baseClasses += `bg-(--text)/5 ${isHorizontal ? "hover:bg-(--text)/10 hover:cursor-pointer" : "hover:bg-(--text)/10 hover:cursor-pointer"}`;
+			// Futuro preenchido: opacity-100, Futuro vazio: opacity-60
+			if (isEmpty) {
+				baseClasses += `opacity-60 bg-(--text)/5 ${isHorizontal ? "hover:bg-(--text)/10 hover:cursor-pointer" : "hover:bg-(--text)/10 hover:cursor-pointer"}`;
+			} else {
+				baseClasses += `opacity-100 bg-(--text)/5 ${isHorizontal ? "hover:bg-(--text)/10 hover:cursor-pointer" : "hover:bg-(--text)/10 hover:cursor-pointer"}`;
+			}
 		}
 
 		return baseClasses;
@@ -134,8 +138,11 @@ export function Agenda({ data, ...props }: AgendaProps) {
 				<TitleSection name={title || "Agenda"} />
 
 				{/* Desktop: Carousel com meses em colunas */}
-				<div className="hidden md:block bg-(--mybackground) p-6 rounded-lg">
-					<Carousel className="w-full" ref={carouselRef}>
+				<div className="hidden md:block container w-11/12 px-4 md:px-14 mx-auto py-16 bg-(--mybackground) md:rounded-xl relative overflow-hidden">
+					<Carousel
+						className="w-full max-w-6xl mx-auto z-10 relative"
+						ref={carouselRef}
+					>
 						<CarouselContent className="gap-4">
 							{sortedMonths.map((month) => {
 								const currentMonth = (new Date().getMonth() + 1)
@@ -174,7 +181,10 @@ export function Agenda({ data, ...props }: AgendaProps) {
 												{month.events.length > 0 ? (
 													month.events.map((event) => {
 														const isEmpty = isEventEmpty(event);
-														const isPast = isEventPast(month.monthNumber, event.day);
+														const isPast = isEventPast(
+															month.monthNumber,
+															event.day,
+														);
 
 														return (
 															<div
@@ -269,7 +279,10 @@ export function Agenda({ data, ...props }: AgendaProps) {
 										{month.events.length > 0 ? (
 											month.events.map((event) => {
 												const isEmpty = isEventEmpty(event);
-												const isPast = isEventPast(month.monthNumber, event.day);
+												const isPast = isEventPast(
+													month.monthNumber,
+													event.day,
+												);
 
 												return (
 													<div
@@ -283,7 +296,9 @@ export function Agenda({ data, ...props }: AgendaProps) {
 															<h4 className="text-sm font-semibold text-(--title) line-clamp-3">
 																{event.title || (
 																	<span className="italic opacity-50">
-																		{isPast && isEmpty ? "Evento vazio" : "Sem título"}
+																		{isPast && isEmpty
+																			? "Evento vazio"
+																			: "Sem título"}
 																	</span>
 																)}
 															</h4>

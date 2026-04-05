@@ -120,8 +120,12 @@ export function Agenda({ data, ...props }: AgendaProps) {
 				baseClasses += "bg-(--text)/5 opacity-50 cursor-not-allowed";
 			}
 		} else {
-			// Futuro: sempre ativo com hover effects
-			baseClasses += `bg-(--text)/5 ${isHorizontal ? "hover:bg-(--text)/10 hover:cursor-pointer" : "hover:bg-(--text)/10 hover:cursor-pointer"}`;
+			// Futuro preenchido: opacity-100, Futuro vazio: opacity-60
+			if (isEmpty) {
+				baseClasses += `opacity-60 bg-(--text)/5 ${isHorizontal ? "hover:bg-(--text)/10 hover:cursor-pointer" : "hover:bg-(--text)/10 hover:cursor-pointer"}`;
+			} else {
+				baseClasses += `opacity-100 bg-(--text)/5 ${isHorizontal ? "hover:bg-(--text)/10 hover:cursor-pointer" : "hover:bg-(--text)/10 hover:cursor-pointer"}`;
+			}
 		}
 
 		return baseClasses;
