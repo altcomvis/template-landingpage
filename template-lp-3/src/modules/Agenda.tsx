@@ -57,7 +57,7 @@ export function Agenda({ data, ...props }: AgendaProps) {
 				const carouselItems = carouselRef.current?.querySelectorAll(
 					"[data-carousel-item]",
 				);
-				if (carouselItems && carouselItems[currentMonthIndex]) {
+				if (carouselItems?.[currentMonthIndex]) {
 					carouselItems[currentMonthIndex].scrollIntoView({
 						behavior: "smooth",
 						block: "nearest",
@@ -92,7 +92,8 @@ export function Agenda({ data, ...props }: AgendaProps) {
 		const hasTitle = event.title && event.title.trim().length > 0;
 		const hasTime = event.time && event.time.trim().length > 0;
 		const hasLocation = event.location && event.location.trim().length > 0;
-		const hasDescription = event.description && event.description.trim().length > 0;
+		const hasDescription =
+			event.description && event.description.trim().length > 0;
 
 		// É vazio se não tem nenhuma informação útil além do dia
 		return !hasTitle && !hasTime && !hasLocation && !hasDescription;
@@ -109,12 +110,17 @@ export function Agenda({ data, ...props }: AgendaProps) {
 
 		let baseClasses = "p-3 rounded-md transition-all ";
 
-		if (isEmpty) {
-			baseClasses +=
-				"bg-yellow-500/15 opacity-40 cursor-not-allowed border border-dashed border-yellow-500/40";
-		} else if (isPast) {
-			baseClasses += "bg-(--text)/5 opacity-50 cursor-not-allowed";
+		if (isPast) {
+			if (isEmpty) {
+				// Passado vazio: amarelo disabled
+				baseClasses +=
+					"bg-yellow-500/15 opacity-40 cursor-not-allowed border border-dashed border-yellow-500/40";
+			} else {
+				// Passado com dados: cinza disabled
+				baseClasses += "bg-(--text)/5 opacity-50 cursor-not-allowed";
+			}
 		} else {
+			// Futuro: sempre ativo com hover effects
 			baseClasses += `bg-(--text)/5 ${isHorizontal ? "hover:bg-(--text)/10 hover:cursor-pointer" : "hover:bg-(--text)/10 hover:cursor-pointer"}`;
 		}
 
@@ -123,14 +129,14 @@ export function Agenda({ data, ...props }: AgendaProps) {
 
 	return (
 		// biome-ignore lint/nursery/useUniqueElementIds: anchor id for menu navigation
-		<section className="py-16 bg-(--mybackground)" id="agenda" {...props}>
+		<section className="py-16 " id="agenda" {...props}>
 			<div className="w-full mx-auto max-w-6xl px-4">
 				<TitleSection name={title || "Agenda"} />
 
 				{/* Desktop: Carousel com meses em colunas */}
-				<div className="hidden md:block">
+				<div className="hidden md:block bg-(--mybackground) p-6 rounded-lg">
 					<Carousel className="w-full" ref={carouselRef}>
-						<CarouselContent className="gap-4">
+						<CarouselContent className="gap-4 px-8">
 							{sortedMonths.map((month) => {
 								const currentMonth = (new Date().getMonth() + 1)
 									.toString()
@@ -172,7 +178,10 @@ export function Agenda({ data, ...props }: AgendaProps) {
 														return (
 															<div
 																key={event.id}
-																className={getEventClasses(month.monthNumber, event)}
+																className={getEventClasses(
+																	month.monthNumber,
+																	event,
+																)}
 															>
 																<div className="flex gap-2 mb-2">
 																	<span className="text-sm font-bold text-(--dark)">
@@ -272,9 +281,7 @@ export function Agenda({ data, ...props }: AgendaProps) {
 															<h4 className="text-sm font-semibold text-(--title) line-clamp-3">
 																{event.title || (
 																	<span className="italic opacity-50">
-																		{isEmpty
-																			? "Evento vazio"
-																			: "Sem título"}
+																		{isEmpty ? "Evento vazio" : "Sem título"}
 																	</span>
 																)}
 															</h4>
