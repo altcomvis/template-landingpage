@@ -87,6 +87,40 @@ export function Agenda({ data, ...props }: AgendaProps) {
 		return day < currentDay;
 	};
 
+	// Verifica se um evento está vazio (sem dados úteis)
+	const isEventEmpty = (event: AgendaEvent): boolean => {
+		const hasTitle = event.title && event.title.trim().length > 0;
+		const hasTime = event.time && event.time.trim().length > 0;
+		const hasLocation = event.location && event.location.trim().length > 0;
+		const hasDescription = event.description && event.description.trim().length > 0;
+
+		// É vazio se não tem nenhuma informação útil além do dia
+		return !hasTitle && !hasTime && !hasLocation && !hasDescription;
+	};
+
+	// Retorna as classes CSS para o estado do evento
+	const getEventClasses = (
+		monthNumber: string,
+		event: AgendaEvent,
+		isHorizontal = false,
+	): string => {
+		const isPast = isEventPast(monthNumber, event.day);
+		const isEmpty = isEventEmpty(event);
+
+		let baseClasses = "p-3 rounded-md transition-all ";
+
+		if (isEmpty) {
+			baseClasses +=
+				"bg-yellow-500/15 opacity-40 cursor-not-allowed border border-dashed border-yellow-500/40";
+		} else if (isPast) {
+			baseClasses += "bg-(--text)/5 opacity-50 cursor-not-allowed";
+		} else {
+			baseClasses += `bg-(--text)/5 ${isHorizontal ? "hover:bg-(--text)/10 hover:cursor-pointer" : "hover:bg-(--text)/10 hover:cursor-pointer"}`;
+		}
+
+		return baseClasses;
+	};
+
 	return (
 		// biome-ignore lint/nursery/useUniqueElementIds: anchor id for menu navigation
 		<section className="py-16 bg-(--mybackground)" id="agenda" {...props}>
@@ -133,15 +167,12 @@ export function Agenda({ data, ...props }: AgendaProps) {
 											<div className="space-y-3">
 												{month.events.length > 0 ? (
 													month.events.map((event) => {
-														const isPast = isEventPast(month.monthNumber, event.day);
+														const isEmpty = isEventEmpty(event);
+
 														return (
 															<div
 																key={event.id}
-																className={`p-3 rounded-md transition-all ${
-																	isPast
-																		? "bg-(--text)/5 opacity-50 cursor-not-allowed"
-																		: "bg-(--text)/5 hover:bg-(--text)/10 hover:cursor-pointer"
-																}`}
+																className={getEventClasses(month.monthNumber, event)}
 															>
 																<div className="flex gap-2 mb-2">
 																	<span className="text-sm font-bold text-(--dark)">
@@ -150,7 +181,9 @@ export function Agenda({ data, ...props }: AgendaProps) {
 																	<h4 className="text-sm font-semibold text-(--title) line-clamp-3">
 																		{event.title || (
 																			<span className="italic opacity-50">
-																				Sem título
+																				{isEmpty
+																					? "Evento vazio"
+																					: "Sem título"}
 																			</span>
 																		)}
 																	</h4>
@@ -225,15 +258,12 @@ export function Agenda({ data, ...props }: AgendaProps) {
 									<div className="flex gap-3 pb-2 min-w-min">
 										{month.events.length > 0 ? (
 											month.events.map((event) => {
-												const isPast = isEventPast(month.monthNumber, event.day);
+												const isEmpty = isEventEmpty(event);
+
 												return (
 													<div
 														key={event.id}
-														className={`shrink-0 w-64 p-3 rounded-md transition-all ${
-															isPast
-																? "bg-(--text)/5 opacity-50 cursor-not-allowed"
-																: "bg-(--text)/5 hover:bg-(--text)/10 hover:cursor-pointer"
-														}`}
+														className={`shrink-0 w-64 ${getEventClasses(month.monthNumber, event, true)}`}
 													>
 														<div className="flex gap-2 mb-2">
 															<span className="text-sm font-bold text-(--dark)">
@@ -242,7 +272,9 @@ export function Agenda({ data, ...props }: AgendaProps) {
 															<h4 className="text-sm font-semibold text-(--title) line-clamp-3">
 																{event.title || (
 																	<span className="italic opacity-50">
-																		Sem título
+																		{isEmpty
+																			? "Evento vazio"
+																			: "Sem título"}
 																	</span>
 																)}
 															</h4>
