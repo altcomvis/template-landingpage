@@ -136,7 +136,7 @@ export function Agenda({ data, ...props }: AgendaProps) {
 				{/* Desktop: Carousel com meses em colunas */}
 				<div className="hidden md:block bg-(--mybackground) p-6 rounded-lg">
 					<Carousel className="w-full" ref={carouselRef}>
-						<CarouselContent className="gap-4 px-8">
+						<CarouselContent className="gap-4">
 							{sortedMonths.map((month) => {
 								const currentMonth = (new Date().getMonth() + 1)
 									.toString()
@@ -174,6 +174,7 @@ export function Agenda({ data, ...props }: AgendaProps) {
 												{month.events.length > 0 ? (
 													month.events.map((event) => {
 														const isEmpty = isEventEmpty(event);
+														const isPast = isEventPast(month.monthNumber, event.day);
 
 														return (
 															<div
@@ -190,7 +191,7 @@ export function Agenda({ data, ...props }: AgendaProps) {
 																	<h4 className="text-sm font-semibold text-(--title) line-clamp-3">
 																		{event.title || (
 																			<span className="italic opacity-50">
-																				{isEmpty
+																				{isPast && isEmpty
 																					? "Evento vazio"
 																					: "Sem título"}
 																			</span>
@@ -268,6 +269,7 @@ export function Agenda({ data, ...props }: AgendaProps) {
 										{month.events.length > 0 ? (
 											month.events.map((event) => {
 												const isEmpty = isEventEmpty(event);
+												const isPast = isEventPast(month.monthNumber, event.day);
 
 												return (
 													<div
@@ -281,7 +283,7 @@ export function Agenda({ data, ...props }: AgendaProps) {
 															<h4 className="text-sm font-semibold text-(--title) line-clamp-3">
 																{event.title || (
 																	<span className="italic opacity-50">
-																		{isEmpty ? "Evento vazio" : "Sem título"}
+																		{isPast && isEmpty ? "Evento vazio" : "Sem título"}
 																	</span>
 																)}
 															</h4>
