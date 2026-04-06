@@ -77,6 +77,16 @@ npm run build
 
 👉 Isso cria a pasta `dist/` com os arquivos finais para publicação.
 
+## 🚨 Pré-Push Obrigatório (Repos)
+
+Antes de subir mudanças para os repositórios, atualize sempre os ZIPs embutidos no `admin-pages/public`:
+
+```bash
+bash scripts/prepare-repos-push.sh
+```
+
+Esse comando executa o `build-and-deploy.sh` para manter os arquivos `template-lp-*.zip` sincronizados com o código mais recente dos templates.
+
 ---
 
 ## ⬆️ Publicar
