@@ -1,0 +1,10 @@
+{
+	"buildCommand": "npm run build",
+	"outputDirectory": "dist",
+	"framework": "vite",
+	"github": {
+		"enabled": true,
+		"autoAlias": false
+	},
+	"productionBranch": "production"
+}
