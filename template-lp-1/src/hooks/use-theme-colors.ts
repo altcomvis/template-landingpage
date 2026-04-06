@@ -57,6 +57,12 @@ function buildGoogleFontsFamily(font: string): string {
 	return font.trim().replace(/\s+/g, "+");
 }
 
+function buildGoogleFontsParam(font: string): string {
+	const family = buildGoogleFontsFamily(font);
+	// Include normal and italic variants to avoid Safari fallback quirks.
+	return `family=${family}:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500;1,600;1,700;1,800`;
+}
+
 export function useThemeColors({
 	primaryColor,
 	secondaryColor,
@@ -112,33 +118,37 @@ export function useThemeColors({
 			if (value) root.style.setProperty(key, value);
 		});
 
-		// ✅ Fonte principal (fontBody)
-		if (fontBody) {
-			const id = "dynamic-google-font-main";
-			document.getElementById(id)?.remove();
+		const googleFontsId = "dynamic-google-fonts";
+		const googleFontParams = Array.from(
+			new Set([fontBody, fontTitle].filter(Boolean) as string[]),
+		).map(buildGoogleFontsParam);
 
+		document.getElementById(googleFontsId)?.remove();
+		if (googleFontParams.length > 0) {
 			const link = document.createElement("link");
-			link.id = id;
+			link.id = googleFontsId;
 			link.rel = "stylesheet";
-			link.href = `https://fonts.googleapis.com/css2?family=${buildGoogleFontsFamily(
-				fontBody,
-			)}:wght@400;500;600;700&display=swap`;
+			link.href = `https://fonts.googleapis.com/css2?${googleFontParams.join("&")}&display=swap`;
 			document.head.appendChild(link);
 		}
 
-		// ✅ Fonte de títulos (fontTitle)
-		if (fontTitle) {
-			const id = "dynamic-google-font-title";
-			document.getElementById(id)?.remove();
-
-			const link = document.createElement("link");
-			link.id = id;
-			link.rel = "stylesheet";
-			link.href = `https://fonts.googleapis.com/css2?family=${buildGoogleFontsFamily(
-				fontTitle,
-			)}:wght@600;700;800&display=swap`;
-			document.head.appendChild(link);
-		}
+		const styleId = "dynamic-runtime-font-overrides";
+		document.getElementById(styleId)?.remove();
+		const style = document.createElement("style");
+		style.id = styleId;
+		style.textContent = `
+			body {
+				font-family: ${bodyFontStack} !important;
+				font-weight: ${bodyVariant.weight};
+				font-style: ${bodyVariant.style};
+			}
+			h1, h2, h3, h4, h5, h6, .font-title {
+				font-family: ${titleFontStack} !important;
+				font-weight: ${titleVariant.weight};
+				font-style: ${titleVariant.style};
+			}
+		`;
+		document.head.appendChild(style);
 
 		// ✅ Força atualização após leve atraso (garante fontTitle)
 		const timeout = setTimeout(() => {
@@ -148,7 +158,9 @@ export function useThemeColors({
 			root.style.setProperty("--font-family-title", titleFontStack);
 		}, 300);
 
-		return () => clearTimeout(timeout);
+		return () => {
+			clearTimeout(timeout);
+		};
 	}, [
 		primaryColor,
 		secondaryColor,
