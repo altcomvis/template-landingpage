@@ -13,6 +13,7 @@ interface EditorialArticle {
 interface EditorialCoverageProps extends React.HTMLAttributes<HTMLElement> {
 	data: {
 		title: string;
+		description?: string;
 		visible?: boolean;
 		rssUrls: string[];
 	};
@@ -37,7 +38,7 @@ async function fetchFeedXML(
 				method: "GET",
 				headers: {
 					Accept: "application/json, application/xml, text/xml, */*",
-				}
+				},
 			});
 
 			if (!res.ok) {
@@ -65,7 +66,9 @@ async function fetchFeedXML(
 		}
 	}
 
-	throw new Error("Nenhum proxy configurado. Configure VITE_RSS_PROXY_BASE na variável de ambiente.");
+	throw new Error(
+		"Nenhum proxy configurado. Configure VITE_RSS_PROXY_BASE na variável de ambiente.",
+	);
 }
 
 /* ─────────────── Função para parsear RSS ─────────────── */
@@ -84,7 +87,10 @@ async function fetchRSSFeeds(
 				const xmlDoc = parser.parseFromString(xml, "application/xml");
 
 				if (xmlDoc.documentElement.nodeName === "parsererror") {
-					console.error(`❌ XML Parse Error for ${url}:`, xmlDoc.documentElement.textContent);
+					console.error(
+						`❌ XML Parse Error for ${url}:`,
+						xmlDoc.documentElement.textContent,
+					);
 					return [];
 				}
 
@@ -94,8 +100,10 @@ async function fetchRSSFeeds(
 				const articles: (EditorialArticle & { pubTime: number })[] = [];
 
 				items.forEach((item) => {
-					const title = item.querySelector("title")?.textContent || "Sem título";
-					let description = item.querySelector("description")?.textContent || "";
+					const title =
+						item.querySelector("title")?.textContent || "Sem título";
+					let description =
+						item.querySelector("description")?.textContent || "";
 					const link = item.querySelector("link")?.textContent || "#";
 					const pubDateStr = item.querySelector("pubDate")?.textContent || "";
 
@@ -185,7 +193,7 @@ function extractImageUrl(itemXml: string): string {
 
 /* ─────────────── Componente ─────────────── */
 export function EditorialCoverage({ data, ...props }: EditorialCoverageProps) {
-	const { title, rssUrls = [] } = data;
+	const { title, description, rssUrls = [] } = data;
 	const [articles, setArticles] = useState<EditorialArticle[]>([]);
 	const [loading, setLoading] = useState(false);
 	const [error, setError] = useState<string | null>(null);
@@ -196,7 +204,10 @@ export function EditorialCoverage({ data, ...props }: EditorialCoverageProps) {
 		try {
 			const env = import.meta.env as Record<string, string> | undefined;
 			// Usa proxy padrão se nenhum estiver configurado
-			return env?.VITE_RSS_PROXY_BASE || "https://rss-proxy-alt4qbwtj-berall.vercel.app";
+			return (
+				env?.VITE_RSS_PROXY_BASE ||
+				"https://rss-proxy-alt4qbwtj-berall.vercel.app"
+			);
 		} catch {
 			return "https://rss-proxy-alt4qbwtj-berall.vercel.app";
 		}
@@ -216,7 +227,9 @@ export function EditorialCoverage({ data, ...props }: EditorialCoverageProps) {
 			.then((result) => {
 				setArticles(result);
 				if (result.length === 0) {
-					setError("Nenhum artigo disponível");
+					setError(
+						"Estamos preparando novidades para esta seção. Volte em instantes.",
+					);
 				}
 			})
 			.catch((err) => {
@@ -237,6 +250,11 @@ export function EditorialCoverage({ data, ...props }: EditorialCoverageProps) {
 		<section className="py-16" id="editorial-coverage" {...props}>
 			<div className="w-full mx-auto px-4 max-w-6xl">
 				<TitleSection name={title || "Cobertura Editorial"} />
+				{description ? (
+					<p className="text-(--text)/70 text-sm md:text-base mb-6 text-center max-w-3xl mx-auto">
+						{description}
+					</p>
+				) : null}
 
 				{loading && (
 					<div className="text-center py-12">
@@ -249,7 +267,8 @@ export function EditorialCoverage({ data, ...props }: EditorialCoverageProps) {
 						<p className="text-(--text)/60">{error}</p>
 						{!proxyBase && (
 							<p className="text-xs text-(--text)/40 mt-2">
-								💡 Dica: Configure VITE_RSS_PROXY_BASE para evitar problemas de CORS
+								💡 Dica: Configure VITE_RSS_PROXY_BASE para evitar problemas de
+								CORS
 							</p>
 						)}
 					</div>

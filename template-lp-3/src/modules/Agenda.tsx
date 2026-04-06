@@ -1,6 +1,7 @@
 import { TitleSection } from "@/components/title-sections";
 import { CalendarOff } from "lucide-react";
-import { useEffect, useRef } from "react";
+import { useEffect, useState } from "react";
+import type { CarouselApi } from "@/components/ui/carousel";
 import {
 	Carousel,
 	CarouselContent,
@@ -35,16 +36,17 @@ interface AgendaProps extends React.HTMLAttributes<HTMLElement> {
 /* ─────────────── Componente ─────────────── */
 export function Agenda({ data, ...props }: AgendaProps) {
 	const { title, months } = data;
-	const carouselRef = useRef<HTMLDivElement>(null);
+	const [api, setApi] = useState<CarouselApi | null>(null);
 
 	// Ordena os meses (01-12)
 	const sortedMonths = Object.entries(months)
 		.sort(([a], [b]) => parseInt(a) - parseInt(b))
 		.map(([key, month]) => ({ monthNumber: key, ...month }));
 
-	// Detecta o mês atual e scroll para ele
+	// Detecta o mês atual e centraliza via API do carousel
 	useEffect(() => {
 		if (window.self !== window.top) return;
+		if (!api) return;
 
 		const currentMonth = (new Date().getMonth() + 1)
 			.toString()
@@ -53,22 +55,10 @@ export function Agenda({ data, ...props }: AgendaProps) {
 			(m) => m.monthNumber === currentMonth,
 		);
 
-		if (currentMonthIndex >= 0 && carouselRef.current) {
-			// Aguarda um pouco para o carousel estar pronto
-			setTimeout(() => {
-				const carouselItems = carouselRef.current?.querySelectorAll(
-					"[data-carousel-item]",
-				);
-				if (carouselItems?.[currentMonthIndex]) {
-					carouselItems[currentMonthIndex].scrollIntoView({
-						behavior: "smooth",
-						block: "nearest",
-						inline: "center",
-					});
-				}
-			}, 100);
+		if (currentMonthIndex >= 0) {
+			api.scrollTo(currentMonthIndex, true);
 		}
-	}, [sortedMonths]);
+	}, [api, sortedMonths]);
 
 	// Verifica se um evento já passou
 	const isEventPast = (monthNumber: string, eventDay: string): boolean => {
@@ -141,7 +131,11 @@ export function Agenda({ data, ...props }: AgendaProps) {
 
 				{/* Desktop: Carousel com meses em colunas */}
 				<div className="hidden md:block bg-(--mybackground) container w-11/12 px-4 md:px-14 mx-auto py-16 md:rounded-xl relative overflow-hidden">
-					<Carousel className="w-full" ref={carouselRef} opts={{ loop: true }}>
+					<Carousel
+						className="w-full"
+						setApi={setApi}
+						opts={{ align: "center", loop: false }}
+					>
 						<CarouselContent className="gap-4 px-8">
 							{sortedMonths.map((month) => {
 								const currentMonth = (new Date().getMonth() + 1)

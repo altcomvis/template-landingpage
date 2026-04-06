@@ -121,6 +121,7 @@ export default function App() {
 		secondaryColor: general.secondaryColor,
 		darkColor: general.darkColor,
 		lightColor: general.lightColor,
+		backgroundMode: general.backgroundMode,
 		backgroundColor: general.backgroundColor,
 		surfaceColor: general.surfaceColor,
 		textColor: general.textColor,
@@ -298,7 +299,7 @@ export default function App() {
 						return renderSection(sectionId) ? (
 							<div
 								key={`${sectionId}-${
-									// biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
+									// biome-ignore lint/suspicious/noArrayIndexKey: section order can intentionally repeat block ids during preview edits
 									idx
 								}`}
 								style={{ display: "contents" }}

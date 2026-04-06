@@ -5,6 +5,7 @@ interface ThemeColorsProps {
 	secondaryColor?: string;
 	darkColor?: string;
 	lightColor?: string;
+	backgroundMode?: "solid" | "primary" | "secondary" | "dark" | "mylight";
 	backgroundColor?: string;
 	surfaceColor?: string;
 	textColor?: string;
@@ -68,6 +69,7 @@ export function useThemeColors({
 	secondaryColor,
 	darkColor,
 	lightColor,
+	backgroundMode,
 	backgroundColor,
 	surfaceColor,
 	textColor,
@@ -81,6 +83,16 @@ export function useThemeColors({
 		const root = document.documentElement;
 		const bodyFontStack = buildFontStack(fontBody);
 		const titleFontStack = buildFontStack(fontTitle);
+		const resolvedBackgroundColor =
+			backgroundMode === "primary"
+				? primaryColor
+				: backgroundMode === "secondary"
+					? secondaryColor
+					: backgroundMode === "dark"
+						? darkColor
+						: backgroundMode === "mylight"
+							? lightColor
+							: backgroundColor;
 
 		// Parse font weights and styles
 		const bodyVariant = parseVariant(fontBodyStyle);
@@ -100,8 +112,8 @@ export function useThemeColors({
 			"--dark-rgb": hexToRgb(darkColor),
 			"--light": lightColor,
 			"--light-rgb": hexToRgb(lightColor),
-			"--mybackground": backgroundColor,
-			"--mybackground-rgb": hexToRgb(backgroundColor),
+			"--mybackground": resolvedBackgroundColor,
+			"--mybackground-rgb": hexToRgb(resolvedBackgroundColor),
 			"--surface": surfaceColor,
 			"--surface-rgb": hexToRgb(surfaceColor),
 			"--text": textColor,
@@ -166,6 +178,7 @@ export function useThemeColors({
 		secondaryColor,
 		darkColor,
 		lightColor,
+		backgroundMode,
 		backgroundColor,
 		surfaceColor,
 		textColor,
