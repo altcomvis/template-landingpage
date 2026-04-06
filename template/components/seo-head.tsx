@@ -48,7 +48,7 @@ export function SeoHead() {
 		const defaultTitle = "Projeto Especial - Editora Globo";
 		const defaultDesc =
 			"Landing Page criada pela Editora Globo. Confira conteúdos, eventos e projetos especiais.";
-		const defaultImage = `${getBasePath()}img/cover.webp`;
+		const defaultImage = `${getBasePath()}img/project/cover.webp`;
 
 		// 🔹 utilitários locais
 		const setMeta = (name: string, content?: string) => {

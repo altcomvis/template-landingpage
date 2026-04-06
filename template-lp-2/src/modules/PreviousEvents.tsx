@@ -1,3 +1,4 @@
+/** biome-ignore-all lint/nursery/useUniqueElementIds: <explanation> */
 import { PreviousEventsStructure } from "@/components/previous-events-structure";
 
 /* ─────────────── Tipagem ─────────────── */

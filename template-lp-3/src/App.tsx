@@ -3,6 +3,7 @@ import { resolveAssetUrl } from "@/config/s3-urls";
 import { MenuTemplate } from "@/modules/Menu";
 
 import { CookiePolicyModal } from "./components/CookiePolicyModal";
+import { StandardPopupModal } from "./components/StandardPopupModal";
 import { SeoHead } from "./components/seo-head";
 import { useParallaxAnimation } from "./hooks/use-parallax-animation";
 import { useThemeColors } from "./hooks/use-theme-colors";
@@ -141,7 +142,6 @@ export default function App() {
 	}
 
 	/* ──────────────────────────────── */
-	<CookiePolicyModal text={general?.cookiePolicyText} />;
 	/* 🖼️ Background (Hero fixo) */
 	const directoryName = (general as { directoryName?: string })?.directoryName;
 	const heroBackgroundFilename = extractFilename(hero?.backgroundUrl);
@@ -174,8 +174,9 @@ export default function App() {
 		"sponsors",
 	];
 
-	const sectionOrder =
-		(landing.sectionOrder as string[]) || DEFAULT_SECTION_ORDER;
+	const sectionOrder = (
+		(landing.sectionOrder as string[]) || DEFAULT_SECTION_ORDER
+	).map((id) => (id === "previous" ? "previousEvents" : id));
 
 	const isSectionVisible = (sectionId: string): boolean => {
 		const visibilityMap: Record<string, boolean> = {
@@ -270,6 +271,8 @@ export default function App() {
 				)}
 
 				<SeoHead seo={general} />
+				<StandardPopupModal config={general?.popup} />
+				<CookiePolicyModal text={general?.cookiePolicyText} />
 				{heroIsFirst && (
 					<div className="relative pb-8 z-50">
 						<div className="absolute inset-x-0 top-3 ">

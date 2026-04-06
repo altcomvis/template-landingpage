@@ -3,6 +3,7 @@ import { resolveAssetUrl } from "@/config/s3-urls";
 import { MenuTemplate } from "@/modules/Menu";
 
 import { CookiePolicyModal } from "./components/CookiePolicyModal";
+import { StandardPopupModal } from "./components/StandardPopupModal";
 import { SeoHead } from "./components/seo-head";
 import { useParallaxAnimation } from "./hooks/use-parallax-animation";
 import { useThemeColors } from "./hooks/use-theme-colors";
@@ -141,7 +142,6 @@ export default function App() {
 	}
 
 	/* ──────────────────────────────── */
-	<CookiePolicyModal text={general?.cookiePolicyText} />;
 	/* 🖼️ Background (Hero fixo) */
 	const directoryName = (general as { directoryName?: string })?.directoryName;
 	const heroBackgroundFilename = extractFilename(hero?.backgroundUrl);
@@ -174,8 +174,9 @@ export default function App() {
 		"sponsors",
 	];
 
-	const sectionOrder =
-		(landing.sectionOrder as string[]) || DEFAULT_SECTION_ORDER;
+	const sectionOrder = (
+		(landing.sectionOrder as string[]) || DEFAULT_SECTION_ORDER
+	).map((id) => (id === "previous" ? "previousEvents" : id));
 
 	const isSectionVisible = (sectionId: string): boolean => {
 		const visibilityMap: Record<string, boolean> = {
@@ -244,6 +245,8 @@ export default function App() {
 			{/* biome-ignore lint/nursery/useUniqueElementIds: required for anchor navigation */}
 			<div id="home" className="w-full">
 				<SeoHead seo={general} />
+				<StandardPopupModal config={general?.popup} />
+				<CookiePolicyModal text={general?.cookiePolicyText} />
 				<div
 					className="relative w-full transition-colors duration-500 z-50"
 					style={{
@@ -267,21 +270,21 @@ export default function App() {
 					className="relative z-10 w-full  mx-auto md:px-10 transition-colors duration-500"
 					style={{ backgroundColor: "var(--surface)", color: "var(--text)" }}
 				>
-				{sectionOrder.map((sectionId, idx) => {
-					// Skip hero if it was already rendered at the top
-					if (heroIsFirst && sectionId === "hero") return null;
-					return renderSection(sectionId) ? (
-						<div
-							key={`${sectionId}-${
-								// biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
-								idx
-							}`}
-							style={{ display: "contents" }}
-						>
-							{renderSection(sectionId)}
-						</div>
-					) : null;
-				})}
+					{sectionOrder.map((sectionId, idx) => {
+						// Skip hero if it was already rendered at the top
+						if (heroIsFirst && sectionId === "hero") return null;
+						return renderSection(sectionId) ? (
+							<div
+								key={`${sectionId}-${
+									// biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
+									idx
+								}`}
+								style={{ display: "contents" }}
+							>
+								{renderSection(sectionId)}
+							</div>
+						) : null;
+					})}
 				</div>
 				<div className="relative z-10">
 					<Footer />

@@ -9,7 +9,7 @@ export function TitleSection({ name, description, ...props }: TitleProps) {
 			<h2
 				className="text-3xl font-bold mb-2 font-title"
 				style={{
-					color: "var(--light)",
+					color: "var(--title)",
 				}}
 			>
 				{name}

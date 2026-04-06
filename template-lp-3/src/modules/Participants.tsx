@@ -66,6 +66,10 @@ function getRoundedClass(
  */
 export function Participants({ data, ...props }: ParticipantsProps) {
 	const participants = data.groups.flatMap((group) => group.participants);
+	const carouselParticipants =
+		participants.length > 0 && participants.length < 6
+			? [...participants, ...participants]
+			: participants;
 	const roundedClass = getRoundedClass(data.imageRounded);
 	const nameOutsideImage = data.nameOutsideImage ?? false;
 	const borderWidth = Number.isFinite(data.imageBorderWidth)
@@ -162,9 +166,9 @@ export function Participants({ data, ...props }: ParticipantsProps) {
 					opts={{ loop: true, align: "center" }}
 				>
 					<CarouselContent className="items-start">
-						{participants.map((p) => (
+						{carouselParticipants.map((p, idx) => (
 							<CarouselItem
-								key={p.name}
+								key={`${p.name}-${idx}`}
 								className="basis-full sm:basis-1/2 md:basis-1/5 min-w-[16rem] md:min-w-68 px-2 md:px-3 pt-0 py-6 flex justify-center items-start"
 							>
 								<ParticipantDialog

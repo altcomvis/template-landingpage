@@ -1,4 +1,8 @@
 {
+	"publishing": {
+		"bucket": "oglobo",
+		"locked": false
+	},
 	"general": {
 		"primaryColor": "#fff",
 		"secondaryColor": "#d8578f",
@@ -21,8 +25,16 @@
 		"gtmId": "GTM-P4R423",
 		"directoryName": "template-landing-page",
 		"pixelMeta": "4392394204320499",
-		"seoImage": "/public/img/cover.webp",
-		"cookiePolicyText": "Usamos cookies para melhorar sua experiência, analisar tráfego e personalizar conteúdo. Ao continuar navegando, você concorda com o uso de cookies. Saiba mais na <a href='https://privacidade.globo.com/privacy-policy/' target='_blank' rel='noopener' class='underline'>Política de Privacidade</a>"
+		"seoImage": "img/project/cover.webp",
+		"cookiePolicyText": "Usamos cookies para melhorar sua experiência, analisar tráfego e personalizar conteúdo. Ao continuar navegando, você concorda com o uso de cookies. Saiba mais na <a href='https://privacidade.globo.com/privacy-policy/' target='_blank' rel='noopener' class='underline'>Política de Privacidade</a>",
+		"popup": {
+			"enabled": false,
+			"trigger": "onLoad",
+			"delaySeconds": 0,
+			"anchor": "open-popup",
+			"title": "",
+			"content": ""
+		}
 	},
 	"hero": {
 		"logo": "marca-do-projeto.webp",
@@ -816,7 +828,19 @@
 					}
 				]
 			},
-			"05": { "name": "Maio", "events": [] },
+			"05": {
+				"name": "Maio",
+				"events": [
+					{
+						"id": "ed3",
+						"title": "Painel de Discussão - ESG e Sustentabilidade",
+						"day": "05",
+						"time": "10h às 12h",
+						"location": "COPPE/UFRJ, Rio de Janeiro",
+						"description": "Discussão com especialistas sobre estratégias ESG e sustentabilidade corporativa"
+					}
+				]
+			},
 			"06": { "name": "Junho", "events": [] },
 			"07": { "name": "Julho", "events": [] },
 			"08": { "name": "Agosto", "events": [] },
