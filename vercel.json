@@ -1,4 +1,3 @@
 {
-	"productionBranch": "production",
 	"ignoreCommand": "if [ \"$VERCEL_ENV\" = \"production\" ]; then exit 1; fi; if [ \"$VERCEL_GIT_COMMIT_REF\" != \"production\" ]; then exit 0; else exit 1; fi"
 }
