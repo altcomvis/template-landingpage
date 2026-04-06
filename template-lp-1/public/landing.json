@@ -782,7 +782,7 @@
 
 	"agenda": {
 		"title": "Agenda",
-		"visible": true,
+		"visible": false,
 		"months": {
 			"01": { "name": "Janeiro", "events": [] },
 			"02": { "name": "Fevereiro", "events": [] },

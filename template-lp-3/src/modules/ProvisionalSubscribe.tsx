@@ -1,3 +1,5 @@
+import { TitleSection } from "@/components/title-sections";
+
 interface ProvisionalSubscribeProps extends React.HTMLAttributes<HTMLElement> {
 	data: {
 		title?: string;
@@ -33,11 +35,8 @@ export function ProvisionalSubscribe({
 			{...props}
 		>
 			<div className="max-w-6xl mx-auto">
-				{title && (
-					<h2 className="text-3xl md:text-4xl font-bold mb-8 text-center font-title">
-						{title}
-					</h2>
-				)}
+				<TitleSection name={title || "Inscrição"} />
+
 				{showClosed && (
 					<div className="text-center text-lg text-muted-foreground py-8">
 						{closedMessage || "Inscrições encerradas"}
