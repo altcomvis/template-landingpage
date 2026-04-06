@@ -138,21 +138,28 @@ export function Agenda({ data, ...props }: AgendaProps) {
 				<TitleSection name={title || "Agenda"} />
 
 				{/* Desktop: Carousel com meses em colunas */}
-				<div className="hidden md:block bg-(--mybackground) p-6 rounded-lg">
-					<Carousel className="w-full" ref={carouselRef}>
+				<div className="hidden md:block bg-(--mybackground) container w-11/12 px-4 md:px-14 mx-auto py-16 md:rounded-xl relative overflow-hidden">
+					<Carousel className="w-full" ref={carouselRef} opts={{ loop: true }}>
 						<CarouselContent className="gap-4 px-8">
 							{sortedMonths.map((month) => {
 								const currentMonth = (new Date().getMonth() + 1)
 									.toString()
 									.padStart(2, "0");
 								const isCurrentMonth = month.monthNumber === currentMonth;
+								const isFutureMonth =
+									Number(month.monthNumber) > Number(currentMonth);
+								const hasFutureContent = month.events.some(
+									(event) => !isEventEmpty(event),
+								);
 
 								return (
 									<CarouselItem
 										key={month.monthNumber}
 										data-carousel-item
 										className={`basis-60 transition-all ${
-											isCurrentMonth ? "opacity-100" : "opacity-75"
+											isCurrentMonth || (isFutureMonth && hasFutureContent)
+												? "opacity-100"
+												: "opacity-75"
 										}`}
 									>
 										<div
@@ -178,7 +185,10 @@ export function Agenda({ data, ...props }: AgendaProps) {
 												{month.events.length > 0 ? (
 													month.events.map((event) => {
 														const isEmpty = isEventEmpty(event);
-														const isPast = isEventPast(month.monthNumber, event.day);
+														const isPast = isEventPast(
+															month.monthNumber,
+															event.day,
+														);
 
 														return (
 															<div
@@ -273,7 +283,10 @@ export function Agenda({ data, ...props }: AgendaProps) {
 										{month.events.length > 0 ? (
 											month.events.map((event) => {
 												const isEmpty = isEventEmpty(event);
-												const isPast = isEventPast(month.monthNumber, event.day);
+												const isPast = isEventPast(
+													month.monthNumber,
+													event.day,
+												);
 
 												return (
 													<div
@@ -287,7 +300,9 @@ export function Agenda({ data, ...props }: AgendaProps) {
 															<h4 className="text-sm font-semibold text-(--title) line-clamp-3">
 																{event.title || (
 																	<span className="italic opacity-50">
-																		{isPast && isEmpty ? "Evento vazio" : "Sem título"}
+																		{isPast && isEmpty
+																			? "Evento vazio"
+																			: "Sem título"}
 																	</span>
 																)}
 															</h4>

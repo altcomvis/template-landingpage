@@ -138,25 +138,28 @@ export function Agenda({ data, ...props }: AgendaProps) {
 				<TitleSection name={title || "Agenda"} />
 
 				{/* Desktop: Carousel com meses em colunas */}
-				<div className="hidden md:block container w-11/12 px-4 md:px-14 mx-auto py-16 bg-(--mybackground) md:rounded-xl relative overflow-hidden">
-					<Carousel
-						className="w-full max-w-6xl mx-auto z-10 relative"
-						ref={carouselRef}
-						opts={{ loop: true }}
-					>
-						<CarouselContent className="gap-4">
+				<div className="hidden md:block bg-(--mybackground) container w-11/12 px-4 md:px-14 mx-auto py-16 md:rounded-xl relative overflow-hidden">
+					<Carousel className="w-full" ref={carouselRef} opts={{ loop: true }}>
+						<CarouselContent className="gap-4 px-8">
 							{sortedMonths.map((month) => {
 								const currentMonth = (new Date().getMonth() + 1)
 									.toString()
 									.padStart(2, "0");
 								const isCurrentMonth = month.monthNumber === currentMonth;
+								const isFutureMonth =
+									Number(month.monthNumber) > Number(currentMonth);
+								const hasFutureContent = month.events.some(
+									(event) => !isEventEmpty(event),
+								);
 
 								return (
 									<CarouselItem
 										key={month.monthNumber}
 										data-carousel-item
 										className={`basis-60 transition-all ${
-											isCurrentMonth ? "opacity-100" : ""
+											isCurrentMonth || (isFutureMonth && hasFutureContent)
+												? "opacity-100"
+												: "opacity-75"
 										}`}
 									>
 										<div

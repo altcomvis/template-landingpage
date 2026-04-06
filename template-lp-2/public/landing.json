@@ -1,4 +1,8 @@
 {
+	"publishing": {
+		"bucket": "oglobo",
+		"locked": false
+	},
 	"general": {
 		"primaryColor": "#fff",
 		"secondaryColor": "#d8578f",
