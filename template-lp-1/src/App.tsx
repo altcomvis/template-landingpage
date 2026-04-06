@@ -3,6 +3,7 @@ import { resolveAssetUrl } from "@/config/s3-urls";
 import { MenuTemplate } from "@/modules/Menu";
 
 import { CookiePolicyModal } from "./components/CookiePolicyModal";
+import { StandardPopupModal } from "./components/StandardPopupModal";
 import { SeoHead } from "./components/seo-head";
 import { useParallaxAnimation } from "./hooks/use-parallax-animation";
 import { useThemeColors } from "./hooks/use-theme-colors";
@@ -173,8 +174,9 @@ export default function App() {
 		"sponsors",
 	];
 
-	const sectionOrder =
-		(landing.sectionOrder as string[]) || DEFAULT_SECTION_ORDER;
+	const sectionOrder = (
+		(landing.sectionOrder as string[]) || DEFAULT_SECTION_ORDER
+	).map((id) => (id === "previous" ? "previousEvents" : id));
 
 	const isSectionVisible = (sectionId: string): boolean => {
 		const visibilityMap: Record<string, boolean> = {
@@ -250,6 +252,7 @@ export default function App() {
 					style={{ backgroundColor: "var(--surface)", color: "var(--text)" }}
 				>
 					<SeoHead seo={general} />
+					<StandardPopupModal config={general?.popup} />
 					<CookiePolicyModal text={general?.cookiePolicyText} />
 					<MenuTemplate landing={landing} />
 

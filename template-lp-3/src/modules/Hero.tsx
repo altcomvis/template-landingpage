@@ -69,7 +69,7 @@ export function Hero({ data, general, ...props }: HeroProps) {
 		<section
 			{...props}
 			ref={heroRef}
-			className="relative flex flex-col items-center justify-center overflow-hidden py-20 "
+			className="relative flex flex-col items-center justify-center overflow-hidden pt-20 pb-5"
 		>
 			{/* 🌤 Light Rays */}
 			{useLightRays && (

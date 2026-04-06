@@ -44,6 +44,8 @@ export function Agenda({ data, ...props }: AgendaProps) {
 
 	// Detecta o mês atual e scroll para ele
 	useEffect(() => {
+		if (window.self !== window.top) return;
+
 		const currentMonth = (new Date().getMonth() + 1)
 			.toString()
 			.padStart(2, "0");
@@ -202,7 +204,7 @@ export function Agenda({ data, ...props }: AgendaProps) {
 																	<span className="text-sm font-bold text-(--dark)">
 																		{event.day}
 																	</span>
-																	<h4 className="text-sm font-semibold text-(--title) line-clamp-3">
+																	<h4 className="text-sm font-semibold text-(--title)">
 																		{event.title || (
 																			<span className="italic opacity-50">
 																				{isPast && isEmpty
@@ -297,7 +299,7 @@ export function Agenda({ data, ...props }: AgendaProps) {
 															<span className="text-sm font-bold text-(--dark)">
 																{event.day}
 															</span>
-															<h4 className="text-sm font-semibold text-(--title) line-clamp-3">
+															<h4 className="text-sm font-semibold text-(--title)">
 																{event.title || (
 																	<span className="italic opacity-50">
 																		{isPast && isEmpty
