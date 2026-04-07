@@ -55,9 +55,20 @@ export function Agenda({ data, ...props }: AgendaProps) {
 			(m) => m.monthNumber === currentMonth,
 		);
 
-		if (currentMonthIndex >= 0) {
-			api.scrollTo(currentMonthIndex, true);
-		}
+		if (currentMonthIndex < 0) return;
+
+		const centerCurrentMonth = () => {
+			requestAnimationFrame(() => {
+				api.scrollTo(currentMonthIndex, true);
+			});
+		};
+
+		centerCurrentMonth();
+		api.on("reInit", centerCurrentMonth);
+
+		return () => {
+			api.off("reInit", centerCurrentMonth);
+		};
 	}, [api, sortedMonths]);
 
 	// Verifica se um evento já passou
@@ -131,7 +142,7 @@ export function Agenda({ data, ...props }: AgendaProps) {
 					<Carousel
 						className="w-full"
 						setApi={setApi}
-						opts={{ align: "center", loop: false }}
+						opts={{ align: "center", loop: true }}
 					>
 						<CarouselContent className="gap-4 px-4 md:px-8">
 							{sortedMonths.map((month) => {
