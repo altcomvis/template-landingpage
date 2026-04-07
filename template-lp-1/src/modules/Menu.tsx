@@ -60,7 +60,7 @@ export function MenuTemplate({ landing }: MenuTemplateProps) {
 		{
 			id: "agenda",
 			label: landing.agenda?.title || "Agenda",
-			visible: landing.agenda?.visible !== false,
+			visible: landing.agenda?.visible === true,
 		},
 		{
 			id: "editorial-coverage",

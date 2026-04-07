@@ -185,7 +185,7 @@ export default function App() {
 			about: landing.about?.visible !== false,
 			participants: participants?.visible !== false,
 			schedule: schedule?.visible !== false,
-			agenda: agenda?.visible !== false,
+			agenda: agenda?.visible === true,
 			editorialCoverage: editorialCoverage?.visible !== false,
 			provisionalSubscribe:
 				provisionalSubscribe?.visible !== false &&
