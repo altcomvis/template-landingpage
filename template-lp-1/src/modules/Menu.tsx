@@ -54,7 +54,7 @@ export function MenuTemplate({ landing }: MenuTemplateProps) {
 		},
 		{
 			id: "schedule",
-			label: landing.schedule?.title || "Programação",
+			label: "Programação",
 			visible: landing.schedule?.visible !== false,
 		},
 		{
