@@ -45,7 +45,6 @@ export function Agenda({ data, ...props }: AgendaProps) {
 
 	// Detecta o mês atual e centraliza via API do carousel
 	useEffect(() => {
-		if (window.self !== window.top) return;
 		if (!api) return;
 
 		const currentMonth = (new Date().getMonth() + 1)
