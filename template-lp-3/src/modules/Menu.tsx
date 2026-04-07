@@ -7,15 +7,28 @@ import {
 	SheetContent,
 	SheetDescription,
 	SheetHeader,
-	SheetTitle,
 	SheetTrigger,
 } from "@/components/ui/sheet";
-import { getBasePath } from "@/utils/getBasePath";
+
+type SectionConfig = { visible?: boolean; iframeUrl?: string };
+
+interface MenuTemplateLanding {
+	hero?: { logo?: string };
+	general?: { directoryName?: string };
+	about?: SectionConfig;
+	participants?: SectionConfig;
+	schedule?: SectionConfig;
+	agenda?: SectionConfig;
+	editorialCoverage?: SectionConfig;
+	provisionalSubscribe?: SectionConfig;
+	subscribe?: SectionConfig;
+	previousEvents?: SectionConfig;
+}
 
 interface MenuTemplateProps {
-	landing: any; //
+	landing: MenuTemplateLanding;
 }
-const logoPath = `${getBasePath()}img/hero/marca-do-projeto.webp`;
+
 export function MenuTemplate({ landing }: MenuTemplateProps) {
 	const [open, setOpen] = useState(false);
 	const [isFixed, setIsFixed] = useState(false);
@@ -126,14 +139,6 @@ export function MenuTemplate({ landing }: MenuTemplateProps) {
 								className="p-6 bg-zinc-700/90 backdrop-blur-md text-zinc-100 h-screen border-none"
 							>
 								<SheetHeader className="p-0 w-full">
-									<SheetTitle className="p-0 mx-auto pt-16">
-										<img
-											src={logoPath}
-											className="w-32 mx-auto"
-											alt="Logo do Projeto"
-										/>
-									</SheetTitle>
-
 									<SheetDescription className="p-0">
 										<span className="flex flex-col gap-6 font-medium text-2xl mt-8 text-center justify-center items-center py-4">
 											{menuItems.map(({ id, label }) => (
