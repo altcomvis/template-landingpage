@@ -78,7 +78,7 @@ export function Participants({ data, ...props }: ParticipantsProps) {
 	return (
 		// biome-ignore lint/nursery/useUniqueElementIds: required for anchor navigation
 		<section id="speakers" className="relative">
-			<TitleSection name={data.title || "Participantes"} />
+			<TitleSection name={data.title} />
 
 			<div
 				className="container w-11/12 px-4 md:px-14 mx-auto py-16 bg-(--mysecondary) md:rounded-xl relative overflow-hidden"

@@ -80,7 +80,7 @@ export function Schedule({ data, participants, ...props }: ScheduleProps) {
 		// biome-ignore lint: ID fixo necessário para âncoras de navegação
 		<section className="py-16" id="schedule" {...props}>
 			<div className="container mx-auto px-4 max-w-6xl">
-				<TitleSection name={title || "Programação"} />
+				<TitleSection name={title} />
 
 				<div className="relative">
 					{/* Linha vertical timeline */}
