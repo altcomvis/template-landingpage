@@ -850,11 +850,11 @@
 		"about",
 		"participants",
 		"schedule",
-		"agenda",
-		"editorialCoverage",
 		"provisionalSubscribe",
 		"subscribe",
-		"previousEvents",
-		"sponsors"
+		"sponsors",
+		"agenda",
+		"editorialCoverage",
+		"previousEvents"
 	]
 }
