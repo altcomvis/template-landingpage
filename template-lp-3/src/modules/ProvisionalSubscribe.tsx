@@ -46,8 +46,7 @@ export function ProvisionalSubscribe({
 					<iframe
 						src={iframeUrl}
 						width="100%"
-						height={1200}
-						className=" overflow-hidden "
+						className="w-full h-[1450px] md:h-[1200px] overflow-hidden"
 						title={title || "Inscrição"}
 					/>
 				)}

@@ -92,11 +92,7 @@ export function Agenda({ data, ...props }: AgendaProps) {
 	};
 
 	// Retorna as classes CSS para o estado do evento
-	const getEventClasses = (
-		monthNumber: string,
-		event: AgendaEvent,
-		isHorizontal = false,
-	): string => {
+	const getEventClasses = (monthNumber: string, event: AgendaEvent): string => {
 		const isPast = isEventPast(monthNumber, event.day);
 		const isEmpty = isEventEmpty(event);
 
@@ -114,9 +110,11 @@ export function Agenda({ data, ...props }: AgendaProps) {
 		} else {
 			// Futuro preenchido: opacity-100 + bg-white, Futuro vazio: opacity-60
 			if (isEmpty) {
-				baseClasses += `opacity-60 bg-(--text)/5 ${isHorizontal ? "hover:bg-(--text)/10 hover:cursor-pointer" : "hover:bg-(--text)/10 hover:cursor-pointer"}`;
+				baseClasses +=
+					"opacity-60 bg-(--text)/5 hover:bg-(--text)/10 hover:cursor-pointer";
 			} else {
-				baseClasses += `opacity-100 bg-white ${isHorizontal ? "hover:bg-(--text)/5 hover:cursor-pointer" : "hover:bg-(--text)/5 hover:cursor-pointer"}`;
+				baseClasses +=
+					"opacity-100 bg-white hover:bg-(--text)/5 hover:cursor-pointer";
 			}
 		}
 
@@ -129,14 +127,13 @@ export function Agenda({ data, ...props }: AgendaProps) {
 			<div className="w-full mx-auto max-w-6xl px-5 md:px-4">
 				<TitleSection name={title || "Agenda"} />
 
-				{/* Desktop: Carousel com meses em colunas */}
-				<div className="hidden md:block bg-(--mybackground) container w-11/12 px-4 md:px-14 mx-auto py-16 md:rounded-xl relative overflow-hidden">
+				<div className="bg-(--mybackground) container w-11/12 px-4 md:px-14 mx-auto py-10 md:py-16 rounded-xl relative overflow-hidden">
 					<Carousel
 						className="w-full"
 						setApi={setApi}
 						opts={{ align: "center", loop: false }}
 					>
-						<CarouselContent className="gap-4 px-8">
+						<CarouselContent className="gap-4 px-4 md:px-8">
 							{sortedMonths.map((month) => {
 								const currentMonth = (new Date().getMonth() + 1)
 									.toString()
@@ -152,14 +149,14 @@ export function Agenda({ data, ...props }: AgendaProps) {
 									<CarouselItem
 										key={month.monthNumber}
 										data-carousel-item
-										className={`basis-60 transition-all ${
+										className={`basis-[86%] sm:basis-[70%] md:basis-[56%] lg:basis-60 transition-all ${
 											isCurrentMonth || (isFutureMonth && hasFutureContent)
 												? "opacity-100"
 												: "opacity-75"
 										}`}
 									>
 										<div
-											className={`border rounded-lg p-6 bg-(--surface) min-h-96 transition-all ${
+											className={`border rounded-lg p-4 md:p-6 bg-(--surface) min-h-80 md:min-h-96 transition-all ${
 												isCurrentMonth
 													? "border-2 border-(--title) shadow-lg ring-2 ring-(--title)/30"
 													: "border border-(--text)/10"
@@ -240,94 +237,9 @@ export function Agenda({ data, ...props }: AgendaProps) {
 								);
 							})}
 						</CarouselContent>
-						{/* Botões de navegação */}
-						<CarouselPrevious className="absolute left-0 top-1/2 md:px-5 md:-translate-y-1/2 md:-translate-x-12 border-none shadow-none text-(--surface) bg-transparent hover:bg-transparent" />
-						<CarouselNext className="absolute right-0 top-1/2 md:px-5 md:-translate-y-1/2 md:translate-x-12 border-none shadow-none text-(--surface) bg-transparent hover:bg-transparent" />
+						<CarouselPrevious className="absolute left-1 md:left-0 top-1/2 -translate-y-1/2 md:px-5 md:-translate-x-12 border-none shadow-none text-(--surface) bg-transparent hover:bg-transparent" />
+						<CarouselNext className="absolute right-1 md:right-0 top-1/2 -translate-y-1/2 md:px-5 md:translate-x-12 border-none shadow-none text-(--surface) bg-transparent hover:bg-transparent" />
 					</Carousel>
-				</div>
-
-				{/* Mobile: Vertical com meses, eventos em grid de 2 colunas */}
-				<div className="md:hidden space-y-4 px-5 bg-(--mybackground)">
-					{sortedMonths.map((month) => {
-						const currentMonth = (new Date().getMonth() + 1)
-							.toString()
-							.padStart(2, "0");
-						const isCurrentMonth = month.monthNumber === currentMonth;
-
-						return (
-							<div
-								key={month.monthNumber}
-								className={`border rounded-lg p-4 bg-(--surface) transition-all ${
-									isCurrentMonth
-										? "border-2 border-(--title) shadow-lg ring-2 ring-(--title)/30"
-										: "border border-(--text)/10"
-								}`}
-							>
-								<h3
-									className={`text-xl font-semibold text-center uppercase text-(--title) mb-3 pb-2 border-b transition-all ${
-										isCurrentMonth
-											? "border-b-2 border-(--title)"
-											: "border-(--text)/10"
-									}`}
-								>
-									{month.name}
-								</h3>
-
-								<div className="grid grid-cols-2 gap-3">
-									{month.events.length > 0 ? (
-										month.events.map((event) => {
-											const isEmpty = isEventEmpty(event);
-											const isPast = isEventPast(month.monthNumber, event.day);
-
-											return (
-												<div
-													key={event.id}
-													className={`min-w-0 ${getEventClasses(month.monthNumber, event)}`}
-												>
-													<div className="flex gap-2 mb-2">
-														<span className="text-sm font-bold text-(--dark)">
-															{event.day}
-														</span>
-														<h4 className="text-sm font-semibold text-(--title)">
-															{event.title || (
-																<span className="italic opacity-50">
-																	{isPast && isEmpty
-																		? "Evento vazio"
-																		: "Sem título"}
-																</span>
-															)}
-														</h4>
-													</div>
-
-													{event.time && (
-														<p className="text-xs text-(--text)/70 mb-1 line-clamp-1">
-															⏰ {event.time}
-														</p>
-													)}
-
-													{event.location && (
-														<p className="text-xs text-(--text)/70 mb-1 line-clamp-1">
-															📍 {event.location}
-														</p>
-													)}
-
-													{event.description && (
-														<p className="text-xs text-(--text)/60 line-clamp-2">
-															{event.description}
-														</p>
-													)}
-												</div>
-											);
-										})
-									) : (
-										<div className="col-span-2 p-4 bg-(--text)/5 rounded-md text-center opacity-40">
-											<CalendarOff className="size-full opacity-10" />
-										</div>
-									)}
-								</div>
-							</div>
-						);
-					})}
 				</div>
 			</div>
 		</section>

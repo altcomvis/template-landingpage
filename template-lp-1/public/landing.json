@@ -790,7 +790,7 @@
 
 	"agenda": {
 		"title": "Agenda",
-		"visible": false,
+		"visible": true,
 		"months": {
 			"01": { "name": "Janeiro", "events": [] },
 			"02": { "name": "Fevereiro", "events": [] },

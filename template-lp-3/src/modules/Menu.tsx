@@ -10,7 +10,7 @@ import {
 	SheetTrigger,
 } from "@/components/ui/sheet";
 
-type SectionConfig = { visible?: boolean; iframeUrl?: string };
+type SectionConfig = { visible?: boolean; iframeUrl?: string; title?: string };
 
 interface MenuTemplateLanding {
 	hero?: { logo?: string };
@@ -42,42 +42,46 @@ export function MenuTemplate({ landing }: MenuTemplateProps) {
 	// 🔹 Gera o menu automaticamente com base nas seções visíveis
 	const menuItems = [
 		{ id: "home", label: "Início", visible: true },
-		{ id: "about", label: "Sobre", visible: landing.about?.visible !== false },
+		{
+			id: "about",
+			label: landing.about?.title || "Sobre",
+			visible: landing.about?.visible !== false,
+		},
 		{
 			id: "speakers",
-			label: "Participantes",
+			label: landing.participants?.title || "Participantes",
 			visible: landing.participants?.visible !== false,
 		},
 		{
 			id: "schedule",
-			label: "Programação",
+			label: landing.schedule?.title || "Programação",
 			visible: landing.schedule?.visible !== false,
 		},
 		{
 			id: "agenda",
-			label: "Agenda",
+			label: landing.agenda?.title || "Agenda",
 			visible: landing.agenda?.visible !== false,
 		},
 		{
 			id: "editorial-coverage",
-			label: "Cobertura Editorial",
+			label: landing.editorialCoverage?.title || "Cobertura Editorial",
 			visible: landing.editorialCoverage?.visible !== false,
 		},
 		{
 			id: "provisional-subscribe",
-			label: "Inscrição",
+			label: landing.provisionalSubscribe?.title || "Inscrição",
 			visible:
 				landing.provisionalSubscribe?.visible !== false &&
 				Boolean(landing.provisionalSubscribe?.iframeUrl),
 		},
 		{
 			id: "subscribe",
-			label: "Inscrição",
+			label: landing.subscribe?.title || "Inscrição",
 			visible: landing.subscribe?.visible !== false,
 		},
 		{
 			id: "previous-events",
-			label: "Edições Anteriores",
+			label: landing.previousEvents?.title || "Edições Anteriores",
 			visible: landing.previousEvents?.visible !== false,
 		},
 		// 👇 removido: botão Patrocinadores fixo
