@@ -126,7 +126,7 @@ export function Agenda({ data, ...props }: AgendaProps) {
 	return (
 		// biome-ignore lint/nursery/useUniqueElementIds: anchor id for menu navigation
 		<section className="py-16 " id="agenda" {...props}>
-			<div className="w-full mx-auto max-w-6xl px-4">
+			<div className="w-full mx-auto max-w-6xl px-5 md:px-4">
 				<TitleSection name={title || "Agenda"} />
 
 				{/* Desktop: Carousel com meses em colunas */}
@@ -246,8 +246,8 @@ export function Agenda({ data, ...props }: AgendaProps) {
 					</Carousel>
 				</div>
 
-				{/* Mobile: Vertical com meses, eventos em horizontal scroll */}
-				<div className="md:hidden space-y-4 px-4 bg-(--mybackground)">
+				{/* Mobile: Vertical com meses, eventos em grid de 2 colunas */}
+				<div className="md:hidden space-y-4 px-5 bg-(--mybackground)">
 					{sortedMonths.map((month) => {
 						const currentMonth = (new Date().getMonth() + 1)
 							.toString()
@@ -273,63 +273,57 @@ export function Agenda({ data, ...props }: AgendaProps) {
 									{month.name}
 								</h3>
 
-								{/* Horizontal scroll para eventos */}
-								<div className="overflow-x-auto">
-									<div className="flex gap-3 pb-2 min-w-min">
-										{month.events.length > 0 ? (
-											month.events.map((event) => {
-												const isEmpty = isEventEmpty(event);
-												const isPast = isEventPast(
-													month.monthNumber,
-													event.day,
-												);
+								<div className="grid grid-cols-2 gap-3">
+									{month.events.length > 0 ? (
+										month.events.map((event) => {
+											const isEmpty = isEventEmpty(event);
+											const isPast = isEventPast(month.monthNumber, event.day);
 
-												return (
-													<div
-														key={event.id}
-														className={`shrink-0 w-64 ${getEventClasses(month.monthNumber, event, true)}`}
-													>
-														<div className="flex gap-2 mb-2">
-															<span className="text-sm font-bold text-(--dark)">
-																{event.day}
-															</span>
-															<h4 className="text-sm font-semibold text-(--title)">
-																{event.title || (
-																	<span className="italic opacity-50">
-																		{isPast && isEmpty
-																			? "Evento vazio"
-																			: "Sem título"}
-																	</span>
-																)}
-															</h4>
-														</div>
-
-														{event.time && (
-															<p className="text-xs text-(--text)/70 mb-1 line-clamp-1">
-																⏰ {event.time}
-															</p>
-														)}
-
-														{event.location && (
-															<p className="text-xs text-(--text)/70 mb-1 line-clamp-1">
-																📍 {event.location}
-															</p>
-														)}
-
-														{event.description && (
-															<p className="text-xs text-(--text)/60 line-clamp-2">
-																{event.description}
-															</p>
-														)}
+											return (
+												<div
+													key={event.id}
+													className={`min-w-0 ${getEventClasses(month.monthNumber, event)}`}
+												>
+													<div className="flex gap-2 mb-2">
+														<span className="text-sm font-bold text-(--dark)">
+															{event.day}
+														</span>
+														<h4 className="text-sm font-semibold text-(--title)">
+															{event.title || (
+																<span className="italic opacity-50">
+																	{isPast && isEmpty
+																		? "Evento vazio"
+																		: "Sem título"}
+																</span>
+															)}
+														</h4>
 													</div>
-												);
-											})
-										) : (
-											<div className="shrink-0 w-64 p-4 bg-(--text)/5 rounded-md text-center opacity-40">
-												<CalendarOff className="size-full opacity-10" />
-											</div>
-										)}
-									</div>
+
+													{event.time && (
+														<p className="text-xs text-(--text)/70 mb-1 line-clamp-1">
+															⏰ {event.time}
+														</p>
+													)}
+
+													{event.location && (
+														<p className="text-xs text-(--text)/70 mb-1 line-clamp-1">
+															📍 {event.location}
+														</p>
+													)}
+
+													{event.description && (
+														<p className="text-xs text-(--text)/60 line-clamp-2">
+															{event.description}
+														</p>
+													)}
+												</div>
+											);
+										})
+									) : (
+										<div className="col-span-2 p-4 bg-(--text)/5 rounded-md text-center opacity-40">
+											<CalendarOff className="size-full opacity-10" />
+										</div>
+									)}
 								</div>
 							</div>
 						);
