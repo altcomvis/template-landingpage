@@ -277,7 +277,7 @@ export default function App() {
 				{heroIsFirst && (
 					<div className="relative pb-8 z-50">
 						<div className="absolute inset-x-0 top-3 ">
-							<MenuTemplate landing={landing} />
+							<MenuTemplate landing={landing} sectionOrder={sectionOrder} />
 						</div>
 						{renderSection("hero")}
 					</div>
@@ -285,7 +285,7 @@ export default function App() {
 				{!heroIsFirst && (
 					<div className="relative z-50">
 						<div className="absolute inset-x-0 top-3 ">
-							<MenuTemplate landing={landing} />
+							<MenuTemplate landing={landing} sectionOrder={sectionOrder} />
 						</div>
 					</div>
 				)}

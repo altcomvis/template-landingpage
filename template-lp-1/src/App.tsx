@@ -255,7 +255,7 @@ export default function App() {
 					<SeoHead seo={general} />
 					<StandardPopupModal config={general?.popup} />
 					<CookiePolicyModal text={general?.cookiePolicyText} />
-					<MenuTemplate landing={landing} />
+					<MenuTemplate landing={landing} sectionOrder={sectionOrder} />
 
 					{sectionOrder.map((sectionId, idx) =>
 						renderSection(sectionId) ? (

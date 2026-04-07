@@ -27,9 +27,10 @@ interface MenuTemplateLanding {
 
 interface MenuTemplateProps {
 	landing: MenuTemplateLanding;
+	sectionOrder?: string[];
 }
 
-export function MenuTemplate({ landing }: MenuTemplateProps) {
+export function MenuTemplate({ landing, sectionOrder }: MenuTemplateProps) {
 	const [open, setOpen] = useState(false);
 	const [isFixed, setIsFixed] = useState(false);
 
@@ -39,54 +40,80 @@ export function MenuTemplate({ landing }: MenuTemplateProps) {
 		return () => window.removeEventListener("scroll", handleScroll);
 	}, []);
 
-	// 🔹 Gera o menu automaticamente com base nas seções visíveis
-	const menuItems = [
-		{ id: "home", label: "Início", visible: true },
-		{
+	const sectionMenuMap: Record<
+		string,
+		{ id: string; label: string; visible: boolean }
+	> = {
+		about: {
 			id: "about",
 			label: landing.about?.title || "Sobre",
 			visible: landing.about?.visible !== false,
 		},
-		{
+		participants: {
 			id: "speakers",
 			label: landing.participants?.title || "Participantes",
 			visible: landing.participants?.visible !== false,
 		},
-		{
+		schedule: {
 			id: "schedule",
 			label: "Programação",
 			visible: landing.schedule?.visible !== false,
 		},
-		{
+		agenda: {
 			id: "agenda",
 			label: landing.agenda?.title || "Agenda",
 			visible: landing.agenda?.visible === true,
 		},
-		{
+		editorialCoverage: {
 			id: "editorial-coverage",
 			label: landing.editorialCoverage?.title || "Cobertura Editorial",
 			visible: landing.editorialCoverage?.visible !== false,
 		},
-		{
+		provisionalSubscribe: {
 			id: "provisional-subscribe",
 			label: landing.provisionalSubscribe?.title || "Inscrição",
 			visible:
 				landing.provisionalSubscribe?.visible !== false &&
 				Boolean(landing.provisionalSubscribe?.iframeUrl),
 		},
-		{
+		subscribe: {
 			id: "subscribe",
 			label: landing.subscribe?.title || "Inscrição",
 			visible: landing.subscribe?.visible !== false,
 		},
-		{
+		previousEvents: {
 			id: "previous-events",
 			label: landing.previousEvents?.title || "Edições Anteriores",
 			visible: landing.previousEvents?.visible !== false,
 		},
-		// 👇 removido: botão Patrocinadores fixo
-		// { id: "sponsors", label: "Patrocínios", visible: landing.sponsors?.visible !== false },
-	].filter((item) => item.visible);
+	};
+
+	const defaultSectionOrder = [
+		"about",
+		"participants",
+		"schedule",
+		"agenda",
+		"editorialCoverage",
+		"provisionalSubscribe",
+		"subscribe",
+		"previousEvents",
+	];
+
+	const normalizedSectionOrder = (sectionOrder || defaultSectionOrder)
+		.map((id) => (id === "previous" ? "previousEvents" : id))
+		.filter((id) => id !== "hero" && id !== "sponsors");
+
+	const seen = new Set<string>();
+	const orderedItems = normalizedSectionOrder
+		.map((sectionId) => sectionMenuMap[sectionId])
+		.filter((item) => !!item && item.visible)
+		.filter((item) => {
+			if (seen.has(item.id)) return false;
+			seen.add(item.id);
+			return true;
+		});
+
+	const menuItems = [{ id: "home", label: "Início" }, ...orderedItems];
 
 	return (
 		<div

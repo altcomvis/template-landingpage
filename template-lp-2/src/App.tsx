@@ -263,7 +263,7 @@ export default function App() {
 						/>
 					)}
 					<div className="absolute inset-x-0 top-0 z-50">
-						<MenuTemplate landing={landing} />
+						<MenuTemplate landing={landing} sectionOrder={sectionOrder} />
 					</div>
 					{heroIsFirst && renderSection("hero")}
 				</div>
