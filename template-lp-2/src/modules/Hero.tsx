@@ -72,7 +72,7 @@ export function Hero({ data, general, subscribe, ...props }: HeroProps) {
 		<section
 			{...props}
 			ref={heroRef}
-			className="relative flex flex-col items-center justify-center overflow-hidden pt-12 pb-20 md:pt-12 md:pb-20"
+			className="relative flex flex-col items-center justify-center overflow-hidden pt-12 pb-20  md:py-24"
 		>
 			{/* 🌤 Light Rays */}
 			{useLightRays && (
@@ -143,7 +143,7 @@ export function Hero({ data, general, subscribe, ...props }: HeroProps) {
 						{/* 📅 Informações do evento */}
 						{(date || time || location || address) && (
 							<div
-								className={`flex gap-4 items-stretch flex-wrap ${
+								className={`flex gap-4 items-stretch flex-wrap pt-12 ${
 									subscribe?.visible
 										? "justify-center lg:justify-center"
 										: "justify-center"

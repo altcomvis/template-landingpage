@@ -19,6 +19,25 @@ interface EditorialCoverageProps extends React.HTMLAttributes<HTMLElement> {
 	};
 }
 
+function normalizeArticleLink(link: string): string {
+	const raw = String(link || "").trim();
+	if (!raw || raw === "#") return "";
+
+	try {
+		const url = new URL(raw);
+		for (const key of Array.from(url.searchParams.keys())) {
+			if (/^utm_/i.test(key)) {
+				url.searchParams.delete(key);
+			}
+		}
+		url.hash = "";
+		const pathname = url.pathname.replace(/\/+$/, "") || "/";
+		return `${url.origin}${pathname}${url.search}`.toLowerCase();
+	} catch {
+		return raw.replace(/\/+$/, "").toLowerCase();
+	}
+}
+
 /* ─────────────── Função para fetch com Proxy (como site-camarote) ─────────────── */
 async function fetchFeedXML(
 	feedUrl: string,
@@ -145,10 +164,20 @@ async function fetchRSSFeeds(
 
 	console.log(`🎯 Total articles: ${allArticles.length}`);
 
-	return allArticles
-		.sort((a, b) => b.pubTime - a.pubTime)
-		.slice(0, 6)
-		.map(({ pubTime, ...article }) => article);
+	const sortedArticles = allArticles.sort((a, b) => b.pubTime - a.pubTime);
+	const seen = new Set<string>();
+	const uniqueArticles = sortedArticles.filter((article) => {
+		const normalizedLink = normalizeArticleLink(article.link);
+		const fallbackKey =
+			`${article.title}|${article.pubDate || ""}`.toLowerCase();
+		const dedupeKey = normalizedLink || fallbackKey;
+		if (!dedupeKey) return true;
+		if (seen.has(dedupeKey)) return false;
+		seen.add(dedupeKey);
+		return true;
+	});
+
+	return uniqueArticles.slice(0, 6).map(({ pubTime, ...article }) => article);
 }
 
 /* ─────────────── Extrair imagens do XML usando regex (namespace-safe) ─────────────── */

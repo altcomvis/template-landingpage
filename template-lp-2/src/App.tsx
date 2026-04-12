@@ -262,8 +262,10 @@ export default function App() {
 							style={{ backgroundImage: `url('${heroBackgroundUrl}')` }}
 						/>
 					)}
-					<div className="absolute inset-x-0 top-0 z-50">
-						<MenuTemplate landing={landing} sectionOrder={sectionOrder} />
+					<div className="relative z-50">
+						<div className="absolute inset-x-0 top-3 ">
+							<MenuTemplate landing={landing} sectionOrder={sectionOrder} />
+						</div>
 					</div>
 					{heroIsFirst && renderSection("hero")}
 				</div>

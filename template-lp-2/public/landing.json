@@ -205,7 +205,8 @@
 	"schedule": {
 		"title": "Programação",
 		"eventTitle": "Summit Futuro Sustentável 2025",
-		"eventDescription": "Um evento dedicado à sustentabilidade e inovação ambiental",
+		"eventDescription": "O Summit Futuro Sustentável é o principal encontro de líderes e empresas comprometidos com o desenvolvimento sustentável no Brasil. Durante dois dias de programação intensa, o evento reúne especialistas, cientistas, empreendedores e representantes do poder público para debater soluções de impacto positivo. Inovação, responsabilidade ambiental e transformação social são os pilares desta edição.",
+		"participantCardSize": "medium",
 		"date": "15/03",
 		"showDateIcon": true,
 		"time": "09h às 18h",

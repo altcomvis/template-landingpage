@@ -25,6 +25,7 @@ interface ScheduleProps extends React.HTMLAttributes<HTMLElement> {
 		title: string;
 		eventTitle?: string;
 		eventDescription?: string;
+		participantCardSize?: "small" | "medium" | "large";
 		date?: string;
 		showDateIcon?: boolean;
 		time?: string;
@@ -53,6 +54,32 @@ export function Schedule({ data, participants, ...props }: ScheduleProps) {
 		showLocationIcon,
 		panels,
 	} = data;
+	const participantCardSize = data.participantCardSize || "medium";
+	const shouldShowParticipantPosition = participantCardSize === "large";
+	const participantSizeStyles =
+		participantCardSize === "small"
+			? {
+					container: "w-16 gap-1",
+					avatar: "w-12 h-12",
+					name: "text-[11px]",
+					role: "text-[9px]",
+					mediatorsWrap: "gap-2 md:pl-3",
+				}
+			: participantCardSize === "large"
+				? {
+						container: "w-48 gap-1",
+						avatar: "w-40 h-40",
+						name: "text-lg",
+						role: "text-sm",
+						mediatorsWrap: "gap-5 md:pl-5",
+					}
+				: {
+						container: "w-20 gap-2",
+						avatar: "w-16 h-16",
+						name: "text-xs",
+						role: "text-[10px]",
+						mediatorsWrap: "gap-4 md:pl-4",
+					};
 	const contentAlign = data.panelContentAlign || "left";
 	const renderDateIcon = showDateIcon !== false;
 	const renderTimeIcon = showTimeIcon !== false;
@@ -124,7 +151,11 @@ export function Schedule({ data, participants, ...props }: ScheduleProps) {
 						)}
 						{eventDescription && (
 							<div className={`mb-4 ${contentTextClass}`}>
-								<p className="text-lg text-(--text)/90">{eventDescription}</p>
+								<div
+									className="text-lg text-(--text)/90 [&_a]:text-(--title) [&_a]:underline [&_a]:underline-offset-2 [&_a]:font-semibold [&_a:hover]:opacity-80"
+									// biome-ignore lint/security/noDangerouslySetInnerHtml: description comes from project JSON rich text editor
+									dangerouslySetInnerHTML={{ __html: eventDescription }}
+								/>
 							</div>
 						)}
 						<div
@@ -217,43 +248,71 @@ export function Schedule({ data, participants, ...props }: ScheduleProps) {
 													return (
 														<div
 															key={full.id}
-															className="text-center w-20 flex flex-col items-center gap-2"
+															className={`text-center flex flex-col items-center ${participantSizeStyles.container}`}
 														>
 															<ParticipantDialog
 																name={full.name}
 																position={full.position}
 																photo={full.photo}
+																avatarClassName={participantSizeStyles.avatar}
 															/>
-															<p className="text-xs font-semibold text-(--text)">
+															<p
+																className={`font-semibold text-(--text) ${participantSizeStyles.name}`}
+															>
 																{full.name}
 															</p>
+															{shouldShowParticipantPosition &&
+																full.position && (
+																	<p
+																		className={`text-(--text) opacity-80 leading-tight ${participantSizeStyles.role}`}
+																	>
+																		{full.position}
+																	</p>
+																)}
 														</div>
 													);
 												})}
 
 												{/* 🎤 Mediadores */}
 												{item.mediators && item.mediators.length > 0 && (
-													<div className="flex flex-wrap gap-4 md:border-l border-zinc-500 md:pl-4">
+													<div
+														className={`flex flex-wrap md:border-l border-zinc-500 ${participantSizeStyles.mediatorsWrap}`}
+													>
 														{item.mediators.map((med) => {
 															const full = findParticipantById(med.id);
 															if (!full) return null;
 															return (
 																<div
 																	key={full.id}
-																	className="text-center w-20 flex flex-col items-center gap-2"
+																	className={`text-center flex flex-col items-center ${participantSizeStyles.container}`}
 																>
 																	<ParticipantDialog
 																		name={full.name}
 																		position={full.position}
 																		photo={full.photo}
+																		avatarClassName={
+																			participantSizeStyles.avatar
+																		}
 																	/>
 																	<div>
-																		<p className="text-[10px] text-(--text) uppercase tracking-wide">
+																		<p
+																			className={`text-(--text) uppercase tracking-wide ${participantSizeStyles.role}`}
+																		>
 																			Mediação
 																		</p>
-																		<p className="text-xs font-semibold text-(--text)">
+																		<p
+																			className={`font-semibold text-(--text) ${participantSizeStyles.name}`}
+																		>
 																			{full.name}
 																		</p>
+																		{shouldShowParticipantPosition &&
+																			full.position && (
+																				<p
+																					className={`text-(--text) opacity-80 leading-tight ${participantSizeStyles.role}`}
+																				>
+																					{full.position}
+																				</p>
+																			)}
 																	</div>
 																</div>
 															);
@@ -266,7 +325,7 @@ export function Schedule({ data, participants, ...props }: ScheduleProps) {
 										<div
 											className={`bg-(--surface) relative  ${contentTextClass}`}
 										>
-											<h3 className="text-1xl font-semibold text-(--text)">
+											<h3 className="text-2xl font-semibold text-(--text)">
 												{item.title}
 											</h3>
 											{item.description && (

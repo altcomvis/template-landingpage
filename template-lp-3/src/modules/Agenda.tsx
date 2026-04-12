@@ -120,11 +120,9 @@ export function Agenda({ data, ...props }: AgendaProps) {
 		} else {
 			// Futuro preenchido: opacity-100 + bg-white, Futuro vazio: opacity-60
 			if (isEmpty) {
-				baseClasses +=
-					"opacity-60 bg-(--text)/5 hover:bg-(--text)/10 hover:cursor-pointer";
+				baseClasses += "opacity-60 bg-(--text)/5";
 			} else {
-				baseClasses +=
-					"opacity-100 bg-white hover:bg-(--text)/5 hover:cursor-pointer";
+				baseClasses += "opacity-100 bg-white";
 			}
 		}
 

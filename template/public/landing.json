@@ -190,6 +190,7 @@
 	},
 	"schedule": {
 		"title": "Programação Oficial",
+		"eventDescription": "O Summit Futuro Sustentável é o principal encontro de líderes e empresas comprometidos com o desenvolvimento sustentável no Brasil. Durante dois dias de programação intensa, o evento reúne especialistas, cientistas, empreendedores e representantes do poder público para debater soluções de impacto positivo. Inovação, responsabilidade ambiental e transformação social são os pilares desta edição.",
 		"panelContentAlign": "left",
 		"visible": true,
 		"panels": [
