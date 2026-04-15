@@ -51,6 +51,7 @@
 		"useLightRays": false,
 		"lightRaysColor": "#ffffff",
 		"logoSize": "",
+		"showImageFade": true,
 		"backgroundUrl": "header.webp"
 	},
 	"about": {
