@@ -83,15 +83,17 @@ export function useThemeColors({
 		const root = document.documentElement;
 		const bodyFontStack = buildFontStack(fontBody);
 		const titleFontStack = buildFontStack(fontTitle);
+		const resolvedDarkColor = titleColor || textColor || darkColor;
+		const resolvedLightColor = surfaceColor || backgroundColor || lightColor;
 		const resolvedBackgroundColor =
 			backgroundMode === "primary"
 				? primaryColor
 				: backgroundMode === "secondary"
 					? secondaryColor
 					: backgroundMode === "dark"
-						? darkColor
+						? resolvedDarkColor
 						: backgroundMode === "mylight"
-							? lightColor
+							? resolvedLightColor
 							: backgroundColor;
 
 		// Parse font weights and styles
@@ -108,10 +110,10 @@ export function useThemeColors({
 			"--myprimary-rgb": hexToRgb(primaryColor),
 			"--mysecondary": secondaryColor,
 			"--mysecondary-rgb": hexToRgb(secondaryColor),
-			"--dark": darkColor,
-			"--dark-rgb": hexToRgb(darkColor),
-			"--light": lightColor,
-			"--light-rgb": hexToRgb(lightColor),
+			"--dark": resolvedDarkColor,
+			"--dark-rgb": hexToRgb(resolvedDarkColor),
+			"--light": resolvedLightColor,
+			"--light-rgb": hexToRgb(resolvedLightColor),
 			"--mybackground": resolvedBackgroundColor,
 			"--mybackground-rgb": hexToRgb(resolvedBackgroundColor),
 			"--surface": surfaceColor,
