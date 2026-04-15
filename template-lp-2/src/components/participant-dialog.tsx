@@ -35,7 +35,7 @@ export function ParticipantDialog({
 					<img
 						src={`${getBasePath()}img/participantes/${photo}`}
 						alt={name}
-						className={`${avatarClassName || "w-16 h-16"} rounded-full object-cover cursor-pointer hover:scale-105 transition `}
+						className={`${avatarClassName || "w-16 h-16 rounded-full"} object-cover cursor-pointer hover:scale-105 transition `}
 					/>
 				)}
 			</DialogTrigger>

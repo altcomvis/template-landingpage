@@ -37,7 +37,30 @@ interface ScheduleProps extends React.HTMLAttributes<HTMLElement> {
 	};
 	participants: {
 		groups: { id: string; label: string; participants: Participant[] }[];
+		imageRounded?: "0" | "sm" | "md" | "lg" | "xl" | "2xl" | "3xl" | "full";
 	};
+}
+
+function getRoundedClass(value?: string): string {
+	switch (value) {
+		case "0":
+			return "rounded-none";
+		case "sm":
+			return "rounded-sm";
+		case "md":
+			return "rounded-md";
+		case "lg":
+			return "rounded-lg";
+		case "2xl":
+			return "rounded-2xl";
+		case "3xl":
+			return "rounded-3xl";
+		case "full":
+			return "rounded-full";
+		case "xl":
+		default:
+			return "rounded-xl";
+	}
 }
 
 /* ─────────────── Componente ─────────────── */
@@ -124,6 +147,7 @@ export function Schedule({ data, participants, ...props }: ScheduleProps) {
 			: contentAlign === "right"
 				? "flex gap-4 justify-end items-stretch flex-wrap"
 				: "flex gap-4 justify-start items-stretch flex-wrap";
+	const participantRoundedClass = getRoundedClass(participants.imageRounded);
 	// Função auxiliar para localizar participante
 	const findParticipantById = (id: string): Participant | undefined => {
 		for (const group of participants.groups) {
@@ -254,7 +278,7 @@ export function Schedule({ data, participants, ...props }: ScheduleProps) {
 																name={full.name}
 																position={full.position}
 																photo={full.photo}
-																avatarClassName={participantSizeStyles.avatar}
+																avatarClassName={`${participantSizeStyles.avatar} ${participantRoundedClass}`}
 															/>
 															<p
 																className={`font-semibold text-(--text) ${participantSizeStyles.name}`}
@@ -290,9 +314,7 @@ export function Schedule({ data, participants, ...props }: ScheduleProps) {
 																		name={full.name}
 																		position={full.position}
 																		photo={full.photo}
-																		avatarClassName={
-																			participantSizeStyles.avatar
-																		}
+																		avatarClassName={`${participantSizeStyles.avatar} ${participantRoundedClass}`}
 																	/>
 																	<div>
 																		<p

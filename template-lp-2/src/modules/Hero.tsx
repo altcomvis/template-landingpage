@@ -28,6 +28,10 @@ interface HeroProps extends React.HTMLAttributes<HTMLElement> {
 		useLightRays?: boolean;
 		lightRaysColor?: string;
 		logoSize?: "grande" | "medio" | "pequeno";
+		infoBoxBgColor?: string;
+		dateTimeBoxBgColor?: string;
+		locationBoxBgColor?: string;
+		showImageFade?: boolean;
 	};
 	general: {
 		projectName: string;
@@ -52,6 +56,10 @@ export function Hero({ data, general, subscribe, ...props }: HeroProps) {
 		useLightRays,
 		lightRaysColor,
 		logoSize,
+		infoBoxBgColor,
+		dateTimeBoxBgColor,
+		locationBoxBgColor,
+		showImageFade,
 	} = data;
 
 	const { projectName } = general;
@@ -67,6 +75,20 @@ export function Hero({ data, general, subscribe, ...props }: HeroProps) {
 	const renderDateIcon = showDateIcon !== false;
 	const renderTimeIcon = showTimeIcon !== false;
 	const renderLocationIcon = showLocationIcon !== false;
+	const showHeroImageFade = showImageFade !== false;
+	const logoSizeClass =
+		logoSize === "grande"
+			? "max-h-40 md:max-h-64"
+			: logoSize === "pequeno"
+				? "max-h-20 md:max-h-24"
+				: "max-h-28 md:max-h-40";
+	const infoBoxStyle = {
+		backgroundColor:
+			infoBoxBgColor ||
+			dateTimeBoxBgColor ||
+			locationBoxBgColor ||
+			"rgba(244, 244, 245, 0.5)",
+	};
 
 	return (
 		<section
@@ -115,13 +137,7 @@ export function Hero({ data, general, subscribe, ...props }: HeroProps) {
 								<img
 									src={logoPath}
 									alt={projectName || "Logo do Projeto"}
-									className={`${subscribe?.visible ? "mx-auto lg:mx-0" : "mx-auto"} drop-shadow-2xl ${
-										logoSize === "grande"
-											? "h-64"
-											: logoSize === "pequeno"
-												? "h-24"
-												: "h-40"
-									}`}
+									className={`${subscribe?.visible ? "mx-auto lg:mx-0" : "mx-auto"} h-auto w-auto max-w-[80vw] sm:max-w-[26rem] object-contain drop-shadow-2xl ${logoSizeClass}`}
 								/>
 							) : (
 								<h1 className="text-3xl md:text-5xl font-bold text-shadow-2xl text-(--title)">
@@ -151,7 +167,8 @@ export function Hero({ data, general, subscribe, ...props }: HeroProps) {
 							>
 								{date && (
 									<div
-										className={`info-box flex items-center gap-2 bg-zinc-100/50 shadow-lg backdrop-blur-md rounded-lg px-4 py-2 ${infoBoxTextClass}`}
+										className={`info-box flex items-center gap-2 shadow-lg backdrop-blur-md rounded-lg px-4 py-2 ${infoBoxTextClass}`}
+										style={infoBoxStyle}
 									>
 										{renderDateIcon && <span className="text-2xl">🗓️</span>}
 										<span className="font-bold text-xl md:text-2xl">
@@ -161,7 +178,8 @@ export function Hero({ data, general, subscribe, ...props }: HeroProps) {
 								)}
 								{time && (
 									<div
-										className={`info-box flex items-center gap-2 bg-zinc-100/50 shadow-lg backdrop-blur-md rounded-lg px-4 py-2 ${infoBoxTextClass}`}
+										className={`info-box flex items-center gap-2 shadow-lg backdrop-blur-md rounded-lg px-4 py-2 ${infoBoxTextClass}`}
+										style={infoBoxStyle}
 									>
 										{renderTimeIcon && <span className="text-2xl">⏰</span>}
 										<span className="font-bold text-xl md:text-2xl">
@@ -171,7 +189,8 @@ export function Hero({ data, general, subscribe, ...props }: HeroProps) {
 								)}
 								{(location || address) && (
 									<div
-										className={`info-box flex items-center gap-2 bg-zinc-100/50 shadow-lg backdrop-blur-md rounded-lg px-4 py-2 text-center md:text-left ${infoBoxTextClass}`}
+										className={`info-box flex items-center gap-2 shadow-lg backdrop-blur-md rounded-lg px-4 py-2 text-center md:text-left ${infoBoxTextClass}`}
+										style={infoBoxStyle}
 									>
 										<div className="flex flex-col">
 											{location && (
@@ -196,7 +215,9 @@ export function Hero({ data, general, subscribe, ...props }: HeroProps) {
 					)}
 				</div>
 			</div>
-			<div className="bg-linear-0 from-black/20 to-black/0 h-24 w-full absolute bottom-0" />
+			{showHeroImageFade && (
+				<div className="bg-linear-0 from-black/20 to-black/0 h-24 w-full absolute bottom-0" />
+			)}
 		</section>
 	);
 }

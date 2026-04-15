@@ -154,6 +154,7 @@ export default function App() {
 		directoryName,
 	);
 	const useFixedHeroBackground = general.useBackgroundImage !== false;
+	const showHeroImageFade = hero?.showImageFade !== false;
 	const backgroundStyle = useFixedHeroBackground
 		? { backgroundColor: "transparent" }
 		: { backgroundColor: "var(--mybackground)" };
@@ -254,12 +255,14 @@ export default function App() {
 			>
 				{useFixedHeroBackground && heroIsFirst && (
 					<>
-						<div
-							className="fixed w-full h-screen top-0 z-1"
-							style={{
-								backgroundImage: `linear-gradient(to bottom, rgb(var(--mybackground-rgb, 255 255 255) / 0.8), rgb(var(--mybackground-rgb, 255 255 255) / 0), rgb(var(--mybackground-rgb, 255 255 255)))`,
-							}}
-						/>
+						{showHeroImageFade && (
+							<div
+								className="fixed w-full h-screen top-0 z-1"
+								style={{
+									backgroundImage: `linear-gradient(to bottom, rgb(var(--mybackground-rgb, 255 255 255) / 0.8), rgb(var(--mybackground-rgb, 255 255 255) / 0), rgb(var(--mybackground-rgb, 255 255 255)))`,
+								}}
+							/>
+						)}
 						<div
 							aria-hidden
 							className="fixed inset-0 z-0 bg-top bg-no-repeat bg-cover"
