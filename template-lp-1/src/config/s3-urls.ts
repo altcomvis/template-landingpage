@@ -32,17 +32,14 @@ export function isProduction(): boolean {
 
 /**
  * Verifica se precisa usar URL absoluta S3
- * (apenas em produção real, não em blob URLs)
+ * (somente quando a página está realmente hospedada no S3 da Globo)
  */
 export function shouldUseAbsoluteS3Urls(): boolean {
-	// Em blob URL (admin preview), usar relativo para consumir assets do ZIP
 	if (isRunningInBlob()) return false;
+	if (typeof window === "undefined") return false;
 
-	// Se está em produção, usa absoluto S3
-	if (isProduction()) return true;
-
-	// Em dev local, usa relativo
-	return false;
+	const host = window.location.hostname.toLowerCase();
+	return host.includes("s3.glbimg.com");
 }
 
 /**
@@ -52,12 +49,28 @@ export function resolveAssetUrl(
 	relativePath: string,
 	directoryName?: string,
 ): string {
+	const normalizedPath = String(relativePath || "").trim().replace(/^\/+/, "");
+	if (!normalizedPath) return "";
+
 	const shouldUseS3 = shouldUseAbsoluteS3Urls();
 
 	if (shouldUseS3 && directoryName) {
-		return `${S3_CONFIG.baseUrl}${directoryName}/${relativePath}`;
+		return `${S3_CONFIG.baseUrl}${directoryName}/${normalizedPath}`;
 	}
 
-	// Em dev ou blob URLs, retorna relativo (será resolvido localmente)
-	return `/${relativePath}`;
+	// No preview em blob, mantém caminho absoluto do host do admin.
+	if (isRunningInBlob()) {
+		return `/${normalizedPath}`;
+	}
+
+	// Em pacotes exportados/local/server comum, resolve relativo à pasta atual.
+	if (typeof document !== "undefined") {
+		try {
+			return new URL(normalizedPath, document.baseURI).toString();
+		} catch {
+			// fallback abaixo
+		}
+	}
+
+	return `./${normalizedPath}`;
 }
