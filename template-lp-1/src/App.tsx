@@ -142,6 +142,44 @@ export default function App() {
 		);
 	}
 
+	const unavailablePage = general?.unavailablePage ?? {};
+	const unavailableBrand =
+		String(unavailablePage?.brandLabel || "").trim() || "Editora Globo";
+	const unavailableTitle =
+		String(unavailablePage?.title || "").trim() ||
+		"Esta página não está disponível no momento";
+	const unavailableMessage =
+		String(unavailablePage?.message || "").trim() ||
+		"Estamos preparando tudo com carinho para você. Volte em instantes para conferir as novidades.";
+
+	if (unavailablePage?.enabled) {
+		return (
+			<>
+				<SeoHead seo={general} />
+				<div
+					className="min-h-screen flex items-center justify-center px-6 py-10"
+					style={{
+						background:
+							"linear-gradient(135deg, var(--surface), var(--mybackground))",
+						fontFamily: "var(--font-family), sans-serif",
+					}}
+				>
+					<div className="w-full max-w-2xl rounded-[28px] border border-black/5 bg-white/85 px-8 py-10 text-center shadow-2xl backdrop-blur-sm">
+						<div className="mb-5 inline-flex items-center rounded-full bg-black px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.28em] text-white">
+							{unavailableBrand}
+						</div>
+						<h1 className="text-3xl font-semibold text-balance text-(--title)">
+							{unavailableTitle}
+						</h1>
+						<p className="mt-4 text-base leading-7 text-(--text)/80">
+							{unavailableMessage}
+						</p>
+					</div>
+				</div>
+			</>
+		);
+	}
+
 	/* ──────────────────────────────── */
 	/* 🖼️ Background dinâmico */
 	const directoryName = (general as { directoryName?: string })?.directoryName;
