@@ -200,7 +200,7 @@ export function Participants({ data, ...props }: ParticipantsProps) {
 												)}
 											</div>
 											{nameOutsideImage && (
-												<div className="mt-3 text-center text-base font-semibold leading-tight text-pretty wrap-break-word text-foreground max-w-60 md:max-w-64 mx-auto">
+												<div className="mt-3 text-center text-lg font-semibold leading-tight text-pretty wrap-break-word text-foreground max-w-60 md:max-w-64 mx-auto">
 													{p.name}
 												</div>
 											)}

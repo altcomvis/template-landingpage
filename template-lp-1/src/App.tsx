@@ -3,7 +3,9 @@ import { resolveAssetUrl } from "@/config/s3-urls";
 import { MenuTemplate } from "@/modules/Menu";
 
 import { CookiePolicyModal } from "./components/CookiePolicyModal";
+import { EditoraGloboLogo } from "./components/EditoraGloboLogo";
 import { StandardPopupModal } from "./components/StandardPopupModal";
+import { Progress } from "./components/ui/progress";
 import { SeoHead } from "./components/seo-head";
 import { useParallaxAnimation } from "./hooks/use-parallax-animation";
 import { useThemeColors } from "./hooks/use-theme-colors";
@@ -136,15 +138,16 @@ export default function App() {
 	/* 🕓 Skeleton de carregamento (depois dos hooks) */
 	if (!landing) {
 		return (
-			<div className="w-full min-h-screen flex items-center justify-center">
-				<p>Carregando...</p>
+			<div className="w-full min-h-screen flex items-center justify-center px-6">
+				<div className="w-full max-w-xs space-y-3 text-center">
+					<p className="text-sm text-muted-foreground">Carregando...</p>
+					<Progress value={65} className="h-2 w-full" />
+				</div>
 			</div>
 		);
 	}
 
 	const unavailablePage = general?.unavailablePage ?? {};
-	const unavailableBrand =
-		String(unavailablePage?.brandLabel || "").trim() || "Editora Globo";
 	const unavailableTitle =
 		String(unavailablePage?.title || "").trim() ||
 		"Esta página não está disponível no momento";
@@ -157,21 +160,17 @@ export default function App() {
 			<>
 				<SeoHead seo={general} />
 				<div
-					className="min-h-screen flex items-center justify-center px-6 py-10"
+					className="min-h-screen bg-gray-900 px-6 py-10 text-center"
 					style={{
-						background:
-							"linear-gradient(135deg, var(--surface), var(--mybackground))",
 						fontFamily: "var(--font-family), sans-serif",
 					}}
 				>
-					<div className="w-full max-w-2xl rounded-[28px] border border-black/5 bg-white/85 px-8 py-10 text-center shadow-2xl backdrop-blur-sm">
-						<div className="mb-5 inline-flex items-center rounded-full bg-black px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.28em] text-white">
-							{unavailableBrand}
-						</div>
-						<h1 className="text-3xl font-semibold text-balance text-(--title)">
+					<div className="mx-auto flex min-h-screen w-full max-w-2xl flex-col items-center justify-center gap-6">
+						<EditoraGloboLogo className="w-full max-w-60 text-gray-600" />
+						<h1 className="text-3xl font-semibold text-balance text-gray-600">
 							{unavailableTitle}
 						</h1>
-						<p className="mt-4 text-base leading-7 text-(--text)/80">
+						<p className="text-base leading-7 text-gray-600">
 							{unavailableMessage}
 						</p>
 					</div>

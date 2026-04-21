@@ -121,6 +121,20 @@ export function Schedule({ data, participants, ...props }: ScheduleProps) {
 				? "justify-end"
 				: "justify-start";
 	const timelineLineClass =
+	const eventTitleText = String(eventTitle || "").trim();
+	const eventDescriptionHtml = String(eventDescription || "").trim();
+	const hasEventDescription =
+		eventDescriptionHtml
+			.replace(/<[^>]*>/g, "")
+			.replace(/&nbsp;/gi, " ")
+			.trim().length > 0;
+	const dateText = String(date || "").trim();
+	const timeText = String(time || "").trim();
+	const locationText = String(location || "").trim();
+	const hasEventInfoRow = Boolean(dateText || timeText || locationText);
+	const shouldShowMetadataBox = Boolean(
+		eventTitleText || hasEventDescription || hasEventInfoRow,
+	);
 		contentAlign === "center"
 			? "left-1/2 -translate-x-1/2  "
 			: contentAlign === "right"
@@ -178,54 +192,55 @@ export function Schedule({ data, participants, ...props }: ScheduleProps) {
 								<div
 									className="text-lg text-(--text)/90 [&_a]:text-(--title) [&_a]:underline [&_a]:underline-offset-2 [&_a]:font-semibold [&_a:hover]:opacity-80"
 									// biome-ignore lint/security/noDangerouslySetInnerHtml: description comes from project JSON rich text editor
-									dangerouslySetInnerHTML={{ __html: eventDescription }}
+				{shouldShowMetadataBox && (
 								/>
-							</div>
+						{eventTitleText && (
 						)}
 						<div
-							className={`	${metadataContainerClass} md:divide-x divide-(--text)`}
+									{eventTitleText}
 						>
 							{date && (
 								<div
-									className={`info-box flex items-center gap-2 px-4 py-2 ${infoBoxTextClass}`}
+						{hasEventDescription && (
 								>
 									{renderDateIcon && <span className="text-2xl">🗓️</span>}
 									<span className="font-bold text-xl md:text-2xl">{date}</span>
 								</div>
-							)}
+									dangerouslySetInnerHTML={{ __html: eventDescriptionHtml }}
 							{time && (
 								<div
 									className={`info-box flex items-center gap-2 px-4 py-2 ${infoBoxTextClass}`}
-								>
-									{renderTimeIcon && <span className="text-2xl">⏰</span>}
-									<span className="font-bold text-xl md:text-2xl">{time}</span>
-								</div>
-							)}
-							{location && (
-								<div
-									className={`info-box flex items-center gap-2 px-4 py-2 text-center md:text-left ${infoBoxTextClass}`}
-								>
-									<span className="font-bold block text-lg md:text-xl text-pretty">
-										{renderLocationIcon ? `📍 ${location}` : location}
-									</span>
-								</div>
-							)}
-						</div>
-					</div>
-				)}
-
-				<div className="relative ">
-					{/* Linha vertical timeline */}
-					<div
-						className={`absolute -top-6 bottom-0 w-px bg-(--text) z-0 ${timelineLineClass}`}
-					/>
-
-					<div className="space-y-12 mt-6">
-						{panels.map((item) => (
-							<div key={`${item.id}-${item.title}`} className={rowClass}>
-								{/* ⏰ Horário */}
-								<div className={timeWrapClass}>
-									{contentAlign === "right" ? (
+						{hasEventInfoRow && (
+							<div
+								className={`${metadataContainerClass} md:divide-x divide-(--text)`}
+							>
+								{dateText && (
+									<div
+										className={`info-box flex items-center gap-2 px-4 py-2 ${infoBoxTextClass}`}
+									>
+										{renderDateIcon && <span className="text-2xl">🗓️</span>}
+										<span className="font-bold text-xl md:text-2xl">{dateText}</span>
+									</div>
+								)}
+								{timeText && (
+									<div
+										className={`info-box flex items-center gap-2 px-4 py-2 ${infoBoxTextClass}`}
+									>
+										{renderTimeIcon && <span className="text-2xl">⏰</span>}
+										<span className="font-bold text-xl md:text-2xl">{timeText}</span>
+									</div>
+								)}
+								{locationText && (
+									<div
+										className={`info-box flex items-center gap-2 px-4 py-2 text-center md:text-left ${infoBoxTextClass}`}
+									>
+										<span className="font-bold block text-lg md:text-xl text-pretty">
+											{renderLocationIcon ? `📍 ${locationText}` : locationText}
+										</span>
+									</div>
+								)}
+							</div>
+						)}
 										<>
 											<Circle
 												size={10}

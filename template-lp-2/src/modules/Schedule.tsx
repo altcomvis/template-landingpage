@@ -107,6 +107,20 @@ export function Schedule({ data, participants, ...props }: ScheduleProps) {
 	const renderDateIcon = showDateIcon !== false;
 	const renderTimeIcon = showTimeIcon !== false;
 	const renderLocationIcon = showLocationIcon !== false;
+	const eventTitleText = String(eventTitle || "").trim();
+	const eventDescriptionHtml = String(eventDescription || "").trim();
+	const hasEventDescription =
+		eventDescriptionHtml
+			.replace(/<[^>]*>/g, "")
+			.replace(/&nbsp;/gi, " ")
+			.trim().length > 0;
+	const dateText = String(date || "").trim();
+	const timeText = String(time || "").trim();
+	const locationText = String(location || "").trim();
+	const hasEventInfoRow = Boolean(dateText || timeText || locationText);
+	const shouldShowMetadataBox = Boolean(
+		eventTitleText || hasEventDescription || hasEventInfoRow,
+	);
 	const infoBoxTextClass = "text-gray-900";
 	const contentTextClass =
 		contentAlign === "center"
@@ -164,53 +178,55 @@ export function Schedule({ data, participants, ...props }: ScheduleProps) {
 				<TitleSection name={title} />
 
 				{/* Metadados da Seção */}
-				{(eventTitle || eventDescription || date || time || location) && (
+				{shouldShowMetadataBox && (
 					<div className=" p-6 border border-(--text) rounded-xl">
-						{eventTitle && (
+						{eventTitleText && (
 							<div className={`mb-4 ${contentTextClass}`}>
 								<h2 className="text-xl md:text-2xl font-bold text-(--title)">
-									{eventTitle}
+									{eventTitleText}
 								</h2>
 							</div>
 						)}
-						{eventDescription && (
+						{hasEventDescription && (
 							<div className={`mb-4 ${contentTextClass}`}>
 								<div
 									className="text-lg text-(--text)/90 [&_a]:text-(--title) [&_a]:underline [&_a]:underline-offset-2 [&_a]:font-semibold [&_a:hover]:opacity-80"
 									// biome-ignore lint/security/noDangerouslySetInnerHtml: description comes from project JSON rich text editor
-									dangerouslySetInnerHTML={{ __html: eventDescription }}
+									dangerouslySetInnerHTML={{ __html: eventDescriptionHtml }}
 								/>
 							</div>
 						)}
-						<div
-							className={`	${metadataContainerClass} md:divide-x divide-(--text)`}
-						>
-							{date && (
-								<div
-									className={`info-box flex items-center gap-2 px-4 py-2 ${infoBoxTextClass}`}
-								>
-									{renderDateIcon && <span className="text-2xl">🗓️</span>}
-									<span className="font-bold text-xl md:text-2xl">{date}</span>
-								</div>
-							)}
-							{time && (
-								<div
-									className={`info-box flex items-center gap-2 px-4 py-2 ${infoBoxTextClass}`}
-								>
-									{renderTimeIcon && <span className="text-2xl">⏰</span>}
-									<span className="font-bold text-xl md:text-2xl">{time}</span>
-								</div>
-							)}
-							{location && (
-								<div
-									className={`info-box flex items-center gap-2 px-4 py-2 text-center md:text-left ${infoBoxTextClass}`}
-								>
-									<span className="font-bold block text-lg md:text-xl text-pretty">
-										{renderLocationIcon ? `📍 ${location}` : location}
-									</span>
-								</div>
-							)}
-						</div>
+						{hasEventInfoRow && (
+							<div
+								className={`${metadataContainerClass} md:divide-x divide-(--text)`}
+							>
+								{dateText && (
+									<div
+										className={`info-box flex items-center gap-2 px-4 py-2 ${infoBoxTextClass}`}
+									>
+										{renderDateIcon && <span className="text-2xl">🗓️</span>}
+										<span className="font-bold text-xl md:text-2xl">{dateText}</span>
+									</div>
+								)}
+								{timeText && (
+									<div
+										className={`info-box flex items-center gap-2 px-4 py-2 ${infoBoxTextClass}`}
+									>
+										{renderTimeIcon && <span className="text-2xl">⏰</span>}
+										<span className="font-bold text-xl md:text-2xl">{timeText}</span>
+									</div>
+								)}
+								{locationText && (
+									<div
+										className={`info-box flex items-center gap-2 px-4 py-2 text-center md:text-left ${infoBoxTextClass}`}
+									>
+										<span className="font-bold block text-lg md:text-xl text-pretty">
+											{renderLocationIcon ? `📍 ${locationText}` : locationText}
+										</span>
+									</div>
+								)}
+							</div>
+						)}
 					</div>
 				)}
 
