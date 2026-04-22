@@ -121,7 +121,7 @@ export function Schedule({ data, participants, ...props }: ScheduleProps) {
 	const shouldShowMetadataBox = Boolean(
 		eventTitleText || hasEventDescription || hasEventInfoRow,
 	);
-	const infoBoxTextClass = "text-gray-900";
+	const infoBoxTextClass = "text-gray-900 ";
 	const contentTextClass =
 		contentAlign === "center"
 			? "text-center"
@@ -142,13 +142,13 @@ export function Schedule({ data, participants, ...props }: ScheduleProps) {
 				: "left-0 ml-20 md:ml-30";
 	const rowClass =
 		contentAlign === "center"
-			? "flex flex-col items-center gap-4"
+		? "flex flex-col items-center "
 			: contentAlign === "right"
 				? "flex flex-row-reverse items-center gap-6"
 				: "flex items-center gap-6";
 	const timeWrapClass =
 		contentAlign === "center"
-			? "font-light text-xl flex gap-3 items-center text-left justify-center z-10 bg-(--surface) "
+			? "font-light text-xl flex gap-3 py-1 items-center text-left justify-center z-10 bg-(--surface) "
 			: contentAlign === "right"
 				? "w-20 md:w-32 mr-[5px] md:-mr-[3px] text-left font-light text-xl flex gap-3 items-center justify-start z-10"
 				: "w-20 md:w-32 ml-[5px] md:-ml-[3px] text-left font-light text-xl flex gap-3 items-center justify-end";
@@ -205,7 +205,9 @@ export function Schedule({ data, participants, ...props }: ScheduleProps) {
 										className={`info-box flex items-center gap-2 px-4 py-2 ${infoBoxTextClass}`}
 									>
 										{renderDateIcon && <span className="text-2xl">🗓️</span>}
-										<span className="font-bold text-xl md:text-2xl">{dateText}</span>
+										<span className="font-bold text-xl md:text-2xl">
+											{dateText}
+										</span>
 									</div>
 								)}
 								{timeText && (
@@ -213,7 +215,9 @@ export function Schedule({ data, participants, ...props }: ScheduleProps) {
 										className={`info-box flex items-center gap-2 px-4 py-2 ${infoBoxTextClass}`}
 									>
 										{renderTimeIcon && <span className="text-2xl">⏰</span>}
-										<span className="font-bold text-xl md:text-2xl">{timeText}</span>
+										<span className="font-bold text-xl md:text-2xl">
+											{timeText}
+										</span>
 									</div>
 								)}
 								{locationText && (
