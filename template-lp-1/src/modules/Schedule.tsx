@@ -107,20 +107,6 @@ export function Schedule({ data, participants, ...props }: ScheduleProps) {
 	const renderDateIcon = showDateIcon !== false;
 	const renderTimeIcon = showTimeIcon !== false;
 	const renderLocationIcon = showLocationIcon !== false;
-	const infoBoxTextClass = "text-gray-900";
-	const contentTextClass =
-		contentAlign === "center"
-			? "text-center"
-			: contentAlign === "right"
-				? "text-right"
-				: "text-left";
-	const contentParticipantsClass =
-		contentAlign === "center"
-			? "justify-center"
-			: contentAlign === "right"
-				? "justify-end"
-				: "justify-start";
-	const timelineLineClass =
 	const eventTitleText = String(eventTitle || "").trim();
 	const eventDescriptionHtml = String(eventDescription || "").trim();
 	const hasEventDescription =
@@ -135,6 +121,20 @@ export function Schedule({ data, participants, ...props }: ScheduleProps) {
 	const shouldShowMetadataBox = Boolean(
 		eventTitleText || hasEventDescription || hasEventInfoRow,
 	);
+	const infoBoxTextClass = "text-gray-900";
+	const contentTextClass =
+		contentAlign === "center"
+			? "text-center"
+			: contentAlign === "right"
+				? "text-right"
+				: "text-left";
+	const contentParticipantsClass =
+		contentAlign === "center"
+			? "justify-center"
+			: contentAlign === "right"
+				? "justify-end"
+				: "justify-start";
+	const timelineLineClass =
 		contentAlign === "center"
 			? "left-1/2 -translate-x-1/2  "
 			: contentAlign === "right"
@@ -178,38 +178,24 @@ export function Schedule({ data, participants, ...props }: ScheduleProps) {
 				<TitleSection name={title} />
 
 				{/* Metadados da Seção */}
-				{(eventTitle || eventDescription || date || time || location) && (
+				{shouldShowMetadataBox && (
 					<div className=" p-6 border border-(--text) rounded-xl">
-						{eventTitle && (
+						{eventTitleText && (
 							<div className={`mb-4 ${contentTextClass}`}>
 								<h2 className="text-xl md:text-2xl font-bold text-(--title)">
-									{eventTitle}
+									{eventTitleText}
 								</h2>
 							</div>
 						)}
-						{eventDescription && (
+						{hasEventDescription && (
 							<div className={`mb-4 ${contentTextClass}`}>
 								<div
 									className="text-lg text-(--text)/90 [&_a]:text-(--title) [&_a]:underline [&_a]:underline-offset-2 [&_a]:font-semibold [&_a:hover]:opacity-80"
 									// biome-ignore lint/security/noDangerouslySetInnerHtml: description comes from project JSON rich text editor
-				{shouldShowMetadataBox && (
-								/>
-						{eventTitleText && (
-						)}
-						<div
-									{eventTitleText}
-						>
-							{date && (
-								<div
-						{hasEventDescription && (
-								>
-									{renderDateIcon && <span className="text-2xl">🗓️</span>}
-									<span className="font-bold text-xl md:text-2xl">{date}</span>
-								</div>
 									dangerouslySetInnerHTML={{ __html: eventDescriptionHtml }}
-							{time && (
-								<div
-									className={`info-box flex items-center gap-2 px-4 py-2 ${infoBoxTextClass}`}
+								/>
+							</div>
+						)}
 						{hasEventInfoRow && (
 							<div
 								className={`${metadataContainerClass} md:divide-x divide-(--text)`}
@@ -219,7 +205,9 @@ export function Schedule({ data, participants, ...props }: ScheduleProps) {
 										className={`info-box flex items-center gap-2 px-4 py-2 ${infoBoxTextClass}`}
 									>
 										{renderDateIcon && <span className="text-2xl">🗓️</span>}
-										<span className="font-bold text-xl md:text-2xl">{dateText}</span>
+										<span className="font-bold text-xl md:text-2xl">
+											{dateText}
+										</span>
 									</div>
 								)}
 								{timeText && (
@@ -227,7 +215,9 @@ export function Schedule({ data, participants, ...props }: ScheduleProps) {
 										className={`info-box flex items-center gap-2 px-4 py-2 ${infoBoxTextClass}`}
 									>
 										{renderTimeIcon && <span className="text-2xl">⏰</span>}
-										<span className="font-bold text-xl md:text-2xl">{timeText}</span>
+										<span className="font-bold text-xl md:text-2xl">
+											{timeText}
+										</span>
 									</div>
 								)}
 								{locationText && (
@@ -241,6 +231,21 @@ export function Schedule({ data, participants, ...props }: ScheduleProps) {
 								)}
 							</div>
 						)}
+					</div>
+				)}
+
+				<div className="relative ">
+					{/* Linha vertical timeline */}
+					<div
+						className={`absolute -top-6 bottom-0 w-px bg-(--text) z-0 ${timelineLineClass}`}
+					/>
+
+					<div className="space-y-12 mt-6">
+						{panels.map((item) => (
+							<div key={`${item.id}-${item.title}`} className={rowClass}>
+								{/* ⏰ Horário */}
+								<div className={timeWrapClass}>
+									{contentAlign === "right" ? (
 										<>
 											<Circle
 												size={10}
