@@ -92,7 +92,7 @@ export function Schedule({ data, participants, ...props }: ScheduleProps) {
 				? {
 						container: "w-48 gap-1",
 						avatar: "w-40 h-40",
-						name: "text-lg",
+						name: "text-lg leading-tight",
 						role: "text-sm",
 						mediatorsWrap: "gap-5 md:pl-5",
 					}
