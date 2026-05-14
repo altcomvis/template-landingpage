@@ -132,16 +132,16 @@ export function Agenda({ data, ...props }: AgendaProps) {
 	return (
 		// biome-ignore lint/nursery/useUniqueElementIds: anchor id for menu navigation
 		<section className="py-16 " id="agenda" {...props}>
-			<div className="w-full mx-auto max-w-6xl px-5 md:px-4">
+			<div className="w-full mx-auto max-w-6xl px-4 md:px-4">
 				<TitleSection name={title || "Agenda"} />
 
-				<div className="bg-(--mybackground) container w-11/12 px-4 md:px-14 mx-auto py-10 md:py-16 rounded-xl relative overflow-hidden">
+				<div className="bg-(--mybackground) container w-full max-w-5xl px-2 sm:px-4 md:px-8 mx-auto py-8 md:py-14 rounded-xl relative overflow-hidden">
 					<Carousel
 						className="w-full"
 						setApi={setApi}
 						opts={{ align: "center", loop: true }}
 					>
-						<CarouselContent className="gap-4 px-4 md:px-8">
+						<CarouselContent className="gap-3 px-1 sm:px-2 md:px-6 lg:px-8">
 							{sortedMonths.map((month) => {
 								const currentMonth = (new Date().getMonth() + 1)
 									.toString()
@@ -157,7 +157,7 @@ export function Agenda({ data, ...props }: AgendaProps) {
 									<CarouselItem
 										key={month.monthNumber}
 										data-carousel-item
-										className={`basis-[86%] sm:basis-[70%] md:basis-[56%] lg:basis-60 transition-all ${
+										className={`basis-full sm:basis-[92%] md:basis-[88%] lg:basis-[56%] xl:basis-[52%] transition-all ${
 											isCurrentMonth || (isFutureMonth && hasFutureContent)
 												? "opacity-100"
 												: "opacity-75"
@@ -245,8 +245,8 @@ export function Agenda({ data, ...props }: AgendaProps) {
 								);
 							})}
 						</CarouselContent>
-						<CarouselPrevious className="absolute left-1 md:left-0 top-1/2 -translate-y-1/2 md:px-5 md:-translate-x-12 border-none shadow-none text-(--surface) bg-transparent hover:bg-transparent" />
-						<CarouselNext className="absolute right-1 md:right-0 top-1/2 -translate-y-1/2 md:px-5 md:translate-x-12 border-none shadow-none text-(--surface) bg-transparent hover:bg-transparent" />
+						<CarouselPrevious className="absolute left-2 sm:left-3 md:left-0 top-1/2 -translate-y-1/2 z-20 size-9 md:size-10 md:px-5 md:-translate-x-12 border-none shadow-none text-(--surface) bg-(--mybackground)/80 hover:bg-(--mybackground)/90 disabled:opacity-35" />
+						<CarouselNext className="absolute right-2 sm:right-3 md:right-0 top-1/2 -translate-y-1/2 z-20 size-9 md:size-10 md:px-5 md:translate-x-12 border-none shadow-none text-(--surface) bg-(--mybackground)/80 hover:bg-(--mybackground)/90 disabled:opacity-35" />
 					</Carousel>
 				</div>
 			</div>
