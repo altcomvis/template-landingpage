@@ -3,6 +3,7 @@ import { TitleSection } from "@/components/title-sections";
 interface ProvisionalSubscribeProps extends React.HTMLAttributes<HTMLElement> {
 	data: {
 		title?: string;
+		description?: string;
 		visible?: boolean;
 		iframeUrl?: string;
 		showClosedMessage?: boolean;
@@ -14,7 +15,14 @@ export function ProvisionalSubscribe({
 	data,
 	...props
 }: ProvisionalSubscribeProps) {
-	const { title, visible, iframeUrl, showClosedMessage, closedMessage } = data;
+	const {
+		title,
+		description,
+		visible,
+		iframeUrl,
+		showClosedMessage,
+		closedMessage,
+	} = data;
 	const sectionId = "provisional-subscribe";
 
 	if (!visible) {
@@ -36,6 +44,11 @@ export function ProvisionalSubscribe({
 		>
 			<div className="max-w-6xl mx-auto">
 				<TitleSection name={title || "Inscrição"} />
+				{description && (
+					<p className="mx-auto max-w-3xl text-center text-base text-muted-foreground mb-6">
+						{description}
+					</p>
+				)}
 
 				{showClosed && (
 					<div className="text-center text-lg text-muted-foreground py-8">

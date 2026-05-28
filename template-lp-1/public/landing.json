@@ -438,6 +438,7 @@
 	],
 	"provisionalSubscribe": {
 		"title": "Inscrição",
+		"description": "",
 		"visible": true,
 		"showClosedMessage": false,
 		"closedMessage": "Inscrições encerradas",
