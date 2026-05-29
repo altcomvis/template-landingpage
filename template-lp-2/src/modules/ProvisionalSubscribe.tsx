@@ -4,6 +4,7 @@ interface ProvisionalSubscribeProps extends React.HTMLAttributes<HTMLElement> {
 	data: {
 		title?: string;
 		description?: string;
+		afterFormText?: string;
 		visible?: boolean;
 		iframeUrl?: string;
 		showClosedMessage?: boolean;
@@ -18,6 +19,7 @@ export function ProvisionalSubscribe({
 	const {
 		title,
 		description,
+		afterFormText,
 		visible,
 		iframeUrl,
 		showClosedMessage,
@@ -56,12 +58,19 @@ export function ProvisionalSubscribe({
 					</div>
 				)}
 				{showIframe && (
-					<iframe
-						src={iframeUrl}
-						width="100%"
-						className="w-full h-[1750px] md:h-[1450px] lg:h-[1350px] overflow-hidden"
-						title={title || "Inscrição"}
-					/>
+					<>
+						<iframe
+							src={iframeUrl}
+							width="100%"
+							className="w-full h-[1750px] md:h-[1450px] lg:h-[1350px] overflow-hidden"
+							title={title || "Inscrição"}
+						/>
+						{afterFormText && (
+							<p className="mx-auto max-w-3xl text-center text-base text-muted-foreground mt-6">
+								{afterFormText}
+							</p>
+						)}
+					</>
 				)}
 			</div>
 		</section>
