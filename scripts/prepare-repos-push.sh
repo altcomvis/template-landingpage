@@ -2,17 +2,25 @@
 
 set -euo pipefail
 
-BASE_DIR="/Users/allanteixeira/Desktop/Projects/template-landingpage"
-BUILD_AND_DEPLOY_SCRIPT="$BASE_DIR/scripts/build-and-deploy.sh"
+SCRIPTS=(
+	"/Users/allanteixeira/Desktop/Projects/template-landingpage/scripts/build-and-deploy.sh"
+	"/Users/allanteixeira/Desktop/Projects/site-voices/scripts/build-and-deploy.sh"
+	"/Users/allanteixeira/Desktop/Projects/site-camarote/scripts/build-and-deploy.sh"
+	"/Users/allanteixeira/Desktop/Projects/site-rg/scripts/build-and-deploy.sh"
+)
 
-if [ ! -f "$BUILD_AND_DEPLOY_SCRIPT" ]; then
-	echo "❌ Script não encontrado: $BUILD_AND_DEPLOY_SCRIPT"
-	exit 1
-fi
+echo "🚦 Pré-push obrigatório: atualizando ZIPs de templates e sites no admin-pages/public"
 
-echo "🚦 Pré-push obrigatório: atualizando ZIPs dos templates no admin-pages/public"
+for script in "${SCRIPTS[@]}"; do
+	if [ ! -f "$script" ]; then
+		echo "❌ Script não encontrado: $script"
+		exit 1
+	fi
 
-bash "$BUILD_AND_DEPLOY_SCRIPT"
+	echo ""
+	echo "▶ Executando: $script"
+	bash "$script"
+done
 
 echo ""
 echo "✅ Pré-push concluído com sucesso."
