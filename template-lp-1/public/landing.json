@@ -56,12 +56,14 @@
 	},
 	"about": {
 		"subtitle": "Por um planeta mais inteligente e sustentável",
-		"socialTitle": "Assista e participe conosco",
 		"paragraphs": [
 			"O Summit Futuro <b>Sustentável</b> é o principal encontro de líderes e empresas <b>comprometidos</b> com o desenvolvimento sustentável no Brasil.<div><br><div>Durante dois dias de programação intensa, o evento reúne especialistas, cientistas, empreendedores e representantes do poder público para debater soluções de impacto positivo.</div><div><br></div><div>Inovação, <i>responsabilidade</i> ambiental e <u>transformação</u> social são os pilares desta edição.</div></div>"
-		],
-		"showTransmission": true,
-		"socialBlocks": [
+		]
+	},
+	"social": {
+		"title": "Assista e participe conosco",
+		"visible": true,
+		"blocks": [
 			{
 				"id": "block-1",
 				"label": "O GLOBO",
@@ -864,6 +866,7 @@
 	"sectionOrder": [
 		"hero",
 		"about",
+		"social",
 		"participants",
 		"schedule",
 		"provisionalSubscribe",

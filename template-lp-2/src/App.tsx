@@ -18,6 +18,7 @@ import { Participants } from "./modules/Participants";
 import { PreviousEvents } from "./modules/PreviousEvents";
 import { ProvisionalSubscribe } from "./modules/ProvisionalSubscribe";
 import { Schedule } from "./modules/Schedule";
+import { Social } from "./modules/Social";
 import { Sponsors } from "./modules/Sponsors";
 import Subscribe from "./modules/Subscribe";
 
@@ -112,6 +113,13 @@ export default function App() {
 	const subscribe = landing?.subscribe ?? {};
 	const provisionalSubscribe = landing?.provisionalSubscribe ?? {};
 	const previousEvents = landing?.previousEvents ?? {};
+	const social =
+		landing?.social ??
+		({
+			title: landing?.about?.socialTitle ?? "",
+			visible: landing?.about?.showTransmission ?? true,
+			blocks: landing?.about?.socialBlocks ?? [],
+		} as const);
 
 	/* ──────────────────────────────── */
 	/* 🎨 Hooks visuais — SEMPRE chamados */
@@ -202,6 +210,7 @@ export default function App() {
 	const DEFAULT_SECTION_ORDER = [
 		"hero",
 		"about",
+		"social",
 		"participants",
 		"schedule",
 		"agenda",
@@ -220,6 +229,7 @@ export default function App() {
 		const visibilityMap: Record<string, boolean> = {
 			hero: true,
 			about: landing.about?.visible !== false,
+			social: social?.visible !== false,
 			participants: participants?.visible !== false,
 			schedule: schedule?.visible !== false,
 			agenda: agenda?.visible === true,
@@ -240,6 +250,9 @@ export default function App() {
 		),
 		about: landing.about?.visible !== false && (
 			<About data-parallax data={landing.about} />
+		),
+		social: isSectionVisible("social") && (
+			<Social data-parallax data={social} />
 		),
 		participants: isSectionVisible("participants") && (
 			<Participants data-parallax data={participants} />

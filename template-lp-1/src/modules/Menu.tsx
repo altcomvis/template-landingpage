@@ -16,6 +16,7 @@ interface MenuTemplateLanding {
 	hero?: { logo?: string };
 	general?: { directoryName?: string };
 	about?: SectionConfig;
+	social?: SectionConfig;
 	participants?: SectionConfig;
 	schedule?: SectionConfig;
 	agenda?: SectionConfig;
@@ -48,6 +49,11 @@ export function MenuTemplate({ landing, sectionOrder }: MenuTemplateProps) {
 			id: "about",
 			label: landing.about?.title || "Sobre",
 			visible: landing.about?.visible !== false,
+		},
+		social: {
+			id: "social",
+			label: landing.social?.title || "Social",
+			visible: landing.social?.visible !== false,
 		},
 		participants: {
 			id: "speakers",
@@ -90,6 +96,7 @@ export function MenuTemplate({ landing, sectionOrder }: MenuTemplateProps) {
 
 	const defaultSectionOrder = [
 		"about",
+		"social",
 		"participants",
 		"schedule",
 		"agenda",
