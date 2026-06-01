@@ -16,7 +16,7 @@ export function About({ data, ...props }: AboutProps) {
 	return (
 		// biome-ignore lint/nursery/useUniqueElementIds: fixed section anchor id for menu navigation
 		<section id="about" className="w-10/12 md:w-full mx-auto py-8 md:py-16">
-			<div className="container mx-auto px-4 max-w-4xl text-center">
+			<div className="container mx-auto px-4 max-w-3xl text-center">
 				{/* Subtítulo principal */}
 				{subtitle && (
 					<h3 className="text-3xl font-semibold mb-6 text-(--title)" {...props}>
